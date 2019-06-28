@@ -4,14 +4,14 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const Recipes = ({ recipes }, { that }) => {
+const Recipes = ({ recipes }) => {
     return (
         <div>
             <center><h1>Recipesss List</h1></center>
             {
                 recipes.data.map((recipe) =>
                     <div key={recipe._id.toString()}>
-                        <Form onSubmit={that.handleSubmit}>
+                        <Form onSubmit="this.handleSubmit">
                             <Form.Group controlId={recipe._id.toString()+".ControlInput1"}>
                                 <Form.Label htmlFor="title" >Recipe Title</Form.Label>
                                 <Form.Control id="title" value={recipe.title} />
@@ -32,7 +32,7 @@ const Recipes = ({ recipes }, { that }) => {
                                 <Form.Label htmlFor="recipe">Recipe</Form.Label>
                                 <Form.Control id="recipe" as="textarea" rows="10" value={recipe.recipe}/>
                             </Form.Group>
-                            <Button type="submit" variant="outline-primary" onClick={that.handleSubmit} >Submit</Button>
+                            <Button type="submit" variant="outline-primary" onClick="this.handleSubmit" >Submit</Button>
                         </Form>
                     </div>
                 )
