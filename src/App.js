@@ -35,6 +35,12 @@ class App extends Component {
           <Recipes recipes={this.state.recipes} />
         </div>
       );
+    } else {
+      return (
+        <div className="App">
+          <header className="App-header" />
+        </div>
+      );
     }
   }
 }
