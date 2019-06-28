@@ -45,9 +45,9 @@ class App extends Component {
       return (
         <div className="App">
           <header className="App-header" />
-          <Recipes recipes={this.state.recipes} />
+          <Recipes recipes={this.state.recipes} that={this} />
           <ButtonToolbar>
-            <Button type="submit" variant="outline-primary" onClick={this.handleSubmit} >Submit</Button>
+            <Button type="submit" variant="outline-primary" onClick={this.handleSubmit}>Submit</Button>
           </ButtonToolbar>
         </div>
       );
