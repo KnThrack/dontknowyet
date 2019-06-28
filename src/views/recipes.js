@@ -8,11 +8,11 @@ const Recipes = ({ recipes }) => {
             <center><h1>Recipesss List</h1></center>
             {
                 recipes.data.map((recipe) => 
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{recipe.title}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{recipe.cuisine}</h6>
-                        <p class="card-text">{recipe.title}</p>
+                <div id={recipe._id} className="card">
+                    <div className="card-body">
+                        <h5 className="card-title">{recipe.title}</h5>
+                        <h6 className="card-subtitle mb-2 text-muted">{recipe.cuisine}</h6>
+                        <p className="card-text">{recipe.title}</p>
                     </div>
                 </div>
             )
