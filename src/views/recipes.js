@@ -5,8 +5,9 @@ import React from 'react'
 const Recipes = ({ recipes }) => {
     return (
         <div>
-            <center><h1>Recipe List</h1></center>
-            {recipes.map((recipe) => (
+            <center><h1>Recipesss List</h1></center>
+            {
+                recipes.map((recipe) => (
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{recipe.title}</h5>
@@ -14,7 +15,8 @@ const Recipes = ({ recipes }) => {
                         <p class="card-text">{recipe.title}</p>
                     </div>
                 </div>
-            ))}
+            ))
+            }
         </div>
     )
 };

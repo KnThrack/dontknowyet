@@ -28,12 +28,14 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header"/>
-        <Recipes recipes={this.state.recipes} />
-      </div>
-    );
+    if (this.state.recipes) {
+      return (
+        <div className="App">
+          <header className="App-header" />
+          <Recipes recipes={this.state.recipes} />
+        </div>
+      );
+    }
   }
 }
 
