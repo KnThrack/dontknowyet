@@ -30,7 +30,7 @@ class App extends Component {
     if (this.state.recipes) {
       return (
         <div className="App">
-          <header className="App-header" min-height="10vh" />
+          <header className="App-header" />
           <Recipes recipes={this.state.recipes} />
         </div>
       );
