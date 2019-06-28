@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Recipes from './views/recipes';
 
 class App extends Component {
+
+  state = {
+    recipes: []
+  }
+
   constructor(props) {
     super(props);
     this.state = { apiResponse: "" };
@@ -10,8 +16,10 @@ class App extends Component {
 
   callAPI() {
     fetch("https://notsureyetapp.herokuapp.com/api/recipes")
-      .then(res => res.text())
-      .then(res => this.setState({ apiResponse: res }))
+      .then(res => res.json())
+      .then((data) => {
+        this.setState({ recipes: data })
+      })
       .catch(err => err);
   }
 
@@ -22,11 +30,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">{this.state.apiResponse}</p>
+        <header className="App-header"/>
+        <Recipes recipes={this.state.recipes} />
       </div>
     );
   }
