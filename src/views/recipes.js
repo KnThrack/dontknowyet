@@ -7,7 +7,7 @@ const Recipes = ({ recipes }) => {
         <div>
             <center><h1>Recipesss List</h1></center>
             {
-                recipes.data.map((recipe) => (
+                recipes.data.map((recipe) => 
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{recipe.title}</h5>
@@ -15,7 +15,7 @@ const Recipes = ({ recipes }) => {
                         <p class="card-text">{recipe.title}</p>
                     </div>
                 </div>
-            ))
+            )
             }
         </div>
     )
