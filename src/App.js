@@ -30,7 +30,6 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-    handleSubmit (test) {
     event.preventDefault();
     const data = new FormData(event.target);
     
