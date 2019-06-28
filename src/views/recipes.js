@@ -1,7 +1,8 @@
 // src/views/recipes.js
 
-import React from 'react'
-import Form from 'react-bootstrap/Form'
+import React from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const Recipes = ({ recipes }) => {
     return (
@@ -10,16 +11,16 @@ const Recipes = ({ recipes }) => {
             {
                 recipes.data.map((recipe) =>
                     <div key={recipe._id.toString()}>
-                        <Form>
+                        <Form onSubmit={this.handleSubmit}>
                             <Form.Group controlId={recipe._id.toString()+".ControlInput1"}>
-                                <Form.Label>Recipe Title</Form.Label>
-                                <Form.Control value={recipe.title} />
-                                <Form.Label>Recipe Name</Form.Label>
-                                <Form.Control value={recipe.name} />
+                                <Form.Label htmlFor="title" >Recipe Title</Form.Label>
+                                <Form.Control id="title" value={recipe.title} />
+                                <Form.Label htmlFor="name">Recipe Name</Form.Label>
+                                <Form.Control id="name" value={recipe.name} />
                             </Form.Group>
                             <Form.Group controlId={recipe._id.toString()+".ControlCuisine"}>
-                                <Form.Label>Cuisine</Form.Label>
-                                <Form.Control value={recipe.cuisine} as="select">
+                                <Form.Label htmlFor="cuisine" >Cuisine</Form.Label>
+                                <Form.Control id="cuisine" value={recipe.cuisine} as="select">
                                     <option>German</option>
                                     <option>Chinease</option>
                                     <option>Asian</option>
@@ -28,9 +29,10 @@ const Recipes = ({ recipes }) => {
                                 </Form.Control>
                             </Form.Group>
                             <Form.Group controlId={recipe._id.toString()+".ControlTextarea1"}>
-                                <Form.Label>Recipe</Form.Label>
-                                <Form.Control as="textarea" rows="10" value={recipe.recipe}/>
+                                <Form.Label htmlFor="recipe">Recipe</Form.Label>
+                                <Form.Control id="recipe" as="textarea" rows="10" value={recipe.recipe}/>
                             </Form.Group>
+                            <Button type="submit" variant="outline-primary" onClick={this.handleSubmit} >Submit</Button>
                         </Form>
                     </div>
                 )
