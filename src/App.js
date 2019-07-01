@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-class Home extends Component {
+class App extends Component {
 
   state = {
     recipes: []
@@ -80,13 +80,13 @@ class Home extends Component {
   render() {
     if (this.state.recipes) {
       return (
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <div className="App">
           <header className="App-header" />
           <Recipes recipes={this.state.recipes} that={this} />
           <ButtonToolbar>
             <Button type="submit" variant="outline-primary" onClick={this.handleSubmit}>Submit</Button>
           </ButtonToolbar>
-        </View>
+        </div>
       );
     } else {
       return (
@@ -98,6 +98,8 @@ class Home extends Component {
   }
 }
 
+export default App;
+/*
 const AppNavigator = createStackNavigator({
   Home:  Home,
   Details: Recipe
@@ -113,3 +115,4 @@ export default class App extends React.Component {
     return <AppContainer />;
   }
 };
+*/
