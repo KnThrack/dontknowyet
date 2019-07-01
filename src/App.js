@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './App.css';
 import Recipes from './views/recipes';
+import Recipe from './views/recipe';
 import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
 class App extends Component {
 
@@ -15,19 +18,20 @@ class App extends Component {
     this.state = { apiResponse: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    axios.defaults.headers.post['Content-Type'] = 'application/json"';
   }
 
 
-  callAPI() {
-    fetch("https://notsureyetapp.herokuapp.com/api/recipes")
-      .then(res => res.json())
-      .then((data) => {
-        this.setState({ recipes: data.data })
-      })
-      .catch(err => err);
+  async callAPI() {
+    const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes")).data;
+
+    this.setState({
+      recipes: recipes,
+    });
+
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.callAPI();
   }
 
@@ -55,7 +59,10 @@ class App extends Component {
 
     for (let index = 0; index < stateCopy.recipes.length; index++) {
       const element = stateCopy.recipes[index];
-    
+
+      axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + element._id, JSON.stringify(element));
+      
+      /*
       fetch('https://notsureyetapp.herokuapp.com/api/recipes/' + element._id, {
         method: "PUT",
         body: JSON.stringify(element),
@@ -64,6 +71,7 @@ class App extends Component {
         },
         credentials: "same-origin"
       });
+      */
     }
   }
 
@@ -90,4 +98,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const AppNavigator = createStackNavigator({
+  Home:  App,
+  Details: Recipe
+},
+{
+  initialRouteName: "Home"
+});
+
+const AppContainer = createAppContainer(AppNavigator);
+
+export default class App extends React.Component {
+  render() {
+    return <AppContainer />;
+  }
+};
