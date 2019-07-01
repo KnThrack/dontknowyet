@@ -14,7 +14,9 @@ class App extends Component {
     super(props);
     this.state = { apiResponse: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
+
 
   callAPI() {
     fetch("https://notsureyetapp.herokuapp.com/api/recipes")
@@ -29,6 +31,17 @@ class App extends Component {
     this.callAPI();
   }
 
+  // handlers
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const form = document.getElementById('bigform');
@@ -41,6 +54,8 @@ class App extends Component {
  */
   }
 
+  // handlers end 
+  
   render() {
     if (this.state.recipes) {
       return (
