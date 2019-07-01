@@ -32,13 +32,13 @@ class App extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const form = document.getElementById('bigform');
-    const data = new FormData(event.target);
-  
-    fetch('https://notsureyetapp.herokuapp.com/api/recipes', {
-      method: 'POST',
-      body: data,
-    });
-
+    /* const data = new FormData(event.target);
+   
+     fetch('https://notsureyetapp.herokuapp.com/api/recipes', {
+       method: 'POST',
+       body: data,
+     });
+ */
   }
 
   render() {
