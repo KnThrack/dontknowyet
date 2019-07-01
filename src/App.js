@@ -36,13 +36,15 @@ class App extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name.split("#");
+    const recipeID = name[0];
+    const recipeField = name[1];
 
-    let index = this.state.recipes.findIndex(x => x._id === name[0].toString());
+    let index = this.state.recipes.findIndex(x => x._id === recipeID.toString());
 
     var stateCopy = Object.assign({}, this.state);
     stateCopy.recipes = stateCopy.recipes.slice();
     stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
-    stateCopy.recipes[index].name[1] = value;
+    stateCopy.recipes[index][recipeField] = value;
     this.setState(stateCopy);
 
   }
