@@ -39,9 +39,25 @@ class App extends Component {
 
     let index = this.state.recipes.data.findIndex(x => x._id === name[0].toString());
 
+    /*
+    this.setState((state, props) => ({
+      counter: state.counter + props.increment
+    }));
+
     this.setState({
-      recipes.data[index].name[1]: value
+      recipes: data[index].name[1]: value
     });
+
+
+    this.setState({
+      todoList: {
+        ...this.state.todoList,
+        day,
+        items: []
+      }
+    })
+    */
+
   }
 
   handleSubmit(event) {
