@@ -9,7 +9,7 @@ const Recipes = ({ recipes, that }) => {
         <div>
             <center><h1>Recipesss List</h1></center>
             {
-                recipes.data.map((recipe) =>
+                recipes.map((recipe) =>
                     <div key={recipe._id.toString()}>
                         <Form id="bigform" /*controlId={recipe._id.toString()+".Form"}*/>
                             <Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>

@@ -22,7 +22,7 @@ class App extends Component {
     fetch("https://notsureyetapp.herokuapp.com/api/recipes")
       .then(res => res.json())
       .then((data) => {
-        this.setState({ recipes: data })
+        this.setState({ recipes: data.data })
       })
       .catch(err => err);
   }
