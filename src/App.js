@@ -5,7 +5,6 @@ import Recipes from './views/recipes';
 import Recipe from './views/recipe';
 import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import { createStackNavigator, createAppContainer } from "react-navigation";
 
 class App extends Component {
 
