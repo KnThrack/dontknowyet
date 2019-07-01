@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 const Recipes = ({ recipes, that }) => {
     return (
         <div>
-            <center><h1>Recipesss List</h1></center>
+            <center><h1>Recipes List</h1></center>
             {
                 recipes.map((recipe) =>
                     <div key={recipe._id.toString()}>
@@ -22,7 +22,7 @@ const Recipes = ({ recipes, that }) => {
                                 <Form.Label htmlFor="cuisine" >Cuisine</Form.Label>
                                 <Form.Control name={recipe._id.toString()+"#cuisine"} onChange={that.handleInputChange} id="cuisine" value={recipe.cuisine} as="select">
                                     <option>German</option>
-                                    <option>Chinease</option>
+                                    <option>Chinese</option>
                                     <option>Asian</option>
                                     <option>French</option>
                                     <option>Italian</option>
