@@ -55,11 +55,14 @@ class App extends Component {
 
     for (let index = 0; index < stateCopy.recipes.length; index++) {
       const element = stateCopy.recipes[index];
-      var RecipeJSON = JSON.stringify(element);
-     
+    
       fetch('https://notsureyetapp.herokuapp.com/api/recipes/' + element._id, {
-        method: 'PUT',
-        body: RecipeJSON,
+        method: "PUT",
+        body: JSON.stringify(element),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
       });
     }
   }
