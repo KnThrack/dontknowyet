@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View, Text } from "react-native";
 import axios from 'axios';
 import './App.css';
 import Recipes from './views/recipes';
@@ -80,13 +81,13 @@ class Home extends Component {
   render() {
     if (this.state.recipes) {
       return (
-        <div className="App">
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
           <header className="App-header" />
           <Recipes recipes={this.state.recipes} that={this} />
           <ButtonToolbar>
             <Button type="submit" variant="outline-primary" onClick={this.handleSubmit}>Submit</Button>
           </ButtonToolbar>
-        </div>
+        </View>
       );
     } else {
       return (
