@@ -37,7 +37,7 @@ class App extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name.split("#");
 
-    let index = this.state.recipes.data.findIndex(x => x._id === name[0].toString());
+    let index = this.state.recipes.findIndex(x => x._id === name[0].toString());
 
     /*
     this.setState((state, props) => ({
