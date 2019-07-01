@@ -39,24 +39,11 @@ class App extends Component {
 
     let index = this.state.recipes.findIndex(x => x._id === name[0].toString());
 
-    /*
-    this.setState((state, props) => ({
-      counter: state.counter + props.increment
-    }));
-
-    this.setState({
-      recipes: data[index].name[1]: value
-    });
-
-
-    this.setState({
-      todoList: {
-        ...this.state.todoList,
-        day,
-        items: []
-      }
-    })
-    */
+    var stateCopy = Object.assign({}, this.state);
+    stateCopy.recipes = stateCopy.recipes.slice();
+    stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
+    stateCopy.recipes[index].name[1] = value;
+    this.setState(stateCopy);
 
   }
 
