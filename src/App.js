@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-class App extends Component {
+class Home extends Component {
 
   state = {
     recipes: []
@@ -99,7 +99,7 @@ class App extends Component {
 }
 
 const AppNavigator = createStackNavigator({
-  Home:  App,
+  Home:  Home,
   Details: Recipe
 },
 {
