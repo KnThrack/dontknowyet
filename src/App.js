@@ -51,14 +51,13 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const form = document.getElementById('bigform');
-    /* const data = new FormData(event.target);
+    var stateCopy = Object.assign({}, this.state);
    
      fetch('https://notsureyetapp.herokuapp.com/api/recipes', {
        method: 'POST',
-       body: data,
+       body: stateCopy.recipes,
      });
- */
+
   }
 
   // handlers end 
