@@ -52,12 +52,14 @@ class App extends Component {
   handleSubmit(event) {
     event.preventDefault();
     var stateCopy = Object.assign({}, this.state);
-   
-     fetch('https://notsureyetapp.herokuapp.com/api/recipes', {
-       method: 'POST',
-       body: stateCopy.recipes,
-     });
 
+    for (let index = 0; index < stateCopy.recipes.length; index++) {
+      const element = stateCopy.recipes[index];
+      fetch('https://notsureyetapp.herokuapp.com/api/recipes/' + element._id, {
+        method: 'PUT',
+        body: element,
+      });
+    }
   }
 
   // handlers end 
