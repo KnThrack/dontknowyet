@@ -6,12 +6,12 @@ import Button from 'react-bootstrap/Button';
 
 const Recipes = ({ recipes, that }) => {
     return (
-        <div id="bigform">
+        <div>
             <center><h1>Recipesss List</h1></center>
             {
                 recipes.data.map((recipe) =>
                     <div key={recipe._id.toString()}>
-                        <Form onChange={that.handleSubmit} /*controlId={recipe._id.toString()+".Form"}*/>
+                        <Form id="bigform" onChange={that.handleSubmit} /*controlId={recipe._id.toString()+".Form"}*/>
                             <Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
                                 <Form.Label htmlFor="title" >Recipe Title</Form.Label>
                                 <Form.Control id="title" value={recipe.title} />
