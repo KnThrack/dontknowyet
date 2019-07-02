@@ -14,13 +14,13 @@ class Recipe extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         
-        axios.defaults.headers.put['Content-Type'] = 'application/json';
+        
     }
 
     async componentDidMount() {
         const { match: { params } } = this.props;
         const recipe = this.props.location.state;
-        // const recipe = (await axios.get(`https://notsureyetapp.herokuapp.com/api/recipes/${params.recipeId}`)).data;
+
         this.setState({
             recipe
         });

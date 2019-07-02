@@ -18,7 +18,8 @@ class App extends Component {
     this.state = { apiResponse: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    axios.defaults.headers.post['Content-Type'] = 'application/json"';
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.headers.put['Content-Type'] = 'application/json';
   }
 
 
