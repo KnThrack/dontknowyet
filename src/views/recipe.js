@@ -66,9 +66,7 @@ class Recipe extends Component {
                         <Form.Control name={recipe._id.toString() + "#recipe"} onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
                     </Form.Group>
                     <Link to="/">
-                        <ButtonToolbar>
                             <Button variant="info" title="Go Back">Go Back</Button>
-                        </ButtonToolbar>
                     </Link>
                 </Form>
             </div >
