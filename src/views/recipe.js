@@ -30,7 +30,6 @@ class Recipe extends Component {
         const recipeID = target.name;
 
         var stateCopy = Object.assign({}, this.state);
-        stateCopy.recipe = stateCopy.recipe.slice();
         stateCopy.recipe[recipeID] = value;
         this.setState(stateCopy);
 
