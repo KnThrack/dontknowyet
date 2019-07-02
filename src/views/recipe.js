@@ -39,6 +39,14 @@ class Recipe extends Component {
 
     }
 
+    handleSubmit(event) {
+        event.preventDefault();
+        var stateCopy = Object.assign({}, this.state);
+
+        axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + stateCopy.recipe._id, JSON.stringify(stateCopy.recipe));
+
+    }
+
     render() {
         const { recipe } = this.state;
         if (recipe === null) return <p>Loading ...</p>;
@@ -65,9 +73,13 @@ class Recipe extends Component {
                         <Form.Label htmlFor="recipe">Recipe</Form.Label>
                         <Form.Control name={recipe._id.toString() + "#recipe"} onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
                     </Form.Group>
-                    <Link to="/">
+                    <ButtonToolbar>
+
+                        <Link to="/">
                             <Button variant="info" title="Go Back">Go Back</Button>
-                    </Link>
+                        </Link>
+                        <Button type="submit" variant="primary" onClick={this.handleSubmit}>Submit</Button>
+                    </ButtonToolbar>
                 </Form>
             </div >
         )

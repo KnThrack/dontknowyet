@@ -88,9 +88,6 @@ class App extends Component {
               <Route path="/recipe/:id" component={Recipe} />
             </div>
           </Router>
-          <ButtonToolbar>
-            <Button type="submit" variant="primary" onClick={this.handleSubmit}>Submit</Button>
-          </ButtonToolbar>
         </div>
       );
     } else {
