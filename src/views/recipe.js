@@ -40,7 +40,7 @@ class Recipe extends Component {
     handleSubmit(event) {
         event.preventDefault();
         var stateCopy = Object.assign({}, this.state);
-        var test = JSON.stringify(stateCopy.recipe));
+        var test = JSON.stringify(stateCopy.recipe);
         axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + stateCopy.recipe._id, JSON.stringify(stateCopy.recipe));
 
     }
