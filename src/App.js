@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 import Recipes from './views/recipes';
@@ -60,7 +61,7 @@ class App extends Component {
       const element = stateCopy.recipes[index];
 
       axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + element._id, JSON.stringify(element));
-      
+
       /*
       fetch('https://notsureyetapp.herokuapp.com/api/recipes/' + element._id, {
         method: "PUT",
@@ -81,7 +82,12 @@ class App extends Component {
       return (
         <div className="App">
           <header className="App-header" />
-          <Recipes recipes={this.state.recipes} that={this} />
+          <Router>
+            <div>
+              <Route exact path="/" render={ <Recipes recipes={this.state.recipes} that={this} /> } />
+              <Route path="/recipe" component={Recipe} />
+            </div>
+          </Router>
           <ButtonToolbar>
             <Button type="submit" variant="primary" onClick={this.handleSubmit}>Submit</Button>
           </ButtonToolbar>
@@ -99,6 +105,10 @@ class App extends Component {
 
 export default App;
 /*
+
+<Recipes recipes={this.state.recipes} that={this} />
+
+
 const AppNavigator = createStackNavigator({
   Home:  Home,
   Details: Recipe

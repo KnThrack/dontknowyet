@@ -18,6 +18,7 @@ const Recipes = ({ recipes, that }) => {
                                 <Card.Text>
                                     {recipe.recipe}
                                 </Card.Text>
+                                <Button variant="info" title="Go to Details" onPress={() => that.props.navigation.navigate('Details', { recipeId: recipe._id.toString() })} />
                             </Card.Body>
                         </Card>
                 )
