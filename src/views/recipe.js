@@ -13,8 +13,8 @@ class Recipe extends Component {
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        axios.defaults.headers.post['Content-Type'] = 'application/json"';
-        axios.defaults.headers.put['Content-Type'] = 'application/json"';
+        
+        axios.defaults.headers.put['Content-Type'] = 'application/json';
     }
 
     async componentDidMount() {
@@ -40,7 +40,7 @@ class Recipe extends Component {
     handleSubmit(event) {
         event.preventDefault();
         var stateCopy = Object.assign({}, this.state);
-        
+        var test = JSON.stringify(stateCopy.recipe));
         axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + stateCopy.recipe._id, JSON.stringify(stateCopy.recipe));
 
     }
