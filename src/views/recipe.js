@@ -15,6 +15,7 @@ class Recipe extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onTableChange = this.onTableChange.bind(this);
+        this.handleAddIngredient = this.handleAddIngredient.bind(this);
     }
 
     async componentDidMount() {
@@ -27,6 +28,14 @@ class Recipe extends Component {
     }
 
     // handlers
+    handleAddIngredient(event) {
+        const target = event.target;
+        // take a copy thats mutable 
+        var stateCopy = Object.assign({}, this.state);
+        stateCopy.recipe.ingredients = { ingredient: "", quantity: "",  unit: "" };
+        this.setState(stateCopy);
+    }
+
     onTableChange(event) {
         const target = event.target;
 
@@ -103,7 +112,7 @@ class Recipe extends Component {
                             <Button variant="info" title="Go Back">Go Back</Button>
                         </Link>
                         <Button type="submit" variant="primary" onClick={this.handleSubmit}>Submit</Button>
-                        <Button type="submit" variant="primary" onClick={this.handleSubmit}>Add Ingredient</Button>
+                        <Button type="submit" variant="primary" onClick={this.handleAddIngredient}>Add Ingredient</Button>
                     </ButtonToolbar>
                 </Form>
             </div >
