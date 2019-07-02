@@ -14,6 +14,7 @@ class Recipe extends Component {
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onTableChange = this.onTableChange.bind(this);
     }
 
     async componentDidMount() {
@@ -23,6 +24,12 @@ class Recipe extends Component {
         this.setState({
             recipe
         });
+    }
+
+    // handlers
+    onTableChange(event) {
+        const target = event.target;
+
     }
 
     handleInputChange(event) {
@@ -72,7 +79,6 @@ class Recipe extends Component {
                         <Table responsive variant="dark">
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Ingredient</th>
                                     <th>Quantity</th>
                                     <th>Unit</th>
@@ -83,7 +89,7 @@ class Recipe extends Component {
                                     (ingredient) =>
                                         <tbody>
                                             <tr key={ingredient._id}>
-                                                <td>{ingredient.ingredient}</td>
+                                                <td><input name={ingredient._id.toString()+"ingredient"} type="text" value={ingredient.ingredient} onChange={this.onTableChange} /></td>
                                                 <td>{ingredient.quantity}</td>
                                                 <td>{ingredient.unit}</td>
                                             </tr>
@@ -97,6 +103,7 @@ class Recipe extends Component {
                             <Button variant="info" title="Go Back">Go Back</Button>
                         </Link>
                         <Button type="submit" variant="primary" onClick={this.handleSubmit}>Submit</Button>
+                        <Button type="submit" variant="primary" onClick={this.handleSubmit}>Add Ingredient</Button>
                     </ButtonToolbar>
                 </Form>
             </div >

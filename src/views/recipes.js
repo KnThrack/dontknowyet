@@ -13,7 +13,7 @@ const Recipes = ({ recipes, that }) => {
             {
                 recipes.map(
                     (recipe) =>
-                        <Card style={{ width: '18rem' }}>
+                        <Card key={recipe._id.toString()} style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>{recipe.title}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">{recipe.cuisine}</Card.Subtitle>
