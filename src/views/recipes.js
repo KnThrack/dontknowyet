@@ -9,32 +9,15 @@ const Recipes = ({ recipes, that }) => {
         <div>
             <center><h1>Recipes List</h1></center>
             {
-                recipes.map((recipe) =>
-                    <div key={recipe._id.toString()}>
-                        <Form id="bigform" /*controlId={recipe._id.toString()+".Form"}*/>
-                            <Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
-                                <Form.Label htmlFor="title" >Recipe Title</Form.Label>
-                                <Form.Control name={recipe._id.toString()+"#title"} onChange={that.handleInputChange} id="title" value={recipe.title} />
-                                <Form.Label htmlFor="name">Recipe Name</Form.Label>
-                                <Form.Control name={recipe._id.toString()+"#name"} onChange={that.handleInputChange} id="name" value={recipe.name} />
-                            </Form.Group>
-                            <Form.Group /*controlId={recipe._id.toString()+".ControlCuisine"}*/>
-                                <Form.Label htmlFor="cuisine" >Cuisine</Form.Label>
-                                <Form.Control name={recipe._id.toString()+"#cuisine"} onChange={that.handleInputChange} id="cuisine" value={recipe.cuisine} as="select">
-                                    <option>German</option>
-                                    <option>Chinese</option>
-                                    <option>Asian</option>
-                                    <option>French</option>
-                                    <option>Italian</option>
-                                </Form.Control>
-                            </Form.Group>
-                            <Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
-                                <Form.Label htmlFor="recipe">Recipe</Form.Label>
-                                <Form.Control name={recipe._id.toString()+"#recipe"} onChange={that.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe}/>
-                            </Form.Group>
-                            <Button class="btn btn-info" title="Go to Details" onPress={() => that.props.navigation.navigate('Details', { recipeId: recipe._id.toString() })} />
-                        </Form>
-                    </div>
+                recipes.map(
+                    (recipe) =>
+                        <div key={recipe._id.toString()} class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                            <div class="card-header">{recipe.cuisine}</div>
+                            <div class="card-body">
+                                <h4 class="card-title">{recipe.title}</h4>
+                                <p class="card-text">{recipe.recipe}</p>
+                            </div>
+                        </div>
                 )
             }
         </div>
@@ -43,7 +26,33 @@ const Recipes = ({ recipes, that }) => {
 
 export default Recipes
 
-/*
+/*old form
+                        <Form id="bigform" /*controlId={recipe._id.toString()+".Form"}>
+                        <Form.Group controlId={recipe._id.toString()+".ControlInput1"}>
+                        <Form.Label htmlFor="title" >Recipe Title</Form.Label>
+                        <Form.Control name={recipe._id.toString()+"#title"} onChange={that.handleInputChange} id="title" value={recipe.title} />
+                        <Form.Label htmlFor="name">Recipe Name</Form.Label>
+                        <Form.Control name={recipe._id.toString()+"#name"} onChange={that.handleInputChange} id="name" value={recipe.name} />
+                    </Form.Group>
+                    <Form.Group controlId={recipe._id.toString()+".ControlCuisine"}>
+                        <Form.Label htmlFor="cuisine" >Cuisine</Form.Label>
+                        <Form.Control name={recipe._id.toString()+"#cuisine"} onChange={that.handleInputChange} id="cuisine" value={recipe.cuisine} as="select">
+                            <option>German</option>
+                            <option>Chinese</option>
+                            <option>Asian</option>
+                            <option>French</option>
+                            <option>Italian</option>
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group controlId={recipe._id.toString()+".ControlTextarea1"}>
+                        <Form.Label htmlFor="recipe">Recipe</Form.Label>
+                        <Form.Control name={recipe._id.toString()+"#recipe"} onChange={that.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe}/>
+                    </Form.Group>
+                    <Button variant="info" title="Go to Details" onPress={() => that.props.navigation.navigate('Details', { recipeId: recipe._id.toString() })} />
+                </Form>
+
+
+
                 <div key={recipe._id.toString()} className="card">
                     <div className="card-body">
                         <h5 className="card-title">{recipe.title}</h5>
