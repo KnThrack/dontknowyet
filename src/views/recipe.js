@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -65,7 +66,9 @@ class Recipe extends Component {
                         <Form.Control name={recipe._id.toString() + "#recipe"} onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
                     </Form.Group>
                     <Link to="/">
-                        <Button variant="info" title="Go Back" />
+                        <ButtonToolbar>
+                            <Button variant="info" title="Go Back" />
+                        </ButtonToolbar>
                     </Link>
                 </Form>
             </div >

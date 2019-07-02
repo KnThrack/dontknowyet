@@ -3,6 +3,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { Link } from 'react-router-dom';
 
 const Recipes = ({ recipes, that }) => {
@@ -20,7 +21,9 @@ const Recipes = ({ recipes, that }) => {
                                     {recipe.recipe}
                                 </Card.Text>
                                 <Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
-                                    <Button variant="info" title="Go to Details" />
+                                    <ButtonToolbar>
+                                        <Button variant="info" title="Go to Details" />
+                                    </ButtonToolbar>
                                 </Link>
                             </Card.Body>
                         </Card>
