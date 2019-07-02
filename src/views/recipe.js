@@ -67,7 +67,7 @@ class Recipe extends Component {
                     </Form.Group>
                     <Link to="/">
                         <ButtonToolbar>
-                            <Button variant="info" title="Go Back" />
+                            <Button variant="info" title="Go Back">Go Back</Button>
                         </ButtonToolbar>
                     </Link>
                 </Form>
