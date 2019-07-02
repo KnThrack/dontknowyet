@@ -19,7 +19,9 @@ const Recipes = ({ recipes, that }) => {
                                 <Card.Text>
                                     {recipe.recipe}
                                 </Card.Text>
-                                <Link to={"/recipe/"+recipe._id.toString()}><Button variant="info" title="Go to Details"/></Link>
+                                <Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+                                    <Button variant="info" title="Go to Details" />
+                                </Link>
                             </Card.Body>
                         </Card>
                 )

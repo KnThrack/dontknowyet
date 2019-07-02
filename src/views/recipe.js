@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Recipe extends Component {
     constructor(props) {
@@ -13,9 +14,10 @@ class Recipe extends Component {
 
     async componentDidMount() {
         const { match: { params } } = this.props;
-        const recipe = (await axios.get(`https://notsureyetapp.herokuapp.com/api/recipes/${params.recipeId}`)).data;
+        const recipe = this.props.state;
+        // const recipe = (await axios.get(`https://notsureyetapp.herokuapp.com/api/recipes/${params.recipeId}`)).data;
         this.setState({
-            recipe,
+            recipe
         });
     }
 
@@ -64,11 +66,10 @@ class Recipe extends Component {
                     </Form.Group>
                     <Button variant="info" title="Go to Details" onPress={() => this.props.navigation.navigate('Details', { recipeId: recipe._id.toString() })} />
                 </Form>
-                <Button
-                    variant="link"
-                    title="Go back"
-                    onPress={() => this.props.navigation.goBack()}
-                />
+                <Link to="/">
+                    <Button variant="info" title="Go Back" />
+                </Link>
+
             </div >
         )
     }
