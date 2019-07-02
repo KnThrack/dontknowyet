@@ -25,16 +25,11 @@ class Recipe extends Component {
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name.split("#");
-        const recipeID = name[0];
-        const recipeField = name[1];
-
-        let index = this.state.recipes.findIndex(x => x._id === recipeID.toString());
+        const recipeID = target.name;
 
         var stateCopy = Object.assign({}, this.state);
-        stateCopy.recipes = stateCopy.recipes.slice();
-        stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
-        stateCopy.recipes[index][recipeField] = value;
+        stateCopy.recipe = stateCopy.recipe.slice();
+        stateCopy.recipe[recipeID] = value;
         this.setState(stateCopy);
 
     }
@@ -55,13 +50,13 @@ class Recipe extends Component {
                 <Form id="bigform" /*controlId={recipe._id.toString()+".Form"}*/>
                     <Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
                         <Form.Label htmlFor="title" >Recipe Title</Form.Label>
-                        <Form.Control name={recipe._id.toString() + "#title"} onChange={this.handleInputChange} id="title" value={recipe.title} />
+                        <Form.Control name="title" onChange={this.handleInputChange} id="title" value={recipe.title} />
                         <Form.Label htmlFor="name">Recipe Name</Form.Label>
-                        <Form.Control name={recipe._id.toString() + "#name"} onChange={this.handleInputChange} id="name" value={recipe.name} />
+                        <Form.Control name="name" onChange={this.handleInputChange} id="name" value={recipe.name} />
                     </Form.Group>
                     <Form.Group /*controlId={recipe._id.toString()+".ControlCuisine"}*/>
                         <Form.Label htmlFor="cuisine" >Cuisine</Form.Label>
-                        <Form.Control name={recipe._id.toString() + "#cuisine"} onChange={this.handleInputChange} id="cuisine" value={recipe.cuisine} as="select">
+                        <Form.Control name="cuisine" onChange={this.handleInputChange} id="cuisine" value={recipe.cuisine} as="select">
                             <option>German</option>
                             <option>Chinese</option>
                             <option>Asian</option>
@@ -71,10 +66,9 @@ class Recipe extends Component {
                     </Form.Group>
                     <Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
                         <Form.Label htmlFor="recipe">Recipe</Form.Label>
-                        <Form.Control name={recipe._id.toString() + "#recipe"} onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
+                        <Form.Control name="recipe" onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
                     </Form.Group>
                     <ButtonToolbar>
-
                         <Link to="/">
                             <Button variant="info" title="Go Back">Go Back</Button>
                         </Link>
