@@ -85,7 +85,7 @@ class App extends Component {
           <Router>
             <div>
               <Route exact path="/" render={ () => <Recipes recipes={this.state.recipes} that={this} /> } />
-              <Route path="/recipe" component={Recipe} />
+              <Route path="/recipe/:id" component={Recipe} />
             </div>
           </Router>
           <ButtonToolbar>

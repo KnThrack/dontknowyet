@@ -3,6 +3,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 const Recipes = ({ recipes, that }) => {
     return (
@@ -18,7 +19,7 @@ const Recipes = ({ recipes, that }) => {
                                 <Card.Text>
                                     {recipe.recipe}
                                 </Card.Text>
-                                <Button variant="info" title="Go to Details" onPress={() => that.props.navigation.navigate('Details', { recipeId: recipe._id.toString() })} />
+                                <Link to={"/recipe/"+recipe._id.toString()}><Button variant="info" title="Go to Details"/></Link>
                             </Card.Body>
                         </Card>
                 )
