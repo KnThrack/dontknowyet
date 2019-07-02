@@ -69,7 +69,6 @@ class Recipe extends Component {
                 <Link to="/">
                     <Button variant="info" title="Go Back" />
                 </Link>
-
             </div >
         )
     }
