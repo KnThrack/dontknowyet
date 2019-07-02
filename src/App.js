@@ -18,12 +18,16 @@ class App extends Component {
     this.state = { apiResponse: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+
+    // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios.defaults.headers.put['Content-Type'] = 'application/json';
   }
 
 
   async callAPI() {
+
+    // get the initial recipes
     const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes")).data;
 
     this.setState({
@@ -33,11 +37,13 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    // get the initial recipes
     this.callAPI();
   }
 
   // handlers
   handleInputChange(event) {
+    // deprecated !
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name.split("#");
@@ -55,6 +61,7 @@ class App extends Component {
   }
 
   handleSubmit(event) {
+    // deprecated !
     event.preventDefault();
     var stateCopy = Object.assign({}, this.state);
 

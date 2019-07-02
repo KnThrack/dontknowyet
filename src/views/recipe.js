@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Form from 'react-bootstrap/Form';
+import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -13,8 +14,6 @@ class Recipe extends Component {
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        
-        
     }
 
     async componentDidMount() {
@@ -27,20 +26,22 @@ class Recipe extends Component {
     }
 
     handleInputChange(event) {
+        // get the value and move it into the state 
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
-        const recipeID = target.name;
-
+        // take a copy thats mutable 
         var stateCopy = Object.assign({}, this.state);
-        stateCopy.recipe[recipeID] = value;
+        stateCopy.recipe[target.name] = value;
+        // set back the mutated copy into the state
         this.setState(stateCopy);
 
     }
 
     handleSubmit(event) {
+        // submit the changes to the backend
         event.preventDefault();
+        // take a copy thats mutable 
         var stateCopy = Object.assign({}, this.state);
-        var test = JSON.stringify(stateCopy.recipe);
         axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + stateCopy.recipe._id, JSON.stringify(stateCopy.recipe));
 
     }
@@ -56,8 +57,6 @@ class Recipe extends Component {
                         <Form.Control name="title" onChange={this.handleInputChange} id="title" value={recipe.title} />
                         <Form.Label htmlFor="name">Recipe Name</Form.Label>
                         <Form.Control name="name" onChange={this.handleInputChange} id="name" value={recipe.name} />
-                    </Form.Group>
-                    <Form.Group /*controlId={recipe._id.toString()+".ControlCuisine"}*/>
                         <Form.Label htmlFor="cuisine" >Cuisine</Form.Label>
                         <Form.Control name="cuisine" onChange={this.handleInputChange} id="cuisine" value={recipe.cuisine} as="select">
                             <option>German</option>
@@ -70,6 +69,28 @@ class Recipe extends Component {
                     <Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
                         <Form.Label htmlFor="recipe">Recipe</Form.Label>
                         <Form.Control name="recipe" onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
+                        <Table responsive variant="dark">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Ingredient</th>
+                                    <th>Quantity</th>
+                                    <th>Unit</th>
+                                </tr>
+                            </thead>
+                            {
+                                recipe.ingredients.map(
+                                    (ingredient) =>
+                                        <tbody>
+                                            <tr key={ingredient._id}>
+                                                <td>{ingredient.ingredient}</td>
+                                                <td>{ingredient.quantity}</td>
+                                                <td>{ingredient.unit}</td>
+                                            </tr>
+                                        </tbody>
+                                )
+                            }
+                        </Table>
                     </Form.Group>
                     <ButtonToolbar>
                         <Link to="/">
