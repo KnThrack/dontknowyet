@@ -11,6 +11,8 @@ class Recipe extends Component {
         this.state = {
             recipe: null,
         };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async componentDidMount() {
