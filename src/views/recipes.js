@@ -32,7 +32,7 @@ const Recipes = ({ recipes, that }) => {
                                 <Form.Label htmlFor="recipe">Recipe</Form.Label>
                                 <Form.Control name={recipe._id.toString()+"#recipe"} onChange={that.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe}/>
                             </Form.Group>
-                            <Button title="Go to Details" onPress={() => that.props.navigation.navigate('Details', { recipeId: recipe._id.toString() })} />
+                            <Button class="btn btn-info" title="Go to Details" onPress={() => that.props.navigation.navigate('Details', { recipeId: recipe._id.toString() })} />
                         </Form>
                     </div>
                 )

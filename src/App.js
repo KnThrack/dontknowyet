@@ -83,7 +83,7 @@ class App extends Component {
           <header className="App-header" />
           <Recipes recipes={this.state.recipes} that={this} />
           <ButtonToolbar>
-            <Button type="submit" variant="outline-primary" onClick={this.handleSubmit}>Submit</Button>
+            <Button class="btn btn-primary" type="submit" variant="outline-primary" onClick={this.handleSubmit}>Submit</Button>
           </ButtonToolbar>
         </div>
       );
