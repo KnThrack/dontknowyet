@@ -14,7 +14,7 @@ class Recipe extends Component {
 
     async componentDidMount() {
         const { match: { params } } = this.props;
-        const recipe = this.props.state;
+        const recipe = this.props.location.state;
         // const recipe = (await axios.get(`https://notsureyetapp.herokuapp.com/api/recipes/${params.recipeId}`)).data;
         this.setState({
             recipe
@@ -64,11 +64,10 @@ class Recipe extends Component {
                         <Form.Label htmlFor="recipe">Recipe</Form.Label>
                         <Form.Control name={recipe._id.toString() + "#recipe"} onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
                     </Form.Group>
-                    <Button variant="info" title="Go to Details" onPress={() => this.props.navigation.navigate('Details', { recipeId: recipe._id.toString() })} />
+                    <Link to="/">
+                        <Button variant="info" title="Go Back" />
+                    </Link>
                 </Form>
-                <Link to="/">
-                    <Button variant="info" title="Go Back" />
-                </Link>
             </div >
         )
     }
