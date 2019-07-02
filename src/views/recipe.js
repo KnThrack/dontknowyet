@@ -13,6 +13,7 @@ class Recipe extends Component {
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        axios.defaults.headers.post['Content-Type'] = 'application/json"';
     }
 
     async componentDidMount() {
