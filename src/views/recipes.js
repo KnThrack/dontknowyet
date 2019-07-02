@@ -1,7 +1,7 @@
 // src/views/recipes.js
 
 import React from 'react';
-import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 const Recipes = ({ recipes, that }) => {
@@ -11,13 +11,15 @@ const Recipes = ({ recipes, that }) => {
             {
                 recipes.map(
                     (recipe) =>
-                        <div key={recipe._id.toString()} class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                            <div class="card-header">{recipe.cuisine}</div>
-                            <div class="card-body">
-                                <h4 class="card-title">{recipe.title}</h4>
-                                <p class="card-text">{recipe.recipe}</p>
-                            </div>
-                        </div>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Body>
+                                <Card.Title>{recipe.title}</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted">{recipe.cuisine}</Card.Subtitle>
+                                <Card.Text>
+                                    {recipe.recipe}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
                 )
             }
         </div>
