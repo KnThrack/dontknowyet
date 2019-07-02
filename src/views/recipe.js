@@ -32,7 +32,7 @@ class Recipe extends Component {
         const target = event.target;
         // take a copy thats mutable 
         var stateCopy = Object.assign({}, this.state);
-        stateCopy.recipe.ingredients = { ingredient: "", quantity: "",  unit: "" };
+        stateCopy.recipe.ingredients.push({ ingredient: "", quantity: "",  unit: "" });
         this.setState(stateCopy);
     }
 
