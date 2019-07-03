@@ -33,11 +33,11 @@ class Recipe extends Component {
 
     // handlers
     handleAddIngredient(event) {
-        this.props.handleAddIngredient(event);
+        this.props.handleAddIngredient(event, this.props.location.state);
     }
 
     handleTableChange(event) {
-        const target = event.target;
+        this.props.handleTableChange(event, this.props.location.state);
     }
 
     handleInputChange(event) {
