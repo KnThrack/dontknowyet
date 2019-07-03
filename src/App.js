@@ -93,7 +93,7 @@ class App extends Component {
           <header className="App-header" />
           <Router>
             <div>
-              <Route exact path="/" render={(props, recipesList) => <Recipes {...props} recipesList={recipesList} />} />
+              <Route exact path="/" render={(props) => <Recipes recipesList={recipesList} {...props} />} />
               <Route path="/recipe/:id" render={(props) => <Recipe {...props} />} />
             </div>
           </Router>
