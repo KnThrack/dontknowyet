@@ -86,7 +86,7 @@ class Recipe extends Component {
                         <Form.Label htmlFor="recipe">Recipe</Form.Label>
                         <Form.Control name="recipe" onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
                     </Form.Group>    
-                    <Form.Group/>
+                    <Form.Group>
                         <Table responsive variant="dark">
                             <thead>
                                 <tr>
