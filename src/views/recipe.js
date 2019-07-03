@@ -111,7 +111,7 @@ class Recipe extends Component {
                     </Form.Group>
                     <ButtonToolbar>
                         <Button type="submit" variant="primary" onClick={this.handleSubmit}>Submit</Button>
-                        <Button type="submit" variant="primary" onClick={this.handleAddIngredient}>Add Ingredient</Button>
+                        <Button type="button" variant="primary" onClick={this.handleAddIngredient}>Add Ingredient</Button>
                     </ButtonToolbar>
                 </Form>
             </div >
