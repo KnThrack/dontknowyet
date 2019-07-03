@@ -94,6 +94,7 @@ class App extends Component {
   }
 
   // handlers end 
+
   RecipeListApp() {
 
     const recipesList = this.state.recipes;
@@ -105,7 +106,7 @@ class App extends Component {
           <Router>
             <div>
               <Route exact path="/" render={(props) => <Recipes recipesList={recipesList} {...props} />} />
-              <Route path="/recipe/:id" render={(props) => <Recipe handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
+              <Route path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
           </Router>
         </div>);

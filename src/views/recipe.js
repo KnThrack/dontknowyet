@@ -50,7 +50,10 @@ class Recipe extends Component {
     }
 
     render() {
-        const myRecipe = this.props.location.state;
+        // find which one we looking at
+        let index = this.props.recipesList.recipes.findIndex(x => x._id === this.props.location.state._id.toString());
+
+        const myRecipe = this.props.recipesList[index];
         if (myRecipe === null) return <p>Loading ...</p>;
         return (
             <div key={myRecipe._id.toString()} className="container">
