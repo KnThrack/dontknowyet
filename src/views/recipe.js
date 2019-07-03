@@ -85,6 +85,8 @@ class Recipe extends Component {
                     <Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
                         <Form.Label htmlFor="recipe">Recipe</Form.Label>
                         <Form.Control name="recipe" onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
+                    </Form.Group>    
+                    <Form.Group/>
                         <Table responsive variant="dark">
                             <thead>
                                 <tr>
@@ -96,7 +98,7 @@ class Recipe extends Component {
                             {
                                 recipe.ingredients.map(
                                     (ingredient) =>
-                                        <tbody>
+                                        <tbody key={ingredient._id}>
                                             <tr key={ingredient._id}>
                                                 <td><input name={ingredient._id.toString()+"ingredient"} type="text" value={ingredient.ingredient} onChange={this.onTableChange} /></td>
                                                 <td>{ingredient.quantity}</td>
