@@ -9,13 +9,9 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
 class App extends Component {
 
-  state = {
-    recipes: []
-  }
-
   constructor(props) {
     super(props);
-    this.state = { apiResponse: "" };
+    //this.state = { apiResponse: "" };
     //this.handleSubmit = this.handleSubmit.bind(this);
     //this.handleInputChange = this.handleInputChange.bind(this);
 
@@ -38,7 +34,7 @@ class App extends Component {
 
   async componentDidMount() {
     // get the initial recipes
-    this.callAPI();
+    //this.callAPI();
   }
 
   // handlers
@@ -87,49 +83,23 @@ class App extends Component {
   }
 
   // handlers end 
+  RecipeListApp() {
+      return (        
+      <div className="App">
+      <header className="App-header" />
+      <Router>
+        <div>
+          <Route exact path="/" component={Recipes} /> } />
+          <Route path="/recipe/:id" component={Recipe} />
+        </div>
+      </Router>
+      </div>);    
+  }
 
   render() {
-    if (this.state.recipes) {
-      return (
-        <div className="App">
-          <header className="App-header" />
-          <Router>
-            <div>
-              <Route exact path="/" render={ () => <Recipes recipes={this.state.recipes} that={this} /> } />
-              <Route path="/recipe/:id" component={Recipe} />
-            </div>
-          </Router>
-        </div>
-      );
-    } else {
-      return (
-        <div className="App">
-          <header className="App-header" />
-        </div>
-      );
-    }
+    return this.RecipeListApp();
   }
 }
 
 export default App;
-/*
 
-<Recipes recipes={this.state.recipes} that={this} />
-
-
-const AppNavigator = createStackNavigator({
-  Home:  Home,
-  Details: Recipe
-},
-{
-  initialRouteName: "Home"
-});
-
-const AppContainer = createAppContainer(AppNavigator);
-
-export default class App extends React.Component {
-  render() {
-    return <AppContainer />;
-  }
-};
-*/
