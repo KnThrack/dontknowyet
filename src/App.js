@@ -43,7 +43,7 @@ class App extends Component {
   async updateIngredients(state) {
 
     // and put it away
-    const updateRecipe = (await axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + state._id, JSON.stringify(state))).data;
+    const updateRecipe = (await axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + state._id, JSON.stringify(state))).data.data;
 
     // find which one we updating
     let index = this.state.recipes.findIndex(x => x._id === updateRecipe._id.toString());
