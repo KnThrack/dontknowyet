@@ -14,7 +14,7 @@ class App extends Component {
     this.state = { recipes: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-
+    this.handleAddIngredient = this.handleAddIngredient.bind(this);
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios.defaults.headers.put['Content-Type'] = 'application/json';
@@ -38,7 +38,27 @@ class App extends Component {
   }
 
   // handlers
+  handleAddIngredient(event) {
+    this.props.handleAddIngredient(event);
+    /*
+    const target = event.target;
+    // take a copy thats mutable 
+    var stateCopy = Object.assign({}, this.state);
+    stateCopy.recipe.ingredients.push({ _id: 1, ingredient: "", quantity: "", unit: "" });
+    this.setState(stateCopy);
+    */
+  }
+
   handleInputChange(event) {
+
+    // get the value and move it into the state 
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    // take a copy thats mutable 
+    var stateCopy = Object.assign({}, this.state);
+    stateCopy.recipe[target.name] = value;
+    // set back the mutated copy into the state
+    this.setState(stateCopy);
     // deprecated !
     /*
     const target = event.target;
@@ -94,7 +114,7 @@ class App extends Component {
           <Router>
             <div>
               <Route exact path="/" render={(props) => <Recipes recipesList={recipesList} {...props} />} />
-              <Route path="/recipe/:id" render={(props) => <Recipe {...props} />} />
+              <Route path="/recipe/:id" render={(props) => <Recipe handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
           </Router>
         </div>);

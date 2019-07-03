@@ -9,9 +9,11 @@ import { Link } from 'react-router-dom';
 class Recipe extends Component {
     constructor(props) {
         super(props);
+        /*
         this.state = {
             recipe: null,
         };
+        */
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onTableChange = this.onTableChange.bind(this);
@@ -20,20 +22,25 @@ class Recipe extends Component {
 
     async componentDidMount() {
         const { match: { params } } = this.props;
+        /*
         const recipe = this.props.location.state;
 
         this.setState({
             recipe
         });
+        */
     }
 
     // handlers
     handleAddIngredient(event) {
+        this.props.handleAddIngredient(event);
+        /*
         const target = event.target;
         // take a copy thats mutable 
         var stateCopy = Object.assign({}, this.state);
-        stateCopy.recipe.ingredients.push({ _id:1, ingredient: "", quantity: "",  unit: "" });
+        stateCopy.recipe.ingredients.push({ _id: 1, ingredient: "", quantity: "", unit: "" });
         this.setState(stateCopy);
+        */
     }
 
     onTableChange(event) {
@@ -42,6 +49,8 @@ class Recipe extends Component {
     }
 
     handleInputChange(event) {
+        this.props.handleInputChange(event);
+        /*
         // get the value and move it into the state 
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -50,7 +59,7 @@ class Recipe extends Component {
         stateCopy.recipe[target.name] = value;
         // set back the mutated copy into the state
         this.setState(stateCopy);
-
+*/
     }
 
     handleSubmit(event) {
@@ -63,7 +72,7 @@ class Recipe extends Component {
     }
 
     render() {
-        const { recipe } = this.state;
+        const { recipe } = this.props.location.state;
         if (recipe === null) return <p>Loading ...</p>;
         return (
             <div key={recipe._id.toString()} className="container">
@@ -85,7 +94,7 @@ class Recipe extends Component {
                     <Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
                         <Form.Label htmlFor="recipe">Recipe</Form.Label>
                         <Form.Control name="recipe" onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
-                    </Form.Group>    
+                    </Form.Group>
                     <Form.Group>
                         <Table responsive variant="dark">
                             <thead>
@@ -100,7 +109,7 @@ class Recipe extends Component {
                                     (ingredient) =>
                                         <tbody key={ingredient._id}>
                                             <tr key={ingredient._id}>
-                                                <td><input name={ingredient._id.toString()+"ingredient"} type="text" value={ingredient.ingredient} onChange={this.onTableChange} /></td>
+                                                <td><input name={ingredient._id.toString() + "ingredient"} type="text" value={ingredient.ingredient} onChange={this.onTableChange} /></td>
                                                 <td>{ingredient.quantity}</td>
                                                 <td>{ingredient.unit}</td>
                                             </tr>
