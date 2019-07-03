@@ -76,7 +76,7 @@ class App extends Component {
 
   handleAddRecipe(event) {
     const newRecipe = {
-      name: "",
+      name: _.uniqueId("newRecipe"),
       title: "",
       cuisine: "",
       ingredients: [],
