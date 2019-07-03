@@ -51,7 +51,7 @@ class Recipe extends Component {
 
     render() {
         // find which one we looking at
-        let index = this.props.recipesListfindIndex(x => x._id === this.props.location.state._id.toString());
+        let index = this.props.recipesList.findIndex(x => x._id === this.props.location.state._id.toString());
 
         const myRecipe = this.props.recipesList[index];
         if (myRecipe === null) return <p>Loading ...</p>;
