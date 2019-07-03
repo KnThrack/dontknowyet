@@ -40,6 +40,22 @@ class App extends Component {
     this.callAPI();
   }
 
+  async updateIngredients(state) {
+
+    // and put it away
+    const updateRecipe = (await axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + state._id, JSON.stringify(state))).data;
+
+    // find which one we updating
+    let index = this.state.recipes.findIndex(x => x._id === updateRecipe._id.toString());
+    var stateCopy = Object.assign({}, this.state);
+    stateCopy.recipes = stateCopy.recipes.slice();
+    stateCopy.recipes[index] = updateRecipe;
+
+    // update it
+    this.setState(stateCopy);
+
+  }
+
   // handlers
   handleAddIngredient(event, childState) {
 
@@ -50,8 +66,10 @@ class App extends Component {
     stateCopy.recipes = stateCopy.recipes.slice();
     stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
     stateCopy.recipes[index].ingredients.push({ ingredient: "", quantity: "", unit: "" });
-    this.setState(stateCopy);
-    this.handleSubmit(event, childState);
+
+    //update it
+    this.updateIngredients(stateCopy.recipes[index]);
+
   }
 
   handleTableChange(event, childState) {

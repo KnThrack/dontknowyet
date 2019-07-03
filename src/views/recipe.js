@@ -87,9 +87,9 @@ class Recipe extends Component {
                             </thead>
                             {
                                 myRecipe.ingredients.map(
-                                    (ingredient) => 
-                                        <tbody key={ (ingredient._id) ? ingredient._id : 1}>
-                                            <tr key={ (ingredient._id) ? ingredient._id : 1}>
+                                    (ingredient) =>
+                                        <tbody key={(ingredient._id) ? ingredient._id : 1}>
+                                            <tr key={(ingredient._id) ? ingredient._id : 1}>
                                                 <td><input name={((ingredient._id) ? ingredient._id : 1) + "#ingredient"} type="text" value={ingredient.ingredient} onChange={this.handleTableChange} /></td>
                                                 <td><input name={((ingredient._id) ? ingredient._id : 1) + "#quantity"} type="text" value={ingredient.quantity} onChange={this.handleTableChange} /></td>
                                                 <td><input name={((ingredient._id) ? ingredient._id : 1) + "#unit"} type="text" value={ingredient.unit} onChange={this.handleTableChange} /></td>
@@ -100,6 +100,9 @@ class Recipe extends Component {
                         </Table>
                     </Form.Group>
                     <ButtonToolbar>
+                    <Link to="/">
+                            <Button variant="info" title="Go Back">Go Back</Button>
+                        </Link>
                         <Button type="submit" variant="primary" onClick={this.handleSubmit}>Submit</Button>
                         <Button type="button" variant="primary" onClick={this.handleAddIngredient}>Add Ingredient</Button>
                     </ButtonToolbar>
@@ -110,9 +113,3 @@ class Recipe extends Component {
 }
 
 export default Recipe;
-
-/*
-                        <Link to="/">
-                            <Button variant="info" title="Go Back">Go Back</Button>
-                        </Link>
-                        */
