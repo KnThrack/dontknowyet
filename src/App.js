@@ -17,6 +17,7 @@ class App extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddIngredient = this.handleAddIngredient.bind(this);
     this.handleTableChange = this.handleTableChange.bind(this);
+    this.handleAddRecipe = this.handleAddRecipe.bind(this);
 
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -56,7 +57,34 @@ class App extends Component {
 
   }
 
+  async addRecipe(newObject) {
+
+    // and put it away
+    const newRecipe = (await axios.post('https://notsureyetapp.herokuapp.com/api/recipes/', JSON.stringify(newObject))).data.data;
+
+    // add it in
+    var stateCopy = Object.assign({}, this.state);
+    stateCopy.recipes = stateCopy.recipes.slice();
+    stateCopy.recipes.push(newRecipe);
+
+    // update it
+    this.setState(stateCopy);
+
+  }
+
   // handlers
+
+  handleAddRecipe(event) {
+    const newRecipe = {
+      name: "",
+      title: "",
+      cuisine: "",
+      ingredients: [],
+      recipe: ""
+    }
+    this.addRecipe(newRecipe);
+  }
+
   handleAddIngredient(event, childState) {
 
     // find which one we updating
@@ -144,7 +172,7 @@ class App extends Component {
           <header className="App-header" />
           <Router>
             <div>
-              <Route exact path="/" render={(props) => <Recipes recipesList={recipesList} {...props} />} />
+              <Route exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} {...props} />} />
               <Route path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
           </Router>

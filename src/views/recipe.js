@@ -18,6 +18,7 @@ class Recipe extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
         this.handleAddIngredient = this.handleAddIngredient.bind(this);
+
     }
 
     async componentDidMount() {
@@ -48,6 +49,8 @@ class Recipe extends Component {
         // submit the changes to the backend
         this.props.handleSubmit(event, this.props.location.state);
     }
+
+    // handlers end
 
     render() {
         // find which one we looking at

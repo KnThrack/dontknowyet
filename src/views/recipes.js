@@ -8,31 +8,18 @@ import axios from 'axios';
 
 class Recipes extends Component {
 
-    /*
-    state = {
-        recipes: []
-    }
-
     constructor(props) {
         super(props);
-        this.state = { recipes: "" };
+        this.handleAddRecipe = this.handleAddRecipe.bind(this);
     }
-*/
 
-    async callAPI() {
-
-        // get the initial recipes
-        const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes")).data;
-
-        this.setState({
-            recipes: recipes.data,
-        });
-
-    }
 
     async componentDidMount() {
-        // get the initial recipes
-        //this.callAPI();
+
+    }
+
+    handleAddRecipe(event) {
+        this.props.handleAddRecipe(event);
     }
 
     RecipeList(recipes) {
@@ -57,6 +44,7 @@ class Recipes extends Component {
                                 </Card>
                         )
                     }
+                    <Button variant="submit" onClick={this.handleAddRecipe} title="Add Recipe">Add Recipe</Button>
                 </div>
             )
         } else {
@@ -64,6 +52,7 @@ class Recipes extends Component {
                 <div>
                     <center><h1>Recipes List</h1></center>
                     <center><h1>Loading ...</h1></center>
+                    <Button variant="submit" onClick={this.handleAddRecipe} title="Add Recipe">Add Recipe</Button>
                 </div>
             )
         }
