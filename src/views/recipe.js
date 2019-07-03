@@ -108,9 +108,6 @@ class Recipe extends Component {
                         </Table>
                     </Form.Group>
                     <ButtonToolbar>
-                        <Link to="/">
-                            <Button variant="info" title="Go Back">Go Back</Button>
-                        </Link>
                         <Button type="submit" variant="primary" onClick={this.handleSubmit}>Submit</Button>
                         <Button type="submit" variant="primary" onClick={this.handleAddIngredient}>Add Ingredient</Button>
                     </ButtonToolbar>
@@ -121,3 +118,9 @@ class Recipe extends Component {
 }
 
 export default Recipe;
+
+/*
+                        <Link to="/">
+                            <Button variant="info" title="Go Back">Go Back</Button>
+                        </Link>
+                        */
