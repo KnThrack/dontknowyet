@@ -65,7 +65,7 @@ class App extends Component {
     var stateCopy = Object.assign({}, this.state);
     stateCopy.recipes = stateCopy.recipes.slice();
     stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
-    stateCopy.recipes[index].ingredients.push({ ingredient: "", quantity: "", unit: "" });
+    stateCopy.recipes[index].ingredients.push({ ingredient: "", quantity: 0, unit: "" });
 
     //update it
     this.updateIngredients(stateCopy.recipes[index]);
