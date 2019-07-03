@@ -34,13 +34,6 @@ class Recipe extends Component {
     // handlers
     handleAddIngredient(event) {
         this.props.handleAddIngredient(event);
-        /*
-        const target = event.target;
-        // take a copy thats mutable 
-        var stateCopy = Object.assign({}, this.state);
-        stateCopy.recipe.ingredients.push({ _id: 1, ingredient: "", quantity: "", unit: "" });
-        this.setState(stateCopy);
-        */
     }
 
     onTableChange(event) {
@@ -49,17 +42,7 @@ class Recipe extends Component {
     }
 
     handleInputChange(event) {
-        this.props.handleInputChange(event);
-        /*
-        // get the value and move it into the state 
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        // take a copy thats mutable 
-        var stateCopy = Object.assign({}, this.state);
-        stateCopy.recipe[target.name] = value;
-        // set back the mutated copy into the state
-        this.setState(stateCopy);
-*/
+        this.props.handleInputChange(event, this.props.location.state);
     }
 
     handleSubmit(event) {

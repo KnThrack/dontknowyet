@@ -38,43 +38,38 @@ class App extends Component {
   }
 
   // handlers
-  handleAddIngredient(event) {
-    this.props.handleAddIngredient(event);
-    /*
+  handleAddIngredient(event, childState) {
+
     const target = event.target;
+    // find which one we updating
+    let index = this.state.recipes.findIndex(x => x._id === childState.recipeID.toString());
     // take a copy thats mutable 
     var stateCopy = Object.assign({}, this.state);
-    stateCopy.recipe.ingredients.push({ _id: 1, ingredient: "", quantity: "", unit: "" });
+    stateCopy.recipes = stateCopy.recipes.slice();
+    stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
+    stateCopy.recipe[index].ingredients.push({ _id: 1, ingredient: "", quantity: "", unit: "" });
     this.setState(stateCopy);
-    */
+
   }
 
-  handleInputChange(event) {
+  handleInputChange(event, childState) {
 
     // get the value and move it into the state 
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    // take a copy thats mutable 
-    var stateCopy = Object.assign({}, this.state);
-    stateCopy.recipe[target.name] = value;
-    // set back the mutated copy into the state
-    this.setState(stateCopy);
-    // deprecated !
-    /*
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name.split("#");
-    const recipeID = name[0];
-    const recipeField = name[1];
 
-    let index = this.state.recipes.findIndex(x => x._id === recipeID.toString());
+    const recipeField = target.name;
 
+    // find which one we updating
+    let index = this.state.recipes.findIndex(x => x._id === childState.recipeID.toString());
+
+    // change the one we want to fix the state
     var stateCopy = Object.assign({}, this.state);
     stateCopy.recipes = stateCopy.recipes.slice();
     stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
     stateCopy.recipes[index][recipeField] = value;
     this.setState(stateCopy);
-*/
+
   }
 
   handleSubmit(event) {
