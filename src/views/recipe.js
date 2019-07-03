@@ -91,7 +91,7 @@ class Recipe extends Component {
                                         <tbody key={(ingredient._id) ? ingredient._id : 1}>
                                             <tr key={(ingredient._id) ? ingredient._id : 1}>
                                                 <td><input name={((ingredient._id) ? ingredient._id : 1) + "#ingredient"} type="text" value={ingredient.ingredient} onChange={this.handleTableChange} /></td>
-                                                <td><input name={((ingredient._id) ? ingredient._id : 1) + "#quantity"} type="text" value={ingredient.quantity} onChange={this.handleTableChange} /></td>
+                                                <td><input name={((ingredient._id) ? ingredient._id : 1) + "#quantity"} type="number" value={ingredient.quantity} onChange={this.handleTableChange} /></td>
                                                 <td><input name={((ingredient._id) ? ingredient._id : 1) + "#unit"} type="text" value={ingredient.unit} onChange={this.handleTableChange} /></td>
                                             </tr>
                                         </tbody>
