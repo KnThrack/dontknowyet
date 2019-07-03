@@ -8,6 +8,7 @@ import axios from 'axios';
 
 class Recipes extends Component {
 
+    /*
     state = {
         recipes: []
     }
@@ -16,7 +17,7 @@ class Recipes extends Component {
         super(props);
         this.state = { recipes: "" };
     }
-
+*/
 
     async callAPI() {
 
@@ -31,7 +32,7 @@ class Recipes extends Component {
 
     async componentDidMount() {
         // get the initial recipes
-        this.callAPI();
+        //this.callAPI();
     }
 
     RecipeList(recipes) {
@@ -69,7 +70,7 @@ class Recipes extends Component {
     }
 
     render() {
-        return this.RecipeList(this.state.recipes);
+        return this.RecipeList(this.props.recipesList);
     }
 }
 

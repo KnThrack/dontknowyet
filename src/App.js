@@ -11,9 +11,9 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    //this.state = { apiResponse: "" };
-    //this.handleSubmit = this.handleSubmit.bind(this);
-    //this.handleInputChange = this.handleInputChange.bind(this);
+    this.state = { recipes: "" };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
 
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -34,7 +34,7 @@ class App extends Component {
 
   async componentDidMount() {
     // get the initial recipes
-    //this.callAPI();
+    this.callAPI();
   }
 
   // handlers
@@ -84,12 +84,15 @@ class App extends Component {
 
   // handlers end 
   RecipeListApp() {
+
+    const recipesList = this.state.recipes;
+
     return (
       <div className="App">
         <header className="App-header" />
         <Router>
           <div>
-            <Route exact path="/" render={() => <Recipes/>} />
+            <Route exact path="/" render={(props, recipesList) => <Recipes {...props} recipesList={recipesList} />} />
             <Route path="/recipe/:id" render={(props) => <Recipe {...props} />} />
           </div>
         </Router>
