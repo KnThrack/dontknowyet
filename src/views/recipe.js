@@ -90,7 +90,7 @@ class Recipe extends Component {
                                     (ingredient) =>
                                         <tbody key={ingredient._id}>
                                             <tr key={ingredient._id}>
-                                                <td><input name={ingredient._id.toString() + "ingredient"} type="text" value={ingredient.ingredient} onChange={this.handleTableChange} /></td>
+                                                <td><input name={ingredient._id.toString() + "#ingredient"} type="text" value={ingredient.ingredient} onChange={this.handleTableChange} /></td>
                                                 <td>{ingredient.quantity}</td>
                                                 <td>{ingredient.unit}</td>
                                             </tr>

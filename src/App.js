@@ -49,12 +49,33 @@ class App extends Component {
     var stateCopy = Object.assign({}, this.state);
     stateCopy.recipes = stateCopy.recipes.slice();
     stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
-    stateCopy.recipes[index].ingredients.push({ _id: _.uniqueId(["ingredient"]) , ingredient: "", quantity: "", unit: "" });
+    stateCopy.recipes[index].ingredients.push({ _id: _.uniqueId(["ingredient"]), ingredient: "", quantity: "", unit: "" });
     this.setState(stateCopy);
 
   }
 
   handleTableChange(event, childState) {
+
+    // get the value and move it into the state 
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    const ingredientsField = target.name.split("#");
+
+    // find which one we updating
+    let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
+
+    // change the one we want to fix the state
+    var stateCopy = Object.assign({}, this.state);
+    stateCopy.recipes = stateCopy.recipes.slice();
+    stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
+
+    // find which one we updating
+    let ingredientIndex = stateCopy.recipes[index].ingredients.findIndex(x => x._id === ingredientsField[0].toString());
+
+    // update it
+    stateCopy.recipes[index].ingredients[ingredientIndex][ingredientsField[1]] = value;
+    this.setState(stateCopy);
 
   }
 
@@ -68,7 +89,7 @@ class App extends Component {
 
     // find which one we updating
     let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
-    
+
     // change the one we want to fix the state
     var stateCopy = Object.assign({}, this.state);
     stateCopy.recipes = stateCopy.recipes.slice();
