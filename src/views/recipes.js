@@ -14,7 +14,7 @@ class Recipes extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { apiResponse: "" };
+        this.state = { recipes: "" };
     }
 
 
@@ -56,6 +56,13 @@ class Recipes extends Component {
                                 </Card>
                         )
                     }
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <center><h1>Recipes List</h1></center>
+                    <center><h1>Loading ...</h1></center>
                 </div>
             )
         }
