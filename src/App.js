@@ -87,16 +87,25 @@ class App extends Component {
 
     const recipesList = this.state.recipes;
 
-    return (
-      <div className="App">
-        <header className="App-header" />
-        <Router>
-          <div>
-            <Route exact path="/" render={(props, recipesList) => <Recipes {...props} recipesList={recipesList} />} />
-            <Route path="/recipe/:id" render={(props) => <Recipe {...props} />} />
-          </div>
-        </Router>
-      </div>);
+    if (recipesList) {
+      return (
+        <div className="App">
+          <header className="App-header" />
+          <Router>
+            <div>
+              <Route exact path="/" render={(props, recipesList) => <Recipes {...props} recipesList={recipesList} />} />
+              <Route path="/recipe/:id" render={(props) => <Recipe {...props} />} />
+            </div>
+          </Router>
+        </div>);
+    } else {
+      return (
+        <div>
+          <center><h1>Recipes List</h1></center>
+          <center><h1>Loading ...</h1></center>
+        </div>
+      )
+    }
   }
 
   render() {
