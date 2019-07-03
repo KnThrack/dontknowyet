@@ -4,6 +4,7 @@ import axios from 'axios';
 import './App.css';
 import Recipes from './views/recipes';
 import Recipe from './views/recipe';
+var _ = require('underscore')
 
 class App extends Component {
 
@@ -42,14 +43,13 @@ class App extends Component {
   // handlers
   handleAddIngredient(event, childState) {
 
-    const target = event.target;
     // find which one we updating
     let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
     // take a copy thats mutable and update it
     var stateCopy = Object.assign({}, this.state);
     stateCopy.recipes = stateCopy.recipes.slice();
     stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
-    stateCopy.recipes[index].ingredients.push({ _id: 1, ingredient: "", quantity: "", unit: "" });
+    stateCopy.recipes[index].ingredients.push({ _id: _.uniqueId(["ingredient"]) , ingredient: "", quantity: "", unit: "" });
     this.setState(stateCopy);
 
   }
@@ -68,7 +68,7 @@ class App extends Component {
 
     // find which one we updating
     let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
-
+    
     // change the one we want to fix the state
     var stateCopy = Object.assign({}, this.state);
     stateCopy.recipes = stateCopy.recipes.slice();
