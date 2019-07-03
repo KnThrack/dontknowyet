@@ -87,9 +87,9 @@ class Recipe extends Component {
                             </thead>
                             {
                                 myRecipe.ingredients.map(
-                                    (ingredient) =>
-                                        <tbody key={ingredient._id}>
-                                            <tr key={ingredient._id}>
+                                    (ingredient) => 
+                                        <tbody key={ (ingredient._id) ? ingredient._id : 1}>
+                                            <tr key={ (ingredient._id) ? ingredient._id : 1}>
                                                 <td><input name={ingredient._id.toString() + "#ingredient"} type="text" value={ingredient.ingredient} onChange={this.handleTableChange} /></td>
                                                 <td><input name={ingredient._id.toString() + "#quantity"} type="text" value={ingredient.quantity} onChange={this.handleTableChange} /></td>
                                                 <td><input name={ingredient._id.toString() + "#unit"} type="text" value={ingredient.unit} onChange={this.handleTableChange} /></td>
