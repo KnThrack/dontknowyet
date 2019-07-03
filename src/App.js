@@ -16,8 +16,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { apiResponse: "" };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    //this.handleSubmit = this.handleSubmit.bind(this);
+    //this.handleInputChange = this.handleInputChange.bind(this);
 
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -44,6 +44,7 @@ class App extends Component {
   // handlers
   handleInputChange(event) {
     // deprecated !
+    /*
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name.split("#");
@@ -57,11 +58,12 @@ class App extends Component {
     stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
     stateCopy.recipes[index][recipeField] = value;
     this.setState(stateCopy);
-
+*/
   }
 
   handleSubmit(event) {
     // deprecated !
+    /*
     event.preventDefault();
     var stateCopy = Object.assign({}, this.state);
 
@@ -70,7 +72,7 @@ class App extends Component {
 
       axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + element._id, JSON.stringify(element));
 
-      /*
+      
       fetch('https://notsureyetapp.herokuapp.com/api/recipes/' + element._id, {
         method: "PUT",
         body: JSON.stringify(element),
@@ -79,8 +81,9 @@ class App extends Component {
         },
         credentials: "same-origin"
       });
-      */
+      
     }
+    */
   }
 
   // handlers end 
