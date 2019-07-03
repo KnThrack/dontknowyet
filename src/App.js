@@ -90,7 +90,7 @@ class App extends Component {
         <Router>
           <div>
             <Route exact path="/" render={() => <Recipes/>} />
-            <Route path="/recipe/:id" render={() => <Recipe/>} />
+            <Route path="/recipe/:id" render={(props) => <Recipe {...props} />} />
           </div>
         </Router>
       </div>);
