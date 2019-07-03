@@ -72,18 +72,18 @@ class Recipe extends Component {
     }
 
     render() {
-        const { recipe } = this.props.location.state;
-        if (recipe === null) return <p>Loading ...</p>;
+        const myRecipe = this.props.location.state;
+        if (myRecipe === null) return <p>Loading ...</p>;
         return (
-            <div key={recipe._id.toString()} className="container">
+            <div key={myRecipe._id.toString()} className="container">
                 <Form id="bigform" /*controlId={recipe._id.toString()+".Form"}*/>
                     <Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
                         <Form.Label htmlFor="title" >Recipe Title</Form.Label>
-                        <Form.Control name="title" onChange={this.handleInputChange} id="title" value={recipe.title} />
+                        <Form.Control name="title" onChange={this.handleInputChange} id="title" value={myRecipe.title} />
                         <Form.Label htmlFor="name">Recipe Name</Form.Label>
-                        <Form.Control name="name" onChange={this.handleInputChange} id="name" value={recipe.name} />
+                        <Form.Control name="name" onChange={this.handleInputChange} id="name" value={myRecipe.name} />
                         <Form.Label htmlFor="cuisine" >Cuisine</Form.Label>
-                        <Form.Control name="cuisine" onChange={this.handleInputChange} id="cuisine" value={recipe.cuisine} as="select">
+                        <Form.Control name="cuisine" onChange={this.handleInputChange} id="cuisine" value={myRecipe.cuisine} as="select">
                             <option>German</option>
                             <option>Chinese</option>
                             <option>Asian</option>
@@ -93,7 +93,7 @@ class Recipe extends Component {
                     </Form.Group>
                     <Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
                         <Form.Label htmlFor="recipe">Recipe</Form.Label>
-                        <Form.Control name="recipe" onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={recipe.recipe} />
+                        <Form.Control name="recipe" onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={myRecipe.recipe} />
                     </Form.Group>
                     <Form.Group>
                         <Table responsive variant="dark">
@@ -105,7 +105,7 @@ class Recipe extends Component {
                                 </tr>
                             </thead>
                             {
-                                recipe.ingredients.map(
+                                myRecipe.ingredients.map(
                                     (ingredient) =>
                                         <tbody key={ingredient._id}>
                                             <tr key={ingredient._id}>
