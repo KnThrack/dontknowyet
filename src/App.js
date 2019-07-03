@@ -84,16 +84,16 @@ class App extends Component {
 
   // handlers end 
   RecipeListApp() {
-      return (        
+    return (
       <div className="App">
-      <header className="App-header" />
-      <Router>
-        <div>
-          <Route exact path="/" component={Recipes} /> } />
-          <Route path="/recipe/:id" component={Recipe} />
-        </div>
-      </Router>
-      </div>);    
+        <header className="App-header" />
+        <Router>
+          <div>
+            <Route exact path="/" render={() => <Recipes/>} />
+            <Route path="/recipe/:id" render={() => <Recipe/>} />
+          </div>
+        </Router>
+      </div>);
   }
 
   render() {
