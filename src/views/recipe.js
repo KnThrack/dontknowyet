@@ -16,7 +16,7 @@ class Recipe extends Component {
         */
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onTableChange = this.onTableChange.bind(this);
+        this.handleTableChange = this.handleTableChange.bind(this);
         this.handleAddIngredient = this.handleAddIngredient.bind(this);
     }
 
@@ -36,9 +36,8 @@ class Recipe extends Component {
         this.props.handleAddIngredient(event);
     }
 
-    onTableChange(event) {
+    handleTableChange(event) {
         const target = event.target;
-
     }
 
     handleInputChange(event) {
@@ -47,11 +46,7 @@ class Recipe extends Component {
 
     handleSubmit(event) {
         // submit the changes to the backend
-        event.preventDefault();
-        // take a copy thats mutable 
-        var stateCopy = Object.assign({}, this.state);
-        axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + stateCopy.recipe._id, JSON.stringify(stateCopy.recipe));
-
+        this.props.handleSubmit(event, this.props.location.state);
     }
 
     render() {
@@ -92,7 +87,7 @@ class Recipe extends Component {
                                     (ingredient) =>
                                         <tbody key={ingredient._id}>
                                             <tr key={ingredient._id}>
-                                                <td><input name={ingredient._id.toString() + "ingredient"} type="text" value={ingredient.ingredient} onChange={this.onTableChange} /></td>
+                                                <td><input name={ingredient._id.toString() + "ingredient"} type="text" value={ingredient.ingredient} onChange={this.handleTableChange} /></td>
                                                 <td>{ingredient.quantity}</td>
                                                 <td>{ingredient.unit}</td>
                                             </tr>

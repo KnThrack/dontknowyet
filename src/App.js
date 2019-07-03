@@ -4,17 +4,19 @@ import axios from 'axios';
 import './App.css';
 import Recipes from './views/recipes';
 import Recipe from './views/recipe';
-import Button from 'react-bootstrap/Button';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = { recipes: "" };
+
+    // bind handlers
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddIngredient = this.handleAddIngredient.bind(this);
+    this.handleTableChange = this.handleTableChange.bind(this);
+
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios.defaults.headers.put['Content-Type'] = 'application/json';
@@ -42,13 +44,17 @@ class App extends Component {
 
     const target = event.target;
     // find which one we updating
-    let index = this.state.recipes.findIndex(x => x._id === childState.recipeID.toString());
-    // take a copy thats mutable 
+    let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
+    // take a copy thats mutable and update it
     var stateCopy = Object.assign({}, this.state);
     stateCopy.recipes = stateCopy.recipes.slice();
     stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
     stateCopy.recipe[index].ingredients.push({ _id: 1, ingredient: "", quantity: "", unit: "" });
     this.setState(stateCopy);
+
+  }
+
+  handleTableChange(event, childState) {
 
   }
 
@@ -61,7 +67,7 @@ class App extends Component {
     const recipeField = target.name;
 
     // find which one we updating
-    let index = this.state.recipes.findIndex(x => x._id === childState.recipeID.toString());
+    let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
 
     // change the one we want to fix the state
     var stateCopy = Object.assign({}, this.state);
@@ -72,29 +78,19 @@ class App extends Component {
 
   }
 
-  handleSubmit(event) {
-    // deprecated !
-    /*
+  handleSubmit(event, childState) {
+
     event.preventDefault();
+
+    // find which one we updating
+    let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
+    // take a copy thats mutable 
     var stateCopy = Object.assign({}, this.state);
+    var recipe = stateCopy.recipes[index];
 
-    for (let index = 0; index < stateCopy.recipes.length; index++) {
-      const element = stateCopy.recipes[index];
+    // and put it away
+    axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + recipe._id, JSON.stringify(recipe));
 
-      axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + element._id, JSON.stringify(element));
-
-      
-      fetch('https://notsureyetapp.herokuapp.com/api/recipes/' + element._id, {
-        method: "PUT",
-        body: JSON.stringify(element),
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials: "same-origin"
-      });
-      
-    }
-    */
   }
 
   // handlers end 
@@ -109,7 +105,7 @@ class App extends Component {
           <Router>
             <div>
               <Route exact path="/" render={(props) => <Recipes recipesList={recipesList} {...props} />} />
-              <Route path="/recipe/:id" render={(props) => <Recipe handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
+              <Route path="/recipe/:id" render={(props) => <Recipe handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
           </Router>
         </div>);
