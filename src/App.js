@@ -4,7 +4,7 @@ import axios from 'axios';
 import './App.css';
 import Recipes from './views/recipes';
 import Recipe from './views/recipe';
-import NavBar from "./views/Navbar";
+import NavBar from "./views/NavBar";
 import Profile from "./views/Profile";
 import PrivateRoute from "./views/PrivateRoute";
 import createAuth0Client from '@auth0/auth0-spa-js';
