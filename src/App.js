@@ -8,6 +8,7 @@ import NavBar from "./views/NavBar";
 import Profile from "./views/Profile";
 import PrivateRoute from "./views/PrivateRoute";
 import createAuth0Client from '@auth0/auth0-spa-js';
+import { Auth0Provider } from "./react-auth0-wrapper";
 
 var _ = require('underscore')
 
@@ -180,12 +181,12 @@ class App extends Component {
             </header>
 
             <div>
-              <PrivateRoute exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} {...props} />} />
-              <PrivateRoute path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
+              <Route exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} {...props} />} />
+              <Route path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
 
             <Switch>
-              
+            <Route path="/" exact />
               <PrivateRoute path="/profile" component={Profile} />
             </Switch>
           </Router>
