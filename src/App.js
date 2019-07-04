@@ -165,7 +165,7 @@ class App extends Component {
 
   }
 
-  // handlers end 
+  // handlers end  <Route path="/" exact />
 
   RecipeListApp() {
 
@@ -180,12 +180,12 @@ class App extends Component {
             </header>
 
             <div>
-              <Route exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} {...props} />} />
-              <Route path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
+              <PrivateRoute exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} {...props} />} />
+              <PrivateRoute path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
 
             <Switch>
-              <Route path="/" exact />
+              
               <PrivateRoute path="/profile" component={Profile} />
             </Switch>
           </Router>
