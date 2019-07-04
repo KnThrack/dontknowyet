@@ -8,7 +8,7 @@ import NavBar from "./views/NavBar";
 import Profile from "./views/Profile";
 import PrivateRoute from "./views/PrivateRoute";
 import createAuth0Client from '@auth0/auth0-spa-js';
-import { Auth0Provider } from "./react-auth0-wrapper";
+import {  useAuth0 } from "./react-auth0-wrapper";
 
 var _ = require('underscore')
 
@@ -170,8 +170,8 @@ class App extends Component {
 
   RecipeListApp() {
 
-    //const { isAuthenticated, loginWithRedirect, logout } = Auth0Provider();
-    var test = Auth0Provider();
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
     const recipesList = this.state.recipes;
 
     if (recipesList) {
