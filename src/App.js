@@ -170,7 +170,8 @@ class App extends Component {
 
   RecipeListApp() {
 
-    const { isAuthenticated, loginWithRedirect, logout } = Auth0Provider();
+    //const { isAuthenticated, loginWithRedirect, logout } = Auth0Provider();
+    var test = Auth0Provider();
     const recipesList = this.state.recipes;
 
     if (recipesList) {
