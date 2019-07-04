@@ -1,6 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Container } from "reactstrap";
 import Loading from "./views/Loading";
 import App from "./App";
 import { useAuth0 } from "./react-auth0-spa";
