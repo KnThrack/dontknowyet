@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 import Recipes from './views/recipes';
 import Recipe from './views/recipe';
+import NavBar from "./views/Navbar";
+import Profile from "./views/Profile";
+import PrivateRoute from "./views/PrivateRoute";
+import createAuth0Client from '@auth0/auth0-spa-js';
+
 var _ = require('underscore')
 
 class App extends Component {
@@ -169,17 +174,27 @@ class App extends Component {
     if (recipesList) {
       return (
         <div className="App">
-          <header className="App-header" />
           <Router>
+            <header className="App-header">
+              <NavBar />
+            </header>
+
             <div>
               <Route exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} {...props} />} />
               <Route path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
+
+            <Switch>
+              <Route path="/" exact />
+              <PrivateRoute path="/profile" component={Profile} />
+            </Switch>
           </Router>
         </div>);
     } else {
       return (
-        <div>
+        <div className="App">
+          <header className="App-header" />
+          <NavBar />
           <center><h1>Recipes List</h1></center>
           <center><h1>Loading ...</h1></center>
         </div>
