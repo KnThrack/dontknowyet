@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Base from './Base';
 import * as serviceWorker from './serviceWorker';
 import { Auth0Provider } from "./react-auth0-wrapper";
 import config from "./auth_config.json";
@@ -25,7 +26,7 @@ const onRedirectCallback = appState => {
       client_id={config.clientId}
       redirect_uri={window.location.origin}
       onRedirectCallback={onRedirectCallback}>
-      <App />
+      <Base />
     </Auth0Provider>,
     document.getElementById("root")
   );
