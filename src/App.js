@@ -11,7 +11,7 @@ import createAuth0Client from '@auth0/auth0-spa-js';
 import {  useAuth0 } from "./react-auth0-wrapper";
 
 var _ = require('underscore');
-const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
 
 class App extends Component {
 
@@ -172,8 +172,9 @@ class App extends Component {
   RecipeListApp() {
 
    const recipesList = this.state.recipes;
+var test = NavBar;
 
-    if (recipesList) {
+      if (recipesList) {
       return (
         <div className="App">
           <Router>
