@@ -182,7 +182,7 @@ class App extends Component {
             </header>
 
             <div>
-              <Route exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} {...props} />} />
+              <PrivateRoute exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} {...props} />} />
               <Route path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
 
