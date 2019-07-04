@@ -172,7 +172,6 @@ class App extends Component {
   RecipeListApp() {
 
    const recipesList = this.state.recipes;
-var test = NavBar;
 
       if (recipesList) {
       return (
