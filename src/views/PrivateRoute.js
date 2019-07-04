@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
 import { useAuth0 } from "../react-auth0-spa";
 
-const PrivateRoute = ({ Render, Component, path, ...rest }) => {
+const PrivateRoute = ({ render: Render, component: Component, path, ...rest }) => {
     const { isAuthenticated, loginWithRedirect } = useAuth0();
 
     useEffect(() => {
@@ -27,8 +27,8 @@ const PrivateRoute = ({ Render, Component, path, ...rest }) => {
 };
 
 PrivateRoute.propTypes = {
-    component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
-      .isRequired,
+    render: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     path: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string)
