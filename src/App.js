@@ -10,7 +10,8 @@ import PrivateRoute from "./views/PrivateRoute";
 import createAuth0Client from '@auth0/auth0-spa-js';
 import {  useAuth0 } from "./react-auth0-wrapper";
 
-var _ = require('underscore')
+var _ = require('underscore');
+const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
 class App extends Component {
 
@@ -170,9 +171,7 @@ class App extends Component {
 
   RecipeListApp() {
 
-    const test = useAuth0;
-
-    const recipesList = this.state.recipes;
+   const recipesList = this.state.recipes;
 
     if (recipesList) {
       return (
