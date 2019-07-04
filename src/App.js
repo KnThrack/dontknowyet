@@ -7,8 +7,6 @@ import Recipe from './views/recipe';
 import NavBar from "./views/NavBar";
 import Profile from "./views/Profile";
 import PrivateRoute from "./views/PrivateRoute";
-import createAuth0Client from '@auth0/auth0-spa-js';
-import { useAuth0 } from "./react-auth0-wrapper";
 
 var _ = require('underscore');
 
