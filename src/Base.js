@@ -18,7 +18,7 @@ async function getToken(getTokenSilently) {
  
   const token = await getTokenSilently();
   axios.defaults.headers.put['Authorization-Type'] = 'basic '+ token;
-
+  axios.defaults.headers.post['Authorization-Type'] = 'basic '+ token;
 }
 
 const Base = () => {
