@@ -34,7 +34,7 @@ class App extends Component {
 
     // get the initial recipes
     const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes")).data;
-
+   const test = (await axios.get("https://notsureyetapp.herokuapp.com/api/external")).data;
     this.setState({
       recipes: recipes.data,
     });
