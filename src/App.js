@@ -32,7 +32,7 @@ class App extends Component {
 
 
   async callAPI() {
-    axios.get("https://notsureyetapp.herokuapp.com/");
+
     // get the initial recipes
     const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes")).data;
 
@@ -44,13 +44,14 @@ class App extends Component {
 
   async componentDidMount() {
     // get the initial recipes
-    this.props.token.then(function (result) {
+    
+    await this.props.token.then(function (result) {
       axios.defaults.headers.post['Authorization'] = 'Bearer ' + result;
       axios.defaults.headers.get['Authorization'] = 'Bearer ' + result;
       axios.defaults.headers.put['Authorization'] = 'Bearer ' + result;
-      this.callAPI();
     });
 
+    this.callAPI();
   }
 
   async updateIngredients(state) {
