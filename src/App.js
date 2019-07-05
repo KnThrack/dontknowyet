@@ -24,12 +24,12 @@ class App extends Component {
     this.handleTableChange = this.handleTableChange.bind(this);
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
 
-    /*
+    
   // set auth headers
-  axios.defaults.headers.post['Authorization'] = 'Bearer ' + token;
-  axios.defaults.headers.get['Authorization'] = 'Bearer ' + token;
-  axios.defaults.headers.put['Authorization'] = 'Bearer ' + token;
-  */
+  axios.defaults.headers.post['Authorization'] = 'Bearer ' + props.token;
+  axios.defaults.headers.get['Authorization'] = 'Bearer ' + props.token;
+  axios.defaults.headers.put['Authorization'] = 'Bearer ' + props.token;
+  
   // set the default axios stuff
   axios.defaults.headers.post['Content-Type'] = 'application/json';
   axios.defaults.headers.put['Content-Type'] = 'application/json';
