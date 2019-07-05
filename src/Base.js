@@ -28,9 +28,9 @@ const Base = () => {
     return <Loading />;
   }
 
-  //getToken(getTokenSilently)
+  const token = getToken(getTokenSilently);
   return (
-    <App token={getToken(getTokenSilently)} />
+    <App token={token} />
   );
 };
 
