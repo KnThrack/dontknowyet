@@ -11,24 +11,25 @@ import "./App.css";
 import initFontAwesome from "./utils/initFontAwesome";
 initFontAwesome();
 */
-const { getTokenSilently } = useAuth0();
 
-async function getToken() {
+
+async function getToken(getTokenSilently) {
  // add auth token to axios
+ 
   const token = await getTokenSilently();
   axios.defaults.headers.put['Authorization-Type'] = 'basic '+ token;
 
 }
 
 const Base = () => {
-
+  const { getTokenSilently } = useAuth0();
   const { loading } = useAuth0();
    
   if (loading) {
     return <Loading />;
   }
-  
-  this.getToken()
+
+  this.getToken(getTokenSilently)
   return (
         <App />
   );
