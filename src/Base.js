@@ -13,11 +13,11 @@ initFontAwesome();
 */
 
 
-function getToken(getTokenSilently) {
+async function getToken(getTokenSilently) {
   // add auth token to axios
 
-  const token = getTokenSilently();
-  return token;
+  const token = await getTokenSilently();
+  return (<App token={token} />);
 }
 
 const Base = () => {
@@ -28,10 +28,8 @@ const Base = () => {
     return <Loading />;
   }
 
-  const token = getToken(getTokenSilently);
-  return (
-    <App token={token} />
-  );
+  return getToken(getTokenSilently);
+
 };
 
 export default Base;
