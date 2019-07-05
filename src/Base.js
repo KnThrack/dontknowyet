@@ -18,9 +18,7 @@ async function getToken(getTokenSilently) {
 
   const token = await getTokenSilently();
   // set auth headers
-  axios.defaults.headers.post['Authorization'] = 'Bearer ' + token;
-  axios.defaults.headers.get['Authorization'] = 'Bearer ' + token;
-  axios.defaults.headers.put['Authorization'] = 'Bearer ' + token;
+
 }
 
 const Base = () => {

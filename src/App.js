@@ -24,8 +24,6 @@ class App extends Component {
     this.handleTableChange = this.handleTableChange.bind(this);
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
 
-
-
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios.defaults.headers.put['Content-Type'] = 'application/json';
@@ -46,7 +44,13 @@ class App extends Component {
 
   async componentDidMount() {
     // get the initial recipes
-    this.callAPI();
+    this.props.token.then(function (result) {
+      axios.defaults.headers.post['Authorization'] = 'Bearer ' + result;
+      axios.defaults.headers.get['Authorization'] = 'Bearer ' + result;
+      axios.defaults.headers.put['Authorization'] = 'Bearer ' + result;
+      this.callAPI();
+    });
+
   }
 
   async updateIngredients(state) {
