@@ -17,8 +17,8 @@ async function getToken(getTokenSilently) {
   // add auth token to axios
   const token = await getTokenSilently();
   // set auth headers
+  axios.defaults.headers.common['test'] = "test";
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-  axios.defaults.headers.get['Authorization'] = 'Bearer ' + token;
   // set the default axios stuff
   axios.defaults.headers.post['Content-Type'] = 'application/json';
   axios.defaults.headers.put['Content-Type'] = 'application/json';
