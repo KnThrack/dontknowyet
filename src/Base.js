@@ -18,7 +18,7 @@ async function getToken(getTokenSilently) {
 
   const token = await getTokenSilently();
   // set auth headers
-
+  return token;
 }
 
 const Base = () => {
@@ -29,8 +29,7 @@ const Base = () => {
     return <Loading />;
   }
 
-  getToken(getTokenSilently);
-  return <App />;
+  return <App token={getToken(getTokenSilently)} />;
 };
 
 export default Base;
