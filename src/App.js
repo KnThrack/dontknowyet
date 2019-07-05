@@ -29,7 +29,7 @@ class App extends Component {
 
 
   async callAPI() {
-
+    axios.get("https://notsureyetapp.herokuapp.com/");
     // get the initial recipes
     const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes")).data;
 
