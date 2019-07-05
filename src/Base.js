@@ -15,11 +15,11 @@ initFontAwesome();
 
 async function getToken(getTokenSilently) {
  // add auth token to axios
- 
   const token = await getTokenSilently();
-  axios.defaults.headers.put['Authorization-Type'] = 'basic '+ token;
-  axios.defaults.headers.post['Authorization-Type'] = 'basic '+ token;
-  axios.defaults.headers.get['Authorization-Type'] = 'basic '+ token;
+
+  axios.defaults.headers.put['Authorization'] = `Bearer ${token}`;
+  axios.defaults.headers.post['Authorization'] = `Bearer ${token}`;
+  axios.defaults.headers.get['Authorization'] = `Bearer ${token}`;
 }
 
 const Base = () => {
