@@ -29,7 +29,7 @@ const Base = () => {
     return <Loading />;
   }
 
-  this.getToken(getTokenSilently)
+  getToken(getTokenSilently)
   return (
         <App />
   );
