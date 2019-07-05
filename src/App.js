@@ -7,9 +7,10 @@ import Recipe from './views/recipe';
 import NavBar from "./views/NavBar";
 import Profile from "./views/Profile";
 import PrivateRoute from "./views/PrivateRoute";
+import { useAuth0 } from "./react-auth0-spa";
 
 var _ = require('underscore');
-
+const { getTokenSilently } = useAuth0();
 
 class App extends Component {
 
@@ -31,6 +32,10 @@ class App extends Component {
 
 
   async callAPI() {
+
+        // add auth token to axios
+    const token = await getTokenSilently();
+    axios.defaults.headers.put['Authorization-Type'] = 'basic '+ token;
 
     // get the initial recipes
     const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes")).data;
