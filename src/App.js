@@ -24,9 +24,7 @@ class App extends Component {
     this.handleTableChange = this.handleTableChange.bind(this);
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
 
-    // set the default axios stuff
-    axios.defaults.headers.post['Content-Type'] = 'application/json';
-    axios.defaults.headers.put['Content-Type'] = 'application/json';
+
   }
 
 
@@ -34,7 +32,7 @@ class App extends Component {
 
     // get the initial recipes
     const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes")).data;
-   const test = (await axios.get("https://notsureyetapp.herokuapp.com/api/external")).data;
+
     this.setState({
       recipes: recipes.data,
     });
