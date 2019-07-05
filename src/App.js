@@ -24,21 +24,19 @@ class App extends Component {
     this.handleTableChange = this.handleTableChange.bind(this);
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
 
-  
-  // set the default axios stuff
-  axios.defaults.headers.post['Content-Type'] = 'application/json';
-  axios.defaults.headers.put['Content-Type'] = 'application/json';
-  axios.defaults.headers.get['Content-Type'] = 'application/json';
+    // set auth headers
+    axios.defaults.headers.post['Authorization'] = 'Bearer ' + this.props.token;
+    axios.defaults.headers.get['Authorization'] = 'Bearer ' + this.props.token;
+    axios.defaults.headers.put['Authorization'] = 'Bearer ' + this.props.token;
+
+    // set the default axios stuff
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.headers.put['Content-Type'] = 'application/json';
+    axios.defaults.headers.get['Content-Type'] = 'application/json';
   }
 
 
   async callAPI() {
-
-      // set auth headers
-  axios.defaults.headers.post['Authorization'] = 'Bearer ' + this.props.token;
-  axios.defaults.headers.get['Authorization'] = 'Bearer ' + this.props.token;
-  axios.defaults.headers.put['Authorization'] = 'Bearer ' + this.props.token;
-
     axios.get("https://notsureyetapp.herokuapp.com/");
     // get the initial recipes
     const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes")).data;
