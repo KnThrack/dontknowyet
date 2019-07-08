@@ -34,7 +34,7 @@ class App extends Component {
   async callAPI() {
 
     // get the initial recipes
-    const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user="+this.state.user._id)).data;
+    const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + this.state.user._id)).data;
 
     this.setState({
       recipes: recipes.data,
@@ -45,14 +45,11 @@ class App extends Component {
   async componentDidMount() {
 
     // before we can get the initial list we need the user to be there. 
-    await this.props.user.then(function (result) {
-      axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + result.email)
-        .then(function (response) {
-          // handle success
-          this.setState({
-            user: response.data
-          });
-        })
+    const user = (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + this.props.user.email)).data;
+
+    // handle success
+    this.setState({
+      user: user
     });
 
     // get the initial recipes
