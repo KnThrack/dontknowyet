@@ -102,7 +102,7 @@ class App extends Component {
       cuisine: "",
       ingredients: [],
       recipe: "",
-      user: ""
+      user: this.state.user._id
     }
     this.addRecipe(newRecipe);
   }
