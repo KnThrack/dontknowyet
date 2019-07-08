@@ -44,19 +44,19 @@ class App extends Component {
 
   async componentDidMount() {
 
+    // get the initial recipes
+    await this.props.token.then(function (result) {
+      axios.defaults.headers.post['Authorization'] = 'Bearer ' + result;
+      axios.defaults.headers.get['Authorization'] = 'Bearer ' + result;
+      axios.defaults.headers.put['Authorization'] = 'Bearer ' + result;
+    });
+
     // before we can get the initial list we need the user to be there. 
     const user = (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + this.props.user.email)).data;
 
     // handle success
     this.setState({
       user: user
-    });
-
-    // get the initial recipes
-    await this.props.token.then(function (result) {
-      axios.defaults.headers.post['Authorization'] = 'Bearer ' + result;
-      axios.defaults.headers.get['Authorization'] = 'Bearer ' + result;
-      axios.defaults.headers.put['Authorization'] = 'Bearer ' + result;
     });
 
     this.callAPI();
