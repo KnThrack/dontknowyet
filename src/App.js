@@ -15,7 +15,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { recipes: "" };
+    this.state = { recipes: "", user: "" };
 
     // bind handlers
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,7 +34,7 @@ class App extends Component {
   async callAPI() {
 
     // get the initial recipes
-    const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes")).data;
+    const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user="+this.state.user._id)).data;
 
     this.setState({
       recipes: recipes.data,
@@ -43,8 +43,19 @@ class App extends Component {
   }
 
   async componentDidMount() {
+
+    // before we can get the initial list we need the user to be there. 
+    await this.props.user.then(function (result) {
+      axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + result.email)
+        .then(function (response) {
+          // handle success
+          this.setState({
+            user: response.data
+          });
+        })
+    });
+
     // get the initial recipes
-    
     await this.props.token.then(function (result) {
       axios.defaults.headers.post['Authorization'] = 'Bearer ' + result;
       axios.defaults.headers.get['Authorization'] = 'Bearer ' + result;
@@ -93,7 +104,8 @@ class App extends Component {
       title: "",
       cuisine: "",
       ingredients: [],
-      recipe: ""
+      recipe: "",
+      user: ""
     }
     this.addRecipe(newRecipe);
   }
