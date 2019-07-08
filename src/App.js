@@ -56,7 +56,7 @@ class App extends Component {
 
     // handle success
     this.setState({
-      user: user
+      user: user.data[0]
     });
 
     this.callAPI();
