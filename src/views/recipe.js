@@ -5,6 +5,9 @@ import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import 'jodit';
+import 'jodit/build/jodit.min.css';
+import JoditEditor from "jodit-react";
 
 class Recipe extends Component {
     constructor(props) {
@@ -49,8 +52,17 @@ class Recipe extends Component {
         // submit the changes to the backend
         this.props.handleSubmit(event, this.props.location.state);
     }
-
     // handlers end
+
+    /**
+     * @property Jodit jodit instance of native Jodit
+     */
+    jodit;
+    setRef = jodit => this.jodit = jodit;
+
+    config = {
+        readonly: false // all options from https://xdsoft.net/jodit/doc/
+    }
 
     render() {
         // find which one we looking at
@@ -76,6 +88,12 @@ class Recipe extends Component {
                         </Form.Control>
                     </Form.Group>
                     <Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
+                        <JoditEditor
+                            editorRef={this.setRef}
+                            value={myRecipe.recipe}
+                            config={this.config}
+                            onChange={this.handleInputChange}
+                        />
                         <Form.Label htmlFor="recipe">Recipe</Form.Label>
                         <Form.Control name="recipe" onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={myRecipe.recipe} />
                     </Form.Group>
@@ -103,7 +121,7 @@ class Recipe extends Component {
                         </Table>
                     </Form.Group>
                     <ButtonToolbar>
-                    <Link to="/">
+                        <Link to="/">
                             <Button variant="info" title="Go Back">Go Back</Button>
                         </Link>
                         <Button type="submit" variant="primary" onClick={this.handleSubmit}>Submit</Button>
