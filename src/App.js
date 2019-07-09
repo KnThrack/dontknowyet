@@ -23,6 +23,8 @@ class App extends Component {
     this.handleAddIngredient = this.handleAddIngredient.bind(this);
     this.handleTableChange = this.handleTableChange.bind(this);
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
+    this.handleJoditInputChange = this.handleJoditInputChange.bind(this);
+    
 
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -166,6 +168,23 @@ class App extends Component {
     this.setState(stateCopy);
 
   }
+  
+  handleJoditInputChange(value, childState) {
+
+    const recipeField = "recipe";
+
+    // find which one we updating
+    let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
+
+    // change the one we want to fix the state
+    var stateCopy = Object.assign({}, this.state);
+    stateCopy.recipes = stateCopy.recipes.slice();
+    stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
+    stateCopy.recipes[index][recipeField] = value;
+    this.setState(stateCopy);
+
+  }
+
 
   handleSubmit(event, childState) {
 
@@ -198,7 +217,7 @@ class App extends Component {
 
             <div>
               <PrivateRoute exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} {...props} />} />
-              <PrivateRoute path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
+              <PrivateRoute path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleJoditInputChange={this.handleJoditInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
 
             <Switch>

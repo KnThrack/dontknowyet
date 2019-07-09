@@ -21,7 +21,7 @@ class Recipe extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
         this.handleAddIngredient = this.handleAddIngredient.bind(this);
-
+        this.handleJoditInputChange = this.handleJoditInputChange.bind(this);
     }
 
     async componentDidMount() {
@@ -46,6 +46,10 @@ class Recipe extends Component {
 
     handleInputChange(event) {
         this.props.handleInputChange(event, this.props.location.state);
+    }
+
+    handleJoditInputChange(event) {
+        this.props.handleJoditInputChange(event, this.props.location.state);
     }
 
     handleSubmit(event) {
@@ -92,7 +96,7 @@ class Recipe extends Component {
                             editorRef={this.setRef}
                             value={myRecipe.recipe}
                             config={this.config}
-                            onChange={this.handleInputChange}
+                            onChange={this.handleJoditInputChange}
                         />
                         <Form.Label htmlFor="recipe">Recipe</Form.Label>
                         <Form.Control name="recipe" onChange={this.handleInputChange} id="recipe" as="textarea" rows="10" value={myRecipe.recipe} />
