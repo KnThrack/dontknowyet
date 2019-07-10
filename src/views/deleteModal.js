@@ -31,4 +31,4 @@ const deleteModal = ({ closeModal }) => {
     );
 };
 
-export default deleteModal;
+export { deleteModal };

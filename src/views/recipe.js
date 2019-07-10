@@ -138,4 +138,4 @@ class Recipe extends Component {
     }
 }
 
-export default Recipe;
+export {Recipe};

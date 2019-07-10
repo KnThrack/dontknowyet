@@ -36,4 +36,4 @@ PrivateRoute.propTypes = {
     ]).isRequired
   };
 
-export default PrivateRoute;
+export {PrivateRoute};

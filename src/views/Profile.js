@@ -21,4 +21,4 @@ const Profile = ({...props}) => {
   );
 };
 
-export default Profile;
+export  {Profile};
