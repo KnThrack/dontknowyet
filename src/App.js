@@ -228,7 +228,7 @@ this.ModalToRender = "";
   handleDelete(event) {
 
     this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
-    
+    this.forceUpdate();
     /*
     const recipeTarget = event.target.id.split("#");
     // find which one we updating
