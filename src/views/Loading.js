@@ -1,3 +1,4 @@
+// src/views/Loading.js
 import React from "react";
 import loading from "../assets/loading.svg";
 
