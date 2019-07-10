@@ -1,8 +1,7 @@
 import React from "react";
-import Loading from "./views/Loading";
+import { Loading } from "./views";
 import App from "./App";
 import { useAuth0 } from "./react-auth0-spa";
-import axios from 'axios';
 
 // styles
 //import "samples-bootstrap-theme/dist/css/auth0-theme.css";
