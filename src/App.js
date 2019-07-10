@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Modal';
 /*
 import Recipes from './views/recipes';
 import Recipe from './views/recipe';
@@ -20,7 +21,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { recipes: "", user: "" };
-this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
+this.ModalToRender = 'false';
     // bind handlers
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -226,8 +227,8 @@ this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
   }
 
   handleDelete(event) {
-
-    this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
+    this.ModalToRender = 'true';
+    //this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
     this.forceUpdate();
     /*
     const recipeTarget = event.target.id.split("#");
@@ -278,7 +279,20 @@ this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
               <PrivateRoute path="/profile" render={(props) => <Profile recipesList={recipesList} />} />
             </Switch>
           </Router>
-          <Modal>{this.ModalToRender}</Modal>
+          <Modal show={this.ModalToRender} onHide={this.handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+            </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+            </Button>
+                </Modal.Footer>
+            </Modal>
         </div>);
     } else {
       return (
