@@ -24,7 +24,8 @@ class App extends Component {
     this.handleTableChange = this.handleTableChange.bind(this);
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
     this.handleJoditInputChange = this.handleJoditInputChange.bind(this);
-
+    this.handleDelete = this.handleDelete.bind(this);
+    
 
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -49,6 +50,7 @@ class App extends Component {
     // get the initial recipes
     await this.props.token.then(function (result) {
       axios.defaults.headers.post['Authorization'] = 'Bearer ' + result;
+      axios.defaults.headers.delete['Authorization'] = 'Bearer ' + result;
       axios.defaults.headers.get['Authorization'] = 'Bearer ' + result;
       axios.defaults.headers.put['Authorization'] = 'Bearer ' + result;
     });
@@ -240,7 +242,7 @@ class App extends Component {
   }
 
   // handlers end  
-  
+
   RecipeListApp() {
 
     const recipesList = this.state.recipes;
@@ -254,7 +256,7 @@ class App extends Component {
             </header>
 
             <div>
-              <PrivateRoute exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} {...props} />} />
+              <PrivateRoute exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} handleDelete={this.handleDelete} {...props} />} />
               <PrivateRoute path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleJoditInputChange={this.handleJoditInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
 
