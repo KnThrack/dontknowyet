@@ -264,7 +264,7 @@ class App extends Component {
 
             <Switch>
               <Route path="/" exact />
-              <PrivateRoute path="/profile" component={Profile} />
+              <PrivateRoute path="/profile" render={(props) => <Profile {...props} />} />
             </Switch>
           </Router>
         </div>);
