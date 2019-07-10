@@ -11,6 +11,7 @@ class Recipes extends Component {
     constructor(props) {
         super(props);
         this.handleAddRecipe = this.handleAddRecipe.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
 
@@ -20,6 +21,10 @@ class Recipes extends Component {
 
     handleAddRecipe(event) {
         this.props.handleAddRecipe(event);
+    }
+
+    handleDelete(event) {
+        this.props.handleDelete(event);
     }
 
     RecipeList(recipes) {
@@ -40,6 +45,7 @@ class Recipes extends Component {
                                         <Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
                                             <Button variant="info" title="Go to Details">Go to Details</Button>
                                         </Link>
+                                        <Button key={recipe._id.toString()} variant="info" onClick={this.handleAddRecipe} title="Delete">Delete</Button>
                                     </Card.Body>
                                 </Card>
                         )

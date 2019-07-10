@@ -7,8 +7,8 @@ import Recipe from './views/recipe';
 import NavBar from "./views/NavBar";
 import Profile from "./views/Profile";
 import PrivateRoute from "./views/PrivateRoute";
-import { useAuth0 } from "./react-auth0-spa";
 
+const util = require('util')
 var _ = require('underscore');
 
 class App extends Component {
@@ -215,8 +215,32 @@ class App extends Component {
 
   }
 
-  // handlers end  <Route path="/" exact />
+  handleDelete(event, childState) {
 
+    // find which one we updating
+    let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
+    // take a copy thats mutable 
+    var stateCopy = Object.assign({}, this.state);
+    var recipe = stateCopy.recipes[index];
+
+    // and put it away
+    axios.delete('https://notsureyetapp.herokuapp.com/api/recipes/' + recipe._id)
+      .then(function (response) {
+        // handle success
+        this.setState(_.without(stateCopy, recipe));
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+
+  }
+
+  // handlers end  
+  
   RecipeListApp() {
 
     const recipesList = this.state.recipes;
