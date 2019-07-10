@@ -3,5 +3,5 @@ export { deleteModal } from './deleteModal.js';
 export { NavBar } from './NavBar.js';
 export { PrivateRoute } from './PrivateRoute.js';
 export { Profile } from './Profile.js';
-export { recipe } from './recipe.js';
-export { recipes } from './recipes.js';
+export { Recipe } from './recipe.js';
+export { Recipes } from './recipes.js';
