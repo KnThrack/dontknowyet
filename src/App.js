@@ -54,26 +54,27 @@ class App extends Component {
     });
 
     // before we can get the initial list we need the user to be there. 
-    const user = (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + this.props.user.email)).data;
+    let user = (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + this.props.user.email)).data;
 
     // if user is not there yet (web hooks in Auth0 dont work with google) then create it instead
     if (user.data === null || user.data === undefined) {
       // handle error / no data
       // no user is here so lets make a new one 
-      console.log(JSON.stringify(this.props.user, null, 2));
       let createUser = {
         name: this.props.user.name,
         email: this.props.user.email,
-        auth0ID: "",
+        auth0ID: this.props.user.sub,
       };
 
-      const newUser = (await axios.post('https://notsureyetapp.herokuapp.com/api/recipes/', JSON.stringify(createUser))).data;
-    } else {
-      // handle success
-      this.setState({
-        user: user.data[0]
-      });
-    };
+      const newUser = (await axios.post('https://notsureyetapp.herokuapp.com/api/users/', JSON.stringify(createUser))).data;
+      user = newUser;
+    }
+
+    // handle success
+    this.setState({
+      user: user.data[0]
+    });
+
     this.callAPI();
   }
 
