@@ -13,7 +13,7 @@ const deleteModal = ({ closeModal }) => {
     return (
         <>
             <p>Hello world</p>
-            <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal show="true" onHide={this.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
