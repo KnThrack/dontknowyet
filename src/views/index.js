@@ -1,7 +1,7 @@
-export { Loading } from './Loading';
-export { deleteModal } from './deleteModal';
-export { NavBar } from './NavBar';
-export { PrivateRoute } from './PrivateRoute';
-export { Profile } from './Profile';
-export { recipe } from './recipe';
-export { recipes } from './recipes';
+export { Loading } from './Loading.js';
+export { deleteModal } from './deleteModal.js';
+export { NavBar } from './NavBar.js';
+export { PrivateRoute } from './PrivateRoute.js';
+export { Profile } from './Profile.js';
+export { recipe } from './recipe.js';
+export { recipes } from './recipes.js';
