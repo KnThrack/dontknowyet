@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
+import Modal from 'react-bootstrap/Modal';
+/*
 import Recipes from './views/recipes';
 import Recipe from './views/recipe';
 import NavBar from "./views/NavBar";
 import Profile from "./views/Profile";
-import PrivateRoute from "./views/PrivateRoute";
+*/
+import { Recipes, Recipe, NavBar, Profile, PrivateRoute, deleteModal } from './views';
+// import PrivateRoute from "./views/PrivateRoute";
 
 const util = require('util')
 var _ = require('underscore');
@@ -16,7 +20,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { recipes: "", user: "" };
-
+this.ModalToRender = "";
     // bind handlers
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -217,8 +221,15 @@ class App extends Component {
 
   }
 
+  handleModalClose(event) {
+
+  }
+
   handleDelete(event) {
 
+    this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
+    
+    /*
     const recipeTarget = event.target.id.split("#");
     // find which one we updating
     let index = this.state.recipes.findIndex(x => x._id === recipeTarget[1]);
@@ -240,7 +251,7 @@ class App extends Component {
       .finally(function () {
         // always executed
       });
-
+*/
   }
 
   // handlers end  
@@ -264,9 +275,10 @@ class App extends Component {
 
             <Switch>
               <Route path="/" exact />
-              <PrivateRoute path="/profile" render={(props) => <Profile {...props} />} />
+              <PrivateRoute path="/profile" render={(props) => <Profile recipesList={recipesList} />} />
             </Switch>
           </Router>
+          <Modal>{this.ModalToRender}</Modal>
         </div>);
     } else {
       return (

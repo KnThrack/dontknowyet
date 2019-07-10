@@ -4,10 +4,10 @@ import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const deleteModal = () => {
+const deleteModal = ({ closeModal }) => {
 
-    handleClose() {
-        this.setState({ show: false });
+    function handleClose() {
+        closeModal();
     }
 
     return (
@@ -19,10 +19,10 @@ const deleteModal = () => {
                 </Modal.Header>
                 <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>
+                    <Button variant="secondary" onClick={handleClose}>
                         Close
             </Button>
-                    <Button variant="primary" onClick={this.handleClose}>
+                    <Button variant="primary" onClick={handleClose}>
                         Save Changes
             </Button>
                 </Modal.Footer>
