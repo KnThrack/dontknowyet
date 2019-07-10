@@ -219,7 +219,7 @@ class App extends Component {
 
   handleDelete(event) {
 
-    const recipeTarget = event.target.name.split("#");
+    const recipeTarget = event.target.id.split("#");
     // find which one we updating
     let index = this.state.recipes.findIndex(x => x._id === recipeTarget[1]);
     // take a copy thats mutable 
