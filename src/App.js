@@ -230,7 +230,8 @@ class App extends Component {
     axios.delete('https://notsureyetapp.herokuapp.com/api/recipes/' + recipe._id)
       .then(function (response) {
         // handle success
-        this.setState(_.without(stateCopy, recipe));
+        stateCopy.recipes = _.without(stateCopy.recipes, recipe);
+        this.setState(stateCopy);
       })
       .catch(function (error) {
         // handle error
