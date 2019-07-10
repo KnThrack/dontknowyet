@@ -58,7 +58,7 @@ class Recipes extends Component {
                 <div>
                     <center><h1>Recipes List</h1></center>
                     <center><h1>Loading ...</h1></center>
-                    <Button variant="submit" onClick={this.handleAddRecipe} title="Add Recipe">Add Recipe</Button>
+                    <Button variant="primary" size="lg" block onClick={this.handleAddRecipe} title="Add Recipe">Add Recipe</Button>
                 </div>
             )
         }
