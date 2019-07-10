@@ -45,7 +45,7 @@ class Recipes extends Component {
                                         <Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
                                             <Button variant="info" title="Go to Details">Go to Details</Button>
                                         </Link>
-                                        <Button key={recipe._id.toString()} variant="info" onClick={this.handleDelete} title="Delete">Delete</Button>
+                                        <Button id={"recipes_del_btn#"+recipe._id.toString()} variant="info" onClick={this.handleDelete} title="Delete">Delete</Button>
                                     </Card.Body>
                                 </Card>
                         )
