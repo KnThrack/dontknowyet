@@ -35,7 +35,7 @@ class Recipes extends Component {
                     {
                         recipes.map(
                             (recipe) =>
-                                <Card key={recipe._id.toString()} style={{ width: '18rem' }}>
+                                <Card key={recipe._id.toString()}>
                                     <Card.Body>
                                         <Card.Title>{recipe.title}</Card.Title>
                                         <Card.Subtitle className="mb-2 text-muted">{recipe.cuisine}</Card.Subtitle>
@@ -50,7 +50,7 @@ class Recipes extends Component {
                                 </Card>
                         )
                     }
-                    <Button variant="submit" onClick={this.handleAddRecipe} title="Add Recipe">Add Recipe</Button>
+                    <Button variant="primary" size="lg" block onClick={this.handleAddRecipe} title="Add Recipe">Add Recipe</Button>
                 </div>
             )
         } else {
@@ -70,5 +70,7 @@ class Recipes extends Component {
 }
 
 export {Recipes};
+
+// style={{ width: '18rem' }}
 
 
