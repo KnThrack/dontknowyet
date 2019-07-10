@@ -25,7 +25,7 @@ class App extends Component {
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
     this.handleJoditInputChange = this.handleJoditInputChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    
+
 
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -225,10 +225,10 @@ class App extends Component {
     // take a copy thats mutable 
     var stateCopy = Object.assign({}, this.state);
     var recipe = stateCopy.recipes[index];
-
+    var that = this;
     // and put it away
     axios.delete('https://notsureyetapp.herokuapp.com/api/recipes/' + recipe._id)
-      .then(function (response, that = this) {
+      .then(function (response) {
         // handle success
         stateCopy.recipes = _.without(stateCopy.recipes, recipe);
         that.setState(stateCopy);
