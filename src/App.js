@@ -20,7 +20,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { recipes: "", user: "" };
-this.ModalToRender = "";
+this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
     // bind handlers
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
