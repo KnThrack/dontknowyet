@@ -233,7 +233,7 @@ class App extends Component {
 
   raiseModal(modalType, index) {
     this.setState({
-      Modal: { show: !this.state.Modal.show, type: modalType, index: index }
+      Modal: { show: !this.state.modal.show, type: modalType, index: index }
     });
 
   }
