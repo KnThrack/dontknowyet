@@ -254,6 +254,7 @@ class App extends Component {
         .then(function (response) {
           // handle success
           stateCopy.recipes = _.without(stateCopy.recipes, recipe);
+          stateCopy.modal.show = false;
           that.setState(stateCopy);
         })
         .catch(function (error) {
@@ -266,7 +267,7 @@ class App extends Component {
 
     }
 
-    // raise decission
+    // raise decision
     this.raiseModal("delete", index);
 
   }
