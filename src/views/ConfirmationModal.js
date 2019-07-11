@@ -8,8 +8,8 @@ const ConfirmationModal = (...props) => {
 
     const { showModal, handleModalClose, handleModalSuccess, state, that } = props[0];
 
-    if (state.Modal !== undefined) {
-        switch (state.Modal.type) {
+    if (state.modal !== undefined) {
+        switch (state.modal.type) {
             case "delete":
                 // code block
                 break;
