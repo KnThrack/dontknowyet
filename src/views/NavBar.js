@@ -2,6 +2,7 @@
 
 import React from "react";
 import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import { useAuth0 } from "../react-auth0-spa";
 import { Link } from "react-router-dom";
 
