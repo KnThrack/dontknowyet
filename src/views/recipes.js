@@ -30,7 +30,7 @@ class Recipes extends Component {
     RecipeList(recipes) {
         if (recipes) {
             return (
-                <div className="recipes">
+                <div>
                     <center><h1>Recipes List</h1></center>
                     {
                         recipes.map(

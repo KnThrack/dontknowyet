@@ -6,10 +6,14 @@ import Button from 'react-bootstrap/Button';
 
 const DeleteModal = (...props) => {
 
-    const { showModal, handleModalClose } = props[0];
+    const { showModal, handleModalClose, handleModalSuccess } = props[0];
 
     function handleClose() {
         handleModalClose();
+    }
+
+    function handleSuccess() {
+        handleModalSuccess();
     }
 
     return (
@@ -22,7 +26,7 @@ const DeleteModal = (...props) => {
                 <Button variant="secondary" onClick={handleClose}>
                     Cancel
             </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={handleSuccess}>
                     Save Changes
             </Button>
             </Modal.Footer>

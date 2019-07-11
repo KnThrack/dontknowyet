@@ -31,6 +31,7 @@ class App extends Component {
     this.handleJoditInputChange = this.handleJoditInputChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
+    this.handleModalSuccess = this.handleModalSuccess.bind(this);
 
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -228,12 +229,23 @@ class App extends Component {
     });
   }
 
-  handleDelete(event) {
+  handleModalSuccess() {
+    this.setState({
+      showModal: false
+    });
+  }
 
+  raiseModal() {
     this.setState({
       showModal: true
     });
 
+  }
+
+  handleDelete(event) {
+
+
+    this.ModalToRender = <DeleteModal showModal={this.state.showModal} handleModalClose={this.handleModalClose} handleModalSuccess={this.handleModalSuccess} />;
     //this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
     //this.forceUpdate();
     /*
@@ -275,7 +287,7 @@ class App extends Component {
               <NavBar />
             </header>
 
-            <div>
+            <div className="recipes">
               <PrivateRoute exact path="/" render={(props) => <Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} handleDelete={this.handleDelete} {...props} />} />
               <PrivateRoute path="/recipe/:id" render={(props) => <Recipe recipesList={recipesList} handleTableChange={this.handleTableChange} handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} handleJoditInputChange={this.handleJoditInputChange} handleAddIngredient={this.handleAddIngredient} {...props} />} />
             </div>
@@ -285,7 +297,9 @@ class App extends Component {
               <PrivateRoute path="/profile" render={(props) => <Profile recipesList={recipesList} />} />
             </Switch>
           </Router>
-          <DeleteModal showModal={this.state.showModal} handleModalClose={this.handleModalClose} />
+          <Modal>
+            {this.ModalToRender}
+          </Modal>
         </div>);
     } else {
       return (
