@@ -21,7 +21,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { recipes: "", user: "" };
-this.ModalToRender = false;
+
     // bind handlers
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -222,8 +222,8 @@ this.ModalToRender = false;
 
   }
 
-  handleModalClose(event) {
-    event.preventDefault();
+  handleModalClose() {
+    this.ModalToRender = false;
   }
 
   handleDelete(event) {
