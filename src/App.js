@@ -30,7 +30,7 @@ class App extends Component {
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
     this.handleJoditInputChange = this.handleJoditInputChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-
+    this.handleModalClose = this.handleModalClose.bind(this);
 
     // set the default axios stuff
     axios.defaults.headers.post['Content-Type'] = 'application/json';
