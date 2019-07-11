@@ -4,7 +4,7 @@ import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const DeleteModal = ({ showModal }, ...props) => {
+const DeleteModal = (...props) => {
 
     function handleClose() {
         props.handleModalClose();
