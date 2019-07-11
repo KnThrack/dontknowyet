@@ -298,9 +298,7 @@ class App extends Component {
               <PrivateRoute path="/profile" render={(props) => <Profile recipesList={recipesList} />} />
             </Switch>
           </Router>
-          <Modal>
-            {this.ModalToRender}
-          </Modal>
+          {this.ModalToRender}
         </div>);
     } else {
       return (
