@@ -10,7 +10,7 @@ import Recipe from './views/recipe';
 import NavBar from "./views/NavBar";
 import Profile from "./views/Profile";
 */
-import { Recipes, Recipe, NavBar, Profile, PrivateRoute, deleteModal } from './views';
+import { Recipes, Recipe, NavBar, Profile, PrivateRoute, DeleteModal } from './views';
 // import PrivateRoute from "./views/PrivateRoute";
 
 const util = require('util')
@@ -283,7 +283,7 @@ class App extends Component {
               <PrivateRoute path="/profile" render={(props) => <Profile recipesList={recipesList} />} />
             </Switch>
           </Router>
-          <deleteModal showModal={this.state.showModal} />
+          <DeleteModal showModal={this.state.showModal} />
         </div>);
     } else {
       return (

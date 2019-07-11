@@ -4,7 +4,7 @@ import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const deleteModal = ({ showModal }) => {
+const DeleteModal = ({ showModal }) => {
 
     function handleClose() {
         this.setState({ show: false });
@@ -28,4 +28,4 @@ const deleteModal = ({ showModal }) => {
     );
 };
 
-export { deleteModal };
+export { DeleteModal };
