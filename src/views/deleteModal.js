@@ -4,17 +4,14 @@ import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const deleteModal = ({ closeModal }) => {
+const deleteModal = ({ showModal }) => {
 
     function handleClose() {
         this.setState({ show: false });
     }
-    this.state = {
-        show: false,
-    };
 
     return (
-            <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal show={showModal} onHide={this.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>

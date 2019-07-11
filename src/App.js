@@ -20,7 +20,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { recipes: "", user: "" };
+    this.state = { recipes: "", user: "", showModal: false };
 
     // bind handlers
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -227,9 +227,13 @@ class App extends Component {
   }
 
   handleDelete(event) {
-    this.ModalToRender = true;
+
+    this.setState({
+      showModal: true
+    });
+
     //this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
-    this.forceUpdate();
+    //this.forceUpdate();
     /*
     const recipeTarget = event.target.id.split("#");
     // find which one we updating
@@ -279,7 +283,7 @@ class App extends Component {
               <PrivateRoute path="/profile" render={(props) => <Profile recipesList={recipesList} />} />
             </Switch>
           </Router>
-          <deleteModal />
+          <deleteModal showModal={this.state.showModal} />
         </div>);
     } else {
       return (
