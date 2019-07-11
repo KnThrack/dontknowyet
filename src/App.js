@@ -223,7 +223,7 @@ this.ModalToRender = false;
   }
 
   handleModalClose(event) {
-
+    event.preventDefault();
   }
 
   handleDelete(event) {
