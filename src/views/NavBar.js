@@ -1,6 +1,7 @@
 // src/views/NavBar.js
 
 import React from "react";
+import Navbar from 'react-bootstrap/Navbar';
 import { useAuth0 } from "../react-auth0-spa";
 import { Link } from "react-router-dom";
 
@@ -23,14 +24,30 @@ const NavBar = () => {
 
             {/* NEW - add a link to the home and profile pages */}
             {isAuthenticated && (
-                <span>
-                    <Link to="/">Home</Link>&nbsp;
-                    <Link to="/profile">Profile</Link>
-                    <i className='uil uil-smile'></i>
-                </span>
+
+                <Navbar>
+                    <Navbar.Brand href="#home">Dontknowyetapp Recipe </Navbar.Brand>
+                    <Navbar.Toggle />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link href="#home">
+                                <Link to="/">Home</Link>
+                            </Nav.Link>
+                            <Nav.Link href="#link">
+                                <Link to="/profile">Profile</Link>
+                            </Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                    <Navbar.Collapse className="justify-content-end">
+                        <Navbar.Text>
+                            Signed in as: <a href="#login">{user.name}</a>
+                        </Navbar.Text>
+                    </Navbar.Collapse>
+                </Navbar>
+
             )}
         </div>
     );
 };
 
-export {NavBar};
+export { NavBar };

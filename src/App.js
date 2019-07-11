@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Modal';
-/*
-import Recipes from './views/recipes';
-import Recipe from './views/recipe';
-import NavBar from "./views/NavBar";
-import Profile from "./views/Profile";
-*/
 import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal } from './views';
-// import PrivateRoute from "./views/PrivateRoute";
 
 const util = require('util')
 var _ = require('underscore');
@@ -301,7 +292,7 @@ class App extends Component {
         <div className="App">
           <Router>
             <header className="App-header">
-              <NavBar />
+              <NavBar/>
             </header>
 
             <div className="recipes">
@@ -321,7 +312,7 @@ class App extends Component {
         <div className="App">
           <header className="App-header" />
           <Router>
-            <NavBar />
+            <NavBar/>
           </Router>
           <center><h1>Recipes List</h1></center>
           <center><h1>Loading ...</h1></center>
