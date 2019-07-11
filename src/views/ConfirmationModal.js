@@ -1,19 +1,30 @@
-// src/views/deleteModal.js
+// src/views/ConfirmationModal.js
 
 import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const DeleteModal = (...props) => {
+const ConfirmationModal = (...props) => {
 
-    const { showModal, handleModalClose, handleModalSuccess } = props[0];
+    const { showModal, handleModalClose, handleModalSuccess, state, that } = props[0];
+
+    switch(state.Modal.type) {
+        case "delete":
+          // code block
+          break;
+        case "confirm":
+          // code block
+          break;
+        default:
+          // code block
+      }
 
     function handleClose() {
         handleModalClose();
     }
 
-    function handleSuccess() {
-        handleModalSuccess();
+    function handleSuccess() {       
+        handleModalSuccess(state, that);
     }
 
     return (
@@ -34,4 +45,4 @@ const DeleteModal = (...props) => {
     );
 };
 
-export { DeleteModal };
+export { ConfirmationModal };

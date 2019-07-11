@@ -10,7 +10,7 @@ import Recipe from './views/recipe';
 import NavBar from "./views/NavBar";
 import Profile from "./views/Profile";
 */
-import { Recipes, Recipe, NavBar, Profile, PrivateRoute, DeleteModal } from './views';
+import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal } from './views';
 // import PrivateRoute from "./views/PrivateRoute";
 
 const util = require('util')
@@ -20,9 +20,8 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { recipes: "", user: "", showModal: false };
+    this.state = { recipes: "", user: "", modal: {}, index:null };
 
-    this.test = "";
     // bind handlers
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -225,20 +224,16 @@ class App extends Component {
   }
 
   handleModalClose() {
-    this.setState({
-      showModal: false
-    });
+    this.raiseModal();
   }
 
   handleModalSuccess() {
-    this.setState({
-      showModal: false
-    });
+    this.raiseModal();
   }
 
-  raiseModal() {
+  raiseModal(modalType, index) {
     this.setState({
-      showModal: true
+      Modal: { show: !this.state.Modal.show, type: modalType, index: index}
     });
 
   }
@@ -252,9 +247,8 @@ class App extends Component {
     // take a copy thats mutable 
     var stateCopy = Object.assign({}, this.state);
     var recipe = stateCopy.recipes[index];
-    var that = this;
-
-    this.test = (recipe, stateCopy, that) => {
+ 
+    this.test = (stateCopy, that) => {
       // and put it away
       axios.delete('https://notsureyetapp.herokuapp.com/api/recipes/' + recipe._id)
         .then(function (response) {
@@ -272,8 +266,8 @@ class App extends Component {
 
     }
 
-        // raise decission
-        this.raiseModal();
+    // raise decission
+    this.raiseModal("delete",index);
 
   }
 
@@ -301,7 +295,7 @@ class App extends Component {
               <PrivateRoute path="/profile" render={(props) => <Profile recipesList={recipesList} />} />
             </Switch>
           </Router>
-          <DeleteModal showModal={this.state.showModal} handleModalClose={this.handleModalClose} handleModalSuccess={this.test} />
+          <ConfirmationModal showModal={this.state.showModal} handleModalClose={this.handleModalClose} handleModalSuccess={this.test} state={this.state} that={this}/>
         </div>);
     } else {
       return (

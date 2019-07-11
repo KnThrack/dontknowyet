@@ -1,5 +1,5 @@
 export { Loading } from './Loading.js';
-export { DeleteModal } from './deleteModal.js';
+export { ConfirmationModal } from './ConfirmationModal.js';
 export { NavBar } from './NavBar.js';
 export { PrivateRoute } from './PrivateRoute.js';
 export { Profile } from './Profile.js';
