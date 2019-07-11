@@ -295,7 +295,7 @@ class App extends Component {
               <PrivateRoute path="/profile" render={(props) => <Profile recipesList={recipesList} />} />
             </Switch>
           </Router>
-          <ConfirmationModal showModal={this.state.showModal} handleModalClose={this.handleModalClose} handleModalSuccess={this.test} state={this.state} that={this} />
+          <ConfirmationModal showModal={this.state.modal.show} handleModalClose={this.handleModalClose} handleModalSuccess={this.test} state={this.state} that={this} />
         </div>);
     } else {
       return (
