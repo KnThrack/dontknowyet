@@ -8,22 +8,23 @@ const ConfirmationModal = (...props) => {
 
     const { showModal, handleModalClose, handleModalSuccess, state, that } = props[0];
 
-    switch(state.Modal.type) {
-        case "delete":
-          // code block
-          break;
-        case "confirm":
-          // code block
-          break;
-        default:
-          // code block
-      }
-
+    if (state.Modal !== undefined) {
+        switch (state.Modal.type) {
+            case "delete":
+                // code block
+                break;
+            case "confirm":
+                // code block
+                break;
+            default:
+            // code block
+        }
+    }
     function handleClose() {
         handleModalClose();
     }
 
-    function handleSuccess() {       
+    function handleSuccess() {
         handleModalSuccess(state, that);
     }
 
