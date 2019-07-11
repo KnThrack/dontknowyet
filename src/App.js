@@ -22,6 +22,7 @@ class App extends Component {
     super(props);
     this.state = { recipes: "", user: "", showModal: false };
 
+    this.test = "";
     // bind handlers
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -244,12 +245,7 @@ class App extends Component {
 
   handleDelete(event) {
 
-
-    this.ModalToRender = <DeleteModal showModal={this.state.showModal} handleModalClose={this.handleModalClose} handleModalSuccess={this.handleModalSuccess} />;
-    this.raiseModal();
-    //this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
-    //this.forceUpdate();
-    /*
+    // delete stuff
     const recipeTarget = event.target.id.split("#");
     // find which one we updating
     let index = this.state.recipes.findIndex(x => x._id === recipeTarget[1]);
@@ -257,21 +253,28 @@ class App extends Component {
     var stateCopy = Object.assign({}, this.state);
     var recipe = stateCopy.recipes[index];
     var that = this;
-    // and put it away
-    axios.delete('https://notsureyetapp.herokuapp.com/api/recipes/' + recipe._id)
-      .then(function (response) {
-        // handle success
-        stateCopy.recipes = _.without(stateCopy.recipes, recipe);
-        that.setState(stateCopy);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .finally(function () {
-        // always executed
-      });
-*/
+
+    this.test = (recipe, stateCopy, that) => {
+      // and put it away
+      axios.delete('https://notsureyetapp.herokuapp.com/api/recipes/' + recipe._id)
+        .then(function (response) {
+          // handle success
+          stateCopy.recipes = _.without(stateCopy.recipes, recipe);
+          that.setState(stateCopy);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+        });
+
+    }
+
+        // raise decission
+        this.raiseModal();
+
   }
 
   // handlers end  
@@ -298,7 +301,7 @@ class App extends Component {
               <PrivateRoute path="/profile" render={(props) => <Profile recipesList={recipesList} />} />
             </Switch>
           </Router>
-          {this.ModalToRender}
+          <DeleteModal showModal={this.state.showModal} handleModalClose={this.handleModalClose} handleModalSuccess={this.test} />
         </div>);
     } else {
       return (
