@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 const DeleteModal = (...props) => {
 
+    const { showModal, handleModalClose } = props[0];
     function handleClose() {
         props.handleModalClose();
     }
