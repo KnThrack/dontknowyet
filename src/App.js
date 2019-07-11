@@ -223,7 +223,9 @@ class App extends Component {
   }
 
   handleModalClose() {
-    this.ModalToRender = false;
+    this.setState({
+      showModal: false
+    });
   }
 
   handleDelete(event) {
@@ -283,7 +285,7 @@ class App extends Component {
               <PrivateRoute path="/profile" render={(props) => <Profile recipesList={recipesList} />} />
             </Switch>
           </Router>
-          <DeleteModal showModal={this.state.showModal} />
+          <DeleteModal showModal={this.state.showModal} handleModalClose={this.handleModalClose} />
         </div>);
     } else {
       return (
