@@ -214,12 +214,31 @@ class App extends Component {
 
     // find which one we updating
     let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
+
     // take a copy thats mutable 
     var stateCopy = Object.assign({}, this.state);
     var recipe = stateCopy.recipes[index];
 
-    // and put it away
-    axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + recipe._id, JSON.stringify(recipe));
+    this.test = (stateCopy, that) => {
+      // and put it away
+      axios.put('https://notsureyetapp.herokuapp.com/api/recipes/' + recipe._id, JSON.stringify(recipe))
+        .then(function (response) {
+          // handle success
+          //stateCopy.recipes = _.without(stateCopy.recipes, recipe);
+          stateCopy.modal.show = false;
+          that.setState(stateCopy);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+        });
+    }
+
+    // raise decision
+    this.raiseModal("confirm", index);
 
   }
 
@@ -264,7 +283,6 @@ class App extends Component {
         .finally(function () {
           // always executed
         });
-
     }
 
     // raise decision
