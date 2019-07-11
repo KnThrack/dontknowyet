@@ -246,6 +246,7 @@ class App extends Component {
 
 
     this.ModalToRender = <DeleteModal showModal={this.state.showModal} handleModalClose={this.handleModalClose} handleModalSuccess={this.handleModalSuccess} />;
+    this.raiseModal();
     //this.ModalToRender = <deleteModal closeModal={this.handleModalClose} />;
     //this.forceUpdate();
     /*

@@ -26,6 +26,7 @@ const NavBar = () => {
                 <span>
                     <Link to="/">Home</Link>&nbsp;
                     <Link to="/profile">Profile</Link>
+                    <i class='uil uil-smile'></i>
                 </span>
             )}
         </div>
