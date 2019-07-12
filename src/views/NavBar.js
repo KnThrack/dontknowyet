@@ -9,7 +9,7 @@ import Image from "react-bootstrap/Image";
 const NavBar = () => {
 	const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-	let userpicture = "../assets/circle.svg";
+	let userpicture = "src/assets/circle.svg";
 	if (isAuthenticated) {
 		if (user.picture) {
 			userpicture = user.picture;
@@ -26,7 +26,7 @@ const NavBar = () => {
 	return (
 		<Navbar expand='lg'>
 			<Navbar.Brand href='/'>
-				<img alt='' src='../logo.svg' width='30' height='30' className='d-inline-block align-top' />
+				<img alt='' src='logo.svg' width='30' height='30' className='d-inline-block align-top' />
 				{" Dontknowyet"}
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />
