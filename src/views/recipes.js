@@ -22,9 +22,9 @@ class Recipes extends Component {
 
 	handleInputChange(event) {
 		this.filter = event.target.value;
-
+		var filter = event.target.value;
 		this.props.recipesList = _.filter(this.props.recipesList, function(recipe) {
-			return _.contains(_.values(recipe), this.filter);
+			return _.contains(_.values(recipe), filter);
 		});
 	}
 
@@ -41,7 +41,9 @@ class Recipes extends Component {
 			return (
 				<div>
 					<Form inline>
-						<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={this.handleInputChange} />
+						<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={this.handleInputChange}>
+							{this.filter}
+						</FormControl>
 						<Button type='submit'>Submit</Button>
 					</Form>
 					{recipes.map(recipe => (
