@@ -11,21 +11,16 @@ var _ = require("underscore");
 class Recipes extends Component {
 	constructor(props) {
 		super(props);
-		this.backup = this.props.recipesList;
+
 		this.handleAddRecipe = this.handleAddRecipe.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
-		this.handleInputChange = this.handleInputChange.bind(this);
-		this.filter = "";
+		this.handleFilterChange = this.handleFilterChange.bind(this);
 	}
 
 	async componentDidMount() {}
 
-	handleInputChange(event) {
-		this.filter = event.target.value;
-		var filter = event.target.value;
-		this.backup = _.filter(this.props.recipesList, function(recipe) {
-			return _.contains(_.values(recipe), filter);
-		});
+	handleFilterChange(event) {
+		this.props.handleFilterChange(event);
 	}
 
 	handleAddRecipe(event) {
@@ -41,7 +36,7 @@ class Recipes extends Component {
 			return (
 				<div>
 					<Form inline>
-						<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={this.handleInputChange} value={this.filter} />
+						<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={this.handleFilterChange} value={this.props.filter} />
 						<Button type='submit'>Submit</Button>
 					</Form>
 					{recipes.map(recipe => (
@@ -84,7 +79,7 @@ class Recipes extends Component {
 	}
 
 	render() {
-		return this.RecipeList(this.backup);
+		return this.RecipeList(this.props.recipesList);
 	}
 }
 

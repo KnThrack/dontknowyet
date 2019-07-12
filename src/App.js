@@ -12,8 +12,10 @@ class App extends Component {
 		super(props);
 		this.state = {
 			recipes: "",
+			filteredRecipes: "",
 			user: "",
-			modal: { show: false, type: "", index: null }
+			modal: { show: false, type: "", index: null },
+			filter: ""
 		};
 
 		// bind handlers
@@ -26,7 +28,7 @@ class App extends Component {
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleModalClose = this.handleModalClose.bind(this);
 		this.handleModalSuccess = this.handleModalSuccess.bind(this);
-
+		this.handleFilterChange = this.handleFilterChange.bind(this);
 		// set the default axios stuff
 		axios.defaults.headers.post["Content-Type"] = "application/json";
 		axios.defaults.headers.put["Content-Type"] = "application/json";
@@ -38,7 +40,8 @@ class App extends Component {
 		const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + this.state.user._id)).data;
 
 		this.setState({
-			recipes: recipes.data
+			recipes: recipes.data,
+			filteredRecipes: recipes.data
 		});
 	}
 
@@ -270,10 +273,21 @@ class App extends Component {
 		this.raiseModal("delete", index);
 	}
 
+	handleFilterChange(event) {
+		const value = target.type === "checkbox" ? target.checked : target.value;
+		let filteredRecipes = this.state.recipes;
+		filteredRecipes = filteredRecipes.filter(recipe => {
+			return _.values(recipe).map(a => _.contains(a, value));
+		});
+		this.setState({
+			filteredRecipes: filteredRecipes,
+			filter: value
+		});
+	}
 	// handlers end
 
 	RecipeListApp() {
-		const recipesList = this.state.recipes;
+		const recipesList = this.state.filteredRecipes;
 
 		if (recipesList) {
 			return (
@@ -288,7 +302,14 @@ class App extends Component {
 								exact
 								path='/'
 								render={props => (
-									<Recipes recipesList={recipesList} handleAddRecipe={this.handleAddRecipe} handleDelete={this.handleDelete} {...props} />
+									<Recipes
+										recipesList={recipesList}
+										filter={this.state.filter}
+										handleAddRecipe={this.handleAddRecipe}
+										handleDelete={this.handleDelete}
+										handleFilterChange={this.handleFilterChange}
+										{...props}
+									/>
 								)}
 							/>
 							<PrivateRoute
