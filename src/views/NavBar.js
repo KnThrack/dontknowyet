@@ -30,11 +30,11 @@ const NavBar = () => {
                             Home
                             </Nav.Link>
                         <Nav.Link href="/profile">
-                            <Link to="/profile">Profile</Link>
+                            Profile
                         </Nav.Link>
                     </Nav>
-                    <Image onError={addDefaultSrc} src={user.picture} rounded onClick={loginout}> </Image>/>
-                    </Navbar.Collapse>
+                    <Image onError={addDefaultSrc} src={user.picture} rounded onClick={loginout} />
+                </Navbar.Collapse>
             </Navbar>
         </div>
     );
