@@ -9,24 +9,24 @@ import { Link } from "react-router-dom";
 var _ = require("underscore");
 
 class Recipes extends Component {
-
 	constructor(props) {
-        super(props);
-       this.backup = this.props.recipesList;
+		super(props);
+		this.backup = this.props.recipesList;
 		this.handleAddRecipe = this.handleAddRecipe.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-        var this.filter = "";
+		this.handleDelete = this.handleDelete.bind(this);
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.filter = "";
 	}
 
-    async componentDidMount() {}
+	async componentDidMount() {}
 
-    handleInputChange(event) {
-        this.filter = event.target.value;
+	handleInputChange(event) {
+		this.filter = event.target.value;
 
-        this.props.recipesList = _.filter(this.props.recipesList, function(recipe){ return _.contains(_.values(recipe),this.filter); });
-        
-    }
+		this.props.recipesList = _.filter(this.props.recipesList, function(recipe) {
+			return _.contains(_.values(recipe), this.filter);
+		});
+	}
 
 	handleAddRecipe(event) {
 		this.props.handleAddRecipe(event);
