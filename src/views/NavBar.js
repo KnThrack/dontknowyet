@@ -25,7 +25,7 @@ const NavBar = () => {
             <Navbar.Brand href="/">Dontknowyet</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="justify-content-end">
+                <Nav className="justify-content-end" justify="true" >
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/profile">Profile</Nav.Link>
                 </Nav>
