@@ -274,6 +274,7 @@ class App extends Component {
 	}
 
 	handleFilterChange(event) {
+		// filter all the recipes based on all the text in them and store it in a filter state
 		const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
 		let filteredRecipes = this.state.recipes;
 		filteredRecipes = filteredRecipes.filter(recipe => {

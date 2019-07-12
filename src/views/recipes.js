@@ -37,7 +37,6 @@ class Recipes extends Component {
 				<div>
 					<Form inline>
 						<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={this.handleFilterChange} value={this.props.filter} />
-						<Button type='submit'>Submit</Button>
 					</Form>
 					{recipes.map(recipe => (
 						<Card key={recipe._id.toString()}>
