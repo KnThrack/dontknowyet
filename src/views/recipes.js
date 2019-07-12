@@ -41,9 +41,7 @@ class Recipes extends Component {
 			return (
 				<div>
 					<Form inline>
-						<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={this.handleInputChange}>
-							{this.filter}
-						</FormControl>
+						<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={this.handleInputChange} value={this.filter} />
 						<Button type='submit'>Submit</Button>
 					</Form>
 					{recipes.map(recipe => (
