@@ -292,7 +292,7 @@ class App extends Component {
         <div className="App">
           <Router>
             <header className="App-header">
-              <NavBar/>
+              <NavBar />
             </header>
 
             <div className="recipes">
@@ -310,12 +310,13 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          <header className="App-header" />
+
           <Router>
-            <NavBar/>
+            <header className="App-header">
+              <NavBar />
+            </header>
           </Router>
-          <center><h1>Recipes List</h1></center>
-          <center><h1>Loading ...</h1></center>
+
         </div>
       )
     }

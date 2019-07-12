@@ -21,7 +21,6 @@ const NavBar = () => {
     }
 
     return (
-        <div>
             <Navbar expand="lg">
                 <Navbar.Brand href="/">Dontknowyet</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -34,10 +33,9 @@ const NavBar = () => {
                             Profile
                         </Nav.Link>
                     </Nav>
-                    <Image onClick={loginout} src={userpicture} roundedCircle/>
+                    <Image onClick={loginout} src={userpicture} roundedCircle height="50px" />
                 </Navbar.Collapse>
             </Navbar>
-        </div>
     );
 };
 
