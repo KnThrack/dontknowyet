@@ -10,7 +10,7 @@ import Image from "react-bootstrap/Image";
 const NavBar = () => {
 	const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-	let userpicture = "../app/src/assets/circle.svg";
+	let userpicture = "../assets/circle.svg";
 	if (isAuthenticated) {
 		if (user.picture) {
 			userpicture = user.picture;
