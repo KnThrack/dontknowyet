@@ -10,10 +10,11 @@ import Image from 'react-bootstrap/Image'
 const NavBar = () => {
     const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
+    let userpicture = "../assets/circle.svg"
+    if (user.picture) { userpicture = user.picture };
+
     //in your component
-    function addDefaultSrc(ev) {
-        ev.target.src = "../assets/circle.svg";
-    }
+
     function loginout() {
         !isAuthenticated && loginWithRedirect({});
         isAuthenticated && logout();
@@ -33,7 +34,7 @@ const NavBar = () => {
                             Profile
                         </Nav.Link>
                     </Nav>
-                    <Image onError={addDefaultSrc} src={user.picture} rounded onClick={loginout} />
+                    <Image onClick={loginout} src={userpicture} roundedCircle/>
                 </Navbar.Collapse>
             </Navbar>
         </div>
