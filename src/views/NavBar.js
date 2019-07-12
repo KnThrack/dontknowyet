@@ -26,20 +26,18 @@ const NavBar = () => {
             {/* NEW - add a link to the home and profile pages */}
             {isAuthenticated && (
 
-                <Navbar>
-                    <Navbar.Brand href="#home">Dontknowyetapp Recipe </Navbar.Brand>
-                    <Navbar.Toggle />
+                <Navbar expand="lg">
+                    <Navbar.Brand href="/">Dontknowyetapp Recipe </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="#home">
+                            <Nav.Link href="/">
                                 <Link to="/">Home</Link>
                             </Nav.Link>
-                            <Nav.Link href="#link">
+                            <Nav.Link href="/profile">
                                 <Link to="/profile">Profile</Link>
                             </Nav.Link>
                         </Nav>
-                    </Navbar.Collapse>
-                    <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
                             Signed in as: <a href="#login">{user.name}</a>
                         </Navbar.Text>
