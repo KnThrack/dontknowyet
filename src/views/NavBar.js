@@ -10,7 +10,7 @@ import { ReactComponent as Logo } from "../logo.svg";
 const NavBar = () => {
 	const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-	let userpicture = "src/assets/circle.svg";
+	let userpicture = "https://unicons.iconscout.com/release/v1.0.0/svg/user-circle.svg";
 	if (isAuthenticated) {
 		if (user.picture) {
 			userpicture = user.picture;
@@ -27,7 +27,7 @@ const NavBar = () => {
 	return (
 		<Navbar expand='lg'>
 			<Navbar.Brand href='/'>
-				<Logo width='30' height='30' className='d-inline-block align-top' />
+				<Logo width='50px' height='50px' className='d-inline-block align-top' />
 				{" Dontknowyet"}
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />

@@ -6,14 +6,27 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
 
+var _ = require("underscore");
+
 class Recipes extends Component {
+
 	constructor(props) {
-		super(props);
+        super(props);
+       this.backup = this.props.recipesList;
 		this.handleAddRecipe = this.handleAddRecipe.bind(this);
-		this.handleDelete = this.handleDelete.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        var this.filter = "";
 	}
 
-	async componentDidMount() {}
+    async componentDidMount() {}
+
+    handleInputChange(event) {
+        this.filter = event.target.value;
+
+        this.props.recipesList = _.filter(this.props.recipesList, function(recipe){ return _.contains(_.values(recipe),this.filter); });
+        
+    }
 
 	handleAddRecipe(event) {
 		this.props.handleAddRecipe(event);
@@ -28,7 +41,7 @@ class Recipes extends Component {
 			return (
 				<div>
 					<Form inline>
-						<FormControl type='text' placeholder='Search' className=' mr-sm-2' />
+						<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={this.handleInputChange} />
 						<Button type='submit'>Submit</Button>
 					</Form>
 					{recipes.map(recipe => (

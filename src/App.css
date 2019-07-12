@@ -52,6 +52,9 @@
 	width: 100%;
 	vertical-align: middle;
 }
+.form-inline {
+	flex-flow: row nowrap;
+}
 
 @media only screen and (min-width: 600px) {
 	/* For tablets: */
