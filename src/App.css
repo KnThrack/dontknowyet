@@ -47,6 +47,12 @@
 	width: 100%;
 }
 
+.form-inline .form-control {
+	display: inline-block;
+	width: 100%;
+	vertical-align: middle;
+}
+
 @media only screen and (min-width: 600px) {
 	/* For tablets: */
 	.App {
