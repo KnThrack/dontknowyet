@@ -274,7 +274,7 @@ class App extends Component {
 	}
 
 	handleFilterChange(event) {
-		const value = target.type === "checkbox" ? target.checked : target.value;
+		const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
 		let filteredRecipes = this.state.recipes;
 		filteredRecipes = filteredRecipes.filter(recipe => {
 			return _.values(recipe).map(a => _.contains(a, value));
