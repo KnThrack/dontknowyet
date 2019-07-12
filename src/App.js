@@ -101,7 +101,7 @@ class App extends Component {
 		var stateCopy = Object.assign({}, this.state);
 		stateCopy.recipes = stateCopy.recipes.slice();
 		stateCopy.recipes.push(newRecipe);
-
+		stateCopy.filteredRecipes = stateCopy.recipes;
 		// update it
 		this.setState(stateCopy);
 	}
