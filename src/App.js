@@ -278,7 +278,7 @@ class App extends Component {
 		let filteredRecipes = this.state.recipes;
 		filteredRecipes = filteredRecipes.filter(recipe => {
 			return _.values(recipe)
-				.map(a => a.indexOf("value") !== -1)
+				.map(a => a.indexOf(value) !== -1)
 				.contains(true);
 		});
 
