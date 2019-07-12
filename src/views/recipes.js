@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Form from "react-bootstrap/FormControl";
+import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
 
 class Recipes extends Component {
