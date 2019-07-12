@@ -27,7 +27,7 @@ const NavBar = () => {
 	return (
 		<Navbar expand='lg'>
 			<Navbar.Brand href='/'>
-				<img alt='' src='/logo.svg' width='30' height='30' className='d-inline-block align-top' />
+				<img alt='' src='../logo.svg' width='30' height='30' className='d-inline-block align-top' />
 				{" Dontknowyet"}
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />
