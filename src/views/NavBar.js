@@ -11,7 +11,7 @@ const NavBar = () => {
     const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     let userpicture = "../assets/circle.svg"
-    if (user.picture) { userpicture = user.picture };
+    if (isAuthenticated) { if (user.picture) { userpicture = user.picture } };
 
     //in your component
 
