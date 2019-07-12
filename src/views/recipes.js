@@ -23,7 +23,7 @@ class Recipes extends Component {
 	handleInputChange(event) {
 		this.filter = event.target.value;
 		var filter = event.target.value;
-		this.props.recipesList = _.filter(this.props.recipesList, function(recipe) {
+		this.backup = _.filter(this.props.recipesList, function(recipe) {
 			return _.contains(_.values(recipe), filter);
 		});
 	}
@@ -84,7 +84,7 @@ class Recipes extends Component {
 	}
 
 	render() {
-		return this.RecipeList(this.props.recipesList);
+		return this.RecipeList(this.backup);
 	}
 }
 
