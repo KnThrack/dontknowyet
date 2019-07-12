@@ -21,21 +21,17 @@ const NavBar = () => {
     }
 
     return (
-            <Navbar expand="lg">
-                <Navbar.Brand href="/">Dontknowyet</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Nav.Link href="/">
-                            Home
-                            </Nav.Link>
-                        <Nav.Link href="/profile">
-                            Profile
-                        </Nav.Link>
-                    </Nav>
-                    <Image onClick={loginout} src={userpicture} roundedCircle height="50px" />
-                </Navbar.Collapse>
-            </Navbar>
+        <Navbar expand="lg">
+            <Navbar.Brand href="/">Dontknowyet</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="justify-content-end">
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/profile">Profile</Nav.Link>
+                </Nav>
+                <Image onClick={loginout} src={userpicture} roundedCircle height="50px" />
+            </Navbar.Collapse>
+        </Navbar>
     );
 };
 
