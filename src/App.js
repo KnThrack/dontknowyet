@@ -31,7 +31,7 @@ const App = (...props) => {
 	useEffect(() => {
 		// get the initial recipes
 		async function putAuth() {
-			await props.token.then(function(result) {
+			await props[0].token.then(function(result) {
 				axios.defaults.headers.post["Authorization"] = "Bearer " + result;
 				axios.defaults.headers.delete["Authorization"] = "Bearer " + result;
 				axios.defaults.headers.get["Authorization"] = "Bearer " + result;
@@ -49,9 +49,9 @@ const App = (...props) => {
 
 		async function createUser() {
 			let createUser = {
-				name: props.user.name,
-				email: props.user.email,
-				auth0ID: props.user.sub
+				name: props[0].user.name,
+				email: props[0].user.email,
+				auth0ID: props[0].user.sub
 			};
 
 			return (await axios.post("https://notsureyetapp.herokuapp.com/api/users/", JSON.stringify(createUser))).data;
