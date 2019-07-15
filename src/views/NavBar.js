@@ -21,7 +21,7 @@ const NavBar = () => {
 
 	function loginout() {
 		!isAuthenticated && loginWithRedirect({});
-		isAuthenticated && logout();
+		isAuthenticated && logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
 	}
 
 	return (

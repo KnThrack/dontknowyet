@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
-import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal } from "./views";
+import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading } from "./views";
 
 const util = require("util");
 var _ = require("underscore");
@@ -345,6 +345,7 @@ class App extends Component {
 						<header className='App-header'>
 							<NavBar />
 						</header>
+						<Loading />
 					</Router>
 				</div>
 			);
