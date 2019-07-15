@@ -7,26 +7,22 @@ import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 
 const Recipe = ({ ...props }) => {
-	const { handleInputChange, handleSubmit, handleTableChange, handleAddIngredient, handleJoditInputChange, recipesList, state } = props[0];
+	const { handleInputChange, handleSubmit, handleTableChange, handleAddIngredient, recipesList, state } = props[0];
 
 	// handlers
-	function handleAddIngredient(event) {
+	function handleAddIngredients(event) {
 		handleAddIngredient(event, state);
 	}
 
-	function handleTableChange(event) {
+	function handleTableChanges(event) {
 		handleTableChange(event, state);
 	}
 
-	function handleInputChange(event) {
+	function handleInputChanges(event) {
 		handleInputChange(event, state);
 	}
 
-	function handleJoditInputChange(event) {
-		handleJoditInputChange(event, state);
-	}
-
-	function handleSubmit(event) {
+	function handleSubmits(event) {
 		// submit the changes to the backend
 		handleSubmit(event, state);
 	}
@@ -42,11 +38,11 @@ const Recipe = ({ ...props }) => {
 			<Form id='bigform' /*controlId={recipe._id.toString()+".Form"}*/>
 				<Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
 					<Form.Label htmlFor='title'>Recipe Title</Form.Label>
-					<Form.Control name='title' onChange={handleInputChange} id='title' value={myRecipe.title} />
+					<Form.Control name='title' onChange={handleInputChanges} id='title' value={myRecipe.title} />
 					<Form.Label htmlFor='name'>Recipe Name</Form.Label>
-					<Form.Control name='name' onChange={handleInputChange} id='name' value={myRecipe.name} />
+					<Form.Control name='name' onChange={handleInputChanges} id='name' value={myRecipe.name} />
 					<Form.Label htmlFor='cuisine'>Cuisine</Form.Label>
-					<Form.Control name='cuisine' onChange={handleInputChange} id='cuisine' value={myRecipe.cuisine} as='select'>
+					<Form.Control name='cuisine' onChange={handleInputChanges} id='cuisine' value={myRecipe.cuisine} as='select'>
 						<option>German</option>
 						<option>Chinese</option>
 						<option>Asian</option>
@@ -56,7 +52,7 @@ const Recipe = ({ ...props }) => {
 				</Form.Group>
 				<Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
 					<Form.Label htmlFor='recipe'>Recipe</Form.Label>
-					<Form.Control name='recipe' onChange={handleInputChange} id='recipe' as='textarea' rows='10' value={myRecipe.recipe} />
+					<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={myRecipe.recipe} />
 				</Form.Group>
 				<Form.Group>
 					<Table responsive variant='dark'>
@@ -75,7 +71,7 @@ const Recipe = ({ ...props }) => {
 											name={(ingredient._id ? ingredient._id : 1) + "#ingredient"}
 											type='text'
 											value={ingredient.ingredient}
-											onChange={handleTableChange}
+											onChange={handleTableChanges}
 										/>
 									</td>
 									<td>
@@ -83,7 +79,7 @@ const Recipe = ({ ...props }) => {
 											name={(ingredient._id ? ingredient._id : 1) + "#quantity"}
 											type='number'
 											value={ingredient.quantity}
-											onChange={handleTableChange}
+											onChange={handleTableChanges}
 										/>
 									</td>
 									<td>
@@ -91,7 +87,7 @@ const Recipe = ({ ...props }) => {
 											name={(ingredient._id ? ingredient._id : 1) + "#unit"}
 											type='text'
 											value={ingredient.unit}
-											onChange={handleTableChange}
+											onChange={handleTableChanges}
 										/>
 									</td>
 								</tr>
@@ -105,10 +101,10 @@ const Recipe = ({ ...props }) => {
 							Go Back
 						</Button>
 					</Link>
-					<Button type='submit' variant='primary' onClick={handleSubmit}>
+					<Button type='submit' variant='primary' onClick={handleSubmits}>
 						Submit
 					</Button>
-					<Button type='button' variant='primary' onClick={handleAddIngredient}>
+					<Button type='button' variant='primary' onClick={handleAddIngredients}>
 						Add Ingredient
 					</Button>
 				</ButtonToolbar>
