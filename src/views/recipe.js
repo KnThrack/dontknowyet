@@ -1,4 +1,4 @@
-// src/views/recipe.js
+// src/views/Recipe.js
 import React from "react";
 import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
