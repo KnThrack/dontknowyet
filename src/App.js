@@ -257,6 +257,7 @@ class App extends Component {
 				.then(function(response) {
 					// handle success
 					stateCopy.recipes = _.without(stateCopy.recipes, recipe);
+					stateCopy.filteredRecipes = stateCopy.recipes;
 					stateCopy.modal.show = false;
 					that.setState(stateCopy);
 				})
