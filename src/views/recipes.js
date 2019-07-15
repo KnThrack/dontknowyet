@@ -10,7 +10,7 @@ import { Loading } from "./";
 var _ = require("underscore");
 
 const Recipes = (...props) => {
-	const { handleFilterChange, handleAddRecipe, handleDelete, location, recipesList } = props[0];
+	const { handleFilterChange, handleAddRecipe, handleDelete, location, recipesList, filter } = props[0];
 
 	function handleFilterChanges(event) {
 		handleFilterChange(event);
@@ -28,7 +28,7 @@ const Recipes = (...props) => {
 		return (
 			<div>
 				<Form inline>
-					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={this.props.filter} />
+					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={filter} />
 				</Form>
 				{recipesList.map(recipe => (
 					<Card key={recipe._id.toString()}>
