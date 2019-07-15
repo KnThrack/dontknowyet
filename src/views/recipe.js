@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 
-const Recipe = ({ ...props }) => {
+const Recipe = props => {
 	const { handleInputChange, handleSubmit, handleTableChange, handleAddIngredient, recipesList, state } = props[0];
 
 	// handlers
