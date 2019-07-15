@@ -48,27 +48,30 @@ const App = (...props) => {
 		auth.then(function(result) {
 			let user = getUser();
 
-			async function createUser() {
-				let createUser = {
-					name: props[0].user.name,
-					email: props[0].user.email,
-					auth0ID: props[0].user.sub
-				};
-
-				return (await axios.post("https://notsureyetapp.herokuapp.com/api/users/", JSON.stringify(createUser))).data;
-			}
-			// if user is not there yet (web hooks in Auth0 dont work with google) then create it instead
-			if (user.data === null || user.data === undefined) {
-				// handle error / no data
-				// no user is here so lets make a new one
-				const newUser = createUser();
-				user = newUser;
-			}
-
 			// handle success
 			user.then(function(result) {
-				setUser(result);
-				callAPI();
+				async function createUser() {
+					let createUser = {
+						name: props[0].user.name,
+						email: props[0].user.email,
+						auth0ID: props[0].user.sub
+					};
+
+					return (await axios.post("https://notsureyetapp.herokuapp.com/api/users/", JSON.stringify(createUser))).data;
+				}
+				// if user is not there yet (web hooks in Auth0 dont work with google) then create it instead
+				if (result.data === null || result.data === undefined) {
+					// handle error / no data
+					// no user is here so lets make a new one
+					const newUser = createUser();
+					newUser.then(function(result) {
+						setUser(result);
+						callAPI();
+					});
+				} else {
+					setUser(result.data);
+					callAPI();
+				}
 			});
 		});
 	}, []);
