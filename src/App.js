@@ -65,9 +65,10 @@ const App = (...props) => {
 		}
 
 		// handle success
-		setUser(user.data[0]);
-
-		callAPI();
+		user.then(function(result) {
+			setUser(result);
+			callAPI();
+		});
 	}, []);
 
 	async function updateIngredients(state) {
