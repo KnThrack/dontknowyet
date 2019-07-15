@@ -42,7 +42,7 @@ const App = (...props) => {
 		putAuth();
 		// before we can get the initial list we need the user to be there.
 		async function getUser() {
-			return (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + props.user.email)).data;
+			return (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + props[0].user.email)).data;
 		}
 
 		let user = getUser();
