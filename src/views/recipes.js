@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
-import { Loading } from "./views";
+import { Loading } from "./";
 
 var _ = require("underscore");
 
