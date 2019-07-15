@@ -7,29 +7,29 @@ import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 
 const Recipe = (...props) => {
-	const { handleInputChange, handleSubmit, handleTableChange, handleAddIngredient, recipesList, state } = props[0];
+	const { handleInputChange, handleSubmit, handleTableChange, handleAddIngredient, recipesList, location } = props[0];
 
 	// handlers
 	function handleAddIngredients(event) {
-		handleAddIngredient(event, state);
+		handleAddIngredient(event, location.state);
 	}
 
 	function handleTableChanges(event) {
-		handleTableChange(event, state);
+		handleTableChange(event, location.state);
 	}
 
 	function handleInputChanges(event) {
-		handleInputChange(event, state);
+		handleInputChange(event, location.state);
 	}
 
 	function handleSubmits(event) {
 		// submit the changes to the backend
-		handleSubmit(event, state);
+		handleSubmit(event, location.state);
 	}
 	// handlers end
 
 	// find which one we looking at
-	let index = recipesList.findIndex(x => x._id === state._id.toString());
+	let index = recipesList.findIndex(x => x._id === location.state._id.toString());
 
 	const myRecipe = recipesList[index];
 	if (myRecipe === null) return <p>Loading ...</p>;

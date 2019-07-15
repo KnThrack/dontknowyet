@@ -1,86 +1,68 @@
 // src/views/recipes.js
-import React, { Component } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
+import { Loading } from "./views";
 
 var _ = require("underscore");
 
-class Recipes extends Component {
-	constructor(props) {
-		super(props);
+const Recipes = (...props) => {
+	const { handleFilterChange, handleAddRecipe, handleDelete, location, recipesList } = props[0];
 
-		this.handleAddRecipe = this.handleAddRecipe.bind(this);
-		this.handleDelete = this.handleDelete.bind(this);
-		this.handleFilterChange = this.handleFilterChange.bind(this);
+	function handleFilterChanges(event) {
+		handleFilterChange(event);
 	}
 
-	async componentDidMount() {}
-
-	handleFilterChange(event) {
-		this.props.handleFilterChange(event);
+	function handleAddRecipes(event) {
+		handleAddRecipe(event);
 	}
 
-	handleAddRecipe(event) {
-		this.props.handleAddRecipe(event);
+	function handleDeletes(event) {
+		handleDelete(event);
 	}
 
-	handleDelete(event) {
-		this.props.handleDelete(event);
-	}
-
-	RecipeList(recipes) {
-		if (recipes) {
-			return (
-				<div>
-					<Form inline>
-						<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={this.handleFilterChange} value={this.props.filter} />
-					</Form>
-					{recipes.map(recipe => (
-						<Card key={recipe._id.toString()}>
-							<Card.Body>
-								<Card.Title>{recipe.title}</Card.Title>
-								<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
-								<Card.Text>{recipe.recipe}</Card.Text>
-								<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
-									<Button variant='info' title='Go to Details'>
-										Go to Details
-									</Button>
-								</Link>
-								<Button id={"recipes_del_btn#" + recipe._id.toString()} variant='info' onClick={this.handleDelete} title='Delete'>
-									Delete
+	if (recipesList) {
+		return (
+			<div>
+				<Form inline>
+					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={this.props.filter} />
+				</Form>
+				{recipesList.map(recipe => (
+					<Card key={recipe._id.toString()}>
+						<Card.Body>
+							<Card.Title>{recipe.title}</Card.Title>
+							<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
+							<Card.Text>{recipe.recipe}</Card.Text>
+							<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+								<Button variant='info' title='Go to Details'>
+									Go to Details
 								</Button>
-							</Card.Body>
-						</Card>
-					))}
-					<Button variant='primary' size='lg' block onClick={this.handleAddRecipe} title='Add Recipe'>
-						Add Recipe
-					</Button>
-				</div>
-			);
-		} else {
-			return (
-				<div>
-					<center>
-						<h1>Recipes List</h1>
-					</center>
-					<center>
-						<h1>Loading ...</h1>
-					</center>
-					<Button variant='primary' size='lg' block onClick={this.handleAddRecipe} title='Add Recipe'>
-						Add Recipe
-					</Button>
-				</div>
-			);
-		}
+							</Link>
+							<Button id={"recipes_del_btn#" + recipe._id.toString()} variant='info' onClick={handleDeletes} title='Delete'>
+								Delete
+							</Button>
+						</Card.Body>
+					</Card>
+				))}
+				<Button variant='primary' size='lg' block onClick={handleAddRecipes} title='Add Recipe'>
+					Add Recipe
+				</Button>
+			</div>
+		);
+	} else {
+		return (
+			<div>
+				<Loading />
+				<Button variant='primary' size='lg' block onClick={handleAddRecipes} title='Add Recipe'>
+					Add Recipe
+				</Button>
+			</div>
+		);
 	}
-
-	render() {
-		return this.RecipeList(this.props.recipesList);
-	}
-}
+};
 
 export { Recipes };
 
