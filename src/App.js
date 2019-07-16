@@ -15,6 +15,8 @@ const App = (...props) => {
 	const [modal, setModal] = useState({ show: false, type: "", index: null });
 	const [filter, setFilter] = useState(null);
 
+	var modalSuccess = "";
+
 	// set the default axios stuff
 	axios.defaults.headers.post["Content-Type"] = "application/json";
 	axios.defaults.headers.put["Content-Type"] = "application/json";
@@ -65,8 +67,8 @@ const App = (...props) => {
 					// no user is here so lets make a new one
 					const newUser = createUser();
 					newUser.then(function(result) {
-						setUser(result);
-						callAPI(result);
+						setUser(result.data);
+						callAPI(result.data);
 					});
 				} else {
 					setUser(result.data[0]);
@@ -204,7 +206,7 @@ const App = (...props) => {
 		var stateCopy = Object.assign({}, recipes);
 		var recipe = stateCopy[index];
 
-		var test = (stateCopy, that) => {
+		modalSuccess = (stateCopy, that) => {
 			// and put it away
 			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + recipe._id, JSON.stringify(recipe))
 				.then(function(response) {
@@ -253,7 +255,7 @@ const App = (...props) => {
 		var stateCopy = Object.assign({}, recipes);
 		var recipe = stateCopy[index];
 
-		var test = (stateCopy, that) => {
+		modalSuccess = (stateCopy, that) => {
 			// and put it away
 			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + recipe._id)
 				.then(function(response) {
@@ -342,7 +344,7 @@ const App = (...props) => {
 							<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
 						</Switch>
 					</Router>
-					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={test} modal={modal} that={this} />
+					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={modalSuccess} modal={modal} that={this} />
 				</div>
 			);
 		} else {
