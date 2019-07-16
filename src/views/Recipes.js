@@ -2,6 +2,8 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
@@ -63,16 +65,14 @@ const Recipes = (...props) => {
 						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
 							<Card.Body>
 								<Card.Title>{recipe.title}</Card.Title>
+								<DropdownButton id='dropdown-basic-button' title='...'>
+									<Dropdown.Item href={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>Go to Details</Dropdown.Item>
+									<Dropdown.Item id={"recipes_del_btn#" + recipe._id.toString()} onClick={handleDeletes}>
+										Delete
+									</Dropdown.Item>
+								</DropdownButton>
 								<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
 								<Card.Text>{recipe.recipe}</Card.Text>
-								<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
-									<Button variant='info' title='Go to Details'>
-										Go to Details
-									</Button>
-								</Link>
-								<Button id={"recipes_del_btn#" + recipe._id.toString()} variant='info' onClick={handleDeletes} title='Delete'>
-									Delete
-								</Button>
 							</Card.Body>
 						</Card>
 					))}
@@ -97,3 +97,15 @@ const Recipes = (...props) => {
 export { Recipes };
 
 // style={{ width: '18rem' }}
+
+/*
+								<Link  to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+									<Button variant='info' title='Go to Details'>
+										Go to Details
+									</Button>
+								</Link>
+								<Button id={"recipes_del_btn#" + recipe._id.toString()} variant='info' onClick={handleDeletes} title='Delete'>
+									Delete
+								</Button>
+
+								*/
