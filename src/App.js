@@ -302,7 +302,7 @@ const App = (...props) => {
 							<NavBar />
 						</header>
 
-						<div className='recipes'>
+						<div className='App-content'>
 							<PrivateRoute
 								exact
 								path='/'

@@ -26,27 +26,29 @@ const Recipes = (...props) => {
 
 	if (recipesList) {
 		return (
-			<div>
+			<div className='content-inner'>
 				<Form inline>
 					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={filter} />
 				</Form>
-				{recipesList.map(recipe => (
-					<Card key={recipe._id.toString()}>
-						<Card.Body>
-							<Card.Title>{recipe.title}</Card.Title>
-							<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
-							<Card.Text>{recipe.recipe}</Card.Text>
-							<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
-								<Button variant='info' title='Go to Details'>
-									Go to Details
+				<div className='recipe-cards'>
+					{recipesList.map(recipe => (
+						<Card key={recipe._id.toString()}>
+							<Card.Body>
+								<Card.Title>{recipe.title}</Card.Title>
+								<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
+								<Card.Text>{recipe.recipe}</Card.Text>
+								<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+									<Button variant='info' title='Go to Details'>
+										Go to Details
+									</Button>
+								</Link>
+								<Button id={"recipes_del_btn#" + recipe._id.toString()} variant='info' onClick={handleDeletes} title='Delete'>
+									Delete
 								</Button>
-							</Link>
-							<Button id={"recipes_del_btn#" + recipe._id.toString()} variant='info' onClick={handleDeletes} title='Delete'>
-								Delete
-							</Button>
-						</Card.Body>
-					</Card>
-				))}
+							</Card.Body>
+						</Card>
+					))}
+				</div>
 				<Button variant='primary' size='lg' block onClick={handleAddRecipes} title='Add Recipe'>
 					Add Recipe
 				</Button>
