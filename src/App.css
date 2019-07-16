@@ -145,12 +145,13 @@
 .footerButtonGroup {
 	width: 100%;
 }
-.cardButton {
+
+#cardButton button[disabled="disabled"] button[disabled="enabled"]{
 	background-color: initial;
 	border-style: none;
 	float: right;
-
 }
+
 
 @media only screen and (min-width: 600px) {
 	/* For tablets: */
