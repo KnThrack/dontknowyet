@@ -63,7 +63,7 @@
 	box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 	border-radius: 27px;
 	margin: 20px;
-	width: 350px;
+	width: 340px;
 	height: 500px;
 }
 .card1 {
@@ -78,6 +78,39 @@
 	background: linear-gradient(152.52deg, #8ab661 0%, #fd8664 100%);
 	box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 }
+
+.card-title {
+	font-style: normal;
+	font-weight: bold;
+	font-size: 48px;
+	line-height: 65px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	letter-spacing: 0.1em;
+	color: #f3f3f3;
+}
+
+.card-subtitle {
+	font-style: normal;
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 41px;
+	text-align: center;
+	color: #f3f3f3;
+}
+
+.card-text {
+	font-style: normal;
+	font-weight: normal;
+	font-size: 30px;
+	line-height: 41px;
+	display: flex;
+	align-items: center;
+	text-indent: 1px;
+	color: #000000;
+}
+
 .navbar {
 	width: 95%;
 }
@@ -115,7 +148,7 @@
 	}
 
 	.App-header {
-		background-color: #282c34;
+		background: rgba(236, 222, 195, 0.72);
 		min-height: 10vh;
 		display: flex;
 		flex-direction: column;
@@ -162,7 +195,7 @@
 	}
 
 	.App-header {
-		background-color: #282c34;
+		background: rgba(236, 222, 195, 0.72);
 		min-height: 10vh;
 		display: flex;
 		flex-direction: column;

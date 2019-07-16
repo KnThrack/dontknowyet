@@ -24,6 +24,34 @@ const Recipes = (...props) => {
 		handleDelete(event);
 	}
 
+	let cardClass = recipe => {
+		var sClass = "";
+
+		switch (recipe.cuisine) {
+			case "German":
+				// code block
+				sClass = "card";
+				break;
+			case "Chinese" || "Asian":
+				// code block
+				sClass = "card card1";
+				break;
+			case "French":
+				// code block
+				sClass = "card card2";
+				break;
+			case "Italian":
+				// code block
+				sClass = "card card3";
+				break;
+			default:
+				sClass = "card";
+			// code block
+		}
+
+		return sClass;
+	};
+
 	if (recipesList) {
 		return (
 			<div className='content-inner'>
@@ -32,7 +60,7 @@ const Recipes = (...props) => {
 				</Form>
 				<div className='recipe-cards'>
 					{recipesList.map(recipe => (
-						<Card key={recipe._id.toString()}>
+						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
 							<Card.Body>
 								<Card.Title>{recipe.title}</Card.Title>
 								<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
