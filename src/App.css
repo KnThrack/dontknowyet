@@ -146,10 +146,13 @@
 	width: 100%;
 }
 
-#cardButton button[disabled="disabled"] button[disabled="enabled"]{
+.cardButton {
+	float: right;
+}
+
+#cardButton .button.dropdown-toggle.btn.btn-primary {
 	background-color: initial;
 	border-style: none;
-	float: right;
 }
 
 
