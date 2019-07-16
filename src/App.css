@@ -10,7 +10,7 @@
 }
 
 .App-header {
-	background-color: #282c34;
+	background: rgba(236, 222, 195, 0.72);
 	min-height: 10vh;
 	display: flex;
 	flex-direction: column;
@@ -66,7 +66,18 @@
 	width: 350px;
 	height: 500px;
 }
-
+.card1 {
+	background: linear-gradient(152.52deg, #fabe0e 0%, #8ab661 100%);
+	box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
+}
+.card2 {
+	background: linear-gradient(152.52deg, #fd8664 0%, #fabe0e 100%);
+	box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
+}
+.card3 {
+	background: linear-gradient(152.52deg, #8ab661 0%, #fd8664 100%);
+	box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
+}
 .navbar {
 	width: 95%;
 }
