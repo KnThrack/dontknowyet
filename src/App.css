@@ -39,7 +39,7 @@
 
 .content-inner {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	min-height: 100vh;
@@ -52,18 +52,19 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: flex-start;
-	max-width: 750px;
+	justify-content: left;
+	max-width: 100%;
 	margin: 0 auto;
 	flex-wrap: wrap;
 }
+
 .card {
 	background: linear-gradient(152.52deg, #0393fc 0%, #00ba6c 100%);
 	box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 	border-radius: 27px;
-	width: 100px;
-	height: 100px;
-	margin: 10px;
+	margin: 20px;
+	width: 350px;
+	height: 500px;
 }
 
 .navbar {
