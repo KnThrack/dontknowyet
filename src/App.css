@@ -82,9 +82,8 @@
 .card-title {
 	font-style: normal;
 	font-weight: bold;
-	font-size: 48px;
+	font-size: 40px;
 	line-height: 65px;
-	display: flex;
 	align-items: center;
 	text-align: center;
 	letter-spacing: 0.1em;
@@ -130,6 +129,10 @@
 }
 .form-inline {
 	flex-flow: row nowrap;
+}
+
+.dropdown-toggle::after {
+	display: none;
 }
 
 @media only screen and (min-width: 600px) {
