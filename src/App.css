@@ -35,6 +35,11 @@
 .recipes {
 }
 
+.card {
+	background: linear-gradient(180deg, #03fced 0%, #fa01ff 100%);
+	border-radius: 44px;
+}
+
 .navbar {
 	width: 95%;
 }
