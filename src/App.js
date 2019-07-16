@@ -335,7 +335,7 @@ const App = (...props) => {
 							/>
 						</div>
 						<div className='d-flex footerButtons'>
-							<ButtonGroup>
+							<ButtonGroup className="footerButtonGroup">
 								<Button variant='primary' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
 									Add Recipe
 								</Button>

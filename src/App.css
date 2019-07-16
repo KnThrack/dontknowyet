@@ -137,12 +137,19 @@
 
 .footerButtons {
 	flex-flow: row nowrap;
+	position: fixed;
+    Width: 100%;
+    bottom: 0;
 }
 
+.footerButtonGroup {
+	width: 100%;
+}
 .cardButton {
-	background-color: none;
-	border-color: none;
+	background-color: initial;
+	border-style: none;
 	float: right;
+
 }
 
 @media only screen and (min-width: 600px) {
