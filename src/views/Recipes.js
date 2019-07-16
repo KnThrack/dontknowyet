@@ -64,8 +64,7 @@ const Recipes = (...props) => {
 					{recipesList.map(recipe => (
 						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
 							<Card.Body>
-								<Card.Title>{recipe.title}</Card.Title>
-								<DropdownButton id='dropdown-basic-button' title='...'>
+								<DropdownButton className='cardButton' id='dropdown-basic-button' title='...'>
 									<Dropdown.Menu>
 										<Dropdown.Item href={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>Go to Details</Dropdown.Item>
 										<Dropdown.Item id={"recipes_del_btn#" + recipe._id.toString()} onClick={handleDeletes}>
@@ -73,6 +72,7 @@ const Recipes = (...props) => {
 										</Dropdown.Item>
 									</Dropdown.Menu>
 								</DropdownButton>
+								<Card.Title>{recipe.title}</Card.Title>
 								<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
 								<Card.Text>{recipe.recipe}</Card.Text>
 							</Card.Body>
