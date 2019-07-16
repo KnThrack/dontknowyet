@@ -20,9 +20,9 @@ const App = (...props) => {
 	axios.defaults.headers.put["Content-Type"] = "application/json";
 	axios.defaults.headers.get["Content-Type"] = "application/json";
 
-	async function callAPI() {
+	async function callAPI(myUser) {
 		// get the initial recipes
-		const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + user._id)).data;
+		const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + myUser._id)).data;
 
 		setRecipes(recipes.data);
 		setFilteredRecipes(recipes.data);
@@ -66,11 +66,11 @@ const App = (...props) => {
 					const newUser = createUser();
 					newUser.then(function(result) {
 						setUser(result);
-						callAPI();
+						callAPI(result);
 					});
 				} else {
-					setUser(result.data);
-					callAPI();
+					setUser(result.data[0]);
+					callAPI(result.data[0]);
 				}
 			});
 		});
