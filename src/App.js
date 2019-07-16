@@ -85,7 +85,6 @@ const App = (...props) => {
 		// find which one we updating
 		let index = recipes.findIndex(x => x._id === updateRecipe._id.toString());
 		var stateCopy = Object.assign({}, recipes);
-		stateCopy = recipes.slice();
 		stateCopy[index] = updateRecipe;
 
 		// update it
@@ -99,7 +98,6 @@ const App = (...props) => {
 
 		// add it in
 		var stateCopy = Object.assign({}, recipes);
-		stateCopy = stateCopy.slice();
 		stateCopy.push(newRecipe);
 
 		// update it
@@ -126,7 +124,6 @@ const App = (...props) => {
 		let index = recipes.findIndex(x => x._id === childState._id.toString());
 		// take a copy thats mutable and update it
 		var stateCopy = Object.assign({}, recipes);
-		stateCopy = stateCopy.slice();
 		stateCopy[index] = Object.assign({}, stateCopy[index]);
 		stateCopy[index].ingredients.push({
 			ingredient: "",
@@ -150,7 +147,6 @@ const App = (...props) => {
 
 		// change the one we want to fix the state
 		var stateCopy = Object.assign({}, recipes);
-		stateCopy = stateCopy.slice();
 		stateCopy[index] = Object.assign({}, stateCopy[index]);
 
 		// find which one we updating
@@ -174,7 +170,6 @@ const App = (...props) => {
 
 		// change the one we want to fix the state
 		var stateCopy = Object.assign({}, recipes);
-		stateCopy = stateCopy.slice();
 		stateCopy[index] = Object.assign({}, stateCopy[index]);
 		stateCopy[index][recipeField] = value;
 		setRecipes(stateCopy);
@@ -189,7 +184,6 @@ const App = (...props) => {
 
 		// change the one we want to fix the state
 		var stateCopy = Object.assign({}, recipes);
-		stateCopy = stateCopy.slice();
 		stateCopy[index] = Object.assign({}, stateCopy[index]);
 		stateCopy[index][recipeField] = value;
 		setRecipes(stateCopy);
