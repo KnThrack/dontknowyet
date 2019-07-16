@@ -79,9 +79,6 @@ const Recipes = (...props) => {
 						</Card>
 					))}
 				</div>
-				<Button variant='primary' size='lg' block onClick={handleAddRecipes} title='Add Recipe'>
-					Add Recipe
-				</Button>
 			</div>
 		);
 	} else {

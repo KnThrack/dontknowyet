@@ -332,7 +332,13 @@ const App = (...props) => {
 								)}
 							/>
 						</div>
-
+						<div className='d-flex footerButtons'>
+							<ButtonGroup>
+								<Button variant='primary' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
+									Add Recipe
+								</Button>
+							</ButtonGroup>
+						</div>
 						<Switch>
 							<Route path='/' exact />
 							<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
