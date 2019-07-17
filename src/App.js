@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import axios from "axios";
 import "./App.scss";
-import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading } from "./views";
+import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
 
 //const util = require("util");
 var _ = require("underscore");
@@ -320,11 +320,7 @@ const App = (...props) => {
 							/>
 						</div>
 						<div className='d-flex footerButtons'>
-							<ButtonGroup className='footerButtonGroup'>
-								<Button variant='dark' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
-									Add Recipe
-								</Button>
-							</ButtonGroup>
+							<FloatButtons handleAddRecipe={handleAddRecipe} {...props} />
 						</div>
 						<Switch>
 							<Route path='/' exact />
@@ -344,11 +340,7 @@ const App = (...props) => {
 						<div className='App-content'>
 							<Loading />
 							<div className='d-flex footerButtons'>
-								<ButtonGroup className='footerButtonGroup'>
-									<Button variant='dark' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
-										Add Recipe
-									</Button>
-								</ButtonGroup>
+								<FloatButtons handleAddRecipe={handleAddRecipe} />
 							</div>
 						</div>
 					</Router>
