@@ -1,126 +1,87 @@
-// src/views/Recipes.js
-import React from "react";
+// src/views/recipes.js
+import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
-import { Loading } from ".";
 
-//var _ = require("underscore");
+var _ = require("underscore");
 
-const Recipes = (...props) => {
-	const { handleFilterChange, handleAddRecipe, handleDelete, recipesList, filter } = props[0];
+class Recipes extends Component {
+	constructor(props) {
+		super(props);
 
-	function handleFilterChanges(event) {
-		handleFilterChange(event);
+		this.handleAddRecipe = this.handleAddRecipe.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
+		this.handleFilterChange = this.handleFilterChange.bind(this);
 	}
 
-	function handleAddRecipes(event) {
-		handleAddRecipe(event);
+	async componentDidMount() {}
+
+	handleFilterChange(event) {
+		this.props.handleFilterChange(event);
 	}
 
-	function handleDeletes(key, event) {
-		handleDelete(key, event);
+	handleAddRecipe(event) {
+		this.props.handleAddRecipe(event);
 	}
 
-	let cardClass = recipe => {
-		var sClass = "";
+	handleDelete(event) {
+		this.props.handleDelete(event);
+	}
 
-		switch (recipe.cuisine) {
-			case "German":
-				// code block
-				sClass = "card";
-				break;
-			case "Chinese":
-				// code block
-				sClass = "card card1";
-				break;
-			case "Asian":
-				// code block
-				sClass = "card card1";
-				break;
-			case "French":
-				// code block
-				sClass = "card card2";
-				break;
-			case "Italian":
-				// code block
-				sClass = "card card3";
-				break;
-			default:
-				sClass = "card";
-			// code block
-		}
-
-		return sClass;
-	};
-
-	if (recipesList) {
-		return (
-			<div className='content-inner'>
-				<Form inline>
-					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={filter} />
-				</Form>
-				<div className='recipe-cards'>
-					{recipesList.map(recipe => (
-						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
-							<div className='recipe-button'>
-								<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
-									<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }} className='dropdown-item' role='Button'>
-										Go to Details
-									</Link>
-									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDeletes}>
-										Delete
-									</Dropdown.Item>
-								</DropdownButton>
-							</div>
+	RecipeList(recipes) {
+		if (recipes) {
+			return (
+				<div>
+					<Form inline>
+						<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={this.handleFilterChange} value={this.props.filter} />
+					</Form>
+					{recipes.map(recipe => (
+						<Card key={recipe._id.toString()}>
 							<Card.Body>
 								<Card.Title>{recipe.title}</Card.Title>
 								<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
 								<Card.Text>{recipe.recipe}</Card.Text>
-							</Card.Body>
-						</Card>
-					))}
-				</div>
-			</div>
-		);
-	} else {
-		return (
-			<div>
-				<Loading />
-				<Button variant='primary' size='lg' block onClick={handleAddRecipes} title='Add Recipe'>
-					Add Recipe
-				</Button>
-			</div>
-		);
-	}
-};
-
-export { Recipes };
-
-// style={{ width: '18rem' }}
-
-/*
-									<Dropdown.Item
-										eventKey={"recipes_det_btn#" + recipe._id.toString()}
-										href={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}
-									>
-										Go to Details
-									</Dropdown.Item>
-									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onClick={handleDeletes}>
-										Delete
-									</Dropdown.Item>
-
-								<Link  to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+								<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
 									<Button variant='info' title='Go to Details'>
 										Go to Details
 									</Button>
 								</Link>
-								<Button id={"recipes_del_btn#" + recipe._id.toString()} variant='info' onClick={handleDeletes} title='Delete'>
+								<Button id={"recipes_del_btn#" + recipe._id.toString()} variant='info' onClick={this.handleDelete} title='Delete'>
 									Delete
 								</Button>
+							</Card.Body>
+						</Card>
+					))}
+					<Button variant='primary' size='lg' block onClick={this.handleAddRecipe} title='Add Recipe'>
+						Add Recipe
+					</Button>
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<center>
+						<h1>Recipes List</h1>
+					</center>
+					<center>
+						<h1>Loading ...</h1>
+					</center>
+					<Button variant='primary' size='lg' block onClick={this.handleAddRecipe} title='Add Recipe'>
+						Add Recipe
+					</Button>
+				</div>
+			);
+		}
+	}
 
-								*/
+	render() {
+		return this.RecipeList(this.props.recipesList);
+	}
+}
+
+export { Recipes };
+
+// style={{ width: '18rem' }}
