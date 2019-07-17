@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { useAuth0 } from "../react-auth0-spa";
 import Image from "react-bootstrap/Image";
+import { ReactComponent as Logo } from "../assets/pandalogo.svg";
 
 const NavBar = () => {
 	const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
@@ -26,7 +27,7 @@ const NavBar = () => {
 	return (
 		<Navbar expand='lg'>
 			<Navbar.Brand href='/'>
-				<img src='pandalogo.png' width='50' height='50' className='d-inline-block align-top' alt=""/>
+				<Logo src='pandalogo.png' width='50' height='50' className='d-inline-block align-top'/>
 				{" Dontknowyet"}
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />
