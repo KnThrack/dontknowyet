@@ -64,11 +64,11 @@ const Recipes = (...props) => {
 					{recipesList.map(recipe => (
 						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
 							<div className='recipe-button'>
-								<DropdownButton id='cardButton' className='cardButton' variant='' title='...'>
+								<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
 									<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }} className='dropdown-item' role='Button'>
 										Go to Details
 									</Link>
-									<Dropdown.Item eventKey='2' onClick={handleDeletes}>
+									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onClick={handleDeletes}>
 										Delete
 									</Dropdown.Item>
 								</DropdownButton>
