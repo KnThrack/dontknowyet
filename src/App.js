@@ -5,9 +5,8 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import axios from "axios";
 import "./App.scss";
 import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading } from "./views";
-import { async } from "q";
 
-const util = require("util");
+//const util = require("util");
 var _ = require("underscore");
 
 const App = (...props) => {

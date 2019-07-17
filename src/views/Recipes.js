@@ -9,10 +9,10 @@ import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
 import { Loading } from ".";
 
-var _ = require("underscore");
+//var _ = require("underscore");
 
 const Recipes = (...props) => {
-	const { handleFilterChange, handleAddRecipe, handleDelete, location, recipesList, filter } = props[0];
+	const { handleFilterChange, handleAddRecipe, handleDelete, recipesList, filter } = props[0];
 
 	function handleFilterChanges(event) {
 		handleFilterChange(event);
