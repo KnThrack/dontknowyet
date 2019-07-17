@@ -66,25 +66,23 @@ const Recipes = (...props) => {
 				</Form>
 				<div className='recipe-cards'>
 					{recipesList.map(recipe => (
-						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
-							<div className='recipe-button'>
-								<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
-									<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }} className='dropdown-item' role='Button'>
-										Go to Details
-									</Link>
-									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDeletes}>
-										Delete
-									</Dropdown.Item>
-								</DropdownButton>
-							</div>
-							<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+						<Link className='cardLink' to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+							<Card className={cardClass(recipe)} key={recipe._id.toString()}>
+								<div className='recipe-button'>
+									<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
+										<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDeletes}>
+											Delete
+										</Dropdown.Item>
+									</DropdownButton>
+								</div>
+
 								<Card.Body>
 									<Card.Title>{recipe.title}</Card.Title>
 									<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
 									<Card.Text>{recipe.recipe}</Card.Text>
 								</Card.Body>
-							</Link>
-						</Card>
+							</Card>
+						</Link>
 					))}
 				</div>
 			</div>
@@ -106,6 +104,10 @@ export { Recipes };
 // style={{ width: '18rem' }}
 
 /*
+									<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }} className='dropdown-item' role='Button'>
+										Go to Details
+									</Link>
+
 									<Dropdown.Item
 										eventKey={"recipes_det_btn#" + recipe._id.toString()}
 										href={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}
