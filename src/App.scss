@@ -139,6 +139,10 @@ button#cardButton {
 	color: #000000;
 }
 
+.cardButton.dropleft .dropdown-toggle::before {
+	display: none;
+}
+
 .recipe-button {
 	position: absolute;
 	padding-left: 290px;
