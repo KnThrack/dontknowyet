@@ -66,24 +66,22 @@ const Recipes = (...props) => {
 				</Form>
 				<div className='recipe-cards'>
 					{recipesList.map(recipe => (
-						<Link className='cardLink' to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
-							<Card className={cardClass(recipe)} key={recipe._id.toString()}>
-								<div className='recipe-button'>
-									<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
-										<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDeletes}>
-											Delete
-										</Dropdown.Item>
-									</DropdownButton>
-								</div>
-								<Link className='cardLink' to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
+							<div className='recipe-button'>
+								<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
+									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDeletes}>
+										Delete
+									</Dropdown.Item>
+								</DropdownButton>
+							</div>
+							<Link className='cardLink' to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
 								<Card.Body>
 									<Card.Title>{recipe.title}</Card.Title>
 									<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
 									<Card.Text>{recipe.recipe}</Card.Text>
 								</Card.Body>
-								</Link>
-							</Card>
-						
+							</Link>
+						</Card>
 					))}
 				</div>
 			</div>
