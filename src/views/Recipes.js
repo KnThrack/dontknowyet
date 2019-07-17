@@ -60,7 +60,7 @@ const Recipes = (...props) => {
 				<Form inline>
 					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={filter} />
 					<DropdownButton title='Test'>
-						<Dropdown.Item eventKey='1' href={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+						<Dropdown.Item eventKey='1' href={"/recipe/"}>
 							Go to Details
 						</Dropdown.Item>
 						<Dropdown.Item eventKey='2' onClick={handleDeletes}>
