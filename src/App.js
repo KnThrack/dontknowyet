@@ -278,6 +278,10 @@ const App = (...props) => {
 		raiseModal("delete", index);
 	}
 
+	function handleModalSuccess(stateCopy, that) {
+		modalSuccess(stateCopy, that);
+	}
+
 	function handleFilterChange(event) {
 		// filter all the recipes based on all the text in them and store it in a filter state
 		const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
@@ -344,7 +348,7 @@ const App = (...props) => {
 							<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
 						</Switch>
 					</Router>
-					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={modalSuccess} modal={modal} that={this} />
+					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={handleModalSuccess} modal={modal} that={this} />
 				</div>
 			);
 		} else {
