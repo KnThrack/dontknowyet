@@ -148,11 +148,13 @@
 
 .cardButton {
 	float: right;
+	background-color: initial !important;
+	border-style: none !important;
 }
 
-#cardButton .button.dropdown-toggle.btn.btn-primary {
-	background-color: initial;
-	border-style: none;
+.cardButton .button.dropdown-toggle.btn.btn-primary {
+	background-color: initial !important;
+	border-style: none !important;
 }
 
 

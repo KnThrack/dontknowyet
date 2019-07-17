@@ -65,12 +65,12 @@ const Recipes = (...props) => {
 						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
 							<Card.Body>
 								<DropdownButton className='cardButton' title='...'>
-									<Dropdown.Menu>
+		
 										<Dropdown.Item href={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>Go to Details</Dropdown.Item>
 										<Dropdown.Item id={"recipes_del_btn#" + recipe._id.toString()} onClick={handleDeletes}>
 											Delete
 										</Dropdown.Item>
-									</Dropdown.Menu>
+			
 								</DropdownButton>
 								<Card.Title>{recipe.title}</Card.Title>
 								<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
