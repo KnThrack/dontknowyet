@@ -34,7 +34,11 @@ const Recipes = (...props) => {
 				// code block
 				sClass = "card";
 				break;
-			case "Chinese" || "Asian":
+			case "Chinese":
+				// code block
+				sClass = "card card1";
+				break;
+			case "Asian":
 				// code block
 				sClass = "card card1";
 				break;
