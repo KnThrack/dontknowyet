@@ -64,7 +64,7 @@ const Recipes = (...props) => {
 					{recipesList.map(recipe => (
 						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
 							<div className='recipe-button'>
-								<DropdownButton id="cardButton" className='cardButton' variant="link" title='...'>
+								<DropdownButton id="cardButton" className='cardButton' variant="" title='...'>
 									<Dropdown.Item href={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>Go to Details</Dropdown.Item>
 									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onClick={handleDeletes}>
 										Delete

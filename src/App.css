@@ -79,6 +79,11 @@
 	box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 }
 
+.card-body {
+	padding: 0px;
+	padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
 .card-title {
 	font-style: normal;
 	font-weight: bold;
@@ -138,8 +143,8 @@
 .footerButtons {
 	flex-flow: row nowrap;
 	position: fixed;
-    Width: 100%;
-    bottom: 0;
+	width: 100%;
+	bottom: 0;
 }
 
 .footerButtonGroup {
@@ -152,11 +157,15 @@
 	border-style: none !important;
 }
 
-.recipe-button .cardButton .button.dropdown-toggle.btn.btn-primary {
+#cardButton .button.dropdown-toggle.btn.btn-primary {
 	background-color: initial !important;
 	border-style: none !important;
 }
 
+.recipe-button {
+    position: absolute;
+    padding-left: 300px;
+}
 
 @media only screen and (min-width: 600px) {
 	/* For tablets: */
