@@ -88,19 +88,19 @@
 	font-style: normal;
 	font-weight: bold;
 	font-size: 35px;
-	line-height: 65px;
 	align-items: left;
 	text-align: center;
 	letter-spacing: 0.1em;
 	color: #f3f3f3;
-	width: 270px
+	width: 270px;
+	padding-top: 10px;
 }
 
 .card-subtitle {
 	font-style: normal;
 	font-weight: bold;
 	font-size: 30px;
-	line-height: 41px;
+	line-height: 35px;
 	text-align: center;
 	color: #f3f3f3;
 }
@@ -109,11 +109,38 @@
 	font-style: normal;
 	font-weight: normal;
 	font-size: 28px;
-	line-height: 41px;
+	line-height: 35px;
 	display: flex;
 	align-items: left;
 	text-indent: 1px;
 	color: #000000;
+}
+
+.cardButton {
+	float: right;
+	background-color: initial !important;
+	border-style: none !important;
+}
+
+button#cardButton {
+	background-color: initial !important;
+	border-style: none !important;
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 25px;
+	/* line-height: 41px; */
+	/* display: flex; */
+	/* align-items: center; */
+	/* text-align: center; */
+	letter-spacing: 0.1em;
+	text-indent: 1px;
+	color: #000000;
+}
+
+.recipe-button {
+	position: absolute;
+	padding-left: 290px;
 }
 
 .navbar {
@@ -150,33 +177,6 @@
 
 .footerButtonGroup {
 	width: 100%;
-}
-
-.cardButton {
-	float: right;
-	background-color: initial !important;
-	border-style: none !important;
-}
-
-button#cardButton {
-    background-color: initial !important;
-    border-style: none !important;
-    font-family: Nunito;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 25px;
-    /* line-height: 41px; */
-    /* display: flex; */
-    /* align-items: center; */
-    /* text-align: center; */
-    letter-spacing: 0.1em;
-    text-indent: 1px;
-    color: #000000;
-}
-
-.recipe-button {
-	position: absolute;
-	padding-left: 300px;
 }
 
 @media only screen and (min-width: 600px) {
