@@ -27,7 +27,7 @@ const NavBar = () => {
 	return (
 		<Navbar expand='lg'>
 			<Navbar.Brand href='/'>
-				<img src='../assets/panda logo.png' width='50' height='50' className='d-inline-block align-top' alt=""/>
+				<img src='../assets/pandalogo.png' width='50' height='50' className='d-inline-block align-top' alt=""/>
 				{" Dontknowyet"}
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />
