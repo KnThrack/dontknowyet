@@ -75,14 +75,15 @@ const Recipes = (...props) => {
 										</Dropdown.Item>
 									</DropdownButton>
 								</div>
-
+								<Link className='cardLink' to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
 								<Card.Body>
 									<Card.Title>{recipe.title}</Card.Title>
 									<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
 									<Card.Text>{recipe.recipe}</Card.Text>
 								</Card.Body>
+								</Link>
 							</Card>
-						</Link>
+						
 					))}
 				</div>
 			</div>
@@ -91,9 +92,6 @@ const Recipes = (...props) => {
 		return (
 			<div>
 				<Loading />
-				<Button variant='primary' size='lg' block onClick={handleAddRecipes} title='Add Recipe'>
-					Add Recipe
-				</Button>
 			</div>
 		);
 	}

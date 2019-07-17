@@ -321,7 +321,7 @@ const App = (...props) => {
 						</div>
 						<div className='d-flex footerButtons'>
 							<ButtonGroup className='footerButtonGroup'>
-								<Button variant="dark" size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
+								<Button variant='dark' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
 									Add Recipe
 								</Button>
 							</ButtonGroup>
@@ -341,7 +341,16 @@ const App = (...props) => {
 						<header className='App-header'>
 							<NavBar />
 						</header>
-						<Loading />
+						<div className='App-content'>
+							<Loading />
+							<div className='d-flex footerButtons'>
+								<ButtonGroup className='footerButtonGroup'>
+									<Button variant='dark' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
+										Add Recipe
+									</Button>
+								</ButtonGroup>
+							</div>
+						</div>
 					</Router>
 				</div>
 			);
