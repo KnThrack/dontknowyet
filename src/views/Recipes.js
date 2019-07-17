@@ -77,11 +77,13 @@ const Recipes = (...props) => {
 									</Dropdown.Item>
 								</DropdownButton>
 							</div>
-							<Card.Body>
-								<Card.Title>{recipe.title}</Card.Title>
-								<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
-								<Card.Text>{recipe.recipe}</Card.Text>
-							</Card.Body>
+							<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }} className='dropdown-item' role='Button'>
+								<Card.Body>
+									<Card.Title>{recipe.title}</Card.Title>
+									<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
+									<Card.Text>{recipe.recipe}</Card.Text>
+								</Card.Body>
+							</Link>
 						</Card>
 					))}
 				</div>
