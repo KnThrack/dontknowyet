@@ -232,7 +232,7 @@ const App = (...props) => {
 					setModal({
 						show: false,
 						type: "delete",
-						index: index
+						index: 0
 					});
 					setRecipes(recipeCopy);
 					setFilteredRecipes(recipeCopy);
@@ -312,7 +312,6 @@ const App = (...props) => {
 										handleTableChange={handleTableChange}
 										handleSubmit={handleSubmit}
 										handleInputChange={handleInputChange}
-										handleJoditInputChange={handleJoditInputChange}
 										handleAddIngredient={handleAddIngredient}
 										{...props}
 									/>
