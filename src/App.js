@@ -251,9 +251,8 @@ const App = (...props) => {
 			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id, JSON.stringify(changeRecipe))
 				.then(function(response) {
 					// handle success
-					//stateCopy.recipes = _.without(stateCopy.recipes, recipe);
 					stateCopy.show = false;
-					that.setModal(stateCopy);
+					setModal(stateCopy);
 				})
 				.catch(function(error) {
 					// handle error
