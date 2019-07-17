@@ -5,7 +5,7 @@ import { useAuth0 } from "./react-auth0-spa";
 
 // styles
 //import "samples-bootstrap-theme/dist/css/auth0-theme.css";
-import "./App.css";
+import "./App.scss";
 /* //fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
 initFontAwesome();

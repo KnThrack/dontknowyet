@@ -1,6 +1,6 @@
 {
 	"name": "dontknowyet",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"private": true,
 	"dependencies": {
 		"@auth0/auth0-spa-js": "^1.0.2",
@@ -11,6 +11,7 @@
 		"jodit": "^3.2.46",
 		"jodit-react": "^1.0.26",
 		"jquery": "^3.4.1",
+		"node-sass": "^4.12.0",
 		"react": "^16.8.6",
 		"react-bootstrap": "^1.0.0-beta.9",
 		"react-dom": "^16.8.6",

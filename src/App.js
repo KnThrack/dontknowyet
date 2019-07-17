@@ -1,143 +1,141 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 import axios from "axios";
-import "./App.css";
+import "./App.scss";
 import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading } from "./views";
 
-const util = require("util");
+//const util = require("util");
 var _ = require("underscore");
 
-class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			recipes: "",
-			filteredRecipes: "",
-			user: "",
-			modal: { show: false, type: "", index: null },
-			filter: ""
-		};
+const App = (...props) => {
+	const [recipes, setRecipes] = useState(null);
+	const [filteredRecipes, setFilteredRecipes] = useState(null);
+	const [user, setUser] = useState(null);
+	const [modal, setModal] = useState({ show: false, type: "", index: null });
+	const [filter, setFilter] = useState(null);
+	const [changeRecipe, setChangeRecipe] = useState(null);
 
-		// bind handlers
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleInputChange = this.handleInputChange.bind(this);
-		this.handleAddIngredient = this.handleAddIngredient.bind(this);
-		this.handleTableChange = this.handleTableChange.bind(this);
-		this.handleAddRecipe = this.handleAddRecipe.bind(this);
-		this.handleJoditInputChange = this.handleJoditInputChange.bind(this);
-		this.handleDelete = this.handleDelete.bind(this);
-		this.handleModalClose = this.handleModalClose.bind(this);
-		this.handleModalSuccess = this.handleModalSuccess.bind(this);
-		this.handleFilterChange = this.handleFilterChange.bind(this);
-		// set the default axios stuff
-		axios.defaults.headers.post["Content-Type"] = "application/json";
-		axios.defaults.headers.put["Content-Type"] = "application/json";
-		axios.defaults.headers.get["Content-Type"] = "application/json";
+	// set the default axios stuff
+	axios.defaults.headers.post["Content-Type"] = "application/json";
+	axios.defaults.headers.put["Content-Type"] = "application/json";
+	axios.defaults.headers.get["Content-Type"] = "application/json";
+
+	async function callAPI(myUser) {
+		// get the initial recipes
+		const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + myUser._id)).data;
+
+		setRecipes(recipes.data);
+		setFilteredRecipes(recipes.data);
 	}
 
-	async callAPI() {
+	useEffect(() => {
 		// get the initial recipes
-		const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + this.state.user._id)).data;
-
-		this.setState({
-			recipes: recipes.data,
-			filteredRecipes: recipes.data
-		});
-	}
-
-	async componentDidMount() {
-		// get the initial recipes
-		await this.props.token.then(function(result) {
-			axios.defaults.headers.post["Authorization"] = "Bearer " + result;
-			axios.defaults.headers.delete["Authorization"] = "Bearer " + result;
-			axios.defaults.headers.get["Authorization"] = "Bearer " + result;
-			axios.defaults.headers.put["Authorization"] = "Bearer " + result;
-		});
-
-		// before we can get the initial list we need the user to be there.
-		let user = (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + this.props.user.email)).data;
-
-		// if user is not there yet (web hooks in Auth0 dont work with google) then create it instead
-		if (user.data === null || user.data === undefined) {
-			// handle error / no data
-			// no user is here so lets make a new one
-			let createUser = {
-				name: this.props.user.name,
-				email: this.props.user.email,
-				auth0ID: this.props.user.sub
-			};
-
-			const newUser = (await axios.post("https://notsureyetapp.herokuapp.com/api/users/", JSON.stringify(createUser))).data;
-			user = newUser;
+		async function putAuth() {
+			await props[0].token.then(function(result) {
+				axios.defaults.headers.post["Authorization"] = "Bearer " + result;
+				axios.defaults.headers.delete["Authorization"] = "Bearer " + result;
+				axios.defaults.headers.get["Authorization"] = "Bearer " + result;
+				axios.defaults.headers.put["Authorization"] = "Bearer " + result;
+			});
 		}
 
-		// handle success
-		this.setState({
-			user: user.data[0]
+		var auth = putAuth();
+
+		// before we can get the initial list we need the user to be there.
+		async function getUser() {
+			return (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + props[0].user.email)).data;
+		}
+		auth.then(function(result) {
+			let user = getUser();
+
+			// handle success
+			user.then(function(result) {
+				async function createUser() {
+					let createUser = {
+						name: props[0].user.name,
+						email: props[0].user.email,
+						auth0ID: props[0].user.sub
+					};
+
+					return (await axios.post("https://notsureyetapp.herokuapp.com/api/users/", JSON.stringify(createUser))).data;
+				}
+				// if user is not there yet (web hooks in Auth0 dont work with google) then create it instead
+				if (result.data === null || result.data === undefined) {
+					// handle error / no data
+					// no user is here so lets make a new one
+					const newUser = createUser();
+					newUser.then(function(result) {
+						setUser(result.data);
+						callAPI(result.data);
+					});
+				} else {
+					setUser(result.data[0]);
+					callAPI(result.data[0]);
+				}
+			});
 		});
+	}, []);
 
-		this.callAPI();
-	}
-
-	async updateIngredients(state) {
+	async function updateIngredients(state) {
 		// and put it away
 		const updateRecipe = (await axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + state._id, JSON.stringify(state))).data.data;
 
 		// find which one we updating
-		let index = this.state.recipes.findIndex(x => x._id === updateRecipe._id.toString());
-		var stateCopy = Object.assign({}, this.state);
-		stateCopy.recipes = stateCopy.recipes.slice();
-		stateCopy.recipes[index] = updateRecipe;
+		let index = recipes.findIndex(x => x._id === updateRecipe._id.toString());
+		var stateCopy = recipes.slice();
+		stateCopy[index] = updateRecipe;
 
 		// update it
-		this.setState(stateCopy);
+		setRecipes(stateCopy);
+		setFilteredRecipes(stateCopy);
 	}
 
-	async addRecipe(newObject) {
+	async function addRecipe(newObject) {
 		// and put it away
 		const newRecipe = (await axios.post("https://notsureyetapp.herokuapp.com/api/recipes/", JSON.stringify(newObject))).data.data;
 
 		// add it in
-		var stateCopy = Object.assign({}, this.state);
-		stateCopy.recipes = stateCopy.recipes.slice();
-		stateCopy.recipes.push(newRecipe);
-		stateCopy.filteredRecipes = stateCopy.recipes;
+		var stateCopy = recipes.slice();
+		stateCopy.push(newRecipe);
+
 		// update it
-		this.setState(stateCopy);
+		setRecipes(stateCopy);
+		setFilteredRecipes(stateCopy);
 	}
 
 	// handlers
 
-	handleAddRecipe(event) {
+	function handleAddRecipe(event) {
 		const newRecipe = {
 			name: _.uniqueId("newRecipe"),
 			title: "",
 			cuisine: "",
 			ingredients: [],
 			recipe: "",
-			user: this.state.user._id
+			user: user._id
 		};
-		this.addRecipe(newRecipe);
+		addRecipe(newRecipe);
 	}
 
-	handleAddIngredient(event, childState) {
+	function handleAddIngredient(event, childState) {
 		// find which one we updating
-		let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
+		let index = recipes.findIndex(x => x._id === childState._id.toString());
 		// take a copy thats mutable and update it
-		var stateCopy = Object.assign({}, this.state);
-		stateCopy.recipes = stateCopy.recipes.slice();
-		stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
-		stateCopy.recipes[index].ingredients.push({
+		var stateCopy = recipes.slice();
+		stateCopy[index] = Object.assign({}, stateCopy[index]);
+		stateCopy[index].ingredients.push({
 			ingredient: "",
 			quantity: 0,
 			unit: ""
 		});
 
 		//update it
-		this.updateIngredients(stateCopy.recipes[index]);
+		updateIngredients(stateCopy[index]);
 	}
 
-	handleTableChange(event, childState) {
+	function handleTableChange(event, childState) {
 		// get the value and move it into the state
 		const target = event.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
@@ -145,22 +143,22 @@ class App extends Component {
 		const ingredientsField = target.name.split("#");
 
 		// find which one we updating
-		let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
+		let index = recipes.findIndex(x => x._id === childState._id.toString());
 
 		// change the one we want to fix the state
-		var stateCopy = Object.assign({}, this.state);
-		stateCopy.recipes = stateCopy.recipes.slice();
-		stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
+		var stateCopy = recipes.slice();
+		stateCopy[index] = Object.assign({}, stateCopy[index]);
 
 		// find which one we updating
-		let ingredientIndex = stateCopy.recipes[index].ingredients.findIndex(x => x._id === ingredientsField[0].toString());
+		let ingredientIndex = stateCopy[index].ingredients.findIndex(x => x._id === ingredientsField[0].toString());
 
 		// update it
-		stateCopy.recipes[index].ingredients[ingredientIndex][ingredientsField[1]] = value;
-		this.setState(stateCopy);
+		stateCopy[index].ingredients[ingredientIndex][ingredientsField[1]] = value;
+		setRecipes(stateCopy);
+		setFilteredRecipes(stateCopy);
 	}
 
-	handleInputChange(event, childState) {
+	function handleInputChange(event, childState) {
 		// get the value and move it into the state
 		const target = event.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
@@ -168,97 +166,75 @@ class App extends Component {
 		const recipeField = target.name;
 
 		// find which one we updating
-		let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
+		let index = recipes.findIndex(x => x._id === childState._id.toString());
 
 		// change the one we want to fix the state
-		var stateCopy = Object.assign({}, this.state);
-		stateCopy.recipes = stateCopy.recipes.slice();
-		stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
-		stateCopy.recipes[index][recipeField] = value;
-		this.setState(stateCopy);
+		var stateCopy = recipes.slice();
+		stateCopy[index] = Object.assign({}, stateCopy[index]);
+		stateCopy[index][recipeField] = value;
+		setRecipes(stateCopy);
+		setFilteredRecipes(stateCopy);
 	}
 
-	handleJoditInputChange(value, childState) {
-		const recipeField = "recipe";
-
-		// find which one we updating
-		let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
-
-		// change the one we want to fix the state
-		var stateCopy = Object.assign({}, this.state);
-		stateCopy.recipes = stateCopy.recipes.slice();
-		stateCopy.recipes[index] = Object.assign({}, stateCopy.recipes[index]);
-		stateCopy.recipes[index][recipeField] = value;
-		this.setState(stateCopy);
-	}
-
-	handleSubmit(event, childState) {
+	function handleSubmit(event, childState) {
 		event.preventDefault();
 
 		// find which one we updating
-		let index = this.state.recipes.findIndex(x => x._id === childState._id.toString());
+		let index = recipes.findIndex(x => x._id === childState._id.toString());
 
 		// take a copy thats mutable
-		var stateCopy = Object.assign({}, this.state);
-		var recipe = stateCopy.recipes[index];
+		var stateCopy = recipes.slice();
+		var recipe = stateCopy[index];
 
-		this.test = (stateCopy, that) => {
-			// and put it away
-			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + recipe._id, JSON.stringify(recipe))
-				.then(function(response) {
-					// handle success
-					//stateCopy.recipes = _.without(stateCopy.recipes, recipe);
-					stateCopy.modal.show = false;
-					that.setState(stateCopy);
-				})
-				.catch(function(error) {
-					// handle error
-					console.log(error);
-				})
-				.finally(function() {
-					// always executed
-				});
-		};
+		setChangeRecipe(recipe);
 
 		// raise decision
-		this.raiseModal("confirm", index);
+		raiseModal("confirm", index);
 	}
 
-	handleModalClose() {
-		this.raiseModal();
-	}
-
-	handleModalSuccess() {
-		this.raiseModal();
-	}
-
-	raiseModal(modalType, index) {
-		this.setState({
-			modal: {
-				show: !this.state.modal.show,
-				type: modalType,
-				index: index
-			}
+	function raiseModal(modalType, index) {
+		setModal({
+			show: !modal.show,
+			type: modalType,
+			index: index
 		});
 	}
 
-	handleDelete(event) {
+	function handleDelete(key, event) {
 		// delete stuff
-		const recipeTarget = event.target.id.split("#");
+		const recipeTarget = key.split("#");
 		// find which one we updating
-		let index = this.state.recipes.findIndex(x => x._id === recipeTarget[1]);
+		let index = recipes.findIndex(x => x._id === recipeTarget[1]);
 		// take a copy thats mutable
-		var stateCopy = Object.assign({}, this.state);
-		var recipe = stateCopy.recipes[index];
+		var stateCopy = recipes.slice();
+		var recipe = stateCopy[index];
 
-		this.test = (stateCopy, that) => {
+		setChangeRecipe(recipe);
+		// raise decision
+		raiseModal("delete", index);
+	}
+
+	function handleModalClose() {
+		setModal({
+			show: false,
+			type: "",
+			index: 0
+		});
+	}
+	function handleModalSuccess(stateCopy, that) {
+		if (stateCopy.type === "delete") {
 			// and put it away
-			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + recipe._id)
+			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id)
 				.then(function(response) {
 					// handle success
-					stateCopy.recipes = _.without(stateCopy.recipes, recipe);
-					stateCopy.modal.show = false;
-					that.setState(stateCopy);
+					var recipeCopy = _.without(recipes, changeRecipe);
+					setModal({
+						show: false,
+						type: "delete",
+						index: 0
+					});
+					setRecipes(recipeCopy);
+					setFilteredRecipes(recipeCopy);
 				})
 				.catch(function(error) {
 					// handle error
@@ -267,29 +243,44 @@ class App extends Component {
 				.finally(function() {
 					// always executed
 				});
-		};
+		}
 
-		// raise decision
-		this.raiseModal("delete", index);
+		if (stateCopy.type === "confirm") {
+			// code block
+			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id, JSON.stringify(changeRecipe))
+				.then(function(response) {
+					// handle success
+					setModal({
+						show: false,
+						type: "confirm",
+						index: 0
+					});
+				})
+				.catch(function(error) {
+					// handle error
+					console.log(error);
+				})
+				.finally(function() {
+					// always executed
+				});
+		}
 	}
 
-	handleFilterChange(event) {
+	function handleFilterChange(event) {
 		// filter all the recipes based on all the text in them and store it in a filter state
 		const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
-		let filteredRecipes = this.state.recipes;
+		let filteredRecipes = recipes;
 		filteredRecipes = filteredRecipes.filter(recipe => {
 			return _.contains(_.values(recipe).map(a => String(a).indexOf(value) !== -1), true);
 		});
 
-		this.setState({
-			filteredRecipes: filteredRecipes,
-			filter: value
-		});
+		setFilteredRecipes(filteredRecipes);
+		setFilter(value);
 	}
 	// handlers end
 
-	RecipeListApp() {
-		const recipesList = this.state.filteredRecipes;
+	function RecipeListApp() {
+		const recipesList = filteredRecipes;
 
 		if (recipesList) {
 			return (
@@ -299,17 +290,17 @@ class App extends Component {
 							<NavBar />
 						</header>
 
-						<div className='recipes'>
+						<div className='App-content'>
 							<PrivateRoute
 								exact
 								path='/'
 								render={props => (
 									<Recipes
 										recipesList={recipesList}
-										filter={this.state.filter}
-										handleAddRecipe={this.handleAddRecipe}
-										handleDelete={this.handleDelete}
-										handleFilterChange={this.handleFilterChange}
+										filter={filter}
+										handleAddRecipe={handleAddRecipe}
+										handleDelete={handleDelete}
+										handleFilterChange={handleFilterChange}
 										{...props}
 									/>
 								)}
@@ -319,23 +310,28 @@ class App extends Component {
 								render={props => (
 									<Recipe
 										recipesList={recipesList}
-										handleTableChange={this.handleTableChange}
-										handleSubmit={this.handleSubmit}
-										handleInputChange={this.handleInputChange}
-										handleJoditInputChange={this.handleJoditInputChange}
-										handleAddIngredient={this.handleAddIngredient}
+										handleTableChange={handleTableChange}
+										handleSubmit={handleSubmit}
+										handleInputChange={handleInputChange}
+										handleAddIngredient={handleAddIngredient}
 										{...props}
 									/>
 								)}
 							/>
 						</div>
-
+						<div className='d-flex footerButtons'>
+							<ButtonGroup className='footerButtonGroup'>
+								<Button variant='primary' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
+									Add Recipe
+								</Button>
+							</ButtonGroup>
+						</div>
 						<Switch>
 							<Route path='/' exact />
 							<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
 						</Switch>
 					</Router>
-					<ConfirmationModal showModal={this.state.modal.show} handleModalClose={this.handleModalClose} handleModalSuccess={this.test} state={this.state} that={this} />
+					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={handleModalSuccess} modal={modal} that={this} />
 				</div>
 			);
 		} else {
@@ -352,9 +348,7 @@ class App extends Component {
 		}
 	}
 
-	render() {
-		return this.RecipeListApp();
-	}
-}
+	return RecipeListApp();
+};
 
 export default App;
