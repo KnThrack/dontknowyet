@@ -234,7 +234,6 @@ const App = (...props) => {
 
 	function raiseModal(modalType, index) {
 		setModal({
-			modal: {
 				show: !modal.show,
 				type: modalType,
 				index: index
