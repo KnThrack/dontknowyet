@@ -59,27 +59,16 @@ const Recipes = (...props) => {
 			<div className='content-inner'>
 				<Form inline>
 					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={filter} />
-					<DropdownButton title='Test'>
-						<Dropdown.Item eventKey='1' href={"/recipe/"}>
-							Go to Details
-						</Dropdown.Item>
-						<Dropdown.Item eventKey='2' onClick={handleDeletes}>
-							Delete
-						</Dropdown.Item>
-					</DropdownButton>
 				</Form>
 				<div className='recipe-cards'>
 					{recipesList.map(recipe => (
 						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
 							<div className='recipe-button'>
 								<DropdownButton id='cardButton' className='cardButton' variant='' title='...'>
-									<Dropdown.Item
-										eventKey={"recipes_det_btn#" + recipe._id.toString()}
-										href={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}
-									>
+									<Dropdown.Item eventKey='1' href={"/recipe/"}>
 										Go to Details
 									</Dropdown.Item>
-									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onClick={handleDeletes}>
+									<Dropdown.Item eventKey='2' onClick={handleDeletes}>
 										Delete
 									</Dropdown.Item>
 								</DropdownButton>
@@ -111,6 +100,16 @@ export { Recipes };
 // style={{ width: '18rem' }}
 
 /*
+									<Dropdown.Item
+										eventKey={"recipes_det_btn#" + recipe._id.toString()}
+										href={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}
+									>
+										Go to Details
+									</Dropdown.Item>
+									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onClick={handleDeletes}>
+										Delete
+									</Dropdown.Item>
+
 								<Link  to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
 									<Button variant='info' title='Go to Details'>
 										Go to Details
