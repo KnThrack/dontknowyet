@@ -87,12 +87,13 @@
 .card-title {
 	font-style: normal;
 	font-weight: bold;
-	font-size: 40px;
+	font-size: 35px;
 	line-height: 65px;
-	align-items: center;
+	align-items: left;
 	text-align: center;
 	letter-spacing: 0.1em;
 	color: #f3f3f3;
+	width: 270px
 }
 
 .card-subtitle {
@@ -107,10 +108,10 @@
 .card-text {
 	font-style: normal;
 	font-weight: normal;
-	font-size: 30px;
+	font-size: 28px;
 	line-height: 41px;
 	display: flex;
-	align-items: center;
+	align-items: left;
 	text-indent: 1px;
 	color: #000000;
 }
@@ -158,19 +159,19 @@
 }
 
 button#cardButton {
-	background-color: initial !important;
-	border-style: none !important;
-	font-family: Nunito;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 30px;
-	line-height: 41px;
-	display: flex;
-	align-items: center;
-	text-align: center;
-	letter-spacing: 0.1em;
-	text-indent: 1px;
-	color: #000000;
+    background-color: initial !important;
+    border-style: none !important;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    /* line-height: 41px; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* text-align: center; */
+    letter-spacing: 0.1em;
+    text-indent: 1px;
+    color: #000000;
 }
 
 .recipe-button {
