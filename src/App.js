@@ -17,7 +17,7 @@ const App = (...props) => {
 	const [modal, setModal] = useState({ show: false, type: "", index: null });
 	const [filter, setFilter] = useState(null);
 
-	var modalSuccess = "";
+	var modalSuccess;
 
 	// set the default axios stuff
 	axios.defaults.headers.post["Content-Type"] = "application/json";
