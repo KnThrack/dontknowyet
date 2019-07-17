@@ -242,9 +242,9 @@ const App = (...props) => {
 		});
 	}
 
-	function handleDelete(event) {
+	function handleDelete(key, event) {
 		// delete stuff
-		const recipeTarget = event.target.id.split("#");
+		const recipeTarget = key.split("#");
 		// find which one we updating
 		let index = recipes.findIndex(x => x._id === recipeTarget[1]);
 		// take a copy thats mutable

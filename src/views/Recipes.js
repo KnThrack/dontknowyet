@@ -22,8 +22,8 @@ const Recipes = (...props) => {
 		handleAddRecipe(event);
 	}
 
-	function handleDeletes(event) {
-		handleDelete(event);
+	function handleDeletes(key, event) {
+		handleDelete(key, event);
 	}
 
 	let cardClass = recipe => {
@@ -68,7 +68,7 @@ const Recipes = (...props) => {
 									<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }} className='dropdown-item' role='Button'>
 										Go to Details
 									</Link>
-									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onClick={handleDeletes}>
+									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDeletes}>
 										Delete
 									</Dropdown.Item>
 								</DropdownButton>
