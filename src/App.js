@@ -16,8 +16,7 @@ const App = (...props) => {
 	const [user, setUser] = useState(null);
 	const [modal, setModal] = useState({ show: false, type: "", index: null });
 	const [filter, setFilter] = useState(null);
-
-	var modalSuccess;
+	const [changeRecipe, setChangeRecipe] = useState(null);
 
 	// set the default axios stuff
 	axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -178,20 +177,6 @@ const App = (...props) => {
 		setFilteredRecipes(stateCopy);
 	}
 
-	function handleJoditInputChange(value, childState) {
-		const recipeField = "recipe";
-
-		// find which one we updating
-		let index = recipes.findIndex(x => x._id === childState._id.toString());
-
-		// change the one we want to fix the state
-		var stateCopy = recipes.slice();
-		stateCopy[index] = Object.assign({}, stateCopy[index]);
-		stateCopy[index][recipeField] = value;
-		setRecipes(stateCopy);
-		setFilteredRecipes(stateCopy);
-	}
-
 	function handleSubmit(event, childState) {
 		event.preventDefault();
 
@@ -202,34 +187,10 @@ const App = (...props) => {
 		var stateCopy = recipes.slice();
 		var recipe = stateCopy[index];
 
-		modalSuccess = (stateCopy, that) => {
-			// and put it away
-			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + recipe._id, JSON.stringify(recipe))
-				.then(function(response) {
-					// handle success
-					//stateCopy.recipes = _.without(stateCopy.recipes, recipe);
-					stateCopy.modal.show = false;
-					that.setState(stateCopy);
-				})
-				.catch(function(error) {
-					// handle error
-					console.log(error);
-				})
-				.finally(function() {
-					// always executed
-				});
-		};
+		setChangeRecipe(recipe);
 
 		// raise decision
 		raiseModal("confirm", index);
-	}
-
-	function handleModalClose() {
-		raiseModal();
-	}
-
-	function handleModalSuccess() {
-		raiseModal();
 	}
 
 	function raiseModal(modalType, index) {
@@ -249,21 +210,32 @@ const App = (...props) => {
 		var stateCopy = recipes.slice();
 		var recipe = stateCopy[index];
 
-		modalSuccess = (stateCopy, that) => {
+		setChangeRecipe(recipe);
+		// raise decision
+		raiseModal("delete", index);
+	}
+
+	function handleModalClose() {
+		setModal({
+			show: false,
+			type: "",
+			index: 0
+		});
+	}
+	function handleModalSuccess(stateCopy, that) {
+		if (stateCopy.type === "delete") {
 			// and put it away
-			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + recipe._id)
+			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id)
 				.then(function(response) {
 					// handle success
-					stateCopy = _.without(stateCopy, recipe);
+					var recipeCopy = _.without(recipes, changeRecipe);
 					setModal({
-						modal: {
-							show: true,
-							type: "delete",
-							index: index
-						}
+						show: false,
+						type: "delete",
+						index: index
 					});
-					setRecipes(stateCopy);
-					setFilteredRecipes(stateCopy);
+					setRecipes(recipeCopy);
+					setFilteredRecipes(recipeCopy);
 				})
 				.catch(function(error) {
 					// handle error
@@ -272,14 +244,25 @@ const App = (...props) => {
 				.finally(function() {
 					// always executed
 				});
-		};
+		}
 
-		// raise decision
-		raiseModal("delete", index);
-	}
-
-	function handleModalSuccess(stateCopy, that) {
-		modalSuccess(stateCopy, that);
+		if (stateCopy.type === "confirm") {
+			// code block
+			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id, JSON.stringify(changeRecipe))
+				.then(function(response) {
+					// handle success
+					//stateCopy.recipes = _.without(stateCopy.recipes, recipe);
+					stateCopy.show = false;
+					that.setModal(stateCopy);
+				})
+				.catch(function(error) {
+					// handle error
+					console.log(error);
+				})
+				.finally(function() {
+					// always executed
+				});
+		}
 	}
 
 	function handleFilterChange(event) {
