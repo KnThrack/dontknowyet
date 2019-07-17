@@ -234,10 +234,9 @@ const App = (...props) => {
 
 	function raiseModal(modalType, index) {
 		setModal({
-				show: !modal.show,
-				type: modalType,
-				index: index
-			}
+			show: !modal.show,
+			type: modalType,
+			index: index
 		});
 	}
 
@@ -334,7 +333,7 @@ const App = (...props) => {
 							/>
 						</div>
 						<div className='d-flex footerButtons'>
-							<ButtonGroup className="footerButtonGroup">
+							<ButtonGroup className='footerButtonGroup'>
 								<Button variant='primary' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
 									Add Recipe
 								</Button>
