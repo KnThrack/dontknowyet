@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import axios from "axios";
-import "./App.css";
+import "./App.scss";
 import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading } from "./views";
 import { async } from "q";
 
