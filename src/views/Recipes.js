@@ -77,7 +77,7 @@ const Recipes = (...props) => {
 									</Dropdown.Item>
 								</DropdownButton>
 							</div>
-							<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }} className='dropdown-item' role='Button'>
+							<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
 								<Card.Body>
 									<Card.Title>{recipe.title}</Card.Title>
 									<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
