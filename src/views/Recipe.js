@@ -1,5 +1,5 @@
 // src/views/Recipe.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Form from "react-bootstrap/Form";
@@ -9,7 +9,10 @@ import { Link } from "react-router-dom";
 const Recipe = (...props) => {
 	const { handleInputChange, handleSubmit, handleTableChange, handleAddIngredient, recipesList, setPageState, location } = props[0];
 
-	setPageState({page: "details"});
+	useEffect(() => {
+		setPageState({page: "details"});
+	}, []);
+
 	// handlers
 	function handleAddIngredients(event) {
 		handleAddIngredient(event, location.state);

@@ -1,5 +1,5 @@
 // src/views/Recipes.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -14,7 +14,10 @@ import { Loading } from ".";
 const Recipes = (...props) => {
 	const { handleFilterChange, handleAddRecipe, handleDelete, recipesList, filter, setPageState } = props[0];
 
-	setPageState({page: "list"});
+	useEffect(() => {
+		setPageState({page: "list"});
+	}, []);
+	
 
 	function handleFilterChanges(event) {
 		handleFilterChange(event);
