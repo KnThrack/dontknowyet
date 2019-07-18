@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 const ConfirmationModal = (...props) => {
-	const { showModal, handleModalClose, handleModalSuccess, modal, that } = props[0];
+	const { showModal, handleModalClose, handleModalSuccess, modal } = props[0];
 
 	let title = "",
 		body = "";
@@ -30,7 +30,7 @@ const ConfirmationModal = (...props) => {
 	}
 
 	function handleSuccess() {
-		handleModalSuccess(modal, that);
+		handleModalSuccess(modal);
 	}
 
 	return (

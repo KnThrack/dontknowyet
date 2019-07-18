@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import axios from "axios";
 import "./App.scss";
 import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
@@ -16,6 +14,7 @@ const App = (...props) => {
 	const [modal, setModal] = useState({ show: false, type: "", index: null });
 	const [filter, setFilter] = useState(null);
 	const [changeRecipe, setChangeRecipe] = useState(null);
+	const [pageState, setPageState] = useState(null);
 
 	// set the default axios stuff
 	axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -320,14 +319,14 @@ const App = (...props) => {
 							/>
 						</div>
 						<div className='d-flex footerButtons'>
-							<FloatButtons handleAddRecipe={handleAddRecipe} {...props} />
+							<FloatButtons handleAddRecipe={handleAddRecipe} pageState={pageState} {...props} />
 						</div>
 						<Switch>
 							<Route path='/' exact />
 							<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
 						</Switch>
 					</Router>
-					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={handleModalSuccess} modal={modal} that={this} />
+					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={handleModalSuccess} modal={modal}/>
 				</div>
 			);
 		} else {
@@ -340,7 +339,7 @@ const App = (...props) => {
 						<div className='App-content'>
 							<Loading />
 							<div className='d-flex footerButtons'>
-								<FloatButtons handleAddRecipe={handleAddRecipe} />
+								<FloatButtons handleAddRecipe={handleAddRecipe} pageState={pageState} />
 							</div>
 						</div>
 					</Router>
