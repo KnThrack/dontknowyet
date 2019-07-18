@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import "./table.css";
 
 const Recipe = (...props) => {
-	const { handleInputChange, handleTableChange, recipesList, setPageState, setChangeRecipe, location } = props[0];
+	const { handleInputChange, handleTableChange, handleChangeIngredient, recipesList, setPageState, setChangeRecipe, location } = props[0];
 
 	useEffect(() => {
 		setPageState({ page: "details" });
@@ -62,7 +62,7 @@ const Recipe = (...props) => {
 							</Tr>
 						</Thead>
 						{myRecipe.ingredients.map(ingredient => (
-							<Tbody key={ingredient._id ? ingredient._id : 1}>
+							<Tbody onClick={handleChangeIngredient} key={ingredient._id ? ingredient._id : 1}>
 								<Tr key={ingredient._id ? ingredient._id : 1}>
 									<Td>{ingredient.ingredient}</Td>
 									<Td>{ingredient.quantity}</Td>

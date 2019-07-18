@@ -137,6 +137,13 @@ const App = (...props) => {
 		// raise Modal
 		raiseModal("addIngredient");
 	}
+	function handleChangeIngredient(event) {
+
+
+		setIngredientIndex(stateCopy[index].ingredients.length - 1);
+		// raise Modal
+		raiseModal("addIngredient");
+	}
 
 	function handleTableChange(event, childState) {
 		// get the value and move it into the state
@@ -315,6 +322,7 @@ const App = (...props) => {
 									<Recipe
 										recipesList={recipesList}
 										handleInputChange={handleInputChange}
+										handleChangeIngredient={handleChangeIngredient}
 										setPageState={setPageState}
 										setChangeRecipe={setChangeRecipe}
 										{...props}
