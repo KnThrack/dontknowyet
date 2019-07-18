@@ -73,8 +73,8 @@ const Recipe = (...props) => {
 											onClick={handleChangeIngredient}
 											src='https://unicons.iconscout.com/release/v1.0.0/svg/multiply.svg'
 											alt=''
-											width='40'
-											height='40'
+											width='30'
+											height='30'
 											className='d-inline-block align-center'
 										/>
 									</Td>
