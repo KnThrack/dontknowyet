@@ -5,10 +5,12 @@ import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 
 const Recipe = (...props) => {
-	const { handleInputChange, handleTableChange, recipesList, setPageState, location } = props[0];
+	const { handleInputChange, handleTableChange, recipesList, setPageState, setChangeRecipe, location } = props[0];
 
 	useEffect(() => {
 		setPageState({page: "details"});
+		let index = recipesList.findIndex(x => x._id === location.state._id.toString());
+		setChangeRecipe(recipesList[index]);
 	}, []);
 
 	// handlers

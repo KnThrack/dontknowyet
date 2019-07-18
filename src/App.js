@@ -157,7 +157,7 @@ const App = (...props) => {
 		setFilteredRecipes(stateCopy);
 	}
 
-	function handleInputChange(event, childState) {
+	function handleInputChange(event) {
 		// get the value and move it into the state
 		const target = event.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
@@ -165,7 +165,7 @@ const App = (...props) => {
 		const recipeField = target.name;
 
 		// find which one we updating
-		let index = recipes.findIndex(x => x._id === childState._id.toString());
+		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
 
 		// change the one we want to fix the state
 		var stateCopy = recipes.slice();
@@ -175,9 +175,10 @@ const App = (...props) => {
 		setFilteredRecipes(stateCopy);
 	}
 
-	function handleSubmit(event, childState) {
+	function handleSubmit(event) {
 		event.preventDefault();
 
+		/*
 		// find which one we updating
 		let index = recipes.findIndex(x => x._id === childState._id.toString());
 
@@ -186,7 +187,7 @@ const App = (...props) => {
 		var recipe = stateCopy[index];
 
 		setChangeRecipe(recipe);
-
+*/
 		// raise decision
 		raiseModal("confirm", index);
 	}
@@ -312,20 +313,27 @@ const App = (...props) => {
 										handleTableChange={handleTableChange}
 										handleInputChange={handleInputChange}
 										setPageState={setPageState}
+										setChangeRecipe={setChangeRecipe}
 										{...props}
 									/>
 								)}
 							/>
 						</div>
 						<div className='d-flex footerButtons'>
-							<FloatButtons handleAddRecipe={handleAddRecipe} handleSubmit={handleSubmit} handleAddIngredient={handleAddIngredient} pageState={pageState} {...props} />
+							<FloatButtons
+								handleAddRecipe={handleAddRecipe}
+								handleSubmit={handleSubmit}
+								handleAddIngredient={handleAddIngredient}
+								pageState={pageState}
+								{...props}
+							/>
 						</div>
 						<Switch>
 							<Route path='/' exact />
 							<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
 						</Switch>
 					</Router>
-					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={handleModalSuccess} modal={modal}/>
+					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={handleModalSuccess} modal={modal} />
 				</div>
 			);
 		} else {
