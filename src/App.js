@@ -12,7 +12,7 @@ const App = (...props) => {
 	const [filteredRecipes, setFilteredRecipes] = useState(null);
 	const [user, setUser] = useState(null);
 	const [modal, setModal] = useState({ show: false, type: "" });
-	const [filter, setFilter] = useState(null);
+	const [filter, setFilter] = useState("");
 	const [changeRecipe, setChangeRecipe] = useState(null);
 	const [ingredientIndex, setIngredientIndex] = useState(null);
 	const [pageState, setPageState] = useState(null);
