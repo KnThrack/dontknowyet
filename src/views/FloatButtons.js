@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 const FloatButtons = (...props) => {
 	const { handleAddRecipe, handleSubmits, handleAddIngredients, pageState } = props[0];
 
+	if (pageState === null) {
+		return <ButtonGroup className='footerButtonGroup' />;
+	}
+
 	if (pageState.page === "list") {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
