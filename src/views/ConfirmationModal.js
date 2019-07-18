@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const ConfirmationModal = (...props) => {
-	const { showModal, handleModalClose, handleModalSuccess, handleInputChanges, modal, changeRecipe, ingredientIndex } = props[0];
+	const { showModal, handleModalClose, handleModalSuccess, handleInputChange, modal, changeRecipe, ingredientIndex } = props[0];
 
 	let title = "",
 		body = "";
@@ -49,11 +49,11 @@ const ConfirmationModal = (...props) => {
 				<Form id='Ingredient' /*controlId={recipe._id.toString()+".Form"}*/>
 				<Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
 					<Form.Label htmlFor='Ingredient'>Ingredient</Form.Label>
-					<Form.Control name='Ingredient' onChange={handleInputChanges} id='Ingredient' value={changeRecipe.ingredients[ingredientIndex].ingredient} />
+					<Form.Control name='Ingredient' onChange={handleInputChange} id='Ingredient' value={changeRecipe.ingredients[ingredientIndex].ingredient} />
 					<Form.Label htmlFor='Quantity'>Quantity</Form.Label>
-					<Form.Control name='Quantity' onChange={handleInputChanges} id='Quantity' value={changeRecipe.ingredients[ingredientIndex].quantity} />
+					<Form.Control name='Quantity' onChange={handleInputChange} id='Quantity' value={changeRecipe.ingredients[ingredientIndex].quantity} />
 					<Form.Label htmlFor='Unit'>Unit</Form.Label>
-					<Form.Control name='Unit' onChange={handleInputChanges} id='Unit' value={changeRecipe.ingredients[ingredientIndex].unit} />
+					<Form.Control name='Unit' onChange={handleInputChange} id='Unit' value={changeRecipe.ingredients[ingredientIndex].unit} />
 				</Form.Group>
 			</Form>
 
