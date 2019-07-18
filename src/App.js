@@ -120,7 +120,7 @@ const App = (...props) => {
 
 	function handleAddIngredient(event, childState) {
 		// find which one we updating
-		let index = recipes.findIndex(x => x._id === childState._id.toString());
+		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
 		// take a copy thats mutable and update it
 		var stateCopy = recipes.slice();
 		stateCopy[index] = Object.assign({}, stateCopy[index]);
