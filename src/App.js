@@ -138,7 +138,7 @@ const App = (...props) => {
 		raiseModal("addIngredient");
 	}
 	function handleChangeIngredient(event) {
-
+		const song = event.target.getAttribute('data-item');
 		const ingredientsField =  event.target.name;
 		setIngredientIndex(1);
 		// raise Modal

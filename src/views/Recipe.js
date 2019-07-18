@@ -53,7 +53,7 @@ const Recipe = (...props) => {
 					<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={myRecipe.recipe} />
 				</Form.Group>
 				<Form.Group>
-					<Table striped="true" bordered="true" hover="true">
+					<Table striped='true' bordered='true' hover='true'>
 						<Thead>
 							<Tr>
 								<Th>Ingredient</Th>
@@ -62,8 +62,8 @@ const Recipe = (...props) => {
 							</Tr>
 						</Thead>
 						{myRecipe.ingredients.map(ingredient => (
-							<Tbody onClick={handleChangeIngredient} key={ingredient._id ? ingredient._id : 1} id={ingredient._id ? ingredient._id : 1}>
-								<Tr key={ingredient._id ? ingredient._id : 1}>
+							<Tbody key={ingredient._id ? ingredient._id : 1}>
+								<Tr onClick={handleChangeIngredient} key={ingredient._id ? ingredient._id : 1} id={ingredient._id ? ingredient._id : 1}>
 									<Td>{ingredient.ingredient}</Td>
 									<Td>{ingredient.quantity}</Td>
 									<Td>{ingredient.unit}</Td>
