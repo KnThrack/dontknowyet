@@ -1,14 +1,15 @@
 // src/views/Recipe.js
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import Table from "react-bootstrap/Table";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import { Link } from "react-router-dom";
 
 const Recipe = (...props) => {
 	const { handleInputChange, handleTableChange, recipesList, setPageState, setChangeRecipe, location } = props[0];
 
 	useEffect(() => {
-		setPageState({page: "details"});
+		setPageState({ page: "details" });
 		let index = recipesList.findIndex(x => x._id === location.state._id.toString());
 		setChangeRecipe(recipesList[index]);
 	}, []);
@@ -52,42 +53,42 @@ const Recipe = (...props) => {
 				</Form.Group>
 				<Form.Group>
 					<Table responsive>
-						<thead>
-							<tr>
-								<th>Ingredient</th>
-								<th>Quantity</th>
-								<th>Unit</th>
-							</tr>
-						</thead>
+						<Thead>
+							<Tr>
+								<Th>Ingredient</Th>
+								<Th>Quantity</Th>
+								<Th>Unit</Th>
+							</Tr>
+						</Thead>
 						{myRecipe.ingredients.map(ingredient => (
-							<tbody key={ingredient._id ? ingredient._id : 1}>
-								<tr key={ingredient._id ? ingredient._id : 1}>
-									<td>
+							<Tbody key={ingredient._id ? ingredient._id : 1}>
+								<Tr key={ingredient._id ? ingredient._id : 1}>
+									<Td>
 										<input
 											name={(ingredient._id ? ingredient._id : 1) + "#ingredient"}
 											type='text'
 											value={ingredient.ingredient}
 											onChange={handleTableChanges}
 										/>
-									</td>
-									<td>
+									</Td>
+									<Td>
 										<input
 											name={(ingredient._id ? ingredient._id : 1) + "#quantity"}
 											type='number'
 											value={ingredient.quantity}
 											onChange={handleTableChanges}
 										/>
-									</td>
-									<td>
+									</Td>
+									<Td>
 										<input
 											name={(ingredient._id ? ingredient._id : 1) + "#unit"}
 											type='text'
 											value={ingredient.unit}
 											onChange={handleTableChanges}
 										/>
-									</td>
-								</tr>
-							</tbody>
+									</Td>
+								</Tr>
+							</Tbody>
 						))}
 					</Table>
 				</Form.Group>
