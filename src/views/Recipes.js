@@ -12,7 +12,9 @@ import { Loading } from ".";
 //var _ = require("underscore");
 
 const Recipes = (...props) => {
-	const { handleFilterChange, handleAddRecipe, handleDelete, recipesList, filter } = props[0];
+	const { handleFilterChange, handleAddRecipe, handleDelete, recipesList, filter, setPageState } = props[0];
+
+	setPageState({page: "list"});
 
 	function handleFilterChanges(event) {
 		handleFilterChange(event);

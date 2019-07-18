@@ -3,7 +3,9 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 const FloatButtons = (...props) => {
-	const { handleAddRecipe, buttonVariant } = props[0];
+	const { handleAddRecipe, buttonVariant, pageState } = props[0];
+
+	console.log(pageState);
 
 	return (
 		<ButtonGroup className='footerButtonGroup'>

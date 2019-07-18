@@ -7,8 +7,9 @@ import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 
 const Recipe = (...props) => {
-	const { handleInputChange, handleSubmit, handleTableChange, handleAddIngredient, recipesList, location } = props[0];
+	const { handleInputChange, handleSubmit, handleTableChange, handleAddIngredient, recipesList, setPageState, location } = props[0];
 
+	setPageState({page: "details"});
 	// handlers
 	function handleAddIngredients(event) {
 		handleAddIngredient(event, location.state);

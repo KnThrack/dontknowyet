@@ -300,6 +300,7 @@ const App = (...props) => {
 										handleAddRecipe={handleAddRecipe}
 										handleDelete={handleDelete}
 										handleFilterChange={handleFilterChange}
+										setPageState={setPageState}
 										{...props}
 									/>
 								)}
@@ -313,6 +314,7 @@ const App = (...props) => {
 										handleSubmit={handleSubmit}
 										handleInputChange={handleInputChange}
 										handleAddIngredient={handleAddIngredient}
+										setPageState={setPageState}
 										{...props}
 									/>
 								)}
