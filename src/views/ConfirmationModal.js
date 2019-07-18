@@ -48,12 +48,12 @@ const ConfirmationModal = (...props) => {
 
 				<Form id='Ingredient' /*controlId={recipe._id.toString()+".Form"}*/>
 				<Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
-					<Form.Label htmlFor='Ingredient'>Ingredient</Form.Label>
-					<Form.Control name='Ingredient' onChange={handleInputChange} id='Ingredient' value={changeRecipe.ingredients[ingredientIndex].ingredient} />
-					<Form.Label htmlFor='Quantity'>Quantity</Form.Label>
-					<Form.Control name='Quantity' onChange={handleInputChange} id='Quantity' value={changeRecipe.ingredients[ingredientIndex].quantity} />
-					<Form.Label htmlFor='Unit'>Unit</Form.Label>
-					<Form.Control name='Unit' onChange={handleInputChange} id='Unit' value={changeRecipe.ingredients[ingredientIndex].unit} />
+					<Form.Label htmlFor='ingredient'>Ingredient</Form.Label>
+					<Form.Control name='ingredient' onChange={handleInputChange} id='ingredient' value={changeRecipe.ingredients[ingredientIndex].ingredient} />
+					<Form.Label htmlFor='quantity'>Quantity</Form.Label>
+					<Form.Control name='quantity' onChange={handleInputChange} id='quantity' value={changeRecipe.ingredients[ingredientIndex].quantity} />
+					<Form.Label htmlFor='unit'>Unit</Form.Label>
+					<Form.Control name='unit' onChange={handleInputChange} id='unit' value={changeRecipe.ingredients[ingredientIndex].unit} />
 				</Form.Group>
 			</Form>
 

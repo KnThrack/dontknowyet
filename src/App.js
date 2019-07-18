@@ -143,20 +143,17 @@ const App = (...props) => {
 		const target = event.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
 
-		const ingredientsField = target.name.split("#");
+		const ingredientsField = target.name;
 
 		// find which one we updating
-		let index = recipes.findIndex(x => x._id === childState._id.toString());
+		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
 
 		// change the one we want to fix the state
 		var stateCopy = recipes.slice();
 		stateCopy[index] = Object.assign({}, stateCopy[index]);
 
-		// find which one we updating
-		let ingredientIndex = stateCopy[index].ingredients.findIndex(x => x._id === ingredientsField[0].toString());
-
 		// update it
-		stateCopy[index].ingredients[ingredientIndex][ingredientsField[1]] = value;
+		stateCopy[index].ingredients[ingredientIndex][ingredientsField] = value;
 		setChangeRecipe(stateCopy[index]);
 		setRecipes(stateCopy);
 		setFilteredRecipes(stateCopy);
@@ -317,7 +314,6 @@ const App = (...props) => {
 								render={props => (
 									<Recipe
 										recipesList={recipesList}
-										handleTableChange={handleTableChange}
 										handleInputChange={handleInputChange}
 										setPageState={setPageState}
 										setChangeRecipe={setChangeRecipe}
@@ -347,7 +343,7 @@ const App = (...props) => {
 						modal={modal}
 						changeRecipe={changeRecipe}
 						ingredientIndex={ingredientIndex}
-						handleInputChange={handleInputChange}
+						handleInputChange={handleTableChange}
 					/>
 				</div>
 			);
