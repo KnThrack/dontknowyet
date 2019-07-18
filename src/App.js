@@ -87,6 +87,7 @@ const App = (...props) => {
 		stateCopy[index] = updateRecipe;
 
 		// update it
+		setChangeRecipe(stateCopy[index]);
 		setRecipes(stateCopy);
 		setFilteredRecipes(stateCopy);
 	}
@@ -153,6 +154,7 @@ const App = (...props) => {
 
 		// update it
 		stateCopy[index].ingredients[ingredientIndex][ingredientsField[1]] = value;
+		setChangeRecipe(stateCopy[index]);
 		setRecipes(stateCopy);
 		setFilteredRecipes(stateCopy);
 	}
@@ -171,6 +173,10 @@ const App = (...props) => {
 		var stateCopy = recipes.slice();
 		stateCopy[index] = Object.assign({}, stateCopy[index]);
 		stateCopy[index][recipeField] = value;
+
+		// one
+		setChangeRecipe(stateCopy[index]);
+		// ALL
 		setRecipes(stateCopy);
 		setFilteredRecipes(stateCopy);
 	}
