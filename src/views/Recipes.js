@@ -1,7 +1,6 @@
 // src/views/Recipes.js
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
@@ -21,10 +20,6 @@ const Recipes = (...props) => {
 
 	function handleFilterChanges(event) {
 		handleFilterChange(event);
-	}
-
-	function handleAddRecipes(event) {
-		handleAddRecipe(event);
 	}
 
 	function handleDeletes(key, event) {

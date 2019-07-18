@@ -1,23 +1,17 @@
 // src/views/Recipe.js
 import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 
 const Recipe = (...props) => {
-	const { handleInputChange, handleSubmit, handleTableChange, handleAddIngredient, recipesList, setPageState, location } = props[0];
+	const { handleInputChange, handleTableChange, recipesList, setPageState, location } = props[0];
 
 	useEffect(() => {
 		setPageState({page: "details"});
 	}, []);
 
 	// handlers
-	function handleAddIngredients(event) {
-		handleAddIngredient(event, location.state);
-	}
-
 	function handleTableChanges(event) {
 		handleTableChange(event, location.state);
 	}
@@ -26,10 +20,6 @@ const Recipe = (...props) => {
 		handleInputChange(event, location.state);
 	}
 
-	function handleSubmits(event) {
-		// submit the changes to the backend
-		handleSubmit(event, location.state);
-	}
 	// handlers end
 
 	// find which one we looking at
@@ -99,19 +89,6 @@ const Recipe = (...props) => {
 						))}
 					</Table>
 				</Form.Group>
-				<ButtonToolbar>
-					<Link to='/'>
-						<Button variant='info' title='Go Back'>
-							Go Back
-						</Button>
-					</Link>
-					<Button type='submit' variant='primary' onClick={handleSubmits}>
-						Submit
-					</Button>
-					<Button type='button' variant='primary' onClick={handleAddIngredients}>
-						Add Ingredient
-					</Button>
-				</ButtonToolbar>
 			</Form>
 		</div>
 	);

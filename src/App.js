@@ -297,7 +297,6 @@ const App = (...props) => {
 									<Recipes
 										recipesList={recipesList}
 										filter={filter}
-										handleAddRecipe={handleAddRecipe}
 										handleDelete={handleDelete}
 										handleFilterChange={handleFilterChange}
 										setPageState={setPageState}
@@ -311,9 +310,7 @@ const App = (...props) => {
 									<Recipe
 										recipesList={recipesList}
 										handleTableChange={handleTableChange}
-										handleSubmit={handleSubmit}
 										handleInputChange={handleInputChange}
-										handleAddIngredient={handleAddIngredient}
 										setPageState={setPageState}
 										{...props}
 									/>
@@ -321,7 +318,7 @@ const App = (...props) => {
 							/>
 						</div>
 						<div className='d-flex footerButtons'>
-							<FloatButtons handleAddRecipe={handleAddRecipe} pageState={pageState} {...props} />
+							<FloatButtons handleAddRecipe={handleAddRecipe} handleSubmit={handleSubmit} handleAddIngredient={handleAddIngredient} pageState={pageState} {...props} />
 						</div>
 						<Switch>
 							<Route path='/' exact />
