@@ -59,7 +59,7 @@ const Recipe = (...props) => {
 								<Th>Ingredient</Th>
 								<Th>Quantity</Th>
 								<Th>Unit</Th>
-								<Th />
+								<Th width="50px" />
 							</Tr>
 						</Thead>
 						{myRecipe.ingredients.map(ingredient => (
@@ -68,7 +68,7 @@ const Recipe = (...props) => {
 									<Td>{ingredient.ingredient}</Td>
 									<Td>{ingredient.quantity}</Td>
 									<Td>{ingredient.unit}</Td>
-									<Td>
+									<Td width="50px" >
 										<img
 											onClick={handleChangeIngredient}
 											src='https://unicons.iconscout.com/release/v1.0.0/svg/multiply.svg'
