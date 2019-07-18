@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { useAuth0 } from "../react-auth0-spa";
 import Image from "react-bootstrap/Image";
-import { ReactComponent as Logo } from "../assets/Logo2small.svg";
+import { ReactComponent as Logo } from "../assets/Logosmall.svg";
 
 const NavBar = () => {
 	const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
