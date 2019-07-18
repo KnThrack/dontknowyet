@@ -14,6 +14,7 @@ const App = (...props) => {
 	const [modal, setModal] = useState({ show: false, type: "" });
 	const [filter, setFilter] = useState(null);
 	const [changeRecipe, setChangeRecipe] = useState(null);
+	const [ingredientIndex, setIngredientIndex] = useState(null);
 	const [pageState, setPageState] = useState(null);
 
 	// set the default axios stuff
@@ -119,7 +120,7 @@ const App = (...props) => {
 		addRecipe(newRecipe);
 	}
 
-	function handleAddIngredient(event, childState) {
+	function handleAddIngredient(event) {
 		// find which one we updating
 		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
 		// take a copy thats mutable and update it
@@ -131,8 +132,10 @@ const App = (...props) => {
 			unit: ""
 		});
 
-		//update it
-		updateIngredients(stateCopy[index]);
+		setIngredientIndex(stateCopy[index].ingredients.length - 1);
+		setChangeRecipe(stateCopy[index]);
+		// raise Modal
+		raiseModal("addIngredient");
 	}
 
 	function handleTableChange(event, childState) {
@@ -337,7 +340,15 @@ const App = (...props) => {
 							<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
 						</Switch>
 					</Router>
-					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={handleModalSuccess} modal={modal} />
+					<ConfirmationModal
+						showModal={modal.show}
+						handleModalClose={handleModalClose}
+						handleModalSuccess={handleModalSuccess}
+						modal={modal}
+						changeIngredient={changeRecipe}
+						ingredientIndex={ingredientIndex}
+						handleInputChange={handleInputChange}
+					/>
 				</div>
 			);
 		} else {
