@@ -11,7 +11,7 @@ const App = (...props) => {
 	const [recipes, setRecipes] = useState(null);
 	const [filteredRecipes, setFilteredRecipes] = useState(null);
 	const [user, setUser] = useState(null);
-	const [modal, setModal] = useState({ show: false, type: "", index: null });
+	const [modal, setModal] = useState({ show: false, type: "" });
 	const [filter, setFilter] = useState(null);
 	const [changeRecipe, setChangeRecipe] = useState(null);
 	const [pageState, setPageState] = useState(null);
@@ -189,7 +189,7 @@ const App = (...props) => {
 		setChangeRecipe(recipe);
 */
 		// raise decision
-		raiseModal("confirm", index);
+		raiseModal("confirm");
 	}
 
 	function raiseModal(modalType, index) {
@@ -211,14 +211,13 @@ const App = (...props) => {
 
 		setChangeRecipe(recipe);
 		// raise decision
-		raiseModal("delete", index);
+		raiseModal("delete");
 	}
 
 	function handleModalClose() {
 		setModal({
 			show: false,
-			type: "",
-			index: 0
+			type: ""
 		});
 	}
 	function handleModalSuccess(stateCopy, that) {
@@ -230,8 +229,7 @@ const App = (...props) => {
 					var recipeCopy = _.without(recipes, changeRecipe);
 					setModal({
 						show: false,
-						type: "delete",
-						index: 0
+						type: "delete"
 					});
 					setRecipes(recipeCopy);
 					setFilteredRecipes(recipeCopy);
