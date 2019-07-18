@@ -139,7 +139,7 @@ const App = (...props) => {
 	}
 	function handleChangeIngredient(event) {
 
-
+		const ingredientsField =  event.target.name;
 		setIngredientIndex(1);
 		// raise Modal
 		raiseModal("addIngredient");

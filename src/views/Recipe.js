@@ -62,7 +62,7 @@ const Recipe = (...props) => {
 							</Tr>
 						</Thead>
 						{myRecipe.ingredients.map(ingredient => (
-							<Tbody onClick={handleChangeIngredient} key={ingredient._id ? ingredient._id : 1}>
+							<Tbody onClick={handleChangeIngredient} key={ingredient._id ? ingredient._id : 1} id={ingredient._id ? ingredient._id : 1}>
 								<Tr key={ingredient._id ? ingredient._id : 1}>
 									<Td>{ingredient.ingredient}</Td>
 									<Td>{ingredient.quantity}</Td>
