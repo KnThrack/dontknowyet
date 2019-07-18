@@ -345,7 +345,7 @@ const App = (...props) => {
 						handleModalClose={handleModalClose}
 						handleModalSuccess={handleModalSuccess}
 						modal={modal}
-						changeIngredient={changeRecipe}
+						changeRecipe={changeRecipe}
 						ingredientIndex={ingredientIndex}
 						handleInputChange={handleInputChange}
 					/>
