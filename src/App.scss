@@ -189,6 +189,28 @@ button#cardButton {
 	text-decoration: none;
 }
 
+// buttons
+.add-Button {
+    background-color: #fabe0e;
+    border-color: #fabe0e;
+}
+.back-Button {
+    background-color:  #8ab661;
+    border-color: #8ab661;
+}
+.submit-Button {
+    background-color:  #fd8664;
+    border-color: #fd8664;
+}
+
+/*
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+	--breakpoint-xl: 1200px;
+*/
+
 @media only screen and (min-width: 600px) {
 	/* For tablets: */
 	.App {

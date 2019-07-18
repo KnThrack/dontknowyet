@@ -13,7 +13,7 @@ const FloatButtons = (...props) => {
 	if (pageState.page === "list") {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
-				<Button variant='dark' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
+				<Button variant='dark' className='add-Button' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
 					Add Recipe
 				</Button>
 			</ButtonGroup>
@@ -22,14 +22,14 @@ const FloatButtons = (...props) => {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
 				<Link to='/'>
-					<Button variant='info' title='Go Back'>
+					<Button variant='info' className='back-Button' size='lg' title='Go Back'>
 						Go Back
 					</Button>
 				</Link>
-				<Button type='submit' variant='primary' onClick={handleSubmit}>
+				<Button type='submit' className='submit-Button' size='lg' variant='primary' onClick={handleSubmit}>
 					Submit
 				</Button>
-				<Button type='button' variant='primary' onClick={handleAddIngredient}>
+				<Button type='button' className='add-Button' size='lg' variant='primary' onClick={handleAddIngredient}>
 					Add Ingredient
 				</Button>
 			</ButtonGroup>
