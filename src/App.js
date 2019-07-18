@@ -140,7 +140,7 @@ const App = (...props) => {
 	function handleChangeIngredient(event) {
 
 
-		setIngredientIndex(stateCopy[index].ingredients.length - 1);
+		setIngredientIndex(1);
 		// raise Modal
 		raiseModal("addIngredient");
 	}
