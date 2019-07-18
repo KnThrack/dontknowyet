@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import { Link } from "react-router-dom";
+import "./table.css";
 
 const Recipe = (...props) => {
 	const { handleInputChange, handleTableChange, recipesList, setPageState, setChangeRecipe, location } = props[0];
@@ -63,30 +64,9 @@ const Recipe = (...props) => {
 						{myRecipe.ingredients.map(ingredient => (
 							<Tbody key={ingredient._id ? ingredient._id : 1}>
 								<Tr key={ingredient._id ? ingredient._id : 1}>
-									<Td>
-										<input
-											name={(ingredient._id ? ingredient._id : 1) + "#ingredient"}
-											type='text'
-											value={ingredient.ingredient}
-											onChange={handleTableChanges}
-										/>
-									</Td>
-									<Td>
-										<input
-											name={(ingredient._id ? ingredient._id : 1) + "#quantity"}
-											type='number'
-											value={ingredient.quantity}
-											onChange={handleTableChanges}
-										/>
-									</Td>
-									<Td>
-										<input
-											name={(ingredient._id ? ingredient._id : 1) + "#unit"}
-											type='text'
-											value={ingredient.unit}
-											onChange={handleTableChanges}
-										/>
-									</Td>
+									<Td>{ingredient.ingredient}</Td>
+									<Td>{ingredient.quantity}</Td>
+									<Td>{ingredient.unit}</Td>
 								</Tr>
 							</Tbody>
 						))}
