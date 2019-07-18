@@ -27,7 +27,7 @@ const NavBar = () => {
 	return (
 		<Navbar expand='lg'>
 			<Navbar.Brand href='/'>
-				<img src="../assets/Logosmall.png" alt="" width='50' height='50' className='d-inline-block align-top'/>
+				<img src={require("../assets/Logosmall.png")} alt='' width='50' height='50' className='d-inline-block align-top' />
 				{" Dontknowyet"}
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />
