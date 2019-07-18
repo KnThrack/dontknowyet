@@ -53,7 +53,7 @@ const Recipe = (...props) => {
 					<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={myRecipe.recipe} />
 				</Form.Group>
 				<Form.Group>
-					<Table striped bordered hover>
+					<Table striped="true" bordered="true" hover="true">
 						<Thead>
 							<Tr>
 								<Th>Ingredient</Th>
