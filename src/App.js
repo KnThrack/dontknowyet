@@ -240,13 +240,13 @@ const App = (...props) => {
 			type: ""
 		});
 	}
-	function handleModalSuccess(stateCopy, that) {
+	function handleModalSuccess(state, that) {
 		setModal({
 			show: false,
 			type: ""
 		});
 
-		if (stateCopy.type === "delete") {
+		if (state.type === "delete") {
 			// and put it away
 			setIngredientDelete(false);
 			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id)
@@ -265,15 +265,16 @@ const App = (...props) => {
 				});
 		}
 
-		if (stateCopy.type === "confirm" || stateCopy.type === "addIngredient") {
+		if (state.type === "confirm" || state.type === "addIngredient") {
 			// code block
+			var stateCopy = Object.assign({}, changeRecipe);
+
 			if (ingredientDelete) {
-				var stateCopy = Object.assign({}, changeRecipe);
 				stateCopy.ingredients = _.without(stateCopy.ingredients, stateCopy.ingredients[ingredientIndex]);
 				setChangeRecipe(stateCopy);
 				setIngredientDelete(false);
 			}
-			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id, JSON.stringify(changeRecipe))
+			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + stateCopy._id, JSON.stringify(stateCopy))
 				.then(function(response) {
 					// handle success
 				})
