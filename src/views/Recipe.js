@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import "./table.css";
 
 const Recipe = (...props) => {
-	const { handleInputChange, handleTableChange, handleChangeIngredient, recipesList, setPageState, setChangeRecipe, location } = props[0];
+	const { handleInputChange, handleTableChange, handleChangeIngredient, handleDeleteIngredient, recipesList, setPageState, setChangeRecipe, location } = props[0];
 
 	useEffect(() => {
 		setPageState({ page: "details" });
@@ -70,7 +70,7 @@ const Recipe = (...props) => {
 									<Td>{ingredient.unit}</Td>
 									<Td width="50px" >
 										<img
-											onClick={handleChangeIngredient}
+											onClick={handleDeleteIngredient}
 											src='https://unicons.iconscout.com/release/v1.0.0/svg/multiply.svg'
 											alt=''
 											width='30'

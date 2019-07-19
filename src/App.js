@@ -137,8 +137,12 @@ const App = (...props) => {
 		// raise Modal
 		raiseModal("addIngredient");
 	}
+
+	function handleDeleteIngredient(event) {
+		console.log(event);
+	}
+
 	function handleChangeIngredient(event) {
-		
 		let index = changeRecipe.ingredients.findIndex(x => x._id === event.currentTarget.id.toString());
 		setIngredientIndex(index);
 		// raise Modal
@@ -323,6 +327,7 @@ const App = (...props) => {
 										recipesList={recipesList}
 										handleInputChange={handleInputChange}
 										handleChangeIngredient={handleChangeIngredient}
+										handleDeleteIngredient={handleDeleteIngredient}
 										setPageState={setPageState}
 										setChangeRecipe={setChangeRecipe}
 										{...props}
