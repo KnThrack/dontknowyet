@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import axios from "axios";
 import "./App.scss";
-import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading } from "./views";
+import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
 
 //const util = require("util");
 var _ = require("underscore");
@@ -13,9 +11,12 @@ const App = (...props) => {
 	const [recipes, setRecipes] = useState(null);
 	const [filteredRecipes, setFilteredRecipes] = useState(null);
 	const [user, setUser] = useState(null);
-	const [modal, setModal] = useState({ show: false, type: "", index: null });
-	const [filter, setFilter] = useState(null);
+	const [modal, setModal] = useState({ show: false, type: "" });
+	const [filter, setFilter] = useState("");
 	const [changeRecipe, setChangeRecipe] = useState(null);
+	const [ingredientIndex, setIngredientIndex] = useState(null);
+	const [ingredientDelete, setIngredientDelete] = useState(false);
+	const [pageState, setPageState] = useState(null);
 
 	// set the default axios stuff
 	axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -88,6 +89,7 @@ const App = (...props) => {
 		stateCopy[index] = updateRecipe;
 
 		// update it
+		setChangeRecipe(stateCopy[index]);
 		setRecipes(stateCopy);
 		setFilteredRecipes(stateCopy);
 	}
@@ -119,9 +121,9 @@ const App = (...props) => {
 		addRecipe(newRecipe);
 	}
 
-	function handleAddIngredient(event, childState) {
+	function handleAddIngredient(event) {
 		// find which one we updating
-		let index = recipes.findIndex(x => x._id === childState._id.toString());
+		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
 		// take a copy thats mutable and update it
 		var stateCopy = recipes.slice();
 		stateCopy[index] = Object.assign({}, stateCopy[index]);
@@ -131,8 +133,22 @@ const App = (...props) => {
 			unit: ""
 		});
 
-		//update it
-		updateIngredients(stateCopy[index]);
+		setIngredientIndex(stateCopy[index].ingredients.length - 1);
+		setChangeRecipe(stateCopy[index]);
+		// raise Modal
+		raiseModal("addIngredient");
+	}
+
+	function handleDeleteIngredient(event) {
+		event.preventDefault();
+		setIngredientDelete(true);
+	}
+
+	function handleChangeIngredient(event) {
+		let index = changeRecipe.ingredients.findIndex(x => x._id === event.currentTarget.id.toString());
+		setIngredientIndex(index);
+		// raise Modal
+		raiseModal("addIngredient");
 	}
 
 	function handleTableChange(event, childState) {
@@ -140,25 +156,23 @@ const App = (...props) => {
 		const target = event.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
 
-		const ingredientsField = target.name.split("#");
+		const ingredientsField = target.name;
 
 		// find which one we updating
-		let index = recipes.findIndex(x => x._id === childState._id.toString());
+		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
 
 		// change the one we want to fix the state
 		var stateCopy = recipes.slice();
 		stateCopy[index] = Object.assign({}, stateCopy[index]);
 
-		// find which one we updating
-		let ingredientIndex = stateCopy[index].ingredients.findIndex(x => x._id === ingredientsField[0].toString());
-
 		// update it
-		stateCopy[index].ingredients[ingredientIndex][ingredientsField[1]] = value;
+		stateCopy[index].ingredients[ingredientIndex][ingredientsField] = value;
+		setChangeRecipe(stateCopy[index]);
 		setRecipes(stateCopy);
 		setFilteredRecipes(stateCopy);
 	}
 
-	function handleInputChange(event, childState) {
+	function handleInputChange(event) {
 		// get the value and move it into the state
 		const target = event.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
@@ -166,19 +180,24 @@ const App = (...props) => {
 		const recipeField = target.name;
 
 		// find which one we updating
-		let index = recipes.findIndex(x => x._id === childState._id.toString());
+		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
 
 		// change the one we want to fix the state
 		var stateCopy = recipes.slice();
 		stateCopy[index] = Object.assign({}, stateCopy[index]);
 		stateCopy[index][recipeField] = value;
+
+		// one
+		setChangeRecipe(stateCopy[index]);
+		// ALL
 		setRecipes(stateCopy);
 		setFilteredRecipes(stateCopy);
 	}
 
-	function handleSubmit(event, childState) {
+	function handleSubmit(event) {
 		event.preventDefault();
 
+		/*
 		// find which one we updating
 		let index = recipes.findIndex(x => x._id === childState._id.toString());
 
@@ -187,9 +206,9 @@ const App = (...props) => {
 		var recipe = stateCopy[index];
 
 		setChangeRecipe(recipe);
-
+*/
 		// raise decision
-		raiseModal("confirm", index);
+		raiseModal("confirm");
 	}
 
 	function raiseModal(modalType, index) {
@@ -211,28 +230,29 @@ const App = (...props) => {
 
 		setChangeRecipe(recipe);
 		// raise decision
-		raiseModal("delete", index);
+		raiseModal("delete");
 	}
 
 	function handleModalClose() {
+		setIngredientDelete(false);
 		setModal({
 			show: false,
-			type: "",
-			index: 0
+			type: ""
 		});
 	}
-	function handleModalSuccess(stateCopy, that) {
-		if (stateCopy.type === "delete") {
+	function handleModalSuccess(state, that) {
+		setModal({
+			show: false,
+			type: ""
+		});
+
+		if (state.type === "delete") {
 			// and put it away
+			setIngredientDelete(false);
 			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id)
 				.then(function(response) {
 					// handle success
 					var recipeCopy = _.without(recipes, changeRecipe);
-					setModal({
-						show: false,
-						type: "delete",
-						index: 0
-					});
 					setRecipes(recipeCopy);
 					setFilteredRecipes(recipeCopy);
 				})
@@ -245,16 +265,35 @@ const App = (...props) => {
 				});
 		}
 
-		if (stateCopy.type === "confirm") {
+		if (state.type === "confirm" || state.type === "addIngredient") {
 			// code block
-			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id, JSON.stringify(changeRecipe))
+			var stateCopy = Object.assign({}, changeRecipe);
+
+			if (ingredientDelete) {
+				stateCopy.ingredients = _.without(stateCopy.ingredients, stateCopy.ingredients[ingredientIndex]);
+
+				// find which one we updating
+				let index = recipes.findIndex(x => x._id === stateCopy._id.toString());
+				// change the one we want to fix the state
+				var recipesCopy = recipes.slice();
+				recipesCopy[index] = stateCopy;
+				setRecipes(recipesCopy);
+				setFilteredRecipes(recipesCopy);
+				setChangeRecipe(stateCopy);
+				setIngredientDelete(false);
+			}
+			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + stateCopy._id, JSON.stringify(stateCopy))
 				.then(function(response) {
 					// handle success
-					setModal({
-						show: false,
-						type: "confirm",
-						index: 0
-					});
+					// find which one we updating
+					let index = recipes.findIndex(x => x._id === response.data.data._id.toString());
+					// change the one we want to fix the state
+					var recipesCopy = recipes.slice();
+					recipesCopy[index] = response.data.data;
+
+					setRecipes(recipesCopy);
+					setFilteredRecipes(recipesCopy);
+					setChangeRecipe(response.data.data);
 				})
 				.catch(function(error) {
 					// handle error
@@ -298,9 +337,9 @@ const App = (...props) => {
 									<Recipes
 										recipesList={recipesList}
 										filter={filter}
-										handleAddRecipe={handleAddRecipe}
 										handleDelete={handleDelete}
 										handleFilterChange={handleFilterChange}
+										setPageState={setPageState}
 										{...props}
 									/>
 								)}
@@ -310,28 +349,40 @@ const App = (...props) => {
 								render={props => (
 									<Recipe
 										recipesList={recipesList}
-										handleTableChange={handleTableChange}
-										handleSubmit={handleSubmit}
 										handleInputChange={handleInputChange}
-										handleAddIngredient={handleAddIngredient}
+										handleChangeIngredient={handleChangeIngredient}
+										handleDeleteIngredient={handleDeleteIngredient}
+										setPageState={setPageState}
+										setChangeRecipe={setChangeRecipe}
 										{...props}
 									/>
 								)}
 							/>
 						</div>
 						<div className='d-flex footerButtons'>
-							<ButtonGroup className='footerButtonGroup'>
-								<Button variant='primary' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
-									Add Recipe
-								</Button>
-							</ButtonGroup>
+							<FloatButtons
+								handleAddRecipe={handleAddRecipe}
+								handleSubmit={handleSubmit}
+								handleAddIngredient={handleAddIngredient}
+								pageState={pageState}
+								{...props}
+							/>
 						</div>
 						<Switch>
 							<Route path='/' exact />
 							<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
 						</Switch>
 					</Router>
-					<ConfirmationModal showModal={modal.show} handleModalClose={handleModalClose} handleModalSuccess={handleModalSuccess} modal={modal} that={this} />
+					<ConfirmationModal
+						showModal={modal.show}
+						handleModalClose={handleModalClose}
+						handleModalSuccess={handleModalSuccess}
+						modal={modal}
+						changeRecipe={changeRecipe}
+						ingredientIndex={ingredientIndex}
+						ingredientDelete={ingredientDelete}
+						handleInputChange={handleTableChange}
+					/>
 				</div>
 			);
 		} else {
@@ -341,7 +392,12 @@ const App = (...props) => {
 						<header className='App-header'>
 							<NavBar />
 						</header>
-						<Loading />
+						<div className='App-content'>
+							<Loading />
+							<div className='d-flex footerButtons'>
+								<FloatButtons handleAddRecipe={handleAddRecipe} pageState={pageState} />
+							</div>
+						</div>
 					</Router>
 				</div>
 			);

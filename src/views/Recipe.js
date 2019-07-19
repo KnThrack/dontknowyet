@@ -1,19 +1,22 @@
-// src/views/recipe.js
-import React from "react";
+// src/views/Recipe.js
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Form from "react-bootstrap/Form";
-import Table from "react-bootstrap/Table";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import { Link } from "react-router-dom";
+import "./table.css";
 
 const Recipe = (...props) => {
-	const { handleInputChange, handleSubmit, handleTableChange, handleAddIngredient, recipesList, location } = props[0];
+	const { handleInputChange, handleTableChange, handleChangeIngredient, handleDeleteIngredient, recipesList, setPageState, setChangeRecipe, location } = props[0];
+
+	useEffect(() => {
+		setPageState({ page: "details" });
+		let index = recipesList.findIndex(x => x._id === location.state._id.toString());
+		setChangeRecipe(recipesList[index]);
+	}, []);
 
 	// handlers
-	function handleAddIngredients(event) {
-		handleAddIngredient(event, location.state);
-	}
-
 	function handleTableChanges(event) {
 		handleTableChange(event, location.state);
 	}
@@ -22,10 +25,6 @@ const Recipe = (...props) => {
 		handleInputChange(event, location.state);
 	}
 
-	function handleSubmits(event) {
-		// submit the changes to the backend
-		handleSubmit(event, location.state);
-	}
 	// handlers end
 
 	// find which one we looking at
@@ -55,59 +54,46 @@ const Recipe = (...props) => {
 					<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={myRecipe.recipe} />
 				</Form.Group>
 				<Form.Group>
-					<Table responsive variant='dark'>
-						<thead>
-							<tr>
-								<th>Ingredient</th>
-								<th>Quantity</th>
-								<th>Unit</th>
-							</tr>
-						</thead>
+					<Table striped='true' bordered='true' hover='true'>
+						<Thead>
+							<Tr>
+								<Th>Ingredient</Th>
+								<Th>Quantity</Th>
+								<Th>Unit</Th>
+								<Th width='50px' />
+							</Tr>
+						</Thead>
 						{myRecipe.ingredients.map(ingredient => (
-							<tbody key={ingredient._id ? ingredient._id : 1}>
-								<tr key={ingredient._id ? ingredient._id : 1}>
-									<td>
-										<input
-											name={(ingredient._id ? ingredient._id : 1) + "#ingredient"}
-											type='text'
-											value={ingredient.ingredient}
-											onChange={handleTableChanges}
+							<Tbody key={ingredient._id ? ingredient._id : 1}>
+								<Tr onClick={handleChangeIngredient} key={ingredient._id ? ingredient._id : 1} id={ingredient._id ? ingredient._id : 1}>
+									<Td>{ingredient.ingredient}</Td>
+									<Td>{ingredient.quantity}</Td>
+									<Td>{ingredient.unit}</Td>
+									<Td className='ingredientDeleteCell' width='50px'>
+										<img
+											id={ingredient._id ? ingredient._id : 1}
+											onClick={handleDeleteIngredient}
+											src='https://unicons.iconscout.com/release/v1.0.0/svg/multiply.svg'
+											alt=''
+											width='30'
+											height='30'
+											className='ingredientDelete-IMG d-inline-block align-center'
 										/>
-									</td>
-									<td>
-										<input
-											name={(ingredient._id ? ingredient._id : 1) + "#quantity"}
-											type='number'
-											value={ingredient.quantity}
-											onChange={handleTableChanges}
-										/>
-									</td>
-									<td>
-										<input
-											name={(ingredient._id ? ingredient._id : 1) + "#unit"}
-											type='text'
-											value={ingredient.unit}
-											onChange={handleTableChanges}
-										/>
-									</td>
-								</tr>
-							</tbody>
+										<Button
+											id={ingredient._id ? ingredient._id : 1}
+											type='submit'
+											className='ingredientDelete-Button submit-Button'
+											variant='primary'
+											onClick={handleDeleteIngredient}
+										>
+											Delete
+										</Button>
+									</Td>
+								</Tr>
+							</Tbody>
 						))}
 					</Table>
 				</Form.Group>
-				<ButtonToolbar>
-					<Link to='/'>
-						<Button variant='info' title='Go Back'>
-							Go Back
-						</Button>
-					</Link>
-					<Button type='submit' variant='primary' onClick={handleSubmits}>
-						Submit
-					</Button>
-					<Button type='button' variant='primary' onClick={handleAddIngredients}>
-						Add Ingredient
-					</Button>
-				</ButtonToolbar>
 			</Form>
 		</div>
 	);
