@@ -269,7 +269,7 @@ const App = (...props) => {
 			// code block
 			if (ingredientDelete) {
 				var stateCopy = Object.assign({}, changeRecipe);
-				stateCopy.ingredient = stateCopy.ingredient.splice(ingredientIndex);
+				stateCopy.ingredients = stateCopy.ingredients.splice(ingredientIndex);
 				setChangeRecipe(stateCopy);
 				setIngredientDelete(false);
 			};
