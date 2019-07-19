@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useAuth0 } from "./react-auth0-spa";
 import axios from "axios";
 import "./App.scss";
 import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
