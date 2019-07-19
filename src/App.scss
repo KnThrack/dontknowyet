@@ -203,7 +203,7 @@ button#cardButton {
     border-color: #fd8664;
 }
 
-.add-Button:not(:disabled):not(.disabled).active, .add-Button:not(:disabled):not(.disabled):active {
+.add-Button:not(:disabled):not(.disabled).active, .add-Button:not(:disabled):not(.disabled):active, .add-Button:hover {
     color: #fff;
     background-color:  #8ab661;
     border-color: #8ab661;
