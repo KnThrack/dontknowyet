@@ -140,8 +140,9 @@ const App = (...props) => {
 
 	function handleDeleteIngredient(event) {
 		event.preventDefault();
-		let index = changeRecipe.ingredients.findIndex(x => x._id === event.Target.id.toString());
+		let index = changeRecipe.ingredients.findIndex(x => x._id === event.target.id.toString());
 		setIngredientIndex(index);
+		raiseModal("deleteIngredient");
 	}
 
 	function handleChangeIngredient(event) {
