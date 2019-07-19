@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const ConfirmationModal = (...props) => {
-	const { showModal, handleModalClose, handleModalSuccess, handleInputChange, modal, changeRecipe, ingredientIndex } = props[0];
+	const { showModal, handleModalClose, handleModalSuccess, handleInputChange, modal, changeRecipe, ingredientIndex, ingredientDelete } = props[0];
 
 	let title = "",
 		body = "";
@@ -24,7 +24,11 @@ const ConfirmationModal = (...props) => {
 				body = "Are you sure that you want to change the recipe ?";
 				break;
 			case "addIngredient":
-				title = "Add Ingredient";
+				if (ingredientDelete) {
+					title = "Delete Ingredient";
+				} else {
+					title = "Add Ingredient";
+				}
 				break;
 			default:
 			// code block
@@ -45,19 +49,34 @@ const ConfirmationModal = (...props) => {
 					<Modal.Title>{title}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-
-				<Form id='Ingredient' /*controlId={recipe._id.toString()+".Form"}*/>
-				<Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
-					<Form.Label htmlFor='ingredient'>Ingredient</Form.Label>
-					<Form.Control name='ingredient' onChange={handleInputChange} id='ingredient' value={changeRecipe.ingredients[ingredientIndex].ingredient} />
-					<Form.Label htmlFor='quantity'>Quantity</Form.Label>
-					<Form.Control name='quantity' onChange={handleInputChange} id='quantity' value={changeRecipe.ingredients[ingredientIndex].quantity} />
-					<Form.Label htmlFor='unit'>Unit</Form.Label>
-					<Form.Control name='unit' onChange={handleInputChange} id='unit' value={changeRecipe.ingredients[ingredientIndex].unit} />
-				</Form.Group>
-			</Form>
-
-
+					<Form id='Ingredient' /*controlId={recipe._id.toString()+".Form"}*/>
+						<Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
+							<Form.Label htmlFor='ingredient'>Ingredient</Form.Label>
+							<Form.Control
+								readOnly={ingredientDelete}
+								name='ingredient'
+								onChange={handleInputChange}
+								id='ingredient'
+								value={changeRecipe.ingredients[ingredientIndex].ingredient}
+							/>
+							<Form.Label htmlFor='quantity'>Quantity</Form.Label>
+							<Form.Control
+								readOnly={ingredientDelete}
+								name='quantity'
+								onChange={handleInputChange}
+								id='quantity'
+								value={changeRecipe.ingredients[ingredientIndex].quantity}
+							/>
+							<Form.Label htmlFor='unit'>Unit</Form.Label>
+							<Form.Control
+								readOnly={ingredientDelete}
+								name='unit'
+								onChange={handleInputChange}
+								id='unit'
+								value={changeRecipe.ingredients[ingredientIndex].unit}
+							/>
+						</Form.Group>
+					</Form>
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant='secondary' onClick={handleClose}>

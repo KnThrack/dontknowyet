@@ -15,6 +15,7 @@ const App = (...props) => {
 	const [filter, setFilter] = useState("");
 	const [changeRecipe, setChangeRecipe] = useState(null);
 	const [ingredientIndex, setIngredientIndex] = useState(null);
+	const [ingredientDelete, setIngredientDelete] = useState(false);
 	const [pageState, setPageState] = useState(null);
 
 	// set the default axios stuff
@@ -140,9 +141,7 @@ const App = (...props) => {
 
 	function handleDeleteIngredient(event) {
 		event.preventDefault();
-		let index = changeRecipe.ingredients.findIndex(x => x._id === event.target.id.toString());
-		setIngredientIndex(index);
-		raiseModal("deleteIngredient");
+		setIngredientDelete(true);
 	}
 
 	function handleChangeIngredient(event) {
@@ -235,14 +234,17 @@ const App = (...props) => {
 	}
 
 	function handleModalClose() {
+		setIngredientDelete(false);
 		setModal({
 			show: false,
 			type: ""
 		});
 	}
 	function handleModalSuccess(stateCopy, that) {
+		
 		if (stateCopy.type === "delete") {
 			// and put it away
+			setIngredientDelete(false);
 			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id)
 				.then(function(response) {
 					// handle success
@@ -263,8 +265,14 @@ const App = (...props) => {
 				});
 		}
 
-		if (stateCopy.type === "confirm") {
+		if (stateCopy.type === "confirm" || stateCopy.type === "addIngredient") {
 			// code block
+			if (ingredientDelete) {
+				var stateCopy = Object.assign({}, changeRecipe);
+				stateCopy.ingredient = stateCopy.ingredient.splice(ingredientIndex);
+				setChangeRecipe(stateCopy);
+				setIngredientDelete(false);
+			};
 			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id, JSON.stringify(changeRecipe))
 				.then(function(response) {
 					// handle success
@@ -281,6 +289,7 @@ const App = (...props) => {
 				.finally(function() {
 					// always executed
 				});
+				
 		}
 	}
 
@@ -359,6 +368,7 @@ const App = (...props) => {
 						modal={modal}
 						changeRecipe={changeRecipe}
 						ingredientIndex={ingredientIndex}
+						ingredientDelete={ingredientDelete}
 						handleInputChange={handleTableChange}
 					/>
 				</div>
