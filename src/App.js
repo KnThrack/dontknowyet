@@ -278,13 +278,21 @@ const App = (...props) => {
 				var recipesCopy = recipes.slice();
 				recipesCopy[index] = stateCopy;
 				setRecipes(stateCopy);
-				setFilteredRecipes(stateCopy);
-				setChangeRecipe(stateCopy);
+				setFilteredRecipes(recipesCopy);
+				setChangeRecipe(recipesCopy);
 				setIngredientDelete(false);
 			}
 			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + stateCopy._id, JSON.stringify(stateCopy))
 				.then(function(response) {
 					// handle success
+					// find which one we updating
+					let index = recipes.findIndex(x => x._id === response.data.data._id.toString());
+					// change the one we want to fix the state
+					var recipesCopy = recipes.slice();
+					recipesCopy[index] = response.data.data;
+					setRecipes(response.data.data);
+					setFilteredRecipes(recipesCopy);
+					setChangeRecipe(stateCopy);
 				})
 				.catch(function(error) {
 					// handle error
