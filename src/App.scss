@@ -203,6 +203,12 @@ button#cardButton {
     border-color: #fd8664;
 }
 
+.submit-Button:not(:disabled):not(.disabled).active, .submit-Button:not(:disabled):not(.disabled):active, .submit-Button:hover {
+    color: #fff;
+    background-color:  #8ab661;
+    border-color: #8ab661;
+}
+
 .add-Button:not(:disabled):not(.disabled).active, .add-Button:not(:disabled):not(.disabled):active, .add-Button:hover {
     color: #fff;
     background-color:  #8ab661;
@@ -217,7 +223,7 @@ button#cardButton {
 	--breakpoint-xl: 1200px;
 */
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 576px) {
 	/* For tablets: */
 	.App {
 		text-align: center;
@@ -265,6 +271,59 @@ button#cardButton {
 }
 
 @media only screen and (min-width: 768px) {
+	/* For desktop: */
+	.App {
+		text-align: center;
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: 100px auto 100px;
+		grid-template-areas:
+			"header"
+			"main"
+			"footer";
+	}
+
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+		height: 40vmin;
+		pointer-events: none;
+	}
+
+	.App-header {
+		background: rgba(236, 222, 195, 0.72);
+		min-height: 10vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		font-size: calc(10px + 2vmin);
+		color: white;
+		grid-area: header;
+	}
+
+	.App-link {
+		color: #61dafb;
+	}
+
+	@keyframes App-logo-spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.App-content {
+		grid-area: main;
+	}
+
+	.footerButtons {
+		grid-area: footer;
+	}
+}
+
+@media only screen and (min-width: 992px) {
 	/* For desktop: */
 	.App {
 		text-align: center;
