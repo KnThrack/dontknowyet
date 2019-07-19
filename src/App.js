@@ -124,7 +124,7 @@ const App = (...props) => {
 			title: "",
 			cuisine: "",
 			ingredients: [],
-			recipe: "",
+			recipe: "Your Recipe",
 			user: user._id
 		};
 		addRecipe(newRecipe);
