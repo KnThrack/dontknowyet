@@ -241,7 +241,11 @@ const App = (...props) => {
 		});
 	}
 	function handleModalSuccess(stateCopy, that) {
-		
+		setModal({
+			show: false,
+			type: ""
+		});
+
 		if (stateCopy.type === "delete") {
 			// and put it away
 			setIngredientDelete(false);
@@ -249,10 +253,6 @@ const App = (...props) => {
 				.then(function(response) {
 					// handle success
 					var recipeCopy = _.without(recipes, changeRecipe);
-					setModal({
-						show: false,
-						type: "delete"
-					});
 					setRecipes(recipeCopy);
 					setFilteredRecipes(recipeCopy);
 				})
@@ -269,18 +269,13 @@ const App = (...props) => {
 			// code block
 			if (ingredientDelete) {
 				var stateCopy = Object.assign({}, changeRecipe);
-				stateCopy.ingredients = _.without(stateCopy.ingredients, stateCopy.ingredients[ingredientIndex])
+				stateCopy.ingredients = _.without(stateCopy.ingredients, stateCopy.ingredients[ingredientIndex]);
 				setChangeRecipe(stateCopy);
 				setIngredientDelete(false);
-			};
+			}
 			axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id, JSON.stringify(changeRecipe))
 				.then(function(response) {
 					// handle success
-					setModal({
-						show: false,
-						type: "confirm",
-						index: 0
-					});
 				})
 				.catch(function(error) {
 					// handle error
@@ -289,7 +284,6 @@ const App = (...props) => {
 				.finally(function() {
 					// always executed
 				});
-				
 		}
 	}
 
