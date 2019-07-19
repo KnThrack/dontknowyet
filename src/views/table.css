@@ -106,6 +106,10 @@ tbody tr:hover {
 	padding-right: 62px;
 }
 
+.ingredientDelete-Button {
+	display: none;
+}
+
 @media screen and (max-width: 992px) {
 	table {
 		display: block;
@@ -134,9 +138,9 @@ tbody tr:hover {
 
 	table tbody tr td:last-child {
 		margin-bottom: 0;
-    }
-    
-    .responsiveTable td .tdBefore {
+	}
+
+	.responsiveTable td .tdBefore {
 		position: absolute;
 		display: block;
 		left: 1rem;
@@ -176,6 +180,18 @@ tbody tr:hover {
 
 	tbody tr {
 		font-size: 14px;
+	}
+
+	.ingredientDeleteCell {
+		width: 100%;
+	}
+
+	.ingredientDelete-IMG {
+		display: none;
+	}
+
+	.ingredientDelete-Button {
+		display: flex;
 	}
 }
 

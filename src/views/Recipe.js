@@ -1,5 +1,6 @@
 // src/views/Recipe.js
 import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
@@ -59,7 +60,7 @@ const Recipe = (...props) => {
 								<Th>Ingredient</Th>
 								<Th>Quantity</Th>
 								<Th>Unit</Th>
-								<Th width="50px" />
+								<Th width='50px' />
 							</Tr>
 						</Thead>
 						{myRecipe.ingredients.map(ingredient => (
@@ -68,16 +69,25 @@ const Recipe = (...props) => {
 									<Td>{ingredient.ingredient}</Td>
 									<Td>{ingredient.quantity}</Td>
 									<Td>{ingredient.unit}</Td>
-									<Td width="50px" >
+									<Td className='ingredientDeleteCell' width='50px'>
 										<img
-										    id={ingredient._id ? ingredient._id : 1}
+											id={ingredient._id ? ingredient._id : 1}
 											onClick={handleDeleteIngredient}
 											src='https://unicons.iconscout.com/release/v1.0.0/svg/multiply.svg'
 											alt=''
 											width='30'
 											height='30'
-											className='d-inline-block align-center'
+											className='ingredientDelete-IMG d-inline-block align-center'
 										/>
+										<Button
+											id={ingredient._id ? ingredient._id : 1}
+											type='submit'
+											className='ingredientDelete-Button'
+											variant='primary'
+											onClick={handleDeleteIngredient}
+										>
+											Delete
+										</Button>
 									</Td>
 								</Tr>
 							</Tbody>
