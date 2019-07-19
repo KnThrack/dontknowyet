@@ -82,7 +82,7 @@ const Recipe = (...props) => {
 										<Button
 											id={ingredient._id ? ingredient._id : 1}
 											type='submit'
-											className='ingredientDelete-Button'
+											className='ingredientDelete-Button submit-Button'
 											variant='primary'
 											onClick={handleDeleteIngredient}
 										>
