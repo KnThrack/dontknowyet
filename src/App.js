@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Jumbotron from "react-bootstrap/Jumbotron";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import "./App.scss";
@@ -17,6 +19,7 @@ const App = (...props) => {
 	const [ingredientIndex, setIngredientIndex] = useState(null);
 	const [ingredientDelete, setIngredientDelete] = useState(false);
 	const [pageState, setPageState] = useState(null);
+	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
 	// set the default axios stuff
 	axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -29,6 +32,11 @@ const App = (...props) => {
 
 		setRecipes(recipes.data);
 		setFilteredRecipes(recipes.data);
+	}
+
+	function loginout() {
+		!isAuthenticated && loginWithRedirect({});
+		isAuthenticated && logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
 	}
 
 	useEffect(() => {
@@ -393,6 +401,15 @@ const App = (...props) => {
 							<NavBar />
 						</header>
 						<div className='App-content'>
+							<Jumbotron>
+								<h1>Welcome to my App !!</h1>
+								<p>If you want to store your awesome recipes please make a user and start cooking !!</p>
+								<p>
+									<Button onClick={loginout} variant='primary'>
+										Create your Awesome User !
+									</Button>
+								</p>
+							</Jumbotron>
 							<Loading />
 							<div className='d-flex footerButtons'>
 								<FloatButtons handleAddRecipe={handleAddRecipe} pageState={pageState} />
