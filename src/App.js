@@ -271,6 +271,14 @@ const App = (...props) => {
 
 			if (ingredientDelete) {
 				stateCopy.ingredients = _.without(stateCopy.ingredients, stateCopy.ingredients[ingredientIndex]);
+
+				// find which one we updating
+				let index = recipes.findIndex(x => x._id === stateCopy._id.toString());
+				// change the one we want to fix the state
+				var recipesCopy = recipes.slice();
+				recipesCopy[index] = stateCopy;
+				setRecipes(stateCopy);
+				setFilteredRecipes(stateCopy);
 				setChangeRecipe(stateCopy);
 				setIngredientDelete(false);
 			}
