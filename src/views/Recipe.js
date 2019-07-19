@@ -70,6 +70,7 @@ const Recipe = (...props) => {
 									<Td>{ingredient.unit}</Td>
 									<Td width="50px" >
 										<img
+										    id={ingredient._id.toString()}
 											onClick={handleDeleteIngredient}
 											src='https://unicons.iconscout.com/release/v1.0.0/svg/multiply.svg'
 											alt=''
