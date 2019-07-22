@@ -3,7 +3,6 @@ import "./upload.css";
 import Dropzone from "./Dropzone";
 
 const Upload = (...props) => {
-
 	const [files, setFiles] = useState([]);
 	const [uploading, setUploading] = useState(false);
 	const [uploadProgress, setUploadProgress] = useState({});
@@ -11,8 +10,8 @@ const Upload = (...props) => {
 
 	useEffect(() => {}, []);
 
-	function onFilesAdded(files) {
-		setFiles(files.concat(files));
+	function onFilesAdded(newfile) {
+		setFiles(files.concat(newfile));
 	}
 
 	async function uploadFiles() {
