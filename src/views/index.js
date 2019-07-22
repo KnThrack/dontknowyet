@@ -6,3 +6,4 @@ export { Profile } from "./Profile";
 export { Recipe } from "./Recipe";
 export { Recipes } from "./Recipes";
 export { FloatButtons } from "./FloatButtons";
+export { Upload } from "./Upload";
