@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./upload.css";
-import Dropzone from "./Dropzone";
+import { Dropzone } from "./";
 import axios from "axios";
 
 const Upload = (...props) => {
