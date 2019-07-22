@@ -1,5 +1,6 @@
 // src/views/Recipe.js
 import React, { useState, useEffect } from "react";
+import Upload from "./Upload";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
@@ -52,6 +53,7 @@ const Recipe = (...props) => {
 				<Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
 					<Form.Label htmlFor='recipe'>Recipe</Form.Label>
 					<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={myRecipe.recipe} />
+					<Upload/>
 				</Form.Group>
 				<Form.Group>
 					<Table striped='true' bordered='true' hover='true'>
