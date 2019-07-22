@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./upload.css";
 import Dropzone from "./Dropzone";
+import axios from "axios";
 
 const Upload = (...props) => {
 	const [files, setFiles] = useState([]);
@@ -34,38 +35,41 @@ const Upload = (...props) => {
 
 	function sendRequest(file) {
 		return new Promise((resolve, reject) => {
-			const req = new XMLHttpRequest();
-
-			req.upload.addEventListener("progress", event => {
-				if (event.lengthComputable) {
-					const copy = { uploadProgress };
-					copy[file.name] = {
-						state: "pending",
-						percentage: (event.loaded / event.total) * 100
-					};
-					setUploadProgress(copy);
-				}
-			});
-
-			req.upload.addEventListener("load", event => {
-				const copy = { ...uploadProgress };
-				copy[file.name] = { state: "done", percentage: 100 };
-				setUploadProgress({ uploadProgress: copy });
-				resolve(req.response);
-			});
-
-			req.upload.addEventListener("error", event => {
-				const copy = { ...uploadProgress };
-				copy[file.name] = { state: "error", percentage: 0 };
-				setUploadProgress(copy);
-				reject(req.response);
-			});
-
+			//"multipart/form-data".
 			const formData = new FormData();
 			formData.append("file", file, file.name);
 
-			req.open("POST", "http://localhost:8000/upload");
-			req.send(formData);
+			axios({
+				method: "post",
+				url: "https://notsureyetapp.herokuapp.com/api/upload/",
+				data: formData,
+				config: { headers: { "Content-Type": "multipart/form-data" } },
+				onUploadProgress: function(progressEvent) {
+					// Do whatever you want with the native progress event
+					if (progressEvent.lengthComputable) {
+						const copy = { uploadProgress };
+						copy[file.name] = {
+							state: "pending",
+							percentage: (progressEvent.loaded / progressEvent.total) * 100
+						};
+						setUploadProgress(copy);
+					}
+				}
+			})
+				.then(function(response) {
+					//handle success
+					const copy = { ...uploadProgress };
+					copy[file.name] = { state: "done", percentage: 100 };
+					setUploadProgress(copy);
+					resolve(response);
+				})
+				.catch(function(response) {
+					//handle error
+					const copy = { ...uploadProgress };
+					copy[file.name] = { state: "error", percentage: 0 };
+					setUploadProgress(copy);
+					reject(response);
+				});
 		});
 	}
 
