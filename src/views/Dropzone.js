@@ -1,88 +1,68 @@
-import React, { Component } from "react";
+import React, { useState, useRef } from "react";
 import "./upload.css";
 
-class Dropzone extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { hightlight: false };
-    this.fileInputRef = React.createRef();
+const Dropzone = (...props) => {
+	const [hightlight, setHightlight] = useState(false);
+	const { onFilesAdded, disabled } = props[0];
+	const fileInputRef = useRef(null);
 
-    this.openFileDialog = this.openFileDialog.bind(this);
-    this.onFilesAdded = this.onFilesAdded.bind(this);
-    this.onDragOver = this.onDragOver.bind(this);
-    this.onDragLeave = this.onDragLeave.bind(this);
-    this.onDrop = this.onDrop.bind(this);
-  }
+	function openFileDialog() {
+		if (disabled) return;
+		fileInputRef.current.click();
+	}
 
-  openFileDialog() {
-    if (this.props.disabled) return;
-    this.fileInputRef.current.click();
-  }
+	function onFilesAddedlocal(evt) {
+		if (disabled) return;
+		const files = evt.target.files;
+		if (onFilesAdded) {
+			const array = fileListToArray(files);
+			onFilesAdded(array);
+		}
+	}
 
-  onFilesAdded(evt) {
-    if (this.props.disabled) return;
-    const files = evt.target.files;
-    if (this.props.onFilesAdded) {
-      const array = this.fileListToArray(files);
-      this.props.onFilesAdded(array);
-    }
-  }
+	function onDragOver(event) {
+		event.preventDefault();
+		if (disabled) return;
+		setHightlight(true);
+	}
 
-  onDragOver(event) {
-    event.preventDefault();
-    if (this.props.disabed) return;
-    this.setState({ hightlight: true });
-  }
+	function onDragLeave(event) {
+		setHightlight(false);
+	}
 
-  onDragLeave(event) {
-    this.setState({ hightlight: false });
-  }
+	function onDrop(event) {
+		event.preventDefault();
+		if (disabled) return;
+		const files = event.dataTransfer.files;
+		if (onFilesAdded) {
+			const array = fileListToArray(files);
+			onFilesAdded(array);
+		}
+		setHightlight(false);
+	}
 
-  onDrop(event) {
-    event.preventDefault();
-    if (this.props.disabed) return;
-    const files = event.dataTransfer.files;
-    if (this.props.onFilesAdded) {
-      const array = this.fileListToArray(files);
-      this.props.onFilesAdded(array);
-    }
-    this.setState({ hightlight: false });
-  }
+	function fileListToArray(list) {
+		const array = [];
+		for (var i = 0; i < list.length; i++) {
+			array.push(list.item(i));
+		}
+		return array;
+	}
 
-  fileListToArray(list) {
-    const array = [];
-    for (var i = 0; i < list.length; i++) {
-      array.push(list.item(i));
-    }
-    return array;
-  }
+	return (
+		<div
+			className={`Dropzone ${hightlight ? "Highlight" : ""}`}
+			onDragOver={onDragOver}
+			onDragLeave={onDragLeave}
+			onDrop={onDrop}
+			onClick={openFileDialog}
+			style={{ cursor: disabled ? "default" : "pointer" }}
+		>
+			<input ref={fileInputRef} className='FileInput' type='file' multiple onChange={onFilesAddedlocal} />
+			<img alt='upload' className='Icon' src='https://unicons.iconscout.com/release/v1.0.0/svg/upload.svg' />
+			<span>Upload Files</span>
+		</div>
+	);
+};
 
-  render() {
-    return (
-      <div
-        className={`Dropzone ${this.state.hightlight ? "Highlight" : ""}`}
-        onDragOver={this.onDragOver}
-        onDragLeave={this.onDragLeave}
-        onDrop={this.onDrop}
-        onClick={this.openFileDialog}
-        style={{ cursor: this.props.disabled ? "default" : "pointer" }}
-      >
-        <input
-          ref={this.fileInputRef}
-          className="FileInput"
-          type="file"
-          multiple
-          onChange={this.onFilesAdded}
-        />
-        <img
-          alt="upload"
-          className="Icon"
-          src="https://unicons.iconscout.com/release/v1.0.0/svg/upload.svg"
-        />
-        <span>Upload Files</span>
-      </div>
-    );
-  }
-}
-
-export default Dropzone;
+export { Dropzone };
