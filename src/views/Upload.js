@@ -4,6 +4,8 @@ import { Dropzone } from "./";
 import axios from "axios";
 import Multer from "multer";
 import * as firebase from "firebase/app";
+// Add the Firebase products that you want to use
+import "firebase/storage";
 
 const Upload = (...props) => {
 	const [files, setFiles] = useState([]);
@@ -44,6 +46,30 @@ const Upload = (...props) => {
 
 	function sendRequest(file) {
 		return new Promise((resolve, reject) => {
+			var storageRef = firebase.storage().ref();
+
+			var metadata = {
+				contentType: file.type
+			};
+
+			storageRef
+				.child(firebase.auth().currentUser.uid + "/" + file.name)
+				.put(file, metadata)
+				.then(function(snapshot) {
+					console.log("Uploaded", snapshot.totalBytes, "bytes.");
+					console.log("File metadata:", snapshot.metadata);
+					// Let's get a download URL for the file.
+					snapshot.ref.getDownloadURL().then(function(url) {
+						console.log("File available at", url);
+					});
+				})
+				.catch(function(error) {
+					// [START onfailure]
+					console.error("Upload failed:", error);
+					// [END onfailure]
+				});
+
+			/*
 			//"multipart/form-data".
 			const formData = new FormData();
 			formData.append("file", file, file.name);
@@ -79,6 +105,7 @@ const Upload = (...props) => {
 					setUploadProgress(copy);
 					reject(response);
 				});
+				*/
 		});
 	}
 
