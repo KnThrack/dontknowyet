@@ -43,7 +43,7 @@ const Upload = (...props) => {
 			};
 
 			storageRef
-				.child(firebaseApp.auth().currentUser.uid + "/" + file.name)
+				.child("users/" + firebaseApp.auth().currentUser.uid + "/" + file.name)
 				.put(file, metadata)
 				.then(function(snapshot) {
 					console.log("Uploaded", snapshot.totalBytes, "bytes.");
