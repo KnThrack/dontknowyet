@@ -115,8 +115,9 @@ const App = (...props) => {
 				appId: "1:1016122621793:web:1cdc1e8b3a26988e"
 			};
 
+			var fire = firebase.initializeApp(firebaseConfig);
 			// auth to firebase with token
-			fireToken = axios({
+			const fireToken = axios({
 				method: "get",
 				url: "https://notsureyetapp.herokuapp.com/auth/firebase"
 			});
