@@ -10,6 +10,7 @@ import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Load
 import * as firebase from "firebase/app";
 // Add the Firebase products that you want to use
 import "firebase/auth";
+import "firebase/storage";
 
 //const util = require("util");
 var _ = require("underscore");
