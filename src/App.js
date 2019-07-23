@@ -101,7 +101,7 @@ const App = (...props) => {
 		});
 
 		auth.then(function(result) {
-			setFirebaseApp(FirebaseApp());
+			setFirebaseApp(new FirebaseApp());
 		});
 	}, []);
 
