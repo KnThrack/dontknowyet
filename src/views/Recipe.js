@@ -8,7 +8,7 @@ import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "./table.css";
 
 const Recipe = (...props) => {
-	const { handleInputChange, handleTableChange, handleChangeIngredient, handleDeleteIngredient, recipesList, setPageState, setChangeRecipe, location } = props[0];
+	const { firebaseApp, handleInputChange, handleTableChange, handleChangeIngredient, handleDeleteIngredient, recipesList, setPageState, setChangeRecipe, location } = props[0];
 
 	useEffect(() => {
 		setPageState({ page: "details" });
@@ -52,7 +52,7 @@ const Recipe = (...props) => {
 				<Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
 					<Form.Label htmlFor='recipe'>Recipe</Form.Label>
 					<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={myRecipe.recipe} />
-					<Upload />
+					<Upload firebaseApp={firebaseApp} />
 				</Form.Group>
 				<Form.Group>
 					<Table striped='true' bordered='true' hover='true'>

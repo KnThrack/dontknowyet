@@ -2,23 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./upload.css";
 import { Dropzone } from "./";
 import axios from "axios";
-import Multer from "multer";
-import * as firebase from "firebase/app";
-// Add the Firebase products that you want to use
-import "firebase/storage";
 
 const Upload = (...props) => {
 	const [files, setFiles] = useState([]);
 	const [uploading, setUploading] = useState(false);
 	const [uploadProgress, setUploadProgress] = useState({});
 	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
-
-	const multer = Multer({
-		storage: Multer.MemoryStorage,
-		limits: {
-			fileSize: 5 * 1024 * 1024 // no larger than 5mb
-		}
-	});
+	const { firebaseApp } = props[0];
 
 	useEffect(() => {}, []);
 
@@ -46,14 +36,14 @@ const Upload = (...props) => {
 
 	function sendRequest(file) {
 		return new Promise((resolve, reject) => {
-			var storageRef = firebase.storage().ref();
+			var storageRef = firebaseApp.storage().ref();
 
 			var metadata = {
 				contentType: file.type
 			};
 
 			storageRef
-				.child(firebase.auth().currentUser.uid + "/" + file.name)
+				.child(firebaseApp.auth().currentUser.uid + "/" + file.name)
 				.put(file, metadata)
 				.then(function(snapshot) {
 					console.log("Uploaded", snapshot.totalBytes, "bytes.");

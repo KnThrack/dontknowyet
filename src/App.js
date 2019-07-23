@@ -7,10 +7,7 @@ import axios from "axios";
 import "./App.scss";
 import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
 // Firebase App (the core Firebase SDK) is always required and must be listed first
-import * as firebase from "firebase/app";
-
-// Add the Firebase products that you want to use
-import "firebase/auth";
+import FirebaseApp from "./firebase/Firebase";
 
 //const util = require("util");
 var _ = require("underscore");
@@ -25,6 +22,7 @@ const App = (...props) => {
 	const [ingredientIndex, setIngredientIndex] = useState(null);
 	const [ingredientDelete, setIngredientDelete] = useState(false);
 	const [pageState, setPageState] = useState(null);
+	const [firebaseApp, setFirebaseApp] = useState(null);
 	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
 	// set the default axios stuff
@@ -104,35 +102,7 @@ const App = (...props) => {
 		});
 
 		auth.then(function(result) {
-			const firebaseConfig = {
-				apiKey: "AIzaSyDqvSOYhQwSshZuNU5HyA2-THt5jmjIq8U",
-				authDomain: "dontknowyet.firebaseapp.com",
-				databaseURL: "https://dontknowyet.firebaseio.com",
-				projectId: "dontknowyet",
-				storageBucket: "",
-				messagingSenderId: "1016122621793",
-				appId: "1:1016122621793:web:1cdc1e8b3a26988e"
-			};
-			// Initialize Firebase
-			firebase.initializeApp(firebaseConfig);
-
-			// auth to firebase with token
-			const fireToken = axios({
-				method: "get",
-				url: "https://notsureyetapp.herokuapp.com/auth/firebase"
-			});
-
-			fireToken.then(function(result) {
-				firebase.auth()
-					.signInWithCustomToken(result.data.firebaseToken)
-					.catch(function(error) {
-						// Handle Errors here.
-						var errorCode = error.code;
-						var errorMessage = error.message;
-						console.log(errorMessage);
-						// ...
-					});
-			});
+			setFirebaseApp(FirebaseApp());
 		});
 	}, []);
 
@@ -411,6 +381,7 @@ const App = (...props) => {
 										handleDeleteIngredient={handleDeleteIngredient}
 										setPageState={setPageState}
 										setChangeRecipe={setChangeRecipe}
+										firebaseApp={firebaseApp}
 										{...props}
 									/>
 								)}
