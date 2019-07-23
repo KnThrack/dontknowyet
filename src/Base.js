@@ -35,7 +35,17 @@ async function getToken(getTokenSilently) {
 	// set auth headers
 
 	// auth to firebase with token
-	const fireToken = (await axios.get("https://notsureyetapp.herokuapp.com/auth/firebase")).data;
+	const fireToken = await axios({
+		method: "get",
+		url: "https://notsureyetapp.herokuapp.com/auth/firebase",
+		config: {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		}
+	}).data;
+
 	firebase.auth()
 		.signInWithCustomToken(fireToken)
 		.catch(function(error) {
