@@ -125,7 +125,7 @@ const App = (...props) => {
 
 			fireToken.then(function(result) {
 				firebase.auth()
-					.signInWithCustomToken(result.data)
+					.signInWithCustomToken(result.data.firebaseToken)
 					.catch(function(error) {
 						// Handle Errors here.
 						var errorCode = error.code;
