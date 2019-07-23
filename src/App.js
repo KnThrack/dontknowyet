@@ -123,7 +123,7 @@ const App = (...props) => {
 			});
 
 			fireToken.then(function(result) {
-				firebase.auth()
+				fire.auth()
 					.signInWithCustomToken(result.data.firebaseToken)
 					.catch(function(error) {
 						// Handle Errors here.
@@ -132,6 +132,8 @@ const App = (...props) => {
 						console.log(errorMessage);
 						// ...
 					});
+
+				setFirebaseApp(fire);
 			});
 		});
 	}, []);
