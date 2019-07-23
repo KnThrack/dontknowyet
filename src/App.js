@@ -43,8 +43,7 @@ const App = (...props) => {
 		isAuthenticated && logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
 
 		isAuthenticated &&
-			firebase
-				.auth()
+			FirebaseApp.auth()
 				.signOut()
 				.then(function() {
 					// Sign-out successful.
