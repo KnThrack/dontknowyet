@@ -7,7 +7,9 @@ import axios from "axios";
 import "./App.scss";
 import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
 // Firebase App (the core Firebase SDK) is always required and must be listed first
-import FirebaseApp from "./firebase/Firebase";
+import * as firebase from "firebase/app";
+// Add the Firebase products that you want to use
+import "firebase/auth";
 
 //const util = require("util");
 var _ = require("underscore");
@@ -43,7 +45,8 @@ const App = (...props) => {
 		isAuthenticated && logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
 
 		isAuthenticated &&
-			FirebaseApp.auth()
+			firebase
+				.auth()
 				.signOut()
 				.then(function() {
 					// Sign-out successful.
@@ -70,6 +73,7 @@ const App = (...props) => {
 		async function getUser() {
 			return (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + props[0].user.email)).data;
 		}
+
 		auth.then(function(result) {
 			let user = getUser();
 
@@ -101,7 +105,33 @@ const App = (...props) => {
 		});
 
 		auth.then(function(result) {
-			setFirebaseApp(new FirebaseApp());
+			const firebaseConfig = {
+				apiKey: "AIzaSyDqvSOYhQwSshZuNU5HyA2-THt5jmjIq8U",
+				authDomain: "dontknowyet.firebaseapp.com",
+				databaseURL: "https://dontknowyet.firebaseio.com",
+				projectId: "dontknowyet",
+				storageBucket: "",
+				messagingSenderId: "1016122621793",
+				appId: "1:1016122621793:web:1cdc1e8b3a26988e"
+			};
+
+			// auth to firebase with token
+			fireToken = axios({
+				method: "get",
+				url: "https://notsureyetapp.herokuapp.com/auth/firebase"
+			});
+
+			fireToken.then(function(result) {
+				firebase.auth()
+					.signInWithCustomToken(result.data.firebaseToken)
+					.catch(function(error) {
+						// Handle Errors here.
+						var errorCode = error.code;
+						var errorMessage = error.message;
+						console.log(errorMessage);
+						// ...
+					});
+			});
 		});
 	}, []);
 
