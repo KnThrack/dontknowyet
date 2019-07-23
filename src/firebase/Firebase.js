@@ -13,28 +13,29 @@ const firebaseConfig = {
 	appId: "1:1016122621793:web:1cdc1e8b3a26988e"
 };
 
-class Firebase {
+class FirebaseApp {
 	constructor() {
 		firebase.initializeApp(firebaseConfig);
+		this.authenticate();
+	}
 
+	async authenticate() {
 		// auth to firebase with token
-		const fireToken = axios({
+		const fireToken = await axios({
 			method: "get",
 			url: "https://notsureyetapp.herokuapp.com/auth/firebase"
 		});
 
-		fireToken.then(function(result) {
-			firebase.auth()
-				.signInWithCustomToken(result.data.firebaseToken)
-				.catch(function(error) {
-					// Handle Errors here.
-					var errorCode = error.code;
-					var errorMessage = error.message;
-					console.log(errorMessage);
-					// ...
-				});
-		});
+		firebase.auth()
+			.signInWithCustomToken(fireToken.data.firebaseToken)
+			.catch(function(error) {
+				// Handle Errors here.
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				console.log(errorMessage);
+				// ...
+			});
 	}
 }
 
-export default Firebase;
+export default FirebaseApp;
