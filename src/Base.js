@@ -2,6 +2,7 @@ import React from "react";
 import { Loading } from "./views";
 import App from "./App";
 import { useAuth0 } from "./react-auth0-spa";
+import axios from "axios";
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import * as firebase from "firebase/app";
 
@@ -15,15 +16,6 @@ import "./App.scss";
 import initFontAwesome from "./utils/initFontAwesome";
 initFontAwesome();
 */
-const firebaseConfig = {
-	apiKey: "AIzaSyDqvSOYhQwSshZuNU5HyA2-THt5jmjIq8U",
-	authDomain: "dontknowyet.firebaseapp.com",
-	databaseURL: "https://dontknowyet.firebaseio.com",
-	projectId: "dontknowyet",
-	storageBucket: "",
-	messagingSenderId: "1016122621793",
-	appId: "1:1016122621793:web:1cdc1e8b3a26988e"
-};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
