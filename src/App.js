@@ -6,6 +6,7 @@ import { useAuth0 } from "./react-auth0-spa";
 import axios from "axios";
 import "./App.scss";
 import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
+import * as firebase from "firebase/app";
 
 //const util = require("util");
 var _ = require("underscore");
@@ -38,6 +39,17 @@ const App = (...props) => {
 	function loginout() {
 		!isAuthenticated && loginWithRedirect({});
 		isAuthenticated && logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
+
+		isAuthenticated &&
+			firebase
+				.auth()
+				.signOut()
+				.then(function() {
+					// Sign-out successful.
+				})
+				.catch(function(error) {
+					// An error happened.
+				});
 	}
 
 	useEffect(() => {

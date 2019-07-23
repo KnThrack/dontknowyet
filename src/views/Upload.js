@@ -2,12 +2,21 @@ import React, { useState, useEffect } from "react";
 import "./upload.css";
 import { Dropzone } from "./";
 import axios from "axios";
+import Multer from "multer";
+import * as firebase from "firebase/app";
 
 const Upload = (...props) => {
 	const [files, setFiles] = useState([]);
 	const [uploading, setUploading] = useState(false);
 	const [uploadProgress, setUploadProgress] = useState({});
 	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
+
+	const multer = Multer({
+		storage: Multer.MemoryStorage,
+		limits: {
+			fileSize: 5 * 1024 * 1024 // no larger than 5mb
+		}
+	});
 
 	useEffect(() => {}, []);
 
