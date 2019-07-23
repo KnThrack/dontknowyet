@@ -111,7 +111,7 @@ const App = (...props) => {
 				authDomain: "dontknowyet.firebaseapp.com",
 				databaseURL: "https://dontknowyet.firebaseio.com",
 				projectId: "dontknowyet",
-				storageBucket: "",
+				storageBucket: "gs://dontknowyet.appspot.com/",
 				messagingSenderId: "1016122621793",
 				appId: "1:1016122621793:web:1cdc1e8b3a26988e"
 			};
