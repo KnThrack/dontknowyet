@@ -35,8 +35,9 @@ async function getToken(getTokenSilently) {
 	// set auth headers
 
 	// auth to firebase with token
+	const fireToken = (await axios.get("https://notsureyetapp.herokuapp.com/auth/firebase")).data;
 	firebase.auth()
-		.signInWithCustomToken(token)
+		.signInWithCustomToken(fireToken)
 		.catch(function(error) {
 			// Handle Errors here.
 			var errorCode = error.code;
