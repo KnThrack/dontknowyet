@@ -51,33 +51,46 @@ const Upload = (...props) => {
 			storageRef
 				.child("users/" + firebaseApp.auth().currentUser.uid + "/" + file.name)
 				.put(file, metadata)
-				.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
-					// progress
-					var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-					console.log(percent + "% done");
-					// Do whatever you want with the native progress event
-					const copy = { uploadProgress };
-					copy[file.name] = {
-						state: "pending",
-						percentage: percent
-					};
-					setUploadProgress(copy);
-				})
-				.then(function(snapshot) {
-					// success !!
-					console.log("Uploaded", snapshot.totalBytes, "bytes.");
-					console.log("File metadata:", snapshot.metadata);
-					// Let's get a download URL for the file.
-					snapshot.ref.getDownloadURL().then(function(url) {
-						console.log("File available at", url);
-					});
+				.on(
+					firebase.storage.TaskEvent.STATE_CHANGED,
+					function(snapshot) {
+						// progress
+						var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+						console.log(percent + "% done");
+						// Do whatever you want with the native progress event
+						const copy = { uploadProgress };
+						copy[file.name] = {
+							state: "pending",
+							percentage: percent
+						};
+						setUploadProgress(copy);
+					},
+					function(error) {
+						// [START onfailure]
+						console.error("Upload failed:", error);
+						//handle error
+						const copy = { ...uploadProgress };
+						copy[file.name] = { state: "error", percentage: 0 };
+						setUploadProgress(copy);
+						reject(error);
+						// [END onfailure]
+					},
+					function(snapshot) {
+						// success !!
+						console.log("Uploaded", snapshot.totalBytes, "bytes.");
+						console.log("File metadata:", snapshot.metadata);
+						// Let's get a download URL for the file.
+						snapshot.ref.getDownloadURL().then(function(url) {
+							console.log("File available at", url);
+						});
 
-					//handle success
-					const copy = { ...uploadProgress };
-					copy[file.name] = { state: "done", percentage: 100 };
-					setUploadProgress(copy);
-					resolve(snapshot);
-				})
+						//handle success
+						const copy = { ...uploadProgress };
+						copy[file.name] = { state: "done", percentage: 100 };
+						setUploadProgress(copy);
+						resolve(snapshot);
+					}
+				)
 				.catch(function(error) {
 					// [START onfailure]
 					console.error("Upload failed:", error);
