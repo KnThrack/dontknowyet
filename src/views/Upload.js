@@ -41,6 +41,10 @@ const Upload = (...props) => {
 				contentType: file.type
 			};
 
+			const copy = { ...uploadProgress };
+			copy[file.name] = { state: "done", percentage: 0 };
+			setUploadProgress(copy);
+
 			storageRef
 				.child("users/" + firebaseApp.auth().currentUser.uid + "/" + file.name)
 				.put(file, metadata)
