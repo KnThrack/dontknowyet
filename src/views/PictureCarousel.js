@@ -13,7 +13,7 @@ const PictureCarousel = (...props) => {
 
 	useEffect(() => {}, []);
 
-	if (pictureList) {
+	if (pictureList.length !== 0) {
 		return (
 			<div className='pictures'>
 				<Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
