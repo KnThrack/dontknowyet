@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import Carousel from "react-bootstrap/Carousel";
-const PictureCarousel = props => {
+const PictureCarousel = (...props) => {
 	const [index, setIndex] = useState(0);
 	const [direction, setDirection] = useState(null);
 	const { pictureList } = props[0];
