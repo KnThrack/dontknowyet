@@ -51,6 +51,18 @@ const Upload = (...props) => {
 			storageRef
 				.child("users/" + firebaseApp.auth().currentUser.uid + "/" + file.name)
 				.put(file, metadata)
+				.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
+					// progress
+					var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					console.log(percent + "% done");
+					// Do whatever you want with the native progress event
+					const copy = { uploadProgress };
+					copy[file.name] = {
+						state: "pending",
+						percentage: percent
+					};
+					setUploadProgress(copy);
+				})
 				.then(function(snapshot) {
 					// success !!
 					console.log("Uploaded", snapshot.totalBytes, "bytes.");
@@ -65,18 +77,6 @@ const Upload = (...props) => {
 					copy[file.name] = { state: "done", percentage: 100 };
 					setUploadProgress(copy);
 					resolve(snapshot);
-				})
-				.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
-					// progress
-					var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-					console.log(percent + "% done");
-					// Do whatever you want with the native progress event
-					const copy = { uploadProgress };
-					copy[file.name] = {
-						state: "pending",
-						percentage: percent
-					};
-					setUploadProgress(copy);
 				})
 				.catch(function(error) {
 					// [START onfailure]
