@@ -6,90 +6,15 @@ import * as firebase from "firebase/app";
 import "firebase/storage";
 
 const Upload = (...props) => {
+	/*
 	const [files, setFiles] = useState([]);
 	const [uploading, setUploading] = useState(false);
 	const [uploadProgress, setUploadProgress] = useState({});
 	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
-	const { firebaseApp } = props[0];
+*/
+	const { uploadFiles, onFilesAdded, successfullUploaded, uploadProgress, uploading, files, setFiles, setSuccessfullUploaded } = props[0];
 
 	useEffect(() => {}, []);
-
-	function onFilesAdded(newfile) {
-		setFiles(files.concat(newfile));
-	}
-
-	async function uploadFiles() {
-		setUploadProgress({});
-		setUploading(true);
-		const promises = [];
-		files.forEach(file => {
-			promises.push(sendRequest(file));
-		});
-		try {
-			await Promise.all(promises);
-			setSuccessfullUploaded(true);
-			setUploading(false);
-		} catch (e) {
-			// Not Production ready! Do some error handling here instead...
-			setSuccessfullUploaded(true);
-			setUploading(false);
-		}
-	}
-
-	function sendRequest(file) {
-		return new Promise((resolve, reject) => {
-			var storageRef = firebaseApp.storage().ref();
-
-			var metadata = {
-				contentType: file.type
-			};
-
-			const copy = { ...uploadProgress };
-			copy[file.name] = { state: "done", percentage: 0 };
-			setUploadProgress(copy);
-
-			var storageData = storageRef.child("users/" + firebaseApp.auth().currentUser.uid + "/" + file.name).put(file, metadata);
-
-			storageData.on(
-				firebase.storage.TaskEvent.STATE_CHANGED,
-				function(snapshot) {
-					// progress
-					var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-					console.log(percent + "% done");
-					// Do whatever you want with the native progress event
-					const copy = { uploadProgress };
-					copy[file.name] = {
-						state: "pending",
-						percentage: percent
-					};
-					setUploadProgress(copy);
-				},
-				function(error) {
-					// [START onfailure]
-					console.error("Upload failed:", error);
-					//handle error
-					const copy = { ...uploadProgress };
-					copy[file.name] = { state: "error", percentage: 0 };
-					setUploadProgress(copy);
-					reject(error);
-					// [END onfailure]
-				},
-				function(snapshot) {
-					// success !!
-
-					//handle success
-					const copy = { ...uploadProgress };
-					copy[file.name] = { state: "done", percentage: 100 };
-					setUploadProgress(copy);
-					resolve(snapshot);
-				}
-			);
-
-			storageData.then(function(snapshot) {
-				console.log(snapshot);
-			});
-		});
-	}
 
 	function renderProgress(file) {
 		const progress = uploadProgress[file.name];

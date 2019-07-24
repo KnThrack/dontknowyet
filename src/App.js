@@ -16,6 +16,7 @@ import "firebase/storage";
 var _ = require("underscore");
 
 const App = (...props) => {
+	// all my state its getting quiet a lot to think about using context
 	const [recipes, setRecipes] = useState(null);
 	const [filteredRecipes, setFilteredRecipes] = useState(null);
 	const [user, setUser] = useState(null);
@@ -27,6 +28,10 @@ const App = (...props) => {
 	const [pageState, setPageState] = useState(null);
 	const [firebaseApp, setFirebaseApp] = useState(null);
 	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+	const [files, setFiles] = useState([]);
+	const [uploading, setUploading] = useState(false);
+	const [uploadProgress, setUploadProgress] = useState({});
+	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
 
 	// set the default axios stuff
 	axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -376,6 +381,85 @@ const App = (...props) => {
 		setFilteredRecipes(filteredRecipes);
 		setFilter(value);
 	}
+
+	// upload handlers
+	function onFilesAdded(newfile) {
+		setFiles(files.concat(newfile));
+	}
+
+	async function uploadFiles() {
+		setUploadProgress({});
+		setUploading(true);
+		const promises = [];
+		files.forEach(file => {
+			promises.push(sendRequest(file));
+		});
+		try {
+			await Promise.all(promises);
+			setSuccessfullUploaded(true);
+			setUploading(false);
+		} catch (e) {
+			// Not Production ready! Do some error handling here instead...
+			setSuccessfullUploaded(true);
+			setUploading(false);
+		}
+	}
+
+	function sendRequest(file) {
+		return new Promise((resolve, reject) => {
+			var storageRef = firebaseApp.storage().ref();
+
+			var metadata = {
+				contentType: file.type
+			};
+
+			const copy = { ...uploadProgress };
+			copy[file.name] = { state: "done", percentage: 0 };
+			setUploadProgress(copy);
+
+			var storageData = storageRef.child("users/" + firebaseApp.auth().currentUser.uid + "/" + file.name).put(file, metadata);
+
+			storageData.on(
+				firebase.storage.TaskEvent.STATE_CHANGED,
+				function(snapshot) {
+					// progress
+					var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					console.log(percent + "% done");
+					// Do whatever you want with the native progress event
+					const copy = { uploadProgress };
+					copy[file.name] = {
+						state: "pending",
+						percentage: percent
+					};
+					setUploadProgress(copy);
+				},
+				function(error) {
+					// [START onfailure]
+					console.error("Upload failed:", error);
+					//handle error
+					const copy = { ...uploadProgress };
+					copy[file.name] = { state: "error", percentage: 0 };
+					setUploadProgress(copy);
+					reject(error);
+					// [END onfailure]
+				},
+				function(snapshot) {
+					// success !!
+
+					//handle success
+					const copy = { ...uploadProgress };
+					copy[file.name] = { state: "done", percentage: 100 };
+					setUploadProgress(copy);
+					resolve(snapshot);
+				}
+			);
+
+			storageData.then(function(snapshot) {
+				console.log(snapshot);
+			});
+		});
+	}
+
 	// handlers end
 
 	function RecipeListApp() {
@@ -415,6 +499,14 @@ const App = (...props) => {
 										setPageState={setPageState}
 										setChangeRecipe={setChangeRecipe}
 										firebaseApp={firebaseApp}
+										successfullUploaded={successfullUploaded}
+										uploadProgress={uploadProgress}
+										uploading={uploading}
+										files={files}
+										setFiles={setFiles}
+										setSuccessfullUploaded={setSuccessfullUploaded}
+										onFilesAdded={onFilesAdded}
+										uploadFiles={uploadFiles}
 										{...props}
 									/>
 								)}
