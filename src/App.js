@@ -155,7 +155,7 @@ const App = (...props) => {
 			.ref()
 			.child("users/" + fire.auth().currentUser.uid + "/");
 		if (storageRef) {
-			var pictureList = await storageRef.ListResult();
+			var pictureList = await storageRef.list();
 			setPictures(pictureList);
 		}
 	}
