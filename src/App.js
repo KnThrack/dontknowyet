@@ -134,7 +134,7 @@ const App = (...props) => {
 				fire.auth()
 					.signInWithCustomToken(result.data.firebaseToken)
 					.then(function(User) {
-						loadPictures(fire, user);
+						loadPictures(fire, User.user);
 					})
 					.catch(function(error) {
 						// Handle Errors here.
@@ -150,14 +150,15 @@ const App = (...props) => {
 	}, []);
 
 	async function loadPictures(fire, user) {
-		// load the pictures from Firebase
-		// @Param: fire = the firebase reference
-		//
-		var uiid = fire.auth().currentUser.uid;
+		/**
+		 * Returns the sum of all numbers passed to the function.
+		 * @param fire firebase reference to the firebase
+		 * @param user current firebase user
+		 */
 		var storageRef = fire
 			.storage()
 			.ref()
-			.child("users/" + uiid + "/");
+			.child("users/" + user.uid + "/");
 		if (storageRef) {
 			var pictureList = await storageRef.list();
 			setPictures(pictureList);
