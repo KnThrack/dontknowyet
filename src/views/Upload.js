@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./upload.css";
-import { Dropzone } from "./";
-import axios from "axios";
+import { Dropzone, Progress } from "./";
 
 const Upload = (...props) => {
 	const [files, setFiles] = useState([]);
@@ -86,17 +85,17 @@ const Upload = (...props) => {
 	}
 
 	function renderProgress(file) {
-		const Progress = uploadProgress[file.name];
+		const progress = uploadProgress[file.name];
 		if (uploading || successfullUploaded) {
 			return (
 				<div className='ProgressWrapper'>
-					<Progress progress={Progress ? Progress.percentage : 0} />
+					<Progress progress={progress ? progress.percentage : 0} />
 					<img
 						className='CheckIcon'
 						alt='done'
 						src='baseline-check_circle_outline-24px.svg'
 						style={{
-							opacity: Progress && Progress.state === "done" ? 0.5 : 0
+							opacity: progress && progress.state === "done" ? 0.5 : 0
 						}}
 					/>
 				</div>
