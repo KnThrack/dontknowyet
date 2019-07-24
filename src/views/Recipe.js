@@ -70,14 +70,11 @@ const Recipe = (...props) => {
 					<Form.Label htmlFor='recipe'>Recipe</Form.Label>
 					<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={myRecipe.recipe} />
 					<Upload
-						firebaseApp={firebaseApp}
 						successfullUploaded={successfullUploaded}
 						uploadProgress={uploadProgress}
 						uploading={uploading}
 						files={files}
 						setFiles={setFiles}
-						setUploading={setUploading}
-						setUploadProgress={setUploadProgress}
 						setSuccessfullUploaded={setSuccessfullUploaded}
 						onFilesAdded={onFilesAdded}
 						uploadFiles={uploadFiles}
