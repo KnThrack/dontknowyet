@@ -13,18 +13,24 @@ const PictureCarousel = (...props) => {
 
 	useEffect(() => {}, []);
 
-	return (
-		<Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
-			{pictureList.items.map(pictures => (
-				<Carousel.Item>
-					<img className='d-block w-100' src={pictures.fullPath} alt='First slide' />
-					<Carousel.Caption>
-						<h3>{pictures.name}</h3>
-					</Carousel.Caption>
-				</Carousel.Item>
-			))}
-		</Carousel>
-	);
+	if (pictureList) {
+		return (
+			<div className='pictures'>
+				<Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
+					{pictureList.items.map(pictures => (
+						<Carousel.Item>
+							<img className='d-block w-100' src={pictures.fullPath} alt='First slide' />
+							<Carousel.Caption>
+								<h3>{pictures.name}</h3>
+							</Carousel.Caption>
+						</Carousel.Item>
+					))}
+				</Carousel>
+			</div>
+		);
+	} else {
+		return <div className='pictures' />;
+	}
 };
 
 export { PictureCarousel };
