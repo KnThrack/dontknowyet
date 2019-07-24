@@ -41,6 +41,8 @@ const App = (...props) => {
 	axios.defaults.headers.get["Content-Type"] = "application/json";
 
 	async function callAPI(myUser) {
+		// load pictures
+		loadPictures(firebaseApp);
 		// get the initial recipes
 		const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + myUser._id)).data;
 
@@ -140,13 +142,13 @@ const App = (...props) => {
 						console.log(errorMessage);
 						// ...
 					});
-				loadPictured(fire);
+
 				setFirebaseApp(fire);
 			});
 		});
 	}, []);
 
-	async function loadPictured(fire) {
+	async function loadPictures(fire) {
 		// load the pictures from Firebase
 		// @Param: fire = the firebase reference
 		//
