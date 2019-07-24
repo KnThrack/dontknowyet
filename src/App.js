@@ -150,10 +150,11 @@ const App = (...props) => {
 		// load the pictures from Firebase
 		// @Param: fire = the firebase reference
 		//
+		var uiid = fire.getUid();
 		var storageRef = fire
 			.storage()
 			.ref()
-			.child("users/" + fire.auth().currentUser.uid + "/");
+			.child("users/" + uiid + "/");
 		if (storageRef) {
 			var pictureList = await storageRef.list();
 			setPictures(pictureList);
