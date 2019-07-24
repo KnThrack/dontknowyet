@@ -90,17 +90,7 @@ const Upload = (...props) => {
 						setUploadProgress(copy);
 						resolve(snapshot);
 					}
-				)
-				.catch(function(error) {
-					// [START onfailure]
-					console.error("Upload failed:", error);
-					//handle error
-					const copy = { ...uploadProgress };
-					copy[file.name] = { state: "error", percentage: 0 };
-					setUploadProgress(copy);
-					reject(error);
-					// [END onfailure]
-				});
+				);
 		});
 	}
 
