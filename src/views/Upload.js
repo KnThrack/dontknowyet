@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./upload.css";
 import { Dropzone, Progress } from "./";
+import * as firebase from "firebase/app";
+// Add the Firebase products that you want to use
+import "firebase/storage";
 
 const Upload = (...props) => {
 	const [files, setFiles] = useState([]);
@@ -73,7 +76,7 @@ const Upload = (...props) => {
 					reject(error);
 					// [END onfailure]
 				})
-				.on(firebaseApp.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
+				.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
 					// progress
 					var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 					console.log(percent + "% done");
