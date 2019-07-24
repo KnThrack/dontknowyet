@@ -1,6 +1,6 @@
 // src/views/Recipe.js
 import React, { useState, useEffect } from "react";
-import { Upload } from "./";
+import { Upload, PictureCarousel } from "./";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
@@ -22,6 +22,7 @@ const Recipe = (...props) => {
 		handleChangeIngredient,
 		handleDeleteIngredient,
 		recipesList,
+		pictureList,
 		setPageState,
 		setChangeRecipe,
 		location
@@ -79,6 +80,7 @@ const Recipe = (...props) => {
 						onFilesAdded={onFilesAdded}
 						uploadFiles={uploadFiles}
 					/>
+					<PictureCarousel pictureList={pictureList} />
 				</Form.Group>
 				<Form.Group>
 					<Table striped='true' bordered='true' hover='true'>

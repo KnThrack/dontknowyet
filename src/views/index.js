@@ -9,3 +9,4 @@ export { FloatButtons } from "./FloatButtons";
 export { Upload } from "./Upload";
 export { Dropzone } from "./Dropzone";
 export { Progress } from "./Progress";
+export { PictureCarousel } from "./PictureCarousel";

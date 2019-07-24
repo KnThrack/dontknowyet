@@ -11,6 +11,7 @@ import * as firebase from "firebase/app";
 // Add the Firebase products that you want to use
 import "firebase/auth";
 import "firebase/storage";
+import { async } from "q";
 
 //const util = require("util");
 var _ = require("underscore");
@@ -29,6 +30,7 @@ const App = (...props) => {
 	const [firebaseApp, setFirebaseApp] = useState(null);
 	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 	const [files, setFiles] = useState([]);
+	const [pictures, setPictures] = useState([]);
 	const [uploading, setUploading] = useState(false);
 	const [uploadProgress, setUploadProgress] = useState({});
 	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
@@ -138,11 +140,25 @@ const App = (...props) => {
 						console.log(errorMessage);
 						// ...
 					});
-
+				loadPictured(fire);
 				setFirebaseApp(fire);
 			});
 		});
 	}, []);
+
+	async function loadPictured(fire) {
+		// load the pictures from Firebase
+		// @Param: fire = the firebase reference
+		//
+		var storageRef = fire
+			.storage()
+			.ref()
+			.child("users/" + fire.auth().currentUser.uid + "/");
+		if (storageRef) {
+			var pictureList = await storageRef.ListResult();
+			setPictures(pictureList);
+		}
+	}
 
 	async function updateIngredients(state) {
 		// and put it away
@@ -262,16 +278,6 @@ const App = (...props) => {
 	function handleSubmit(event) {
 		event.preventDefault();
 
-		/*
-		// find which one we updating
-		let index = recipes.findIndex(x => x._id === childState._id.toString());
-
-		// take a copy thats mutable
-		var stateCopy = recipes.slice();
-		var recipe = stateCopy[index];
-
-		setChangeRecipe(recipe);
-*/
 		// raise decision
 		raiseModal("confirm");
 	}
@@ -498,6 +504,7 @@ const App = (...props) => {
 								render={props => (
 									<Recipe
 										recipesList={recipesList}
+										pictureList={pictureList}
 										handleInputChange={handleInputChange}
 										handleChangeIngredient={handleChangeIngredient}
 										handleDeleteIngredient={handleDeleteIngredient}
