@@ -334,6 +334,9 @@ const App = (...props) => {
 			// code block
 			var stateCopy = Object.assign({}, changeRecipe);
 
+			// upload pictures
+			uploadFiles();
+
 			if (ingredientDelete) {
 				stateCopy.ingredients = _.without(stateCopy.ingredients, stateCopy.ingredients[ingredientIndex]);
 
@@ -398,10 +401,12 @@ const App = (...props) => {
 			await Promise.all(promises);
 			setSuccessfullUploaded(true);
 			setUploading(false);
+			setFiles([]);
 		} catch (e) {
 			// Not Production ready! Do some error handling here instead...
 			setSuccessfullUploaded(true);
 			setUploading(false);
+			setFiles([]);
 		}
 	}
 

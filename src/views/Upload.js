@@ -35,27 +35,6 @@ const Upload = (...props) => {
 		}
 	}
 
-	function renderActions() {
-		if (successfullUploaded) {
-			return (
-				<button
-					onClick={() => {
-						setFiles([]);
-						setSuccessfullUploaded(false);
-					}}
-				>
-					Clear
-				</button>
-			);
-		} else {
-			return (
-				<button disabled={files.length < 0 || uploading} onClick={uploadFiles}>
-					Upload
-				</button>
-			);
-		}
-	}
-
 	return (
 		<div className='Upload'>
 			<span className='Title'>Upload Files</span>
@@ -74,7 +53,6 @@ const Upload = (...props) => {
 					})}
 				</div>
 			</div>
-			<div className='Actions'>{renderActions()}</div>
 		</div>
 	);
 };
