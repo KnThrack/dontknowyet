@@ -46,56 +46,42 @@ const Upload = (...props) => {
 				.child("users/" + firebaseApp.auth().currentUser.uid + "/" + file.name)
 				.put(file, metadata)
 				.then(function(snapshot) {
+					// success !!
 					console.log("Uploaded", snapshot.totalBytes, "bytes.");
 					console.log("File metadata:", snapshot.metadata);
 					// Let's get a download URL for the file.
 					snapshot.ref.getDownloadURL().then(function(url) {
 						console.log("File available at", url);
 					});
-				})
-				.catch(function(error) {
-					// [START onfailure]
-					console.error("Upload failed:", error);
-					// [END onfailure]
-				});
 
-			/*
-			//"multipart/form-data".
-			const formData = new FormData();
-			formData.append("file", file, file.name);
-
-			axios({
-				method: "post",
-				url: "https://notsureyetapp.herokuapp.com/api/upload/",
-				data: formData,
-				config: { headers: { "Content-Type": "multipart/form-data" } },
-				onUploadProgress: function(progressEvent) {
-					// Do whatever you want with the native progress event
-					if (progressEvent.lengthComputable) {
-						const copy = { uploadProgress };
-						copy[file.name] = {
-							state: "pending",
-							percentage: (progressEvent.loaded / progressEvent.total) * 100
-						};
-						setUploadProgress(copy);
-					}
-				}
-			})
-				.then(function(response) {
 					//handle success
 					const copy = { ...uploadProgress };
 					copy[file.name] = { state: "done", percentage: 100 };
 					setUploadProgress(copy);
-					resolve(response);
+					resolve(snapshot);
 				})
-				.catch(function(response) {
+				.catch(function(error) {
+					// [START onfailure]
+					console.error("Upload failed:", error);
 					//handle error
 					const copy = { ...uploadProgress };
 					copy[file.name] = { state: "error", percentage: 0 };
 					setUploadProgress(copy);
-					reject(response);
+					reject(error);
+					// [END onfailure]
+				})
+				.on(firebaseApp.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
+					// progress
+					var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					console.log(percent + "% done");
+					// Do whatever you want with the native progress event
+					const copy = { uploadProgress };
+					copy[file.name] = {
+						state: "pending",
+						percentage: percent
+					};
+					setUploadProgress(copy);
 				});
-				*/
 		});
 	}
 
