@@ -66,16 +66,6 @@ const Upload = (...props) => {
 					setUploadProgress(copy);
 					resolve(snapshot);
 				})
-				.catch(function(error) {
-					// [START onfailure]
-					console.error("Upload failed:", error);
-					//handle error
-					const copy = { ...uploadProgress };
-					copy[file.name] = { state: "error", percentage: 0 };
-					setUploadProgress(copy);
-					reject(error);
-					// [END onfailure]
-				})
 				.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
 					// progress
 					var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -87,6 +77,16 @@ const Upload = (...props) => {
 						percentage: percent
 					};
 					setUploadProgress(copy);
+				})
+				.catch(function(error) {
+					// [START onfailure]
+					console.error("Upload failed:", error);
+					//handle error
+					const copy = { ...uploadProgress };
+					copy[file.name] = { state: "error", percentage: 0 };
+					setUploadProgress(copy);
+					reject(error);
+					// [END onfailure]
 				});
 		});
 	}
