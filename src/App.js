@@ -176,7 +176,7 @@ const App = (...props) => {
 			const newArray = pictureList.items.map(async picture => await getPictureUrl(picture));
 
 			try {
-				await Promise.all(newArray);
+				var array = await Promise.all(newArray);
 				Promise.then(function(lai) {
 					setPictures(lai);
 				});
