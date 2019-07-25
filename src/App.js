@@ -177,7 +177,9 @@ const App = (...props) => {
 
 			try {
 				await Promise.all(newArray);
-				setPictures(newArray);
+				Promise.then(function(lai) {
+					setPictures(lai);
+				});
 			} catch (e) {}
 		}
 	}
