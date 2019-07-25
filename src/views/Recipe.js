@@ -82,7 +82,7 @@ const Recipe = (...props) => {
 						onFilesAdded={onFilesAdded}
 						uploadFiles={uploadFiles}
 					/>
-					<PictureCarousel pictureList={pictureList} />
+					<PictureCarousel pictureList={pictureList} recipeID={myRecipe._id.toString()} />
 				</Form.Group>
 				<Form.Group>
 					<Table striped='true' bordered='true' hover='true'>

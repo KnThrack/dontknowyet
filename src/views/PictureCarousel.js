@@ -5,7 +5,7 @@ const PictureCarousel = (...props) => {
 	const [index, setIndex] = useState(0);
 	const [direction, setDirection] = useState(null);
 	const [images, setImages] = useState([]);
-	const { pictureList } = props[0];
+	const { pictureList, recipeID } = props[0];
 
 	const handleSelect = (selectedIndex, e) => {
 		setIndex(selectedIndex);
@@ -18,14 +18,19 @@ const PictureCarousel = (...props) => {
 		return (
 			<div className='pictures'>
 				<Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
-					{pictureList.map(picture => (
-						<Carousel.Item key={picture.name}>
-							<img className='d-block w-100' src={picture.url} alt='First slide' />
-							<Carousel.Caption>
-								<h3>{picture.name}</h3>
-							</Carousel.Caption>
-						</Carousel.Item>
-					))}
+					{pictureList.map(function picture(value) {
+						if (value.recipeID === recipeID) {
+							return (
+								<Carousel.Item key={picture.name}>
+									<img className='d-block w-100' src={picture.url} alt='First slide' />
+									<Carousel.Caption>
+										<h3>{picture.name}</h3>
+									</Carousel.Caption>
+								</Carousel.Item>
+							);
+						}
+						return null;
+					})}
 				</Carousel>
 			</div>
 		);
