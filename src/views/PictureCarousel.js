@@ -14,7 +14,8 @@ const PictureCarousel = (...props) => {
 	useEffect(() => {}, []);
 
 	async function getUrl(picture) {
-		return await picture.getDownloadURL();
+		var url = await picture.getDownloadURL();
+		return url;
 	}
 
 	if (pictureList.items !== undefined) {
