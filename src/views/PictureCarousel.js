@@ -15,6 +15,7 @@ const PictureCarousel = (...props) => {
 
 	async function getUrl(picture) {
 		const url = await picture.getDownloadURL();
+		console.log(url);
 		return url;
 	}
 
