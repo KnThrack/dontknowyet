@@ -149,6 +149,17 @@ const App = (...props) => {
 		});
 	}, []);
 
+	async function getPictureUrl(picture) {
+		const url = await picture.getDownloadURL();
+
+		var image = {
+			name: picture.name,
+			url: url
+		};
+
+		return image;
+	}
+
 	async function loadPictures(fire, user) {
 		/**
 		 * Returns the sum of all numbers passed to the function.
@@ -161,7 +172,10 @@ const App = (...props) => {
 			.child("users/" + user.uid + "/");
 		if (storageRef) {
 			var pictureList = await storageRef.list();
-			setPictures(pictureList);
+
+			const newArray = pictureList.map(async picture => await getPictureUrl(picture));
+
+			setPictures(newArray);
 		}
 	}
 

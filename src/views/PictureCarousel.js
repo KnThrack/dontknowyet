@@ -3,7 +3,8 @@ import Image from "react-bootstrap/Image";
 import Carousel from "react-bootstrap/Carousel";
 const PictureCarousel = (...props) => {
 	const [index, setIndex] = useState(0);
-	const [direction, setDirection] = useState(null);
+    const [direction, setDirection] = useState(null);
+    const [images, setImages] = useState([]);
 	const { pictureList } = props[0];
 
 	const handleSelect = (selectedIndex, e) => {
@@ -11,13 +12,27 @@ const PictureCarousel = (...props) => {
 		setDirection(e.direction);
 	};
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+
+        if (pictureList.items !== undefined) {
+            pictureList.items.map(picture => );
+
+        };
+
+
+    }, [pictureList]);
 
 	async function getUrl(picture) {
-		const url = await picture.getDownloadURL();
-		console.log(url);
-		return url;
-	}
+        const url = await picture.getDownloadURL();
+
+        var image = {
+            name: picture.name,
+            url: url,
+        };
+		return image;
+    }
+    
+
 
 	if (pictureList.items !== undefined) {
 		return (
