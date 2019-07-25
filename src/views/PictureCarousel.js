@@ -13,23 +13,22 @@ const PictureCarousel = (...props) => {
 
 	useEffect(() => {}, []);
 
-	async function getItem(picture) {
-		const url = await picture.getDownloadURL();
-		return (
-			<Carousel.Item key={picture.name}>
-				<img className='d-block w-100' src={url} alt='First slide' />
-				<Carousel.Caption>
-					<h3>{picture.name}</h3>
-				</Carousel.Caption>
-			</Carousel.Item>
-		);
+	async function getUrl(picture) {
+		return await picture.getDownloadURL();
 	}
 
 	if (pictureList.items !== undefined) {
 		return (
 			<div className='pictures'>
 				<Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
-					{pictureList.items.map(picture => getItem(picture))}
+					{pictureList.items.map(picture => (
+						<Carousel.Item key={picture.name}>
+							<img className='d-block w-100' src={getUrl(picture)} alt='First slide' />
+							<Carousel.Caption>
+								<h3>{picture.name}</h3>
+							</Carousel.Caption>
+						</Carousel.Item>
+					))}
 				</Carousel>
 			</div>
 		);
