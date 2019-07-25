@@ -151,7 +151,7 @@ const App = (...props) => {
 
 	async function getPictureUrl(picture) {
 		const url = await picture.getDownloadURL();
-
+		const metaData = await picture.getMetadata();
 		var image = {
 			name: picture.name,
 			url: url
@@ -443,7 +443,11 @@ const App = (...props) => {
 			var storageRef = firebaseApp.storage().ref();
 
 			var metadata = {
-				contentType: file.type
+				contentType: file.type,
+				customMetadata: {
+					recipe_id: changeRecipe._id,
+					recipe_name: changeRecipe.name
+				}
 			};
 
 			const copy = { ...uploadProgress };
