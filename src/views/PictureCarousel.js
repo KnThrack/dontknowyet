@@ -16,13 +16,13 @@ const PictureCarousel = (...props) => {
 
 	if (pictureList.length !== 0) {
 		return (
-			<div className='pictures'>
+			<div className='pictures-outer'>
 				<Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
 					{pictureList.map(function picture(picture) {
 						if (picture.recipe_id === recipeID) {
 							return (
 								<Carousel.Item key={picture.name}>
-									<img className='d-block w-100' src={picture.url} alt='First slide' />
+									<img className='recipe_picture' src={picture.url} alt='First slide' />
 									<Carousel.Caption>
 										<h3>{picture.name}</h3>
 									</Carousel.Caption>
