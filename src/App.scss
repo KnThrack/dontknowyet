@@ -191,28 +191,44 @@ button#cardButton {
 
 // buttons
 .add-Button {
-    background-color: #fabe0e;
-    border-color: #fabe0e;
+	background-color: #fabe0e;
+	border-color: #fabe0e;
 }
 .back-Button {
-    background-color:  #8ab661;
-    border-color: #8ab661;
+	background-color: #8ab661;
+	border-color: #8ab661;
 }
 .submit-Button {
-    background-color:  #fd8664;
-    border-color: #fd8664;
+	background-color: #fd8664;
+	border-color: #fd8664;
 }
 
-.submit-Button:not(:disabled):not(.disabled).active, .submit-Button:not(:disabled):not(.disabled):active, .submit-Button:hover {
-    color: #fff;
-    background-color:  #8ab661;
-    border-color: #8ab661;
+.submit-Button:not(:disabled):not(.disabled).active,
+.submit-Button:not(:disabled):not(.disabled):active,
+.submit-Button:hover {
+	color: #fff;
+	background-color: #8ab661;
+	border-color: #8ab661;
 }
 
-.add-Button:not(:disabled):not(.disabled).active, .add-Button:not(:disabled):not(.disabled):active, .add-Button:hover {
-    color: #fff;
-    background-color:  #8ab661;
-    border-color: #8ab661;
+.add-Button:not(:disabled):not(.disabled).active,
+.add-Button:not(:disabled):not(.disabled):active,
+.add-Button:hover {
+	color: #fff;
+	background-color: #8ab661;
+	border-color: #8ab661;
+}
+
+.pictures {
+	width: 350px;
+	height: 350px;
+	display: flex;
+	flex-direction: row;
+}
+
+.Recipe-pictures.form-group {
+	display: flex;
+	flex-direction: row;
 }
 
 /*
