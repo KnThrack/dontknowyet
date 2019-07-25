@@ -174,9 +174,11 @@ const App = (...props) => {
 			var pictureList = await storageRef.list();
 
 			const newArray = pictureList.items.map(async picture => await getPictureUrl(picture));
-			newArray.then(function(array) {
+
+			try {
+				await Promise.all(newArray);
 				setPictures(newArray);
-			});
+			} catch (e) {}
 		}
 	}
 
