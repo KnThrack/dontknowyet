@@ -152,7 +152,9 @@ const App = (...props) => {
 	async function getPictureUrl(picture) {
 		const url = await picture.getDownloadURL();
 		const metaData = await picture.getMetadata();
+		//customMetadata
 		var image = {
+			recipe_id: metaData.customMetadata.recipe_id,
 			name: picture.name,
 			url: url
 		};
