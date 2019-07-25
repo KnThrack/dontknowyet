@@ -21,7 +21,7 @@ const PictureCarousel = (...props) => {
 					{pictureList.map(function picture(picture) {
 						if (picture.recipe_id === recipeID) {
 							return (
-								<Carousel.Item key={picture.name}>
+								<Carousel.Item className='recipe_picture' key={picture.name}>
 									<img className='recipe_picture' src={picture.url} alt='First slide' />
 									<Carousel.Caption>
 										<h3>{picture.name}</h3>
