@@ -173,7 +173,7 @@ const App = (...props) => {
 		if (storageRef) {
 			var pictureList = await storageRef.list();
 
-			const newArray = pictureList.map(async picture => await getPictureUrl(picture));
+			const newArray = pictureList.items.map(async picture => await getPictureUrl(picture));
 
 			setPictures(newArray);
 		}
