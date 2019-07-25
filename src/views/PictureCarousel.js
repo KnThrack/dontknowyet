@@ -25,7 +25,7 @@ const PictureCarousel = (...props) => {
 		);
 	}
 
-	if (pictureList.items.length !== 0) {
+	if (pictureList.items !== undefined) {
 		return (
 			<div className='pictures'>
 				<Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
