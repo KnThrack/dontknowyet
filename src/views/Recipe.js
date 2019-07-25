@@ -70,6 +70,8 @@ const Recipe = (...props) => {
 				<Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
 					<Form.Label htmlFor='recipe'>Recipe</Form.Label>
 					<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={myRecipe.recipe} />
+				</Form.Group>
+				<Form.Group className='Recipe-pictures'>
 					<Upload
 						successfullUploaded={successfullUploaded}
 						uploadProgress={uploadProgress}
