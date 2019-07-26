@@ -519,6 +519,7 @@ const App = (...props) => {
 								render={props => (
 									<Recipes
 										recipesList={recipesList}
+										pictureList={pictures}
 										filter={filter}
 										handleDelete={handleDelete}
 										handleFilterChange={handleFilterChange}

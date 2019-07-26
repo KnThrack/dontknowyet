@@ -8,15 +8,14 @@ import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
 import { Loading } from ".";
 
-//var _ = require("underscore");
+var _ = require("underscore");
 
 const Recipes = (...props) => {
-	const { handleFilterChange, handleAddRecipe, handleDelete, recipesList, filter, setPageState } = props[0];
+	const { handleFilterChange, handleAddRecipe, handleDelete, recipesList, filter, setPageState, pictureList } = props[0];
 
 	useEffect(() => {
-		setPageState({page: "list"});
+		setPageState({ page: "list" });
 	}, []);
-	
 
 	function handleFilterChanges(event) {
 		handleFilterChange(event);
@@ -65,24 +64,32 @@ const Recipes = (...props) => {
 					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={filter} />
 				</Form>
 				<div className='recipe-cards'>
-					{recipesList.map(recipe => (
-						<Card className={cardClass(recipe)} key={recipe._id.toString()}>
-							<div className='recipe-button'>
-								<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
-									<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDeletes}>
-										Delete
-									</Dropdown.Item>
-								</DropdownButton>
-							</div>
-							<Link className='cardLink' to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
-								<Card.Body>
-									<Card.Title>{recipe.title}</Card.Title>
-									<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
-									<Card.Text>{recipe.recipe}</Card.Text>
-								</Card.Body>
-							</Link>
-						</Card>
-					))}
+					{recipesList.map(function recipes(recipe) {
+						// find a picture in the picture list
+						const picture_index = _.findIndex(pictureList, { recipe_id: recipe.recipe_id });
+						// pictureList[picture_index].url
+						return (
+							<Card className={cardClass(recipe)} key={recipe._id.toString()}>
+								<Card.Img src={pictureList[picture_index].url} alt='Card image' />
+								<Card.ImgOverlay>
+									<div className='recipe-button'>
+										<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
+											<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDeletes}>
+												Delete
+											</Dropdown.Item>
+										</DropdownButton>
+									</div>
+									<Link className='cardLink' to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+										<Card.Body>
+											<Card.Title>{recipe.title}</Card.Title>
+											<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
+											<Card.Text>{recipe.recipe}</Card.Text>
+										</Card.Body>
+									</Link>
+								</Card.ImgOverlay>
+							</Card>
+						);
+					})}
 				</div>
 			</div>
 		);
