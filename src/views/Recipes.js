@@ -67,10 +67,14 @@ const Recipes = (...props) => {
 					{recipesList.map(function recipes(recipe) {
 						// find a picture in the picture list
 						const picture_index = _.findIndex(pictureList, { recipe_id: recipe.recipe_id });
+						let url = "";
+						if (picture_index !== -1) {
+							url = pictureList[picture_index].url;
+						}
 						// pictureList[picture_index].url
 						return (
 							<Card className={cardClass(recipe)} key={recipe._id.toString()}>
-								<Card.Img src={pictureList[picture_index].url} alt='Card image' />
+								<Card.Img src={url} alt='Card image' />
 								<Card.ImgOverlay>
 									<div className='recipe-button'>
 										<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
