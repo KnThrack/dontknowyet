@@ -66,10 +66,11 @@ const Recipes = (...props) => {
 				<div className='recipe-cards'>
 					{recipesList.map(function recipes(recipe) {
 						// find a picture in the picture list
-						const picture_index = _.findIndex(pictureList, { recipe_id: recipe.recipe_id });
+						const picture_index = _.findIndex(pictureList, { recipe_id: recipe._id });
 						let url = "";
 						if (picture_index !== -1) {
 							url = pictureList[picture_index].url;
+						} else {
 						}
 						// pictureList[picture_index].url
 						return (
