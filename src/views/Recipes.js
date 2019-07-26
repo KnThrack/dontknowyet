@@ -75,8 +75,6 @@ const Recipes = (...props) => {
 						// pictureList[picture_index].url
 						return (
 							<Card className={cardClass(recipe)} key={recipe._id.toString()}>
-								<Card.Img src={url} alt='Card image' variant='bottom' />
-
 								<div className='recipe-button'>
 									<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
 										<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDeletes}>
@@ -91,6 +89,7 @@ const Recipes = (...props) => {
 										<Card.Text>{recipe.recipe}</Card.Text>
 									</Card.Body>
 								</Link>
+								<Card.Img src={url} alt='Card image' variant='top' />
 							</Card>
 						);
 					})}
