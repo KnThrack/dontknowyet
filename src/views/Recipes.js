@@ -75,6 +75,7 @@ const Recipes = (...props) => {
 						// pictureList[picture_index].url
 						return (
 							<Card className={cardClass(recipe)} key={recipe._id.toString()}>
+								<Card.Header>{recipe.title}</Card.Header>
 								<div className='recipe-button'>
 									<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
 										<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDeletes}>
@@ -84,12 +85,12 @@ const Recipes = (...props) => {
 								</div>
 								<Link className='cardLink' to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
 									<Card.Body>
-										<Card.Title>{recipe.title}</Card.Title>
-										<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
+										<Card.Title>{recipe.cuisine}</Card.Title>
 										<Card.Text>{recipe.recipe}</Card.Text>
 									</Card.Body>
 								</Link>
 								<Card.Img src={url} alt='Card image' variant='top' />
+								<Card.Footer className='text-muted'>2 days ago</Card.Footer>
 							</Card>
 						);
 					})}
@@ -110,6 +111,9 @@ export { Recipes };
 // style={{ width: '18rem' }}
 
 /*
+<Card.Subtitle className='mb-2 text-muted'>{recipe.cuisine}</Card.Subtitle>
+
+
 									<Link to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }} className='dropdown-item' role='Button'>
 										Go to Details
 									</Link>
