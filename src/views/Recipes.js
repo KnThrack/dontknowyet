@@ -86,7 +86,7 @@ const Recipes = (...props) => {
 								<Link className='cardLink' to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
 									<Card.Body>
 										<Card.Subtitle>{recipe.title}</Card.Subtitle>
-										<Card.Text>{recipe.recipe < 35 ? `${recipe.recipe}` : `${recipe.recipe.substring(0, 32)}...`}</Card.Text>
+										<Card.Text>{recipe.recipe < 45 ? `${recipe.recipe}` : `${recipe.recipe.substring(0, 32)}...`}</Card.Text>
 									</Card.Body>
 								</Link>
 								<Card.Img src={url} alt='Card image' variant='top' />
