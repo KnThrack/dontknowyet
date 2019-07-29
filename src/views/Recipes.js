@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
 import { Loading } from ".";
+import Moment from "moment";
 
 var _ = require("underscore");
 
@@ -90,7 +91,7 @@ const Recipes = (...props) => {
 									</Card.Body>
 								</Link>
 								<Card.Img src={url} alt='Card image' variant='top' />
-								<Card.Footer className='text-muted'>{recipe.create_date}</Card.Footer>
+								<Card.Footer className='text-muted'>{Moment(recipe.create_date).format()}</Card.Footer>
 							</Card>
 						);
 					})}

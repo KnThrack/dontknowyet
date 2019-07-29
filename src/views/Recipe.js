@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Upload, PictureCarousel } from "./";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "./table.css";
