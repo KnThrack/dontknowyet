@@ -91,7 +91,7 @@ const Recipes = (...props) => {
 									</Card.Body>
 								</Link>
 								<Card.Img src={url} alt='Card image' variant='top' />
-								<Card.Footer className='text-muted'>{Moment(recipe.create_date).format()}</Card.Footer>
+								<Card.Footer className='text-muted'>{Moment(recipe.create_date).format("YYYY MM DD")}</Card.Footer>
 							</Card>
 						);
 					})}
