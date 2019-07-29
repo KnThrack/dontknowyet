@@ -90,7 +90,7 @@ const Recipes = (...props) => {
 									</Card.Body>
 								</Link>
 								<Card.Img src={url} alt='Card image' variant='top' />
-								<Card.Footer className='text-muted'>2 days ago</Card.Footer>
+								<Card.Footer className='text-muted'>{recipe.create_date}</Card.Footer>
 							</Card>
 						);
 					})}
