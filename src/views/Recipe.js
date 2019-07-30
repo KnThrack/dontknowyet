@@ -53,8 +53,8 @@ const Recipe = (...props) => {
 	if (myRecipe === null) return <p>Loading ...</p>;
 	return (
 		<div key={myRecipe._id.toString()} className='container'>
-			<Card className={cardClass(recipe)} key={recipe._id.toString()}>
-				<Card.Header>{recipe.cuisine}</Card.Header>
+			<Card key={myRecipe._id.toString()}>
+				<Card.Header>{myRecipe.cuisine}</Card.Header>
 				<Card.Body>
 					<Form id='bigform' /*controlId={recipe._id.toString()+".Form"}*/>
 						<Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
