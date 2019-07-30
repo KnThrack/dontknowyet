@@ -12,7 +12,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/storage";
 import { async } from "q";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 //const util = require("util");
 var _ = require("underscore");
