@@ -518,7 +518,7 @@ const App = (...props) => {
 								transitionAppearTimeout={600}
 								transitionEnterTimeout={600}
 								transitionLeaveTimeout={200}
-								transitionName={props.match.path === "/recipe/:id" ? "SlideIn" : "SlideOut"}
+								classNames='card'
 							>
 								<PrivateRoute
 									exact
