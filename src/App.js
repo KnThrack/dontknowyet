@@ -12,7 +12,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/storage";
 import { async } from "q";
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 
 //const util = require("util");
 var _ = require("underscore");
@@ -514,7 +514,7 @@ const App = (...props) => {
 						</header>
 
 						<div className='App-content'>
-							<ReactCSSTransitionGroup
+							<CSSTransitionGroup
 								transitionAppear={true}
 								transitionAppearTimeout={600}
 								transitionEnterTimeout={600}
@@ -560,7 +560,7 @@ const App = (...props) => {
 										/>
 									)}
 								/>
-							</ReactCSSTransitionGroup>
+							</CSSTransitionGroup>
 						</div>
 						<div className='d-flex footerButtons'>
 							<FloatButtons
