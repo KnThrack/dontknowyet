@@ -54,7 +54,7 @@ const Recipe = (...props) => {
 				setSuccessfullUploaded={setSuccessfullUploaded}
 				onFilesAdded={onFilesAdded}
 				uploadFiles={uploadFiles}
-				{...props}
+				location={location}
 			/>
 		</div>
 	);
