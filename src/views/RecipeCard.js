@@ -4,10 +4,10 @@ import Card from "react-bootstrap/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
-import { RecipeForm } from ".";
+import { RecipeForm } from "./";
 import Moment from "moment";
 
-const RecipeCard = ({ ...props }) => {
+const RecipeCard = (...props) => {
 	const {
 		recipe,
 		url,
