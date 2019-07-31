@@ -37,10 +37,11 @@ const Recipe = (...props) => {
 	const myRecipe = recipesList[index];
 	if (myRecipe === null) return <p>Loading ...</p>;
 	return (
-		<div key={myRecipe._id.toString()} className='container'>
+		<div className='content-inner'>
 			<RecipeCard
 				recipe={myRecipe}
 				pictureList={pictureList}
+				withform={true}
 				handleInputChange={handleInputChange}
 				handleChangeIngredient={handleChangeIngredient}
 				handleDeleteIngredient={handleDeleteIngredient}
