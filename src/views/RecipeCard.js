@@ -75,6 +75,7 @@ const RecipeCard = (...props) => {
 				</div>
 				<Card.Body>
 					<RecipeForm
+						recipe={recipe}
 						pictureList={pictureList}
 						handleInputChange={handleInputChange}
 						handleChangeIngredient={handleChangeIngredient}
@@ -88,7 +89,6 @@ const RecipeCard = (...props) => {
 						onFilesAdded={onFilesAdded}
 						uploadFiles={uploadFiles}
 						location={location}
-						{...props}
 					/>
 				</Card.Body>
 				<Card.Footer className='text-muted'>{Moment(recipe.create_date).format("DD MMM YY, h:mm:ss a")}</Card.Footer>
