@@ -32,9 +32,11 @@
 		transform: rotate(360deg);
 	}
 }
+
 .App-content {
 	grid-column-start: 1;
 	grid-column-end: -1;
+	margin-bottom: 60px;
 }
 
 .content-inner {
@@ -349,6 +351,7 @@ button#cardButton {
 		grid-column-start: 1;
 		grid-column-end: -1;
 		grid-row: 2;
+		margin-bottom: 0px;
 	}
 
 	.Bigcard {
@@ -408,6 +411,7 @@ button#cardButton {
 
 	.App-content {
 		grid-area: main;
+		margin-bottom: 0px;
 	}
 
 	.footerButtons {
@@ -490,6 +494,7 @@ button#cardButton {
 
 	.App-content {
 		grid-area: main;
+		margin-bottom: 0px;
 	}
 
 	.footerButtons {
