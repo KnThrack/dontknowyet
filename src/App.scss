@@ -127,6 +127,28 @@
 	height: 100%;
 }
 
+.cardLink:hover {
+	text-decoration: none;
+}
+
+.card-subtitle {
+	margin-top: 2px;
+}
+
+.card-footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	right: 0;
+}
+
+.Bigcard .card-footer {
+	position: relative;
+	bottom: 0;
+	width: 100%;
+	right: 0;
+}
+
 .cardButton {
 	float: right;
 	background-color: initial !important;
@@ -192,21 +214,6 @@ button#cardButton {
 
 .footerButtonGroup {
 	width: 100%;
-}
-
-.cardLink:hover {
-	text-decoration: none;
-}
-
-.card-subtitle {
-	margin-top: 2px;
-}
-
-.card-footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	right: 0;
 }
 
 // buttons
