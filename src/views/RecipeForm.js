@@ -6,7 +6,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "./table.css";
 
-const RecipeForm = ({ ...props }) => {
+const RecipeForm = (...props) => {
 	const {
 		recipe,
 		uploadFiles,
