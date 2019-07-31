@@ -12,8 +12,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/storage";
 import { async } from "q";
-import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
-
+import { CSSTransition } from "react-transition-group";
 //const util = require("util");
 var _ = require("underscore");
 
@@ -514,12 +513,12 @@ const App = (...props) => {
 						</header>
 
 						<div className='App-content'>
-							<CSSTransitionGroup
+							<CSSTransition
 								transitionAppear={true}
 								transitionAppearTimeout={600}
 								transitionEnterTimeout={600}
 								transitionLeaveTimeout={200}
-								transitionName={props.match.path === "/thanks" ? "SlideIn" : "SlideOut"}
+								transitionName={props.match.path === "/recipe/:id" ? "SlideIn" : "SlideOut"}
 							>
 								<PrivateRoute
 									exact
@@ -560,7 +559,7 @@ const App = (...props) => {
 										/>
 									)}
 								/>
-							</CSSTransitionGroup>
+							</CSSTransition>
 						</div>
 						<div className='d-flex footerButtons'>
 							<FloatButtons
