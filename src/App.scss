@@ -259,7 +259,8 @@ button#cardButton {
 
 .Recipe-pictures.form-group {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	align-items: center;
 }
 
 .recipe_picture {
@@ -375,6 +376,12 @@ button#cardButton {
 		margin-top: 20px;
 		width: 100% !important;
 		height: 100% !important;
+	}
+
+	.Recipe-pictures.form-group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 }
 
