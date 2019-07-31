@@ -52,7 +52,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: left;
+	justify-content: center;
 	max-width: 100%;
 	margin: 0 auto;
 	flex-wrap: wrap;
@@ -63,6 +63,7 @@
 	box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 	border-radius: 27px;
 	height: 100% !important;
+	width: 100% !important;
 }
 
 .card {
@@ -349,62 +350,19 @@ button#cardButton {
 		grid-column-end: -1;
 		grid-row: 2;
 	}
+
+	.Bigcard {
+		background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
+		box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
+		border-radius: 27px;
+		margin: 0px !important;
+		margin-top: 20px;
+		width: 100% !important;
+		height: 100% !important;
+	}
 }
 
 @media only screen and (min-width: 768px) {
-	/* For desktop: */
-	.App {
-		text-align: center;
-		display: grid;
-		grid-template-columns: auto;
-		grid-template-rows: 100px auto 100px;
-		grid-template-areas:
-			"header"
-			"main"
-			"footer";
-	}
-
-	.App-logo {
-		animation: App-logo-spin infinite 20s linear;
-		height: 40vmin;
-		pointer-events: none;
-	}
-
-	.App-header {
-		background: rgba(236, 222, 195, 0.72);
-		min-height: 10vh;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		font-size: calc(10px + 2vmin);
-		color: white;
-		grid-area: header;
-	}
-
-	.App-link {
-		color: #61dafb;
-	}
-
-	@keyframes App-logo-spin {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
-
-	.App-content {
-		grid-area: main;
-	}
-
-	.footerButtons {
-		grid-area: footer;
-	}
-}
-
-@media only screen and (min-width: 992px) {
 	/* For desktop: */
 	.App {
 		text-align: center;
@@ -473,5 +431,68 @@ button#cardButton {
 		margin: 20px;
 		width: 340px;
 		height: 500px;
+	}
+
+	.recipe-cards {
+		display: flex;
+		flex-direction: row;
+		align-items: left;
+		justify-content: center;
+		max-width: 100%;
+		margin: 0 auto;
+		flex-wrap: wrap;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	/* For desktop: */
+	.App {
+		text-align: center;
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: 100px auto 100px;
+		grid-template-areas:
+			"header"
+			"main"
+			"footer";
+	}
+
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+		height: 40vmin;
+		pointer-events: none;
+	}
+
+	.App-header {
+		background: rgba(236, 222, 195, 0.72);
+		min-height: 10vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		font-size: calc(10px + 2vmin);
+		color: white;
+		grid-area: header;
+	}
+
+	.App-link {
+		color: #61dafb;
+	}
+
+	@keyframes App-logo-spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.App-content {
+		grid-area: main;
+	}
+
+	.footerButtons {
+		grid-area: footer;
 	}
 }
