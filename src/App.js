@@ -11,8 +11,7 @@ import * as firebase from "firebase/app";
 // Add the Firebase products that you want to use
 import "firebase/auth";
 import "firebase/storage";
-import { async } from "q";
-import { CSSTransition } from "react-transition-group";
+
 //const util = require("util");
 var _ = require("underscore");
 
@@ -513,53 +512,45 @@ const App = (...props) => {
 						</header>
 
 						<div className='App-content'>
-							<CSSTransition
-								transitionAppear={true}
-								transitionAppearTimeout={600}
-								transitionEnterTimeout={600}
-								transitionLeaveTimeout={200}
-								classNames='card'
-							>
-								<PrivateRoute
-									exact
-									path='/'
-									render={props => (
-										<Recipes
-											recipesList={recipesList}
-											pictureList={pictures}
-											filter={filter}
-											handleDelete={handleDelete}
-											handleFilterChange={handleFilterChange}
-											setPageState={setPageState}
-											{...props}
-										/>
-									)}
-								/>
-								<PrivateRoute
-									path='/recipe/:id'
-									render={props => (
-										<Recipe
-											recipesList={recipesList}
-											pictureList={pictures}
-											handleInputChange={handleInputChange}
-											handleChangeIngredient={handleChangeIngredient}
-											handleDeleteIngredient={handleDeleteIngredient}
-											setPageState={setPageState}
-											setChangeRecipe={setChangeRecipe}
-											firebaseApp={firebaseApp}
-											successfullUploaded={successfullUploaded}
-											uploadProgress={uploadProgress}
-											uploading={uploading}
-											files={files}
-											setFiles={setFiles}
-											setSuccessfullUploaded={setSuccessfullUploaded}
-											onFilesAdded={onFilesAdded}
-											uploadFiles={uploadFiles}
-											{...props}
-										/>
-									)}
-								/>
-							</CSSTransition>
+							<PrivateRoute
+								exact
+								path='/'
+								render={props => (
+									<Recipes
+										recipesList={recipesList}
+										pictureList={pictures}
+										filter={filter}
+										handleDelete={handleDelete}
+										handleFilterChange={handleFilterChange}
+										setPageState={setPageState}
+										{...props}
+									/>
+								)}
+							/>
+							<PrivateRoute
+								path='/recipe/:id'
+								render={props => (
+									<Recipe
+										recipesList={recipesList}
+										pictureList={pictures}
+										handleInputChange={handleInputChange}
+										handleChangeIngredient={handleChangeIngredient}
+										handleDeleteIngredient={handleDeleteIngredient}
+										setPageState={setPageState}
+										setChangeRecipe={setChangeRecipe}
+										firebaseApp={firebaseApp}
+										successfullUploaded={successfullUploaded}
+										uploadProgress={uploadProgress}
+										uploading={uploading}
+										files={files}
+										setFiles={setFiles}
+										setSuccessfullUploaded={setSuccessfullUploaded}
+										onFilesAdded={onFilesAdded}
+										uploadFiles={uploadFiles}
+										{...props}
+									/>
+								)}
+							/>
 						</div>
 						<div className='d-flex footerButtons'>
 							<FloatButtons
