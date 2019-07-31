@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
-import { Form } from ".";
+import { RecipeForm } from ".";
 import Moment from "moment";
 
 const RecipeCard = ({ ...props }) => {
@@ -74,7 +74,7 @@ const RecipeCard = ({ ...props }) => {
 					</DropdownButton>
 				</div>
 				<Card.Body>
-					<Form
+					<RecipeForm
 						pictureList={pictureList}
 						handleInputChange={handleInputChange}
 						handleChangeIngredient={handleChangeIngredient}
