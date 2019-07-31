@@ -62,7 +62,6 @@
 	background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
 	box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 	border-radius: 27px;
-	margin: 0px !important;
 	height: 100% !important;
 }
 
@@ -70,6 +69,7 @@
 	background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
 	box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 	border-radius: 27px;
+	margin-top: 10px;
 	width: 100%;
 	height: 500px;
 }
@@ -352,6 +352,7 @@ button#cardButton {
 		box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 		border-radius: 27px;
 		margin: 0px !important;
+		margin-top: 10px;
 		width: 60% !important;
 		height: 100% !important;
 	}
