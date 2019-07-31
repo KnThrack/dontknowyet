@@ -346,25 +346,6 @@ button#cardButton {
 		grid-column-end: -1;
 		grid-row: 2;
 	}
-
-	.Bigcard {
-		background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
-		box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
-		border-radius: 27px;
-		margin: 0px !important;
-		margin-top: 10px;
-		width: 60% !important;
-		height: 100% !important;
-	}
-
-	.card {
-		background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
-		box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
-		border-radius: 27px;
-		margin: 20px;
-		width: 340px;
-		height: 500px;
-	}
 }
 
 @media only screen and (min-width: 768px) {
@@ -470,5 +451,24 @@ button#cardButton {
 
 	.footerButtons {
 		grid-area: footer;
+	}
+
+	.Bigcard {
+		background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
+		box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
+		border-radius: 27px;
+		margin: 0px !important;
+		margin-top: 20px;
+		width: 60% !important;
+		height: 100% !important;
+	}
+
+	.card {
+		background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
+		box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
+		border-radius: 27px;
+		margin: 20px;
+		width: 340px;
+		height: 500px;
 	}
 }
