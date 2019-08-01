@@ -37,7 +37,6 @@ const Upload = (...props) => {
 
 	return (
 		<div className='upload'>
-			<span className='Title'>Upload Files</span>
 			<div className='upload-content'>
 				<div>
 					<Dropzone onFilesAdded={onFilesAdded} disabled={uploading || successfullUploaded} />
