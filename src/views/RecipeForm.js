@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { Upload, PictureCarousel, RecipeTable } from "./";
 
 const RecipeForm = (...props) => {

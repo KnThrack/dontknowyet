@@ -12,3 +12,4 @@ export { Progress } from "./Progress";
 export { PictureCarousel } from "./PictureCarousel";
 export { RecipeCard } from "./RecipeCard";
 export { RecipeForm } from "./RecipeForm";
+export { RecipeTable } from "./RecipeTable";
