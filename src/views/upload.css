@@ -39,7 +39,6 @@
 	box-sizing: border-box;
 	width: 100%;
 	align-items: center;
-	display: none;
 	flex-direction: row;
 }
 
