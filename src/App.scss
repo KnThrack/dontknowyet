@@ -156,6 +156,14 @@
 	border-style: none !important;
 }
 
+.card-img-top {
+	width: 330px;
+	height: 230px;
+	border-top-left-radius: calc(0.25rem - 1px);
+	border-top-right-radius: calc(0.25rem - 1px);
+	align-self: center;
+}
+
 button#cardButton {
 	background-color: initial !important;
 	border-style: none !important;
