@@ -139,7 +139,7 @@ const App = (...props) => {
 						// Handle Errors here.
 						var errorCode = error.code;
 						var errorMessage = error.message;
-						console.log(errorMessage);
+						console.log(errorMessage, errorCode);
 						// ...
 					});
 
@@ -183,6 +183,7 @@ const App = (...props) => {
 		}
 	}
 
+	/*
 	async function updateIngredients(state) {
 		// and put it away
 		const updateRecipe = (await axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + state._id, JSON.stringify(state))).data.data;
@@ -197,7 +198,7 @@ const App = (...props) => {
 		setRecipes(stateCopy);
 		setFilteredRecipes(stateCopy);
 	}
-
+*/
 	async function addRecipe(newObject) {
 		// and put it away
 		const newRecipe = (await axios.post("https://notsureyetapp.herokuapp.com/api/recipes/", JSON.stringify(newObject))).data.data;

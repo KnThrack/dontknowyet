@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./upload.css";
 import { Dropzone, Progress } from "./";
-import * as firebase from "firebase/app";
 // Add the Firebase products that you want to use
 import "firebase/storage";
 
@@ -12,7 +11,7 @@ const Upload = (...props) => {
 	const [uploadProgress, setUploadProgress] = useState({});
 	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
 */
-	const { uploadFiles, onFilesAdded, successfullUploaded, uploadProgress, uploading, files, setFiles, setSuccessfullUploaded } = props[0];
+	const { onFilesAdded, successfullUploaded, uploadProgress, uploading, files } = props[0];
 
 	useEffect(() => {}, []);
 
