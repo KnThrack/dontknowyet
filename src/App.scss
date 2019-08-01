@@ -248,10 +248,17 @@ button#cardButton {
 }
 
 .pictures-outer {
-	width: 350px;
-	height: 350px;
+	width: 300px;
+	height: 300px;
 	display: flex;
 	flex-direction: row;
+}
+
+.upload-content {
+	padding-top: 16px;
+	box-sizing: border-box;
+	width: 100%;
+	align-items: center;
 }
 
 .Recipe-pictures.form-group {
