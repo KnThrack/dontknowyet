@@ -30,6 +30,10 @@ const RecipeCard = (...props) => {
 
 	useEffect(() => {}, []);
 
+	function test(something) {
+		console.log(something);
+	}
+
 	let cardClass = recipe => {
 		var sClass = "";
 
@@ -96,7 +100,7 @@ const RecipeCard = (...props) => {
 		);
 	} else {
 		return (
-			<Card className={cardClass(recipe)} key={recipe._id.toString()}>
+			<Card onClick={test} className={cardClass(recipe)} key={recipe._id.toString()}>
 				<Card.Header>{recipe.cuisine}</Card.Header>
 				<div className='recipe-button'>
 					<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
