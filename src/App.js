@@ -524,6 +524,19 @@ const App = (...props) => {
 										handleDelete={handleDelete}
 										handleFilterChange={handleFilterChange}
 										setPageState={setPageState}
+										handleInputChange={handleInputChange}
+										handleChangeIngredient={handleChangeIngredient}
+										handleDeleteIngredient={handleDeleteIngredient}
+										setChangeRecipe={setChangeRecipe}
+										firebaseApp={firebaseApp}
+										successfullUploaded={successfullUploaded}
+										uploadProgress={uploadProgress}
+										uploading={uploading}
+										files={files}
+										setFiles={setFiles}
+										setSuccessfullUploaded={setSuccessfullUploaded}
+										onFilesAdded={onFilesAdded}
+										uploadFiles={uploadFiles}
 										{...props}
 									/>
 								)}

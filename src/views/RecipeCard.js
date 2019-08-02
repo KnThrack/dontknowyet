@@ -26,6 +26,8 @@ const RecipeCard = (...props) => {
 		handleChangeIngredient,
 		handleDeleteIngredient,
 		handleDelete,
+		setChangeRecipe,
+		ChangeRecipe,
 		pictureList,
 		location
 	} = props[0];
@@ -35,6 +37,8 @@ const RecipeCard = (...props) => {
 	}, []);
 
 	function test(something) {
+		setChangeRecipe(recipe);
+
 		setwithform(true);
 		console.log(something);
 	}
@@ -73,7 +77,7 @@ const RecipeCard = (...props) => {
 
 	if (withforms) {
 		return (
-			<Card className='Bigcard' key={recipe._id.toString()}>
+			<Card id={"card#" + recipe._id.toString()} className='Bigcard' key={recipe._id.toString()}>
 				<Card.Header>{recipe.cuisine}</Card.Header>
 				<div className='recipe-button'>
 					<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
@@ -105,7 +109,7 @@ const RecipeCard = (...props) => {
 		);
 	} else {
 		return (
-			<Card onClick={test} className={cardClass(recipe)} key={recipe._id.toString()}>
+			<Card id={"card#" + recipe._id.toString()} onClick={test} className={cardClass(recipe)} key={recipe._id.toString()}>
 				<Card.Header>{recipe.cuisine}</Card.Header>
 				<div className='recipe-button'>
 					<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>

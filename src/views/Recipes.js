@@ -7,7 +7,29 @@ import { Loading, RecipeCard } from ".";
 var _ = require("underscore");
 
 const Recipes = (...props) => {
-	const { handleFilterChange, handleDelete, recipesList, filter, setPageState, pictureList } = props[0];
+	//const { handleFilterChange, handleDelete, recipesList, filter, setPageState, pictureList } = props[0];
+	const {
+		handleFilterChange,
+		handleDelete,
+		recipesList,
+		filter,
+		uploadFiles,
+		onFilesAdded,
+		successfullUploaded,
+		uploadProgress,
+		uploading,
+		files,
+		setFiles,
+		setSuccessfullUploaded,
+		handleInputChange,
+		handleChangeIngredient,
+		handleDeleteIngredient,
+		pictureList,
+		setPageState,
+		setChangeRecipe,
+		ChangeRecipe,
+		location
+	} = props[0];
 
 	useEffect(() => {
 		setPageState({ page: "list" });
@@ -33,7 +55,30 @@ const Recipes = (...props) => {
 						} else {
 						}
 						// pictureList[picture_index].url
-						return <RecipeCard recipe={recipe} url={url} handleDelete={handleDelete} key={recipe._id} />;
+						return (
+							<RecipeCard
+								recipe={recipe}
+								url={url}
+								handleDelete={handleDelete}
+								key={recipe._id}
+								pictureList={pictureList}
+								withform={true}
+								handleInputChange={handleInputChange}
+								handleChangeIngredient={handleChangeIngredient}
+								handleDeleteIngredient={handleDeleteIngredient}
+								ChangeRecipe={ChangeRecipe}
+								setChangeRecipe={setChangeRecipe}
+								successfullUploaded={successfullUploaded}
+								uploadProgress={uploadProgress}
+								uploading={uploading}
+								files={files}
+								setFiles={setFiles}
+								setSuccessfullUploaded={setSuccessfullUploaded}
+								onFilesAdded={onFilesAdded}
+								uploadFiles={uploadFiles}
+								location={location}
+							/>
+						);
 					})}
 				</div>
 			</div>
