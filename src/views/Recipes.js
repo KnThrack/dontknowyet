@@ -45,6 +45,31 @@ const Recipes = (...props) => {
 		setChangeRecipe(recipe);
 	}
 
+	if (ChangeRecipe) {
+		return (
+			<RecipeCard
+				recipe={ChangeRecipe}
+				handleDelete={handleDelete}
+				pictureList={pictureList}
+				withform={true}
+				makeCardBig={makeCardBig}
+				handleInputChange={handleInputChange}
+				handleChangeIngredient={handleChangeIngredient}
+				handleDeleteIngredient={handleDeleteIngredient}
+				setChangeRecipe={setChangeRecipe}
+				successfullUploaded={successfullUploaded}
+				uploadProgress={uploadProgress}
+				uploading={uploading}
+				files={files}
+				setFiles={setFiles}
+				setSuccessfullUploaded={setSuccessfullUploaded}
+				onFilesAdded={onFilesAdded}
+				uploadFiles={uploadFiles}
+				location={location}
+			/>
+		);
+	}
+
 	if (recipesList) {
 		return (
 			<div className='content-inner'>
