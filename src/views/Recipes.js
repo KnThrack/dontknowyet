@@ -62,7 +62,7 @@ const Recipes = (...props) => {
 								handleDelete={handleDelete}
 								key={recipe._id}
 								pictureList={pictureList}
-								withform={true}
+								withform={false}
 								handleInputChange={handleInputChange}
 								handleChangeIngredient={handleChangeIngredient}
 								handleDeleteIngredient={handleDeleteIngredient}
