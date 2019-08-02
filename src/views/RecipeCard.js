@@ -115,7 +115,7 @@ const RecipeCard = (...props) => {
 						<Card.Text>{recipe.recipe < 45 ? `${recipe.recipe}` : `${recipe.recipe.substring(0, 45)}...`}</Card.Text>
 					</Card.Body>
 
-					<Card.Img src={url} alt='Card image' variant='bottom' />
+					<Card.Img src={url} alt='Card image' variant='top' />
 				</div>
 				<Card.Footer className='text-muted'>{Moment(recipe.create_date).format("DD MMM YY, h:mm:ss a")}</Card.Footer>
 			</Card>
