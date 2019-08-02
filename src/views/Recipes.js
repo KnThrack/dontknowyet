@@ -33,7 +33,7 @@ const Recipes = (...props) => {
 						} else {
 						}
 						// pictureList[picture_index].url
-						return <RecipeCard recipe={recipe} url={url} handleDelete={handleDelete} />;
+						return <RecipeCard recipe={recipe} url={url} handleDelete={handleDelete} key={recipe._id} />;
 					})}
 				</div>
 			</div>

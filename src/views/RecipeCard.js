@@ -1,5 +1,5 @@
 // src/views/Loading.js
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -8,6 +8,9 @@ import { RecipeForm } from "./";
 import Moment from "moment";
 
 const RecipeCard = (...props) => {
+
+	const [withforms, setwithform] = useState("");
+
 	const {
 		recipe,
 		url,
@@ -28,9 +31,13 @@ const RecipeCard = (...props) => {
 		location
 	} = props[0];
 
-	useEffect(() => {}, []);
+	useEffect((
+		setwithform(withform);
+
+	) => {}, []);
 
 	function test(something) {
+		setwithform(true);
 		console.log(something);
 	}
 
@@ -66,7 +73,7 @@ const RecipeCard = (...props) => {
 		return sClass;
 	};
 
-	if (withform) {
+	if (withforms) {
 		return (
 			<Card className='Bigcard' key={recipe._id.toString()}>
 				<Card.Header>{recipe.cuisine}</Card.Header>
