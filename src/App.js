@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Jumbotron from "react-bootstrap/Jumbotron";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useAuth0 } from "./react-auth0-spa";
 import axios from "axios";
 import "./App.scss";
 import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
+// Firebase App (the core Firebase SDK) is always required and must be listed first
+import * as firebase from "firebase/app";
+// Add the Firebase products that you want to use
+import "firebase/auth";
+import "firebase/storage";
 
 //const util = require("util");
 var _ = require("underscore");
 
 const App = (...props) => {
+	// all my state its getting quiet a lot to think about using context
 	const [recipes, setRecipes] = useState(null);
 	const [filteredRecipes, setFilteredRecipes] = useState(null);
 	const [user, setUser] = useState(null);
@@ -17,6 +26,13 @@ const App = (...props) => {
 	const [ingredientIndex, setIngredientIndex] = useState(null);
 	const [ingredientDelete, setIngredientDelete] = useState(false);
 	const [pageState, setPageState] = useState(null);
+	const [firebaseApp, setFirebaseApp] = useState(null);
+	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+	const [files, setFiles] = useState([]);
+	const [pictures, setPictures] = useState([]);
+	const [uploading, setUploading] = useState(false);
+	const [uploadProgress, setUploadProgress] = useState({});
+	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
 
 	// set the default axios stuff
 	axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -29,6 +45,22 @@ const App = (...props) => {
 
 		setRecipes(recipes.data);
 		setFilteredRecipes(recipes.data);
+	}
+
+	function loginout() {
+		!isAuthenticated && loginWithRedirect({});
+		isAuthenticated && logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
+
+		isAuthenticated &&
+			firebase
+				.auth()
+				.signOut()
+				.then(function() {
+					// Sign-out successful.
+				})
+				.catch(function(error) {
+					// An error happened.
+				});
 	}
 
 	useEffect(() => {
@@ -48,6 +80,7 @@ const App = (...props) => {
 		async function getUser() {
 			return (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + props[0].user.email)).data;
 		}
+
 		auth.then(function(result) {
 			let user = getUser();
 
@@ -77,8 +110,80 @@ const App = (...props) => {
 				}
 			});
 		});
+
+		auth.then(function(result) {
+			const firebaseConfig = {
+				apiKey: "AIzaSyDqvSOYhQwSshZuNU5HyA2-THt5jmjIq8U",
+				authDomain: "dontknowyet.firebaseapp.com",
+				databaseURL: "https://dontknowyet.firebaseio.com",
+				projectId: "dontknowyet",
+				storageBucket: "gs://dontknowyet.appspot.com/",
+				messagingSenderId: "1016122621793",
+				appId: "1:1016122621793:web:1cdc1e8b3a26988e"
+			};
+
+			var fire = firebase.initializeApp(firebaseConfig);
+			// auth to firebase with token
+			const fireToken = axios({
+				method: "get",
+				url: "https://notsureyetapp.herokuapp.com/auth/firebase"
+			});
+
+			fireToken.then(function(result) {
+				fire.auth()
+					.signInWithCustomToken(result.data.firebaseToken)
+					.then(function(User) {
+						loadPictures(fire, User.user);
+					})
+					.catch(function(error) {
+						// Handle Errors here.
+						var errorCode = error.code;
+						var errorMessage = error.message;
+						console.log(errorMessage, errorCode);
+						// ...
+					});
+
+				setFirebaseApp(fire);
+			});
+		});
 	}, []);
 
+	async function getPictureUrl(picture) {
+		const url = await picture.getDownloadURL();
+		const metaData = await picture.getMetadata();
+		//customMetadata
+		var image = {
+			recipe_id: metaData.customMetadata.recipe_id,
+			name: picture.name,
+			url: url
+		};
+
+		return image;
+	}
+
+	async function loadPictures(fire, user) {
+		/**
+		 * Returns the sum of all numbers passed to the function.
+		 * @param fire firebase reference to the firebase
+		 * @param user current firebase user
+		 */
+		var storageRef = fire
+			.storage()
+			.ref()
+			.child("users/" + user.uid + "/");
+		if (storageRef) {
+			var pictureList = await storageRef.list();
+
+			const newArray = pictureList.items.map(async picture => await getPictureUrl(picture));
+
+			try {
+				var pictures = await Promise.all(newArray);
+				setPictures(pictures);
+			} catch (e) {}
+		}
+	}
+
+	/*
 	async function updateIngredients(state) {
 		// and put it away
 		const updateRecipe = (await axios.put("https://notsureyetapp.herokuapp.com/api/recipes/" + state._id, JSON.stringify(state))).data.data;
@@ -93,7 +198,7 @@ const App = (...props) => {
 		setRecipes(stateCopy);
 		setFilteredRecipes(stateCopy);
 	}
-
+*/
 	async function addRecipe(newObject) {
 		// and put it away
 		const newRecipe = (await axios.post("https://notsureyetapp.herokuapp.com/api/recipes/", JSON.stringify(newObject))).data.data;
@@ -115,7 +220,7 @@ const App = (...props) => {
 			title: "",
 			cuisine: "",
 			ingredients: [],
-			recipe: "",
+			recipe: "Your Recipe",
 			user: user._id
 		};
 		addRecipe(newRecipe);
@@ -197,16 +302,6 @@ const App = (...props) => {
 	function handleSubmit(event) {
 		event.preventDefault();
 
-		/*
-		// find which one we updating
-		let index = recipes.findIndex(x => x._id === childState._id.toString());
-
-		// take a copy thats mutable
-		var stateCopy = recipes.slice();
-		var recipe = stateCopy[index];
-
-		setChangeRecipe(recipe);
-*/
 		// raise decision
 		raiseModal("confirm");
 	}
@@ -269,6 +364,9 @@ const App = (...props) => {
 			// code block
 			var stateCopy = Object.assign({}, changeRecipe);
 
+			// upload pictures
+			uploadFiles();
+
 			if (ingredientDelete) {
 				stateCopy.ingredients = _.without(stateCopy.ingredients, stateCopy.ingredients[ingredientIndex]);
 
@@ -316,6 +414,91 @@ const App = (...props) => {
 		setFilteredRecipes(filteredRecipes);
 		setFilter(value);
 	}
+
+	// upload handlers
+	function onFilesAdded(newfile) {
+		setFiles(files.concat(newfile));
+	}
+
+	async function uploadFiles() {
+		setUploadProgress({});
+		setUploading(true);
+		const promises = [];
+		files.forEach(file => {
+			promises.push(sendRequest(file));
+		});
+		try {
+			await Promise.all(promises);
+			setSuccessfullUploaded(true);
+			setUploading(false);
+			setFiles([]);
+		} catch (e) {
+			// Not Production ready! Do some error handling here instead...
+			setSuccessfullUploaded(true);
+			setUploading(false);
+			setFiles([]);
+		}
+	}
+
+	function sendRequest(file) {
+		return new Promise((resolve, reject) => {
+			var storageRef = firebaseApp.storage().ref();
+
+			var metadata = {
+				contentType: file.type,
+				customMetadata: {
+					recipe_id: changeRecipe._id,
+					recipe_name: changeRecipe.name
+				}
+			};
+
+			const copy = { ...uploadProgress };
+			copy[file.name] = { state: "done", percentage: 0 };
+			setUploadProgress(copy);
+
+			var storageData = storageRef.child("users/" + firebaseApp.auth().currentUser.uid + "/" + file.name).put(file, metadata);
+
+			storageData.on(
+				firebase.storage.TaskEvent.STATE_CHANGED,
+				function(snapshot) {
+					// progress
+					var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					console.log(percent + "% done");
+					// Do whatever you want with the native progress event
+					const copy = { uploadProgress };
+					copy[file.name] = {
+						state: "pending",
+						percentage: percent
+					};
+					setUploadProgress(copy);
+				},
+				function(error) {
+					// [START onfailure]
+					console.error("Upload failed:", error);
+					//handle error
+					const copy = { ...uploadProgress };
+					copy[file.name] = { state: "error", percentage: 0 };
+					setUploadProgress(copy);
+					reject(error);
+					// [END onfailure]
+				},
+				function(snapshot) {
+					// success !!
+
+					//handle success
+					const copy = { ...uploadProgress };
+					copy[file.name] = { state: "done", percentage: 100 };
+					setUploadProgress(copy);
+					resolve(snapshot);
+				}
+			);
+
+			storageData.then(function(snapshot) {
+				console.log(snapshot);
+			});
+		});
+	}
+
 	// handlers end
 
 	function RecipeListApp() {
@@ -336,6 +519,7 @@ const App = (...props) => {
 								render={props => (
 									<Recipes
 										recipesList={recipesList}
+										pictureList={pictures}
 										filter={filter}
 										handleDelete={handleDelete}
 										handleFilterChange={handleFilterChange}
@@ -349,11 +533,21 @@ const App = (...props) => {
 								render={props => (
 									<Recipe
 										recipesList={recipesList}
+										pictureList={pictures}
 										handleInputChange={handleInputChange}
 										handleChangeIngredient={handleChangeIngredient}
 										handleDeleteIngredient={handleDeleteIngredient}
 										setPageState={setPageState}
 										setChangeRecipe={setChangeRecipe}
+										firebaseApp={firebaseApp}
+										successfullUploaded={successfullUploaded}
+										uploadProgress={uploadProgress}
+										uploading={uploading}
+										files={files}
+										setFiles={setFiles}
+										setSuccessfullUploaded={setSuccessfullUploaded}
+										onFilesAdded={onFilesAdded}
+										uploadFiles={uploadFiles}
 										{...props}
 									/>
 								)}
@@ -393,6 +587,15 @@ const App = (...props) => {
 							<NavBar />
 						</header>
 						<div className='App-content'>
+							<Jumbotron>
+								<h1>Welcome to my App !!</h1>
+								<p>If you want to store your awesome recipes please make a user and start cooking !!</p>
+								<p>
+									<Button onClick={loginout} variant='primary'>
+										Create your Awesome User !
+									</Button>
+								</p>
+							</Jumbotron>
 							<Loading />
 							<div className='d-flex footerButtons'>
 								<FloatButtons handleAddRecipe={handleAddRecipe} pageState={pageState} />
