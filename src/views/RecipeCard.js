@@ -14,6 +14,7 @@ const RecipeCard = (...props) => {
 		recipe,
 		url,
 		withform,
+		makeCardBig,
 		uploadFiles,
 		onFilesAdded,
 		successfullUploaded,
@@ -27,7 +28,6 @@ const RecipeCard = (...props) => {
 		handleDeleteIngredient,
 		handleDelete,
 		setChangeRecipe,
-		ChangeRecipe,
 		pictureList,
 		location
 	} = props[0];
@@ -37,10 +37,7 @@ const RecipeCard = (...props) => {
 	}, []);
 
 	function test(something) {
-		setChangeRecipe(recipe);
-
-		setwithform(true);
-		console.log(something);
+		makeCardBig(something, recipe);
 	}
 
 	let cardClass = recipe => {

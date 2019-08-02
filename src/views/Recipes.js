@@ -39,6 +39,11 @@ const Recipes = (...props) => {
 		handleFilterChange(event);
 	}
 
+	function makeCardBig(event, recipe) {
+		// ok here we need to basically raise a modal with the card we just click and overlay or over the list
+		setChangeRecipe(recipe);
+	}
+
 	if (recipesList) {
 		return (
 			<div className='content-inner'>
@@ -63,10 +68,10 @@ const Recipes = (...props) => {
 								key={recipe._id}
 								pictureList={pictureList}
 								withform={false}
+								makeCardBig={makeCardBig}
 								handleInputChange={handleInputChange}
 								handleChangeIngredient={handleChangeIngredient}
 								handleDeleteIngredient={handleDeleteIngredient}
-								ChangeRecipe={ChangeRecipe}
 								setChangeRecipe={setChangeRecipe}
 								successfullUploaded={successfullUploaded}
 								uploadProgress={uploadProgress}
@@ -81,6 +86,33 @@ const Recipes = (...props) => {
 						);
 					})}
 				</div>
+				{recipesList.map(function recipes(recipe) {
+					if (recipe._id === ChangeRecipe._id) {
+						<RecipeCard
+						recipe={recipe}
+						url={url}
+						handleDelete={handleDelete}
+						key={recipe._id}
+						pictureList={pictureList}
+						withform={true}
+						makeCardBig={makeCardBig}
+						handleInputChange={handleInputChange}
+						handleChangeIngredient={handleChangeIngredient}
+						handleDeleteIngredient={handleDeleteIngredient}
+						setChangeRecipe={setChangeRecipe}
+						successfullUploaded={successfullUploaded}
+						uploadProgress={uploadProgress}
+						uploading={uploading}
+						files={files}
+						setFiles={setFiles}
+						setSuccessfullUploaded={setSuccessfullUploaded}
+						onFilesAdded={onFilesAdded}
+						uploadFiles={uploadFiles}
+						location={location}
+					/>
+
+					}
+				}}
 			</div>
 		);
 	} else {
