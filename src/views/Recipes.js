@@ -87,29 +87,31 @@ const Recipes = (...props) => {
 					})}
 				</div>
 				{recipesList.map(function recipes(recipe) {
-					if (recipe._id === ChangeRecipe._id) {
-						return (
-							<RecipeCard
-								recipe={recipe}
-								handleDelete={handleDelete}
-								pictureList={pictureList}
-								withform={true}
-								makeCardBig={makeCardBig}
-								handleInputChange={handleInputChange}
-								handleChangeIngredient={handleChangeIngredient}
-								handleDeleteIngredient={handleDeleteIngredient}
-								setChangeRecipe={setChangeRecipe}
-								successfullUploaded={successfullUploaded}
-								uploadProgress={uploadProgress}
-								uploading={uploading}
-								files={files}
-								setFiles={setFiles}
-								setSuccessfullUploaded={setSuccessfullUploaded}
-								onFilesAdded={onFilesAdded}
-								uploadFiles={uploadFiles}
-								location={location}
-							/>
-						);
+					if (ChangeRecipe !== undefined) {
+						if (recipe._id === ChangeRecipe._id) {
+							return (
+								<RecipeCard
+									recipe={recipe}
+									handleDelete={handleDelete}
+									pictureList={pictureList}
+									withform={true}
+									makeCardBig={makeCardBig}
+									handleInputChange={handleInputChange}
+									handleChangeIngredient={handleChangeIngredient}
+									handleDeleteIngredient={handleDeleteIngredient}
+									setChangeRecipe={setChangeRecipe}
+									successfullUploaded={successfullUploaded}
+									uploadProgress={uploadProgress}
+									uploading={uploading}
+									files={files}
+									setFiles={setFiles}
+									setSuccessfullUploaded={setSuccessfullUploaded}
+									onFilesAdded={onFilesAdded}
+									uploadFiles={uploadFiles}
+									location={location}
+								/>
+							);
+						}
 					}
 				})}
 			</div>
