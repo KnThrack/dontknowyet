@@ -41,6 +41,7 @@ const Recipes = (...props) => {
 
 	function makeCardBig(event, recipe) {
 		// ok here we need to basically raise a modal with the card we just click and overlay or over the list
+		setPageState({ page: "details" });
 		setChangeRecipe(recipe);
 	}
 
