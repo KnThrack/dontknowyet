@@ -27,7 +27,6 @@ const RecipeCard = (...props) => {
 		handleChangeIngredient,
 		handleDeleteIngredient,
 		handleDelete,
-		setChangeRecipe,
 		pictureList,
 		location
 	} = props[0];
@@ -74,7 +73,7 @@ const RecipeCard = (...props) => {
 
 	if (withforms) {
 		return (
-			<Card id={"card#" + recipe._id.toString()} className='Bigcard' key={recipe._id.toString()}>
+			<Card className='Bigcard'>
 				<Card.Header>{recipe.cuisine}</Card.Header>
 				<div className='recipe-button'>
 					<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
