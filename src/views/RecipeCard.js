@@ -109,13 +109,14 @@ const RecipeCard = (...props) => {
 						</Dropdown.Item>
 					</DropdownButton>
 				</div>
+				<div className='cardLink'>
+					<Card.Body>
+						<Card.Subtitle>{recipe.title}</Card.Subtitle>
+						<Card.Text>{recipe.recipe < 45 ? `${recipe.recipe}` : `${recipe.recipe.substring(0, 45)}...`}</Card.Text>
+					</Card.Body>
 
-				<Card.Body>
-					<Card.Subtitle>{recipe.title}</Card.Subtitle>
-					<Card.Text>{recipe.recipe < 45 ? `${recipe.recipe}` : `${recipe.recipe.substring(0, 45)}...`}</Card.Text>
-				</Card.Body>
-
-				<Card.Img src={url} alt='Card image' variant='top' />
+					<Card.Img src={url} alt='Card image' variant='bottom' />
+				</div>
 				<Card.Footer className='text-muted'>{Moment(recipe.create_date).format("DD MMM YY, h:mm:ss a")}</Card.Footer>
 			</Card>
 		);
