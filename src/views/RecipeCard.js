@@ -8,7 +8,6 @@ import { RecipeForm } from "./";
 import Moment from "moment";
 
 const RecipeCard = (...props) => {
-
 	const [withforms, setwithform] = useState("");
 
 	const {
@@ -31,10 +30,9 @@ const RecipeCard = (...props) => {
 		location
 	} = props[0];
 
-	useEffect((
+	useEffect(() => {
 		setwithform(withform);
-
-	) => {}, []);
+	}, []);
 
 	function test(something) {
 		setwithform(true);
