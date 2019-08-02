@@ -91,9 +91,7 @@ const Recipes = (...props) => {
 						return (
 							<RecipeCard
 								recipe={recipe}
-								url={url}
 								handleDelete={handleDelete}
-								key={recipe._id}
 								pictureList={pictureList}
 								withform={true}
 								makeCardBig={makeCardBig}
