@@ -380,6 +380,7 @@ button#cardButton {
 		margin-top: 20px;
 		width: 100% !important;
 		height: 100% !important;
+		transition: width 2s, height 4s;
 	}
 
 	.Recipe-pictures.form-group {
@@ -449,6 +450,7 @@ button#cardButton {
 		margin-top: 20px;
 		width: 60% !important;
 		height: 100% !important;
+		transition: width 2s, height 4s;
 	}
 
 	.card {
