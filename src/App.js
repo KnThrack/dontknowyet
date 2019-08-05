@@ -23,6 +23,7 @@ const App = (...props) => {
 	const [modal, setModal] = useState({ show: false, type: "" });
 	const [filter, setFilter] = useState("");
 	const [changeRecipe, setChangeRecipe] = useState(null);
+	const [deleteRecipe, setDeleteRecipe] = useState(null);
 	const [ingredientIndex, setIngredientIndex] = useState(null);
 	const [ingredientDelete, setIngredientDelete] = useState(false);
 	const [pageState, setPageState] = useState(null);
@@ -329,7 +330,8 @@ const App = (...props) => {
 		var stateCopy = recipes.slice();
 		var recipe = stateCopy[index];
 
-		setChangeRecipe(recipe);
+		setDeleteRecipe(recipe);
+		//setChangeRecipe(recipe);
 		// raise decision
 		raiseModal("delete");
 	}
@@ -351,12 +353,15 @@ const App = (...props) => {
 		if (state.type === "delete") {
 			// and put it away
 			setIngredientDelete(false);
-			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id)
+			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + deleteRecipe._id)
 				.then(function(response) {
 					// handle success
-					var recipeCopy = _.without(recipes, changeRecipe);
+					var recipeCopy = _.without(recipes, deleteRecipe);
 					setRecipes(recipeCopy);
 					setFilteredRecipes(recipeCopy);
+					if (pageState === "details") {
+						handleBack();
+					}
 				})
 				.catch(function(error) {
 					// handle error
@@ -604,6 +609,7 @@ const App = (...props) => {
 						handleModalClose={handleModalClose}
 						handleModalSuccess={handleModalSuccess}
 						modal={modal}
+						deleteRecipe={deleteRecipe}
 						changeRecipe={changeRecipe}
 						ingredientIndex={ingredientIndex}
 						ingredientDelete={ingredientDelete}
