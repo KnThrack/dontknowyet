@@ -105,7 +105,7 @@ const RecipeCard = (...props) => {
 		);
 	} else {
 		return (
-			<Card id={"card#" + recipe._id.toString()} onClick={test} className={cardClass(recipe)} key={recipe._id.toString()}>
+			<Card id={"card#" + recipe._id.toString()} className={cardClass(recipe)} key={recipe._id.toString()}>
 				<Card.Header>{recipe.cuisine}</Card.Header>
 				<div className='recipe-button'>
 					<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
@@ -114,7 +114,7 @@ const RecipeCard = (...props) => {
 						</Dropdown.Item>
 					</DropdownButton>
 				</div>
-				<div className='cardLink'>
+				<div className='cardLink' onClick={test}>
 					<Card.Body>
 						<Card.Subtitle>{recipe.title}</Card.Subtitle>
 						<Card.Text>{recipe.recipe < 45 ? `${recipe.recipe}` : `${recipe.recipe.substring(0, 45)}...`}</Card.Text>
