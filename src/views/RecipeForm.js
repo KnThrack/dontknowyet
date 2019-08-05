@@ -51,7 +51,19 @@ const RecipeForm = (...props) => {
 			*/
 			>
 				<Form.Label htmlFor='recipe'>Recipe</Form.Label>
-				<SimpleMDE name='recipe' onChange={handleMDEInputChanges} value={recipe.recipe} />;
+				<SimpleMDE
+					name='recipe'
+					onChange={handleMDEInputChanges}
+					value={recipe.recipe}
+					options={{
+						autofocus: true,
+						spellChecker: false,
+						uploadImage: false,
+						toolbar: ["bold", "italic", "heading", "|", "heading-smaller", "heading-bigger", "|", "quote", "table", "clean-block"]
+						// etc.
+					}}
+				/>
+				;
 			</Form.Group>
 			<Form.Group>
 				<RecipeTable recipe={recipe} handleChangeIngredient={handleChangeIngredient} handleDeleteIngredient={handleDeleteIngredient} />
