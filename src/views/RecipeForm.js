@@ -17,6 +17,7 @@ const RecipeForm = (...props) => {
 		setSuccessfullUploaded,
 		handleChangeIngredient,
 		handleInputChange,
+		handleMDEInputChanges,
 		handleDeleteIngredient,
 		pictureList,
 		location
@@ -50,7 +51,7 @@ const RecipeForm = (...props) => {
 			*/
 			>
 				<Form.Label htmlFor='recipe'>Recipe</Form.Label>
-				<SimpleMDE name='recipe' onChange={handleInputChanges} value={recipe.recipe} />;
+				<SimpleMDE name='recipe' onChange={handleMDEInputChanges} value={recipe.recipe} />;
 			</Form.Group>
 			<Form.Group>
 				<RecipeTable recipe={recipe} handleChangeIngredient={handleChangeIngredient} handleDeleteIngredient={handleDeleteIngredient} />
