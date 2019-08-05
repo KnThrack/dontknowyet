@@ -381,7 +381,32 @@ button#cardButton {
 	.card {
 		margin-left: 5px;
 	}
+
+	@keyframes card-initial {
+		0% {
+			height: 50% !important;
+			width: 10% !important;
+		}
+
+		40% {
+			height: 60% !important;
+			width: 30% !important;
+		}
+
+		60% {
+			height: 80% !important;
+			width: 60% !important;
+		}
+
+		100% {
+			height: 100% !important;
+			width: 100% !important;
+		}
+	}
+
 	.Bigcard {
+		animation-name: card-initial;
+		animation-duration: 4s;
 		background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
 		box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 		border-radius: 27px;
