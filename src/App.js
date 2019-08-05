@@ -507,9 +507,12 @@ const App = (...props) => {
 	}
 
 	function makeCardBig(event, recipe) {
-		// ok here we need to basically raise a modal with the card we just click and overlay or over the list
-		setPageState({ page: "details" });
-		setChangeRecipe(recipe);
+		// we dont do that for that one button
+		if (event.target.id !== "cardButton") {
+			// ok here we need to basically raise a modal with the card we just click and overlay or over the list
+			setPageState({ page: "details" });
+			setChangeRecipe(recipe);
+		}
 	}
 
 	// handlers end
