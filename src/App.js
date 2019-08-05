@@ -534,6 +534,7 @@ const App = (...props) => {
 										handleChangeIngredient={handleChangeIngredient}
 										handleDeleteIngredient={handleDeleteIngredient}
 										setChangeRecipe={setChangeRecipe}
+										changeRecipe={changeRecipe}
 										firebaseApp={firebaseApp}
 										successfullUploaded={successfullUploaded}
 										uploadProgress={uploadProgress}
