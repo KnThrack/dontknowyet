@@ -28,7 +28,7 @@ const Recipes = (...props) => {
 		pictureList,
 		setPageState,
 		setChangeRecipe,
-		ChangeRecipe,
+		changeRecipe,
 		location
 	} = props[0];
 
@@ -40,10 +40,10 @@ const Recipes = (...props) => {
 		handleFilterChange(event);
 	}
 
-	if (ChangeRecipe) {
+	if (changeRecipe) {
 		return (
 			<RecipeCard
-				recipe={ChangeRecipe}
+				recipe={changeRecipe}
 				handleDelete={handleDelete}
 				pictureList={pictureList}
 				withform={true}
@@ -108,10 +108,10 @@ const Recipes = (...props) => {
 					})}
 				</div>
 				{recipesList.map(function recipes(recipe) {
-					if (ChangeRecipe !== undefined) {
+					if (changeRecipe !== undefined) {
 						return (
 							<RecipeCard
-								recipe={ChangeRecipe}
+								recipe={changeRecipe}
 								handleDelete={handleDelete}
 								pictureList={pictureList}
 								withform={true}
