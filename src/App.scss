@@ -243,8 +243,16 @@ button#cardButton {
 .submit-Button:not(:disabled):not(.disabled):active,
 .submit-Button:hover {
 	color: #fff;
-	background-color: #8ab661;
-	border-color: #8ab661;
+	background-color: #fabe0e;
+	border-color: #fabe0e;
+}
+
+.back-Button:not(:disabled):not(.disabled).active,
+.back-Button:not(:disabled):not(.disabled):active,
+.back-Button:hover {
+	color: #fff;
+	background-color: #0e88fa;
+	border-color: #0e88fa;
 }
 
 .add-Button:not(:disabled):not(.disabled).active,
