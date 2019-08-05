@@ -322,22 +322,12 @@ button#cardButton {
 */
 
 @keyframes card-initial {
-	0% {
-		height: 50% !important;
-		width: 10% !important;
+	from {
+		height: 50px !important;
+		width: 10px !important;
 	}
 
-	40% {
-		height: 60% !important;
-		width: 30% !important;
-	}
-
-	60% {
-		height: 80% !important;
-		width: 60% !important;
-	}
-
-	100% {
+	to {
 		height: 100% !important;
 		width: 100% !important;
 	}
