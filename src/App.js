@@ -531,7 +531,6 @@ const App = (...props) => {
 										handleFilterChange={handleFilterChange}
 										setPageState={setPageState}
 										handleInputChange={handleInputChange}
-										handleMDEInputChanges={handleMDEInputChanges}
 										handleChangeIngredient={handleChangeIngredient}
 										handleDeleteIngredient={handleDeleteIngredient}
 										setChangeRecipe={setChangeRecipe}

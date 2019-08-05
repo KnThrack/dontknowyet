@@ -87,7 +87,6 @@ const RecipeCard = (...props) => {
 						recipe={recipe}
 						pictureList={pictureList}
 						handleInputChange={handleInputChange}
-						handleMDEInputChanges={handleMDEInputChanges}
 						handleChangeIngredient={handleChangeIngredient}
 						handleDeleteIngredient={handleDeleteIngredient}
 						successfullUploaded={successfullUploaded}

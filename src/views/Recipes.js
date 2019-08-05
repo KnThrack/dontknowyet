@@ -50,7 +50,6 @@ const Recipes = (...props) => {
 				makeCardBig={makeCardBig}
 				handleInputChange={handleInputChange}
 				handleChangeIngredient={handleChangeIngredient}
-				handleMDEInputChanges={handleMDEInputChanges}
 				handleDeleteIngredient={handleDeleteIngredient}
 				setChangeRecipe={setChangeRecipe}
 				successfullUploaded={successfullUploaded}
