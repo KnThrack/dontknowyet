@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import EasyMDE from "easymde";
 import { Upload, PictureCarousel, RecipeTable } from "./";
+import SimpleMDE from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
 
 const RecipeForm = (...props) => {
 	const {
@@ -21,9 +22,7 @@ const RecipeForm = (...props) => {
 		location
 	} = props[0];
 
-	useEffect(() => {
-		var easyMDE = new EasyMDE({ element: document.getElementById("recipe") });
-	}, []);
+	useEffect(() => {}, []);
 
 	// handlers
 	function handleInputChanges(event) {
@@ -46,9 +45,12 @@ const RecipeForm = (...props) => {
 					<option>Italian</option>
 				</Form.Control>
 			</Form.Group>
-			<Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
+			<Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}
+							<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={recipe.recipe} />
+			*/
+			>
 				<Form.Label htmlFor='recipe'>Recipe</Form.Label>
-				<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={recipe.recipe} />
+				<SimpleMDE name='recipe' onChange={handleInputChanges} value={recipe.recipe} />;
 			</Form.Group>
 			<Form.Group>
 				<RecipeTable recipe={recipe} handleChangeIngredient={handleChangeIngredient} handleDeleteIngredient={handleDeleteIngredient} />
