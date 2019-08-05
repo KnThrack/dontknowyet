@@ -321,6 +321,28 @@ button#cardButton {
 	--breakpoint-xl: 1200px;
 */
 
+@keyframes card-initial {
+	0% {
+		height: 50% !important;
+		width: 10% !important;
+	}
+
+	40% {
+		height: 60% !important;
+		width: 30% !important;
+	}
+
+	60% {
+		height: 80% !important;
+		width: 60% !important;
+	}
+
+	100% {
+		height: 100% !important;
+		width: 100% !important;
+	}
+}
+
 @media only screen and (min-width: 576px) {
 	/* For tablets: */
 	.App {
@@ -382,28 +404,6 @@ button#cardButton {
 		margin-left: 5px;
 	}
 
-	@keyframes card-initial {
-		0% {
-			height: 50% !important;
-			width: 10% !important;
-		}
-
-		40% {
-			height: 60% !important;
-			width: 30% !important;
-		}
-
-		60% {
-			height: 80% !important;
-			width: 60% !important;
-		}
-
-		100% {
-			height: 100% !important;
-			width: 100% !important;
-		}
-	}
-
 	.Bigcard {
 		animation-name: card-initial;
 		animation-duration: 4s;
@@ -413,7 +413,6 @@ button#cardButton {
 		margin-top: 20px;
 		width: 100% !important;
 		height: 100% !important;
-		transition: width 2s, height 4s;
 	}
 
 	.Recipe-pictures.form-group {
@@ -483,7 +482,8 @@ button#cardButton {
 		margin-top: 20px;
 		width: 60% !important;
 		height: 100% !important;
-		transition: width 2s, height 4s;
+		animation-name: card-initial;
+		animation-duration: 4s;
 	}
 
 	.card {
