@@ -24,7 +24,6 @@ const RecipeCard = (...props) => {
 		setFiles,
 		setSuccessfullUploaded,
 		handleInputChange,
-		handleMDEInputChanges,
 		handleChangeIngredient,
 		handleDeleteIngredient,
 		handleDelete,

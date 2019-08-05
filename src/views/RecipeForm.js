@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { Upload, PictureCarousel, RecipeTable } from "./";
-import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
 
 const RecipeForm = (...props) => {
 	const {
@@ -17,7 +15,6 @@ const RecipeForm = (...props) => {
 		setSuccessfullUploaded,
 		handleChangeIngredient,
 		handleInputChange,
-		handleMDEInputChanges,
 		handleDeleteIngredient,
 		pictureList,
 		location
@@ -51,19 +48,7 @@ const RecipeForm = (...props) => {
 			*/
 			>
 				<Form.Label htmlFor='recipe'>Recipe</Form.Label>
-				<SimpleMDE
-					name='recipe'
-					onChange={handleMDEInputChanges}
-					value={recipe.recipe}
-					options={{
-						autofocus: true,
-						spellChecker: false,
-						uploadImage: false,
-						toolbar: ["bold", "italic", "heading", "|", "heading-smaller", "heading-bigger", "|", "quote", "table", "clean-block"]
-						// etc.
-					}}
-				/>
-				;
+				<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={recipe.recipe} />
 			</Form.Group>
 			<Form.Group>
 				<RecipeTable recipe={recipe} handleChangeIngredient={handleChangeIngredient} handleDeleteIngredient={handleDeleteIngredient} />

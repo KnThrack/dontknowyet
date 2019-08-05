@@ -299,22 +299,6 @@ const App = (...props) => {
 		setFilteredRecipes(stateCopy);
 	}
 
-	function handleMDEInputChanges(value) {
-		// find which one we updating
-		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
-
-		// change the one we want to fix the state
-		var stateCopy = recipes.slice();
-		stateCopy[index] = Object.assign({}, stateCopy[index]);
-		stateCopy[index].recipe = value;
-
-		// one
-		setChangeRecipe(stateCopy[index]);
-		// ALL
-		setRecipes(stateCopy);
-		setFilteredRecipes(stateCopy);
-	}
-
 	function handleSubmit(event) {
 		event.preventDefault();
 
