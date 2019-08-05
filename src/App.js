@@ -214,6 +214,12 @@ const App = (...props) => {
 
 	// handlers
 
+	function handleBack(event) {
+		// ok here we need to basically raise a modal with the card we just click and overlay or over the list
+		setPageState({ page: "list" });
+		setChangeRecipe(null);
+	}
+
 	function handleAddRecipe(event) {
 		const newRecipe = {
 			name: _.uniqueId("newRecipe"),
@@ -335,6 +341,7 @@ const App = (...props) => {
 			type: ""
 		});
 	}
+
 	function handleModalSuccess(state, that) {
 		setModal({
 			show: false,
@@ -580,6 +587,7 @@ const App = (...props) => {
 								handleSubmit={handleSubmit}
 								handleAddIngredient={handleAddIngredient}
 								pageState={pageState}
+								handleBack={handleBack}
 								{...props}
 							/>
 						</div>

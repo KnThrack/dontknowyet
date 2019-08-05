@@ -42,26 +42,28 @@ const Recipes = (...props) => {
 
 	if (changeRecipe) {
 		return (
-			<RecipeCard
-				recipe={changeRecipe}
-				handleDelete={handleDelete}
-				pictureList={pictureList}
-				withform={true}
-				makeCardBig={makeCardBig}
-				handleInputChange={handleInputChange}
-				handleChangeIngredient={handleChangeIngredient}
-				handleDeleteIngredient={handleDeleteIngredient}
-				setChangeRecipe={setChangeRecipe}
-				successfullUploaded={successfullUploaded}
-				uploadProgress={uploadProgress}
-				uploading={uploading}
-				files={files}
-				setFiles={setFiles}
-				setSuccessfullUploaded={setSuccessfullUploaded}
-				onFilesAdded={onFilesAdded}
-				uploadFiles={uploadFiles}
-				location={location}
-			/>
+			<div className='content-inner'>
+				<RecipeCard
+					recipe={changeRecipe}
+					handleDelete={handleDelete}
+					pictureList={pictureList}
+					withform={true}
+					makeCardBig={makeCardBig}
+					handleInputChange={handleInputChange}
+					handleChangeIngredient={handleChangeIngredient}
+					handleDeleteIngredient={handleDeleteIngredient}
+					setChangeRecipe={setChangeRecipe}
+					successfullUploaded={successfullUploaded}
+					uploadProgress={uploadProgress}
+					uploading={uploading}
+					files={files}
+					setFiles={setFiles}
+					setSuccessfullUploaded={setSuccessfullUploaded}
+					onFilesAdded={onFilesAdded}
+					uploadFiles={uploadFiles}
+					location={location}
+				/>
+			</div>
 		);
 	}
 

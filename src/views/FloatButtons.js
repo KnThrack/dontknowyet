@@ -4,7 +4,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { Link } from "react-router-dom";
 
 const FloatButtons = (...props) => {
-	const { handleAddRecipe, handleSubmit, handleAddIngredient, pageState } = props[0];
+	const { handleAddRecipe, handleSubmit, handleBack, handleAddIngredient, pageState } = props[0];
 
 	if (pageState === null) {
 		return <ButtonGroup className='footerButtonGroup' />;
@@ -22,7 +22,7 @@ const FloatButtons = (...props) => {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
 				<Link to='/'>
-					<Button variant='info' className='back-Button' size='lg' title='Go Back'>
+					<Button variant='info' className='back-Button' size='lg' title='Go Back' onClick={handleBack}>
 						Go Back
 					</Button>
 				</Link>
