@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
+import EasyMDE from "easymde";
 import { Upload, PictureCarousel, RecipeTable } from "./";
 
 const RecipeForm = (...props) => {
@@ -20,7 +21,9 @@ const RecipeForm = (...props) => {
 		location
 	} = props[0];
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		var easyMDE = new EasyMDE({ element: document.getElementById("recipe") });
+	}, []);
 
 	// handlers
 	function handleInputChanges(event) {
