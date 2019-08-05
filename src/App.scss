@@ -321,18 +321,6 @@ button#cardButton {
 	--breakpoint-xl: 1200px;
 */
 
-@keyframes card-initial {
-	from {
-		left: 0;
-		top: 0;
-	}
-
-	to {
-		left: 100px;
-		top: 100px;
-	}
-}
-
 @media only screen and (min-width: 576px) {
 	/* For tablets: */
 	.App {
@@ -395,7 +383,6 @@ button#cardButton {
 	}
 
 	.Bigcard {
-		animation-name: card-initial;
 		background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
 		box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 		border-radius: 27px;
@@ -471,7 +458,6 @@ button#cardButton {
 		margin-top: 20px;
 		width: 60% !important;
 		height: 100% !important;
-		animation-name: card-initial;
 	}
 
 	.card {
