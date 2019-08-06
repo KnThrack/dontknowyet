@@ -3,7 +3,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	/*background: linear-gradient(180deg, rgba(220, 255, 255, 0.32) 0%, rgba(250, 219, 255, 0.5) 99.99%, rgba(212, 156, 255, 0.33) 100%); */
-	background: rgb(224, 230, 230);
+	background: rgb(243, 243, 243);
 }
 
 code {
