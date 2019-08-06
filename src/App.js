@@ -664,7 +664,7 @@ const App = (...props) => {
 							path='/recipes'
 							render={props => (
 								<Recipes
-									recipesList={recipesList}
+									recipesList={filteredRecipes}
 									pictureList={pictures}
 									filter={filter}
 									handleDelete={handleDelete}
@@ -693,7 +693,7 @@ const App = (...props) => {
 							path='/recipe/:id'
 							render={props => (
 								<Recipe
-									recipesList={recipesList}
+									recipesList={filteredRecipes}
 									pictureList={pictures}
 									handleInputChange={handleInputChange}
 									handleChangeIngredient={handleChangeIngredient}
