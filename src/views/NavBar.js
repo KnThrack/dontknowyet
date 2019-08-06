@@ -12,8 +12,10 @@ const NavBar = () => {
 
 	let userpicture = "https://unicons.iconscout.com/release/v1.0.0/svg/user-circle.svg";
 	if (isAuthenticated) {
-		if (user.picture) {
-			userpicture = user.picture;
+		if (user !== undefined) {
+			if (user.picture) {
+				userpicture = user.picture;
+			}
 		}
 	}
 
