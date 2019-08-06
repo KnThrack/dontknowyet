@@ -1,9 +1,8 @@
 import React from "react";
-import { Loading } from "./views";
 import App from "./App";
 import { useAuth0 } from "./react-auth0-spa";
 import axios from "axios";
-
+import { NavBar, Profile, StartPage, Loading } from "./views";
 // styles
 //import "samples-bootstrap-theme/dist/css/auth0-theme.css";
 import "./App.scss";
@@ -25,11 +24,20 @@ const Base = () => {
 	const { getTokenSilently } = useAuth0();
 	const { loading, user } = useAuth0();
 
-	/*
 	if (loading) {
-		return <Loading />;
+		return (
+			<div className='App'>
+				<header className='App-header'>
+					<NavBar />
+				</header>
+				<div className='App-content'>
+					<StartPage />
+					<Loading />
+				</div>
+			</div>
+		);
 	}
-*/
+
 	return <App token={getToken(loading, getTokenSilently)} user={user} />;
 };
 
