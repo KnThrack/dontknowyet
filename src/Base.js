@@ -24,9 +24,11 @@ const Base = () => {
 	const { getTokenSilently } = useAuth0();
 	const { loading, user } = useAuth0();
 
+	/*
 	if (loading) {
 		return <Loading />;
 	}
+*/
 
 	return <App token={getToken(getTokenSilently)} user={user} />;
 };

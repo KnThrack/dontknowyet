@@ -525,16 +525,16 @@ const App = (...props) => {
 	function RecipeListApp() {
 		const recipesList = filteredRecipes;
 
-		if (recipesList) {
-			return (
-				<div className='App'>
+		//	if (recipesList) {
+		return (
+			<div className='App'>
+				<header className='App-header'>
+					<NavBar />
+				</header>
+				<div className='App-content'>
 					<Router>
-						<header className='App-header'>
-							<NavBar />
-						</header>
-
-						<div className='App-content'>
-							<Route path='/' render={props => <StartPage />} />
+						<Switch>
+							<Route path='/' exact render={props => <StartPage />} />
 							<PrivateRoute
 								exact
 								path='/recipes'
@@ -589,36 +589,37 @@ const App = (...props) => {
 									/>
 								)}
 							/>
-						</div>
-						<div className='d-flex footerButtons'>
-							<FloatButtons
-								handleAddRecipe={handleAddRecipe}
-								handleSubmit={handleSubmit}
-								handleAddIngredient={handleAddIngredient}
-								pageState={pageState}
-								handleBack={handleBack}
-								{...props}
-							/>
-						</div>
-						<Switch>
-							<Route path='/' exact />
+
 							<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
 						</Switch>
 					</Router>
-					<ConfirmationModal
-						showModal={modal.show}
-						handleModalClose={handleModalClose}
-						handleModalSuccess={handleModalSuccess}
-						modal={modal}
-						deleteRecipe={deleteRecipe}
-						changeRecipe={changeRecipe}
-						ingredientIndex={ingredientIndex}
-						ingredientDelete={ingredientDelete}
-						handleInputChange={handleTableChange}
+				</div>
+
+				<div className='d-flex footerButtons'>
+					<FloatButtons
+						handleAddRecipe={handleAddRecipe}
+						handleSubmit={handleSubmit}
+						handleAddIngredient={handleAddIngredient}
+						pageState={pageState}
+						handleBack={handleBack}
+						{...props}
 					/>
 				</div>
-			);
-		} else {
+
+				<ConfirmationModal
+					showModal={modal.show}
+					handleModalClose={handleModalClose}
+					handleModalSuccess={handleModalSuccess}
+					modal={modal}
+					deleteRecipe={deleteRecipe}
+					changeRecipe={changeRecipe}
+					ingredientIndex={ingredientIndex}
+					ingredientDelete={ingredientDelete}
+					handleInputChange={handleTableChange}
+				/>
+			</div>
+		);
+		/*	} else {
 			return (
 				<div className='App'>
 					<Router>
@@ -644,6 +645,7 @@ const App = (...props) => {
 				</div>
 			);
 		}
+		*/
 	}
 
 	return RecipeListApp();
