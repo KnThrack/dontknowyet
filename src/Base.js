@@ -13,15 +13,12 @@ initFontAwesome();
 */
 
 async function getToken(loading, getTokenSilently) {
-	var token;
 	// add auth token to axios
-	loading.then(async function(response) {
-		token = await getTokenSilently();
+	if (!loading) {
+		const token = await getTokenSilently();
 		// set auth headers
 		return token;
-	});
-
-	return token;
+	}
 }
 
 const Base = () => {
