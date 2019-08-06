@@ -658,7 +658,7 @@ const App = (...props) => {
 			<div className='App-content'>
 				<Router>
 					<Switch>
-						<Route path='/' exact render={props => <StartPage />} />
+						<Route path='/' exact component={StartPage} />
 						<PrivateRoute
 							exact
 							path='/recipes'
@@ -714,7 +714,7 @@ const App = (...props) => {
 							)}
 						/>
 
-						<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
+						<PrivateRoute path='/profile' component={Profile} />
 					</Switch>
 				</Router>
 			</div>
