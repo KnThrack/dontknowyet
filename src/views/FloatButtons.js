@@ -21,11 +21,9 @@ const FloatButtons = (...props) => {
 	} else if (pageState.page === "details") {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
-				<Link to='/'>
-					<Button variant='info' className='back-Button' size='lg' title='Go Back' onClick={handleBack}>
-						Go Back
-					</Button>
-				</Link>
+				<Button variant='info' className='back-Button' size='lg' title='Go Back' onClick={handleBack}>
+					Go Back
+				</Button>
 				<Button type='submit' className='submit-Button' size='lg' variant='primary' onClick={handleSubmit}>
 					Submit
 				</Button>

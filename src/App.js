@@ -655,68 +655,67 @@ const App = (...props) => {
 			<header className='App-header'>
 				<NavBar />
 			</header>
-			<div className='App-content'>
-				<Router>
-					<Switch>
-						<Route path='/' exact component={StartPage} />
-						<PrivateRoute
-							exact
-							path='/recipes'
-							render={props => (
-								<Recipes
-									recipesList={filteredRecipes}
-									pictureList={pictures}
-									filter={filter}
-									handleDelete={handleDelete}
-									handleFilterChange={handleFilterChange}
-									setPageState={setPageState}
-									handleInputChange={handleInputChange}
-									handleChangeIngredient={handleChangeIngredient}
-									handleDeleteIngredient={handleDeleteIngredient}
-									setChangeRecipe={setChangeRecipe}
-									changeRecipe={changeRecipe}
-									firebaseApp={firebaseApp}
-									successfullUploaded={successfullUploaded}
-									uploadProgress={uploadProgress}
-									uploading={uploading}
-									files={files}
-									setFiles={setFiles}
-									setSuccessfullUploaded={setSuccessfullUploaded}
-									onFilesAdded={onFilesAdded}
-									uploadFiles={uploadFiles}
-									makeCardBig={makeCardBig}
-									{...props}
-								/>
-							)}
-						/>
-						<PrivateRoute
-							path='/recipe/:id'
-							render={props => (
-								<Recipe
-									recipesList={filteredRecipes}
-									pictureList={pictures}
-									handleInputChange={handleInputChange}
-									handleChangeIngredient={handleChangeIngredient}
-									handleDeleteIngredient={handleDeleteIngredient}
-									setPageState={setPageState}
-									setChangeRecipe={setChangeRecipe}
-									firebaseApp={firebaseApp}
-									successfullUploaded={successfullUploaded}
-									uploadProgress={uploadProgress}
-									uploading={uploading}
-									files={files}
-									setFiles={setFiles}
-									setSuccessfullUploaded={setSuccessfullUploaded}
-									onFilesAdded={onFilesAdded}
-									uploadFiles={uploadFiles}
-									{...props}
-								/>
-							)}
-						/>
 
-						<PrivateRoute path='/profile' component={Profile} />
-					</Switch>
-				</Router>
+			<div className='App-content'>
+				<Switch>
+					<Route path='/' exact component={StartPage} />
+					<PrivateRoute
+						exact
+						path='/recipes'
+						render={props => (
+							<Recipes
+								recipesList={filteredRecipes}
+								pictureList={pictures}
+								filter={filter}
+								handleDelete={handleDelete}
+								handleFilterChange={handleFilterChange}
+								setPageState={setPageState}
+								handleInputChange={handleInputChange}
+								handleChangeIngredient={handleChangeIngredient}
+								handleDeleteIngredient={handleDeleteIngredient}
+								setChangeRecipe={setChangeRecipe}
+								changeRecipe={changeRecipe}
+								firebaseApp={firebaseApp}
+								successfullUploaded={successfullUploaded}
+								uploadProgress={uploadProgress}
+								uploading={uploading}
+								files={files}
+								setFiles={setFiles}
+								setSuccessfullUploaded={setSuccessfullUploaded}
+								onFilesAdded={onFilesAdded}
+								uploadFiles={uploadFiles}
+								makeCardBig={makeCardBig}
+								{...props}
+							/>
+						)}
+					/>
+					<PrivateRoute
+						path='/recipe/:id'
+						render={props => (
+							<Recipe
+								recipesList={filteredRecipes}
+								pictureList={pictures}
+								handleInputChange={handleInputChange}
+								handleChangeIngredient={handleChangeIngredient}
+								handleDeleteIngredient={handleDeleteIngredient}
+								setPageState={setPageState}
+								setChangeRecipe={setChangeRecipe}
+								firebaseApp={firebaseApp}
+								successfullUploaded={successfullUploaded}
+								uploadProgress={uploadProgress}
+								uploading={uploading}
+								files={files}
+								setFiles={setFiles}
+								setSuccessfullUploaded={setSuccessfullUploaded}
+								onFilesAdded={onFilesAdded}
+								uploadFiles={uploadFiles}
+								{...props}
+							/>
+						)}
+					/>
+
+					<PrivateRoute path='/profile' component={Profile} />
+				</Switch>
 			</div>
 
 			<div className='d-flex footerButtons'>
