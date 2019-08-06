@@ -12,11 +12,15 @@ import initFontAwesome from "./utils/initFontAwesome";
 initFontAwesome();
 */
 
-async function getToken(getTokenSilently) {
+async function getToken(loading, getTokenSilently) {
+	var token;
 	// add auth token to axios
+	loading.then(async function(response) {
+		token = await getTokenSilently();
+		// set auth headers
+		return token;
+	});
 
-	const token = await getTokenSilently();
-	// set auth headers
 	return token;
 }
 
@@ -29,7 +33,7 @@ const Base = () => {
 		return <Loading />;
 	}
 */
-	return <App token={getToken(getTokenSilently)} user={user} />;
+	return <App token={getToken(loading, getTokenSilently)} user={user} />;
 };
 
 export default Base;
