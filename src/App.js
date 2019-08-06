@@ -648,7 +648,101 @@ const App = (...props) => {
 		*/
 	}
 
-	return RecipeListApp();
+	//return RecipeListApp();
+
+	return (
+		<div className='App'>
+			<header className='App-header'>
+				<NavBar />
+			</header>
+			<div className='App-content'>
+				<Router>
+					<Switch>
+						<Route path='/' exact render={props => <StartPage />} />
+						<PrivateRoute
+							exact
+							path='/recipes'
+							render={props => (
+								<Recipes
+									recipesList={recipesList}
+									pictureList={pictures}
+									filter={filter}
+									handleDelete={handleDelete}
+									handleFilterChange={handleFilterChange}
+									setPageState={setPageState}
+									handleInputChange={handleInputChange}
+									handleChangeIngredient={handleChangeIngredient}
+									handleDeleteIngredient={handleDeleteIngredient}
+									setChangeRecipe={setChangeRecipe}
+									changeRecipe={changeRecipe}
+									firebaseApp={firebaseApp}
+									successfullUploaded={successfullUploaded}
+									uploadProgress={uploadProgress}
+									uploading={uploading}
+									files={files}
+									setFiles={setFiles}
+									setSuccessfullUploaded={setSuccessfullUploaded}
+									onFilesAdded={onFilesAdded}
+									uploadFiles={uploadFiles}
+									makeCardBig={makeCardBig}
+									{...props}
+								/>
+							)}
+						/>
+						<PrivateRoute
+							path='/recipe/:id'
+							render={props => (
+								<Recipe
+									recipesList={recipesList}
+									pictureList={pictures}
+									handleInputChange={handleInputChange}
+									handleChangeIngredient={handleChangeIngredient}
+									handleDeleteIngredient={handleDeleteIngredient}
+									setPageState={setPageState}
+									setChangeRecipe={setChangeRecipe}
+									firebaseApp={firebaseApp}
+									successfullUploaded={successfullUploaded}
+									uploadProgress={uploadProgress}
+									uploading={uploading}
+									files={files}
+									setFiles={setFiles}
+									setSuccessfullUploaded={setSuccessfullUploaded}
+									onFilesAdded={onFilesAdded}
+									uploadFiles={uploadFiles}
+									{...props}
+								/>
+							)}
+						/>
+
+						<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
+					</Switch>
+				</Router>
+			</div>
+
+			<div className='d-flex footerButtons'>
+				<FloatButtons
+					handleAddRecipe={handleAddRecipe}
+					handleSubmit={handleSubmit}
+					handleAddIngredient={handleAddIngredient}
+					pageState={pageState}
+					handleBack={handleBack}
+					{...props}
+				/>
+			</div>
+
+			<ConfirmationModal
+				showModal={modal.show}
+				handleModalClose={handleModalClose}
+				handleModalSuccess={handleModalSuccess}
+				modal={modal}
+				deleteRecipe={deleteRecipe}
+				changeRecipe={changeRecipe}
+				ingredientIndex={ingredientIndex}
+				ingredientDelete={ingredientDelete}
+				handleInputChange={handleTableChange}
+			/>
+		</div>
+	);
 };
 
 export default App;
