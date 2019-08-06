@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useAuth0 } from "./react-auth0-spa";
 import axios from "axios";
 import "./App.scss";
-import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
+import { Recipes, Recipe, NavBar, Profile, StartPage, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import * as firebase from "firebase/app";
 // Add the Firebase products that you want to use
@@ -534,9 +534,10 @@ const App = (...props) => {
 						</header>
 
 						<div className='App-content'>
+							<Route path='/' render={props => <StartPage />} />
 							<PrivateRoute
 								exact
-								path='/'
+								path='/recipes'
 								render={props => (
 									<Recipes
 										recipesList={recipesList}

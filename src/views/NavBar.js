@@ -34,6 +34,7 @@ const NavBar = () => {
 			<Navbar.Collapse id='basic-navbar-nav'>
 				<Nav className='justify-content-end' justify='true'>
 					<Nav.Link href='/'>Home</Nav.Link>
+					<Nav.Link href='/recipes'>My Recipes</Nav.Link>
 					<Nav.Link href='/profile'>Profile</Nav.Link>
 				</Nav>
 				<Image onClick={loginout} src={userpicture} roundedCircle height='50px' />
