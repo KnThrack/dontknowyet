@@ -38,22 +38,7 @@ const Base = () => {
 		);
 	}
 
-	return (
-		<div className='App'>
-			<header className='App-header'>
-				<NavBar />
-			</header>
-
-			<div className='App-content'>
-				<Router>
-					<Switch>
-						<Route path='/' exact component={StartPage} />
-						<App token={getToken(loading, getTokenSilently)} user={user} />
-					</Switch>
-				</Router>
-			</div>
-		</div>
-	);
+	return <App token={getToken(loading, getTokenSilently)} user={user} />;
 };
 
 export default Base;
