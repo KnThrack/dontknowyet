@@ -9,3 +9,14 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+a:hover {
+	color: #ffc107;
+	text-decoration: none;
+}
+
+a {
+	color: #8ab661;
+	text-decoration: none;
+	background-color: transparent;
+}
