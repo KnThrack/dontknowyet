@@ -27,13 +27,15 @@ const Base = () => {
 	if (loading) {
 		return (
 			<div className='App'>
-				<header className='App-header'>
-					<NavBar />
-				</header>
-				<div className='App-content'>
-					<StartPage />
-					<Loading />
-				</div>
+				<Router>
+					<header className='App-header'>
+						<NavBar />
+					</header>
+					<div className='App-content'>
+						<StartPage />
+						<Loading />
+					</div>
+				</Router>
 			</div>
 		);
 	}
