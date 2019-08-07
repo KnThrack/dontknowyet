@@ -1,8 +1,7 @@
 import React from "react";
 import App from "./App";
 import { useAuth0 } from "./react-auth0-spa";
-import { NavBar, Profile, StartPage, Loading } from "./views";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { NavBar, StartPage, Loading } from "./views";
 // styles
 //import "samples-bootstrap-theme/dist/css/auth0-theme.css";
 import "./App.scss";
@@ -27,15 +26,13 @@ const Base = () => {
 	if (loading) {
 		return (
 			<div className='App'>
-				<Router>
-					<header className='App-header'>
-						<NavBar />
-					</header>
-					<div className='App-content'>
-						<StartPage />
-						<Loading />
-					</div>
-				</Router>
+				<header className='App-header'>
+					<NavBar />
+				</header>
+				<div className='App-content'>
+					<StartPage />
+					<Loading />
+				</div>
 			</div>
 		);
 	}

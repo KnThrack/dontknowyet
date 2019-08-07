@@ -5,7 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { useAuth0 } from "../react-auth0-spa";
 import Image from "react-bootstrap/Image";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+
 //import { ReactComponent as Logo } from "../assets/Logosmall.svg";
 
 const NavBar = () => {
@@ -36,9 +37,11 @@ const NavBar = () => {
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />
 			<Navbar.Collapse id='basic-navbar-nav'>
 				<Nav className='justify-content-end' justify='true'>
-					<Link to='/'>Home</Link>
-					<Link to='/recipes'>My Recipes</Link>
-					<Link to='/profile'>Profile</Link>
+					<Router>
+						<Link to='/'>Home</Link>
+						<Link to='/recipes'>My Recipes</Link>
+						<Link to='/profile'>Profile</Link>
+					</Router>
 				</Nav>
 				<Image onClick={loginout} src={userpicture} roundedCircle height='50px' />
 			</Navbar.Collapse>
