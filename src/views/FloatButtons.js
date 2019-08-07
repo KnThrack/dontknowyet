@@ -33,9 +33,7 @@ const FloatButtons = (...props) => {
 			</ButtonGroup>
 		);
 	} else if (pageState.page === "home") {
-		return (
-
-		);
+		return <ButtonGroup className='footerButtonGroup' />;
 	}
 };
 

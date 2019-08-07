@@ -9,7 +9,7 @@ const StartPage = (...props) => {
 	}, []);
 
 	return (
-		<div class='App-Home'>
+		<div className='App-Home'>
 			<h1>Hello world!</h1>
 		</div>
 	);
