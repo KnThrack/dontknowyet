@@ -37,11 +37,9 @@ const NavBar = () => {
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />
 			<Navbar.Collapse id='basic-navbar-nav'>
 				<Nav className='justify-content-end' justify='true'>
-					<Router>
-						<Link to='/'>Home</Link>
-						<Link to='/recipes'>My Recipes</Link>
-						<Link to='/profile'>Profile</Link>
-					</Router>
+					<Link to='/'>Home</Link>
+					<Link to='/recipes'>My Recipes</Link>
+					<Link to='/profile'>Profile</Link>
 				</Nav>
 				<Image onClick={loginout} src={userpicture} roundedCircle height='50px' />
 			</Navbar.Collapse>
