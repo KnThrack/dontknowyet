@@ -14,11 +14,10 @@ const StartPage = (...props) => {
 
 	return (
 		<div className='App-Home'>
-			<Jumbotron>
-				<h1>Dontknowyet App</h1>
-				<p>Put some text here in the future to explain what the App is etc...</p>
-				<p>You need to log in to use the application !</p>
-			</Jumbotron>
+			<h1>Dontknowyet App</h1>
+			<p>Put some text here in the future to explain what the App is etc...</p>
+			<p>You need to log in to use the application !</p>
+
 			<Image
 				className='Home-Picture'
 				src='https://firebasestorage.googleapis.com/v0/b/dontknowyet.appspot.com/o/public%2Ffoodpicture.jpg?alt=media&token=17aed28d-eb6f-48e1-ad2b-e3a4a5fc8365'
