@@ -9,7 +9,8 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 
 //import { ReactComponent as Logo } from "../assets/Logosmall.svg";
 
-const NavBar = () => {
+const NavBar = (...props) => {
+	const { showNavs } = props[0];
 	const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
 	let userpicture = "https://unicons.iconscout.com/release/v1.0.0/svg/user-circle.svg";
@@ -28,23 +29,34 @@ const NavBar = () => {
 		isAuthenticated && logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
 	}
 
-	return (
-		<Navbar expand='lg'>
-			<Navbar.Brand href='/'>
-				<img src={require("../assets/Logosmall.png")} alt='' width='50' height='50' className='d-inline-block align-top' />
-				{" Dontknowyet"}
-			</Navbar.Brand>
-			<Navbar.Toggle aria-controls='basic-navbar-nav' />
-			<Navbar.Collapse id='basic-navbar-nav'>
-				<Nav className='justify-content-end' justify='true'>
-					<Link to='/'>Home</Link>
-					<Link to='/recipes'>My Recipes</Link>
-					<Link to='/profile'>Profile</Link>
-				</Nav>
-				<Image onClick={loginout} src={userpicture} roundedCircle height='50px' />
-			</Navbar.Collapse>
-		</Navbar>
-	);
+	if (showNavs) {
+		return (
+			<Navbar expand='lg'>
+				<Navbar.Brand href='/'>
+					<img src={require("../assets/Logosmall.png")} alt='' width='50' height='50' className='d-inline-block align-top' />
+					{" Dontknowyet"}
+				</Navbar.Brand>
+				<Navbar.Toggle aria-controls='basic-navbar-nav' />
+				<Navbar.Collapse id='basic-navbar-nav'>
+					<Nav className='justify-content-end' justify='true'>
+						<Link to='/'>Home</Link>
+						<Link to='/recipes'>My Recipes</Link>
+						<Link to='/profile'>Profile</Link>
+					</Nav>
+					<Image onClick={loginout} src={userpicture} roundedCircle height='50px' />
+				</Navbar.Collapse>
+			</Navbar>
+		);
+	} else {
+		return (
+			<Navbar expand='lg'>
+				<Navbar.Brand href='/'>
+					<img src={require("../assets/Logosmall.png")} alt='' width='50' height='50' className='d-inline-block align-top' />
+					{" Dontknowyet"}
+				</Navbar.Brand>
+			</Navbar>
+		);
+	}
 };
 
 export { NavBar };

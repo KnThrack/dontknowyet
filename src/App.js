@@ -525,7 +525,7 @@ const App = (...props) => {
 		<div className='App'>
 			<Router>
 				<header className='App-header'>
-					<NavBar />
+					<NavBar showNavs={true} />
 				</header>
 
 				<div className='App-content'>

@@ -26,7 +26,9 @@ const Base = () => {
 	if (loading) {
 		return (
 			<div className='App'>
-				<header className='App-header' />
+				<header className='App-header'>
+					<NavBar showNavs={false} />
+				</header>
 				<div className='App-content'>
 					<StartPage />
 					<Loading />
