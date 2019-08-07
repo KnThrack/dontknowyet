@@ -524,12 +524,12 @@ const App = (...props) => {
 	return (
 		<div className='App'>
 			<Router>
-				<Switch>
-					<header className='App-header'>
-						<NavBar />
-					</header>
+				<header className='App-header'>
+					<NavBar />
+				</header>
 
-					<div className='App-content'>
+				<div className='App-content'>
+					<Switch>
 						<Route exact path='/' component={StartPage} />
 						<PrivateRoute
 							exact
@@ -587,31 +587,31 @@ const App = (...props) => {
 						/>
 
 						<PrivateRoute path='/profile' component={Profile} />
-					</div>
+					</Switch>
+				</div>
 
-					<div className='d-flex footerButtons'>
-						<FloatButtons
-							handleAddRecipe={handleAddRecipe}
-							handleSubmit={handleSubmit}
-							handleAddIngredient={handleAddIngredient}
-							pageState={pageState}
-							handleBack={handleBack}
-							{...props}
-						/>
-					</div>
-
-					<ConfirmationModal
-						showModal={modal.show}
-						handleModalClose={handleModalClose}
-						handleModalSuccess={handleModalSuccess}
-						modal={modal}
-						deleteRecipe={deleteRecipe}
-						changeRecipe={changeRecipe}
-						ingredientIndex={ingredientIndex}
-						ingredientDelete={ingredientDelete}
-						handleInputChange={handleTableChange}
+				<div className='d-flex footerButtons'>
+					<FloatButtons
+						handleAddRecipe={handleAddRecipe}
+						handleSubmit={handleSubmit}
+						handleAddIngredient={handleAddIngredient}
+						pageState={pageState}
+						handleBack={handleBack}
+						{...props}
 					/>
-				</Switch>
+				</div>
+
+				<ConfirmationModal
+					showModal={modal.show}
+					handleModalClose={handleModalClose}
+					handleModalSuccess={handleModalSuccess}
+					modal={modal}
+					deleteRecipe={deleteRecipe}
+					changeRecipe={changeRecipe}
+					ingredientIndex={ingredientIndex}
+					ingredientDelete={ingredientDelete}
+					handleInputChange={handleTableChange}
+				/>
 			</Router>
 		</div>
 	);
