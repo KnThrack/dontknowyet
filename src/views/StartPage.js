@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Background from "../assets/background.svg";
 
-const StartPage = () => {
+const StartPage = (...props) => {
+	const { setPageState } = props[0];
+
+	useEffect(() => {
+		setPageState({ page: "home" });
+	}, []);
+
 	return (
 		<div class='App-Home'>
 			<h1>Hello world!</h1>

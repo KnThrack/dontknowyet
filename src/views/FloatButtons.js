@@ -32,6 +32,10 @@ const FloatButtons = (...props) => {
 				</Button>
 			</ButtonGroup>
 		);
+	} else if (pageState.page === "home") {
+		return (
+
+		);
 	}
 };
 

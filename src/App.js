@@ -530,7 +530,7 @@ const App = (...props) => {
 
 				<div className='App-content'>
 					<Switch>
-						<Route exact path='/' component={StartPage} />
+						<Route exact path='/' render={props => <StartPage setPageState={setPageState} />} />
 						<PrivateRoute
 							exact
 							path='/recipes'
