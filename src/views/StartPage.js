@@ -5,7 +5,9 @@ const StartPage = (...props) => {
 	const { setPageState } = props[0];
 
 	useEffect(() => {
-		setPageState({ page: "home" });
+		if (setPageState !== undefined) {
+			setPageState({ page: "home" });
+		}
 	}, []);
 
 	return (
