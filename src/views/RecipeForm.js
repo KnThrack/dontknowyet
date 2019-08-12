@@ -2,6 +2,14 @@ import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { Upload, PictureCarousel, RecipeTable } from "./";
 
+/**
+ * @classdesc RecipeForm renderer class
+ * @class RecipeForm
+ * @exports RecipeForm
+ * @constructor
+ * @inner
+ * @memberof RecipeCard
+ */
 const RecipeForm = (...props) => {
 	const {
 		recipe,

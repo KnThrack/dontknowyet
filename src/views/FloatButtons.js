@@ -3,6 +3,12 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { Link } from "react-router-dom";
 
+/**
+ * @classdesc this class controls the floating buttons that are shown at the bottom
+ * @class FloatButtons
+ * @exports FloatButtons
+ * @constructor
+ */
 const FloatButtons = (...props) => {
 	const { handleAddRecipe, handleSubmit, handleBack, handleAddIngredient, pageState } = props[0];
 

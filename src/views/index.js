@@ -1,3 +1,6 @@
+/**
+ * @classdesc index class for node
+ */
 export { Loading } from "./Loading";
 export { ConfirmationModal } from "./ConfirmationModal";
 export { NavBar } from "./NavBar";

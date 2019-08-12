@@ -5,6 +5,12 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+/**
+ * @classdesc This is the class that creates the Modal shown to the user
+ * @class ConfirmationModal
+ * @exports ConfirmationModal
+ * @constructor
+ */
 const ConfirmationModal = (...props) => {
 	const { showModal, handleModalClose, handleModalSuccess, handleInputChange, modal, changeRecipe, ingredientIndex, ingredientDelete } = props[0];
 

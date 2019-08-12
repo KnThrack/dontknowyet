@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/NavBar.js - Documentation</title>
     
     
     
@@ -43,31 +43,127 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/NavBar.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// src/views/NavBar.js
 
+import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import { useAuth0 } from "../react-auth0-spa";
+import Image from "react-bootstrap/Image";
+import { Link } from "react-router-dom";
 
-    <section class="package">
-        <h3> </h3>		
+//import { ReactComponent as Logo } from "../assets/Logosmall.svg";
+/**
+ * @classdesc This class renders the navigation bar that is displayed in the header
+ * @class NavBar
+ * @exports NavBar
+ * @constructor
+ */
+const NavBar = (...props) => {
+	const { showNavs } = props[0];
+	const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+	var enableLink = "hideit";
+
+	let userpicture = "https://unicons.iconscout.com/release/v1.0.0/svg/user-circle.svg";
+	if (isAuthenticated) {
+		if (user !== undefined) {
+			if (user.picture) {
+				userpicture = user.picture;
+				enableLink = "";
+			}
+		}
+	}
+
+	//in your component
+
+	function loginout() {
+		!isAuthenticated &amp;&amp; loginWithRedirect({});
+		isAuthenticated &amp;&amp; logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
+
+		/*
+		isAuthenticated &amp;&amp;
+		firebase
+			.auth()
+			.signOut()
+			.then(function() {
+				// Sign-out successful.
+			})
+			.catch(function(error) {
+				// An error happened.
+			});
+			*/
+	}
+
+	if (showNavs) {
+		return (
+			&lt;Navbar expand='lg'>
+				&lt;Navbar.Brand href='/'>
+					&lt;img src={require("../assets/Logosmall.png")} alt='' width='50' height='50' className='d-inline-block align-top' />
+					{" Dontknowyet"}
+				&lt;/Navbar.Brand>
+				&lt;Navbar.Toggle aria-controls='basic-navbar-nav' />
+				&lt;Navbar.Collapse id='basic-navbar-nav'>
+					&lt;Nav className='justify-content-end' justify='true'>
+						&lt;Link to='/'> Home &lt;/Link>
+						&lt;Link className={enableLink} to='/recipes'>
+							My Recipes
+						&lt;/Link>
+						&lt;Link to='/profile'> Profile &lt;/Link>
+					&lt;/Nav>
+					&lt;Image onClick={loginout} src={userpicture} roundedCircle height='50px' />
+				&lt;/Navbar.Collapse>
+			&lt;/Navbar>
+		);
+	} else {
+		return (
+			&lt;Navbar expand='lg'>
+				&lt;Navbar.Brand href='/'>
+					&lt;img src={require("../assets/Logosmall.png")} alt='' width='50' height='50' className='d-inline-block align-top' />
+					{" Dontknowyet"}
+				&lt;/Navbar.Brand>
+			&lt;/Navbar>
+		);
+	}
+};
+
+export { NavBar };
+
+/*
+                        &lt;Navbar.Text>
+                            Signed in as: &lt;a href="#login">{user.name}&lt;/a>
+                        &lt;/Navbar.Text>
+
+          {!isAuthenticated &amp;&amp; (
+                &lt;button
+                    onClick={() =>
+                        loginWithRedirect({})
+                    }
+                >
+                    Log in
+        &lt;/button>
+            )}
+
+            {isAuthenticated &amp;&amp; &lt;button onClick={() => logout()}>Log out&lt;/button>}
+
+            { NEW - add a link to the home and profile pages }
+            {isAuthenticated &amp;&amp; (
+
+... DIV
+  )}
+                        */
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

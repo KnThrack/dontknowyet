@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>Base.js - Documentation</title>
     
     
     
@@ -43,31 +43,68 @@
 
 <div id="main">
     
+    <h1 class="page-title">Base.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import App from "./App";
+import { useAuth0 } from "./react-auth0-spa";
+import { NavBar, StartPage, Loading } from "./views";
+// styles
+//import "samples-bootstrap-theme/dist/css/auth0-theme.css";
+import "./App.scss";
+/* //fontawesome
+import initFontAwesome from "./utils/initFontAwesome";
+initFontAwesome();
+*/
 
+async function getToken(loading, getTokenSilently) {
+	// add auth token to axios
+	if (!loading) {
+		const token = await getTokenSilently();
+		// set auth headers
+		return token;
+	}
+}
 
-    <section class="package">
-        <h3> </h3>		
+/**
+ * @classdesc this class is the very top controller of the application
+ * @class Base
+ * @exports Base
+ * @constructor
+ */
+const Base = () => {
+	const { getTokenSilently } = useAuth0();
+	const { loading, user } = useAuth0();
+
+	if (loading) {
+		return (
+			&lt;div className='App'>
+				&lt;header className='App-header'>
+					&lt;NavBar showNavs={false} />
+				&lt;/header>
+				&lt;div className='App-content'>
+					&lt;StartPage />
+					&lt;Loading />
+				&lt;/div>
+			&lt;/div>
+		);
+	}
+
+	return &lt;App token={getToken(loading, getTokenSilently)} user={user} />;
+};
+
+export default Base;
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

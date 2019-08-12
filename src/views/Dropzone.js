@@ -1,6 +1,14 @@
 import React, { useState, useRef } from "react";
 import "./upload.css";
 
+/**
+ * @classdesc Dropzone renderer for the Upload class
+ * @class Dropzone
+ * @exports Dropzone
+ * @constructor
+ * @inner
+ * @memberof Upload
+ */
 const Dropzone = (...props) => {
 	const [hightlight, setHightlight] = useState(false);
 	const { onFilesAdded, disabled } = props[0];

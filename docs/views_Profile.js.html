@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/Profile.js - Documentation</title>
     
     
     
@@ -43,31 +43,49 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/Profile.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// src/views/Profile.js
 
+import React from "react";
+import { useAuth0 } from "../react-auth0-spa";
 
-    <section class="package">
-        <h3> </h3>		
+/**
+ * @classdesc Profile renderer class for the user profile
+ * @class Profile
+ * @exports Profile
+ * @constructor
+ */
+const Profile = () => {
+	const { loading, user } = useAuth0();
+
+	if (loading || !user) {
+		return "Loading...";
+	}
+
+	return (
+		&lt;>
+			&lt;img src={user.picture} alt='Profile' />
+
+			&lt;h2>{user.name}&lt;/h2>
+			&lt;p>{user.email}&lt;/p>
+			&lt;code>{JSON.stringify(user, null, 2)}&lt;/code>
+		&lt;/>
+	);
+};
+
+export { Profile };
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

@@ -19,6 +19,12 @@ async function getToken(loading, getTokenSilently) {
 	}
 }
 
+/**
+ * @classdesc this class is the very top controller of the application
+ * @class Base
+ * @exports Base
+ * @constructor
+ */
 const Base = () => {
 	const { getTokenSilently } = useAuth0();
 	const { loading, user } = useAuth0();

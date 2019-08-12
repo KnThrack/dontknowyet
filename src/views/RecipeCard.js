@@ -7,6 +7,12 @@ import { Link } from "react-router-dom";
 import { RecipeForm } from "./";
 import Moment from "moment";
 
+/**
+ * @classdesc RecipeCard renderer class
+ * @class RecipeCard
+ * @exports RecipeCard
+ * @constructor
+ */
 const RecipeCard = (...props) => {
 	const [withforms, setwithform] = useState("");
 

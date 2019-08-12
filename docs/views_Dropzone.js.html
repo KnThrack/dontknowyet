@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/Dropzone.js - Documentation</title>
     
     
     
@@ -43,31 +43,95 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/Dropzone.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useRef } from "react";
+import "./upload.css";
 
+/**
+ * @classdesc Dropzone renderer for the Upload class
+ * @class Dropzone
+ * @exports Dropzone
+ * @constructor
+ * @inner
+ * @memberof Upload
+ */
+const Dropzone = (...props) => {
+	const [hightlight, setHightlight] = useState(false);
+	const { onFilesAdded, disabled } = props[0];
+	const fileInputRef = useRef(null);
 
-    <section class="package">
-        <h3> </h3>		
+	function openFileDialog() {
+		if (disabled) return;
+		fileInputRef.current.click();
+	}
+
+	function onFilesAddedlocal(evt) {
+		if (disabled) return;
+		const files = evt.target.files;
+		if (onFilesAdded) {
+			const array = fileListToArray(files);
+			onFilesAdded(array);
+		}
+	}
+
+	function onDragOver(event) {
+		event.preventDefault();
+		if (disabled) return;
+		setHightlight(true);
+	}
+
+	function onDragLeave(event) {
+		setHightlight(false);
+	}
+
+	function onDrop(event) {
+		event.preventDefault();
+		if (disabled) return;
+		const files = event.dataTransfer.files;
+		if (onFilesAdded) {
+			const array = fileListToArray(files);
+			onFilesAdded(array);
+		}
+		setHightlight(false);
+	}
+
+	function fileListToArray(list) {
+		const array = [];
+		for (var i = 0; i &lt; list.length; i++) {
+			array.push(list.item(i));
+		}
+		return array;
+	}
+
+	return (
+		&lt;div
+			className={`Dropzone ${hightlight ? "Highlight" : ""}`}
+			onDragOver={onDragOver}
+			onDragLeave={onDragLeave}
+			onDrop={onDrop}
+			onClick={openFileDialog}
+			style={{ cursor: disabled ? "default" : "pointer" }}
+		>
+			&lt;input ref={fileInputRef} className='FileInput' type='file' multiple onChange={onFilesAddedlocal} />
+			&lt;img alt='upload' className='Icon' src='https://unicons.iconscout.com/release/v1.0.0/svg/upload.svg' />
+			&lt;span>Upload Files&lt;/span>
+		&lt;/div>
+	);
+};
+
+export { Dropzone };
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

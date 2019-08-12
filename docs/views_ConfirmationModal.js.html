@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/ConfirmationModal.js - Documentation</title>
     
     
     
@@ -43,31 +43,136 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/ConfirmationModal.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// src/views/ConfirmationModal.js
 
+import React from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
-    <section class="package">
-        <h3> </h3>		
+/**
+ * @classdesc This is the class that creates the Modal shown to the user
+ * @class ConfirmationModal
+ * @exports ConfirmationModal
+ * @constructor
+ */
+const ConfirmationModal = (...props) => {
+	const { showModal, handleModalClose, handleModalSuccess, handleInputChange, modal, changeRecipe, ingredientIndex, ingredientDelete } = props[0];
+
+	let title = "",
+		body = "";
+
+	if (modal !== undefined) {
+		switch (modal.type) {
+			case "delete":
+				// code block
+				title = "Delete Recipe";
+				body = "Are you sure that you want to delete the recipe ?";
+				break;
+			case "confirm":
+				// code block
+				title = "Submit Recipe";
+				body = "Are you sure that you want to change the recipe ?";
+				break;
+			case "addIngredient":
+				if (ingredientDelete) {
+					title = "Delete Ingredient";
+				} else {
+					title = "Add Ingredient";
+				}
+				break;
+			default:
+			// code block
+		}
+	}
+	function handleClose() {
+		handleModalClose();
+	}
+
+	function handleSuccess() {
+		handleModalSuccess(modal);
+	}
+
+	if (modal.type === "addIngredient") {
+		return (
+			&lt;Modal show={showModal} onHide={handleClose}>
+				&lt;Modal.Header closeButton>
+					&lt;Modal.Title>{title}&lt;/Modal.Title>
+				&lt;/Modal.Header>
+				&lt;Modal.Body>
+					&lt;Form id='Ingredient' /*controlId={recipe._id.toString()+".Form"}*/>
+						&lt;Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
+							&lt;Form.Label htmlFor='ingredient'>Ingredient&lt;/Form.Label>
+							&lt;Form.Control
+								readOnly={ingredientDelete}
+								name='ingredient'
+								onChange={handleInputChange}
+								id='ingredient'
+								value={changeRecipe.ingredients[ingredientIndex].ingredient}
+							/>
+							&lt;Form.Label htmlFor='quantity'>Quantity&lt;/Form.Label>
+							&lt;Form.Control
+								readOnly={ingredientDelete}
+								name='quantity'
+								onChange={handleInputChange}
+								id='quantity'
+								value={changeRecipe.ingredients[ingredientIndex].quantity}
+							/>
+							&lt;Form.Label htmlFor='unit'>Unit&lt;/Form.Label>
+							&lt;Form.Control
+								readOnly={ingredientDelete}
+								name='unit'
+								onChange={handleInputChange}
+								id='unit'
+								value={changeRecipe.ingredients[ingredientIndex].unit}
+							/>
+						&lt;/Form.Group>
+					&lt;/Form>
+				&lt;/Modal.Body>
+				&lt;Modal.Footer>
+					&lt;Button variant='secondary' onClick={handleClose}>
+						Cancel
+					&lt;/Button>
+					&lt;Button variant='primary' onClick={handleSuccess}>
+						Save Changes
+					&lt;/Button>
+				&lt;/Modal.Footer>
+			&lt;/Modal>
+		);
+	} else {
+		return (
+			&lt;Modal show={showModal} onHide={handleClose}>
+				&lt;Modal.Header closeButton>
+					&lt;Modal.Title>{title}&lt;/Modal.Title>
+				&lt;/Modal.Header>
+				&lt;Modal.Body>{body}&lt;/Modal.Body>
+				&lt;Modal.Footer>
+					&lt;Button variant='secondary' onClick={handleClose}>
+						Cancel
+					&lt;/Button>
+					&lt;Button variant='primary' onClick={handleSuccess}>
+						Save Changes
+					&lt;/Button>
+				&lt;/Modal.Footer>
+			&lt;/Modal>
+		);
+	}
+};
+
+export { ConfirmationModal };
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

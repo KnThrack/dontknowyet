@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/Progress.js - Documentation</title>
     
     
     
@@ -43,31 +43,41 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/Progress.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import "./progress.css";
 
+/**
+ * @classdesc Progress renderer for the Upload class
+ * @class Progress
+ * @exports Progress
+ * @constructor
+ * @inner
+ * @memberof Upload
+ */
+const Progress = (...props) => {
+	const { progress } = props[0];
 
-    <section class="package">
-        <h3> </h3>		
+	return (
+		&lt;div className='ProgressBar'>
+			&lt;div className='Progress' style={{ width: progress + "%" }} />
+		&lt;/div>
+	);
+};
+
+export { Progress };
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

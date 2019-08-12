@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/Loading.js - Documentation</title>
     
     
     
@@ -43,31 +43,36 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/Loading.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// src/views/Loading.js
+import React from "react";
+import loading from "../assets/loading.svg";
 
+/**
+ * @classdesc render the loading circle
+ * @class Loading
+ * @exports Loading
+ * @constructor
+ */
+const Loading = () => (
+	&lt;div className='spinner'>
+		&lt;img src={loading} alt='Loading' />
+	&lt;/div>
+);
 
-    <section class="package">
-        <h3> </h3>		
+export { Loading };
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/RecipeForm.js - Documentation</title>
     
     
     
@@ -43,31 +43,100 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/RecipeForm.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import { Upload, PictureCarousel, RecipeTable } from "./";
 
+/**
+ * @classdesc RecipeForm renderer class
+ * @class RecipeForm
+ * @exports RecipeForm
+ * @constructor
+ * @inner
+ * @memberof RecipeCard
+ */
+const RecipeForm = (...props) => {
+	const {
+		recipe,
+		uploadFiles,
+		onFilesAdded,
+		successfullUploaded,
+		uploadProgress,
+		uploading,
+		files,
+		setFiles,
+		setSuccessfullUploaded,
+		handleChangeIngredient,
+		handleInputChange,
+		handleDeleteIngredient,
+		pictureList,
+		location
+	} = props[0];
 
-    <section class="package">
-        <h3> </h3>		
+	useEffect(() => {}, []);
+
+	// handlers
+	function handleInputChanges(event) {
+		handleInputChange(event, location.state);
+	}
+
+	return (
+		&lt;Form id='bigform' /*controlId={recipe._id.toString()+".Form"}*/>
+			&lt;Form.Group /*controlId={recipe._id.toString()+".ControlInput1"}*/>
+				&lt;Form.Label htmlFor='title'>Recipe Title&lt;/Form.Label>
+				&lt;Form.Control name='title' onChange={handleInputChanges} id='title' value={recipe.title} />
+				&lt;Form.Label htmlFor='name'>Recipe Name&lt;/Form.Label>
+				&lt;Form.Control name='name' onChange={handleInputChanges} id='name' value={recipe.name} />
+				&lt;Form.Label htmlFor='cuisine'>Cuisine&lt;/Form.Label>
+				&lt;Form.Control name='cuisine' onChange={handleInputChanges} id='cuisine' value={recipe.cuisine} as='select'>
+					&lt;option>German&lt;/option>
+					&lt;option>Chinese&lt;/option>
+					&lt;option>Asian&lt;/option>
+					&lt;option>French&lt;/option>
+					&lt;option>Italian&lt;/option>
+				&lt;/Form.Control>
+			&lt;/Form.Group>
+			&lt;Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}
+							&lt;Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={recipe.recipe} />
+			*/
+			>
+				&lt;Form.Label htmlFor='recipe'>Recipe&lt;/Form.Label>
+				&lt;Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={recipe.recipe} />
+			&lt;/Form.Group>
+			&lt;Form.Group>
+				&lt;RecipeTable recipe={recipe} handleChangeIngredient={handleChangeIngredient} handleDeleteIngredient={handleDeleteIngredient} />
+			&lt;/Form.Group>
+			&lt;Form.Group className='Recipe-pictures'>
+				&lt;Upload
+					successfullUploaded={successfullUploaded}
+					uploadProgress={uploadProgress}
+					uploading={uploading}
+					files={files}
+					setFiles={setFiles}
+					setSuccessfullUploaded={setSuccessfullUploaded}
+					onFilesAdded={onFilesAdded}
+					uploadFiles={uploadFiles}
+				/>
+				&lt;PictureCarousel pictureList={pictureList} recipeID={recipe._id.toString()} />
+			&lt;/Form.Group>
+		&lt;/Form>
+	);
+};
+
+export { RecipeForm };
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

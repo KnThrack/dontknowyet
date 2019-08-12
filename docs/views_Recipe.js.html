@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/Recipe.js - Documentation</title>
     
     
     
@@ -43,31 +43,89 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/Recipe.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// src/views/Recipe.js
+import React, { useState, useEffect } from "react";
+import { RecipeCard } from "./";
 
+/**
+ * @classdesc Recipe renderer class for a single recipe
+ * @deprecated
+ * @class Recipe
+ * @exports Recipe
+ * @constructor
+ */
+const Recipe = (...props) => {
+	const {
+		uploadFiles,
+		onFilesAdded,
+		successfullUploaded,
+		uploadProgress,
+		uploading,
+		files,
+		setFiles,
+		setSuccessfullUploaded,
+		handleInputChange,
+		handleChangeIngredient,
+		handleDeleteIngredient,
+		recipesList,
+		pictureList,
+		setPageState,
+		setChangeRecipe,
+		ChangeRecipe,
+		location
+	} = props[0];
 
-    <section class="package">
-        <h3> </h3>		
+	useEffect(() => {
+		setPageState({ page: "details" });
+		let index = recipesList.findIndex(x => x._id === location.state._id.toString());
+		setChangeRecipe(recipesList[index]);
+	}, []);
+
+	// handlers end
+
+	// find which one we looking at
+	let index = recipesList.findIndex(x => x._id === location.state._id.toString());
+
+	const myRecipe = recipesList[index];
+	if (myRecipe === null) return &lt;p>Loading ...&lt;/p>;
+	return (
+		&lt;div className='content-inner'>
+			&lt;RecipeCard
+				recipe={myRecipe}
+				pictureList={pictureList}
+				withform={true}
+				handleInputChange={handleInputChange}
+				handleChangeIngredient={handleChangeIngredient}
+				handleDeleteIngredient={handleDeleteIngredient}
+				ChangeRecipe={ChangeRecipe}
+				successfullUploaded={successfullUploaded}
+				uploadProgress={uploadProgress}
+				uploading={uploading}
+				files={files}
+				setFiles={setFiles}
+				setSuccessfullUploaded={setSuccessfullUploaded}
+				onFilesAdded={onFilesAdded}
+				uploadFiles={uploadFiles}
+				location={location}
+			/>
+		&lt;/div>
+	);
+};
+
+export { Recipe };
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import Carousel from "react-bootstrap/Carousel";
+
+/**
+ * @classdesc PictureCarousel renderer for the Upload class
+ * @class PictureCarousel
+ * @exports PictureCarousel
+ * @constructor
+ * @inner
+ * @memberof Upload
+ */
 const PictureCarousel = (...props) => {
 	const [index, setIndex] = useState(0);
 	const [direction, setDirection] = useState(null);

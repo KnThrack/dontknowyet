@@ -4,6 +4,14 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "./table.css";
 
+/**
+ * @classdesc RecipeTable renderer class
+ * @class RecipeTable
+ * @exports RecipeTable
+ * @constructor
+ * @inner
+ * @memberof RecipeCard
+ */
 const RecipeTable = (...props) => {
 	const { recipe, handleChangeIngredient, handleDeleteIngredient } = props[0];
 

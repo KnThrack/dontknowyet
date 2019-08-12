@@ -3,6 +3,12 @@ import Background from "../assets/background.svg";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Image from "react-bootstrap/Image";
 
+/**
+ * @classdesc this class renders the start page of the website
+ * @class StartPage
+ * @exports StartPage
+ * @constructor
+ */
 const StartPage = (...props) => {
 	const { setPageState } = props[0];
 

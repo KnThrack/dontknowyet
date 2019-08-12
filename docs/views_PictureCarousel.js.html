@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/PictureCarousel.js - Documentation</title>
     
     
     
@@ -43,31 +43,70 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/PictureCarousel.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import Image from "react-bootstrap/Image";
+import Carousel from "react-bootstrap/Carousel";
 
+/**
+ * @classdesc PictureCarousel renderer for the Upload class
+ * @class PictureCarousel
+ * @exports PictureCarousel
+ * @constructor
+ * @inner
+ * @memberof Upload
+ */
+const PictureCarousel = (...props) => {
+	const [index, setIndex] = useState(0);
+	const [direction, setDirection] = useState(null);
+	const [images, setImages] = useState([]);
+	const { pictureList, recipeID } = props[0];
 
-    <section class="package">
-        <h3> </h3>		
+	const handleSelect = (selectedIndex, e) => {
+		setIndex(selectedIndex);
+		setDirection(e.direction);
+	};
+
+	useEffect(() => {}, []);
+
+	if (pictureList.length !== 0) {
+		return (
+			&lt;div className='pictures-outer'>
+				&lt;Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
+					{pictureList.map(function picture(picture) {
+						if (picture.recipe_id === recipeID) {
+							return (
+								&lt;Carousel.Item className='recipe_picture' key={picture.name}>
+									&lt;img className='recipe_picture' src={picture.url} alt='First slide' />
+									&lt;Carousel.Caption>
+										&lt;h3>{picture.name}&lt;/h3>
+									&lt;/Carousel.Caption>
+								&lt;/Carousel.Item>
+							);
+						}
+						return null;
+					})}
+				&lt;/Carousel>
+			&lt;/div>
+		);
+	} else {
+		return &lt;div className='pictures' />;
+	}
+};
+
+export { PictureCarousel };
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

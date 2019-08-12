@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/FloatButtons.js - Documentation</title>
     
     
     
@@ -43,31 +43,65 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/FloatButtons.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import { Link } from "react-router-dom";
 
+/**
+ * @classdesc this class controls the floating buttons that are shown at the bottom
+ * @class FloatButtons
+ * @exports FloatButtons
+ * @constructor
+ */
+const FloatButtons = (...props) => {
+	const { handleAddRecipe, handleSubmit, handleBack, handleAddIngredient, pageState } = props[0];
 
-    <section class="package">
-        <h3> </h3>		
+	if (pageState === null) {
+		return &lt;ButtonGroup className='footerButtonGroup' />;
+	}
+
+	if (pageState.page === "list") {
+		return (
+			&lt;ButtonGroup className='footerButtonGroup'>
+				&lt;Button variant='dark' className='back-Button' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
+					Add Recipe
+				&lt;/Button>
+			&lt;/ButtonGroup>
+		);
+	} else if (pageState.page === "details") {
+		return (
+			&lt;ButtonGroup className='footerButtonGroup'>
+				&lt;Button variant='info' className='back-Button' size='lg' title='Go Back' onClick={handleBack}>
+					Go Back
+				&lt;/Button>
+				&lt;Button type='submit' className='submit-Button' size='lg' variant='primary' onClick={handleSubmit}>
+					Submit
+				&lt;/Button>
+				&lt;Button type='button' className='back-Button' size='lg' variant='primary' onClick={handleAddIngredient}>
+					Add Ingredient
+				&lt;/Button>
+			&lt;/ButtonGroup>
+		);
+	} else if (pageState.page === "home") {
+		return &lt;ButtonGroup className='footerButtonGroup' />;
+	}
+};
+
+export { FloatButtons };
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

@@ -8,7 +8,12 @@ import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 
 //import { ReactComponent as Logo } from "../assets/Logosmall.svg";
-
+/**
+ * @classdesc This class renders the navigation bar that is displayed in the header
+ * @class NavBar
+ * @exports NavBar
+ * @constructor
+ */
 const NavBar = (...props) => {
 	const { showNavs } = props[0];
 	const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();

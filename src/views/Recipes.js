@@ -6,6 +6,12 @@ import { Loading, RecipeCard } from ".";
 
 var _ = require("underscore");
 
+/**
+ * @classdesc Recipes renderer class to display a list of recipes or a single recipe
+ * @class Recipes
+ * @exports Recipes
+ * @constructor
+ */
 const Recipes = (...props) => {
 	//const { handleFilterChange, handleDelete, recipesList, filter, setPageState, pictureList } = props[0];
 	const {

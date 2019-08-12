@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>views/RecipeCard.js - Documentation</title>
     
     
     
@@ -43,31 +43,161 @@
 
 <div id="main">
     
+    <h1 class="page-title">views/RecipeCard.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// src/views/Loading.js
+import React, { useState, useEffect } from "react";
+import Card from "react-bootstrap/Card";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import { Link } from "react-router-dom";
+import { RecipeForm } from "./";
+import Moment from "moment";
 
+/**
+ * @classdesc RecipeCard renderer class
+ * @class RecipeCard
+ * @exports RecipeCard
+ * @constructor
+ */
+const RecipeCard = (...props) => {
+	const [withforms, setwithform] = useState("");
 
-    <section class="package">
-        <h3> </h3>		
+	const {
+		recipe,
+		url,
+		withform,
+		makeCardBig,
+		uploadFiles,
+		onFilesAdded,
+		successfullUploaded,
+		uploadProgress,
+		uploading,
+		files,
+		setFiles,
+		setSuccessfullUploaded,
+		handleInputChange,
+		handleChangeIngredient,
+		handleDeleteIngredient,
+		handleDelete,
+		pictureList,
+		location
+	} = props[0];
+
+	useEffect(() => {
+		setwithform(withform);
+	}, []);
+
+	function test(something) {
+		makeCardBig(something, recipe);
+	}
+
+	let cardClass = recipe => {
+		var sClass = "";
+
+		switch (recipe.cuisine) {
+			case "German":
+				// code block
+				sClass = "card";
+				break;
+			case "Chinese":
+				// code block
+				sClass = "card card1";
+				break;
+			case "Asian":
+				// code block
+				sClass = "card card1";
+				break;
+			case "French":
+				// code block
+				sClass = "card card2";
+				break;
+			case "Italian":
+				// code block
+				sClass = "card card3";
+				break;
+			default:
+				sClass = "card";
+			// code block
+		}
+
+		return sClass;
+	};
+
+	if (withforms) {
+		return (
+			&lt;Card className='Bigcard'>
+				&lt;Card.Header>{recipe.cuisine}&lt;/Card.Header>
+				&lt;div className='recipe-button'>
+					&lt;DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
+						&lt;Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDelete}>
+							Delete
+						&lt;/Dropdown.Item>
+					&lt;/DropdownButton>
+				&lt;/div>
+				&lt;Card.Body>
+					&lt;RecipeForm
+						recipe={recipe}
+						pictureList={pictureList}
+						handleInputChange={handleInputChange}
+						handleChangeIngredient={handleChangeIngredient}
+						handleDeleteIngredient={handleDeleteIngredient}
+						successfullUploaded={successfullUploaded}
+						uploadProgress={uploadProgress}
+						uploading={uploading}
+						files={files}
+						setFiles={setFiles}
+						setSuccessfullUploaded={setSuccessfullUploaded}
+						onFilesAdded={onFilesAdded}
+						uploadFiles={uploadFiles}
+						location={location}
+					/>
+				&lt;/Card.Body>
+				&lt;Card.Footer className='text-muted'>{Moment(recipe.create_date).format("DD MMM YY, h:mm:ss a")}&lt;/Card.Footer>
+			&lt;/Card>
+		);
+	} else {
+		return (
+			&lt;Card id={"card#" + recipe._id.toString()} className={cardClass(recipe)} key={recipe._id.toString()}>
+				&lt;Card.Header>{recipe.cuisine}&lt;/Card.Header>
+				&lt;div className='recipe-button'>
+					&lt;DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
+						&lt;Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDelete}>
+							Delete
+						&lt;/Dropdown.Item>
+					&lt;/DropdownButton>
+				&lt;/div>
+				&lt;div className='cardLink' onClick={test}>
+					&lt;Card.Body>
+						&lt;Card.Subtitle>{recipe.title}&lt;/Card.Subtitle>
+						&lt;Card.Text>{recipe.recipe &lt; 45 ? `${recipe.recipe}` : `${recipe.recipe.substring(0, 45)}...`}&lt;/Card.Text>
+					&lt;/Card.Body>
+
+					&lt;Card.Img src={url} alt='Card image' variant='top' />
+				&lt;/div>
+				&lt;Card.Footer className='text-muted'>{Moment(recipe.create_date).format("DD MMM YY, h:mm:ss a")}&lt;/Card.Footer>
+			&lt;/Card>
+		);
+	}
+};
+
+export { RecipeCard };
+
+/*
+&lt;Link className='cardLink' to={{ pathname: "/recipe/" + recipe._id.toString(), state: recipe }}>
+
+*/
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 
