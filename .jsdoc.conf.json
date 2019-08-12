@@ -10,7 +10,7 @@
 	"plugins": ["plugins/markdown"],
 	"opts": {
 		"encoding": "utf8",
-		"template": "./",
+		"template": "node_modules/docdash",
 		"destination": "./docs/",
 		"recurse": true,
 		"verbose": true
@@ -37,8 +37,8 @@
 			"title": "Dont Know yet",
 			"type": "website",
 			"image": "",
-			"site_name": "Docdash",
-			"url": "http://clenemt.github.io/docdash/"
+			"site_name": "Dontknowyet",
+			"url": ""
 		},
 		"meta": {
 			"title": "Dont know yet",
