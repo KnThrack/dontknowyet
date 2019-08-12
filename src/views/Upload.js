@@ -4,6 +4,11 @@ import { Dropzone, Progress } from "./";
 // Add the Firebase products that you want to use
 import "firebase/storage";
 
+/**
+ * @classdesc The Upload class takes care of all the upload functionalities and propagates most of the actual function to the app class
+ *
+ */
+
 const Upload = (...props) => {
 	/*
 	const [files, setFiles] = useState([]);
@@ -15,6 +20,10 @@ const Upload = (...props) => {
 
 	useEffect(() => {}, []);
 
+	/**
+	 * @function renderProgress renders the progress of the file upload
+	 * @param {Object} file - The file being uploaded.
+	 */
 	function renderProgress(file) {
 		const progress = uploadProgress[file.name];
 		if (uploading || successfullUploaded) {

@@ -29,6 +29,19 @@ const NavBar = (...props) => {
 	function loginout() {
 		!isAuthenticated && loginWithRedirect({});
 		isAuthenticated && logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
+
+		/*
+		isAuthenticated &&
+		firebase
+			.auth()
+			.signOut()
+			.then(function() {
+				// Sign-out successful.
+			})
+			.catch(function(error) {
+				// An error happened.
+			});
+			*/
 	}
 
 	if (showNavs) {

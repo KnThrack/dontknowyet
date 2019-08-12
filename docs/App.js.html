@@ -1,4 +1,59 @@
-import React, { useState, useEffect } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>App.js - Documentation</title>
+    
+    
+    
+    
+    
+    <meta property="og:title" content="Not sure yet application"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content=""/>
+    
+    <meta property="og:url" content=""/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://myproject.com" target="_blank" class="menu-item" id="website_link" >Project Website</a></h2><h2><a href="https://myproject.com.forum" target="_blank" class="menu-item" id="forum_link" >Forum</a></h2><h3>Global</h3><ul><li><a href="global.html#addRecipecommitsthenewrecipetotheAPIandaddsittothearrayofallrecipes">addRecipe commits the new recipe to the API and adds it to the array of all recipes</a></li><li><a href="global.html#callAPIcallstheAPIlayerforaauthenticateduser">callAPI calls the API layer for a authenticated user</a></li><li><a href="global.html#getPictureUrlgetsthedetailsofapicturefromthefirebasestorage">getPictureUrl gets the details of a picture from the firebase storage</a></li><li><a href="global.html#handleAddIngredienthandlethecreationofaemptyingredientandraisethemodaltoenterthedetails">handleAddIngredient handle the creation of a empty ingredient and raise the modal to enter the details</a></li><li><a href="global.html#handleAddRecipehandlethecreationofaemptyrecipeobjectandpassittotheAPImethod">handleAddRecipe handle the creation of a empty recipe object and pass it to the API method</a></li><li><a href="global.html#handleBackhandlegoingbackfromtherecipedetailtothelist">handleBack handle going back from the recipe detail to the list</a></li><li><a href="global.html#handleChangeIngredienthandlethechangeofaingredient">handleChangeIngredient handle the change of a ingredient</a></li><li><a href="global.html#handleDeleteclosethemodalagain">handleDelete close the modal again</a></li><li><a href="global.html#handleDeletedeletearecipe">handleDelete delete a recipe</a></li><li><a href="global.html#handleDeleteIngredienthandlethedeletionofaingredient">handleDeleteIngredient handle the deletion of a ingredient</a></li><li><a href="global.html#handleFilterChangehandlesthefiltersearchchangeandfilterstherecipelistthatsdisplayed">handleFilterChange handles the filter search change and filters the recipe list thats displayed</a></li><li><a href="global.html#handleInputChangehandlechangeofinputsfromtheform">handleInputChange handle change of inputs from the form</a></li><li><a href="global.html#handleModalSuccesshandlewhathappenswhenwepressconfirminthemodal">handleModalSuccess handle what happens when we press confirm in the modal</a></li><li><a href="global.html#handleSubmithandlesubmitbuttonaction">handleSubmit handle submit button action</a></li><li><a href="global.html#handleTableChangehandlechangeofinputsfromthemodalaboutingredientsusedtobeforthetableinputs">handleTableChange handle change of inputs from the modal about ingredients </a></li><li><a href="global.html#loadPicturesloadsallthepicturesoftheuserfromfirebase">loadPictures loads all the pictures of the user from firebase</a></li><li><a href="global.html#makeCardBigmakesthelittlecardbigger">makeCardBig makes the little card bigger</a></li><li><a href="global.html#onFilesAddedaddafiletothefilearray">onFilesAdded add a file to the file array</a></li><li><a href="global.html#onFilesAddeduploadthefiletofirebase">onFilesAdded upload the file to firebase</a></li><li><a href="global.html#raiseModalraisethemodaltoconfirmstuff">raiseModal raise the modal to confirm stuff</a></li><li><a href="global.html#renderProgressrenderstheprogressofthefileupload">renderProgress renders the progress of the file upload</a></li><li><a href="global.html#sendRequestsendstherequesttofirebase">sendRequest sends the request to firebase</a></li><li><a href="global.html#setSuccessfullUploadedsetifweuploadedsuccessfully">setSuccessfullUploaded set if we uploaded successfully</a></li><li><a href="global.html#useEffectreacthookforuseEffectdoesthestuffweneedtoexecuteontheinitialload">useEffect react hook for useEffect does the stuff we need to execute on the initial load</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">App.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import "./App.scss";
@@ -11,11 +66,6 @@ import "firebase/storage";
 
 //const util = require("util");
 var _ = require("underscore");
-
-/**
- * @classdesc The app class is the top functional component which holds most of the logic / handlers / state handling of all other views.
- *
- */
 
 const App = (...props) => {
 	// all my state its getting quiet a lot to think about using context
@@ -630,7 +680,7 @@ const App = (...props) => {
 	 */
 	function makeCardBig(event, recipe) {
 		// we dont do that for that one button
-		if (event.target.id !== "cardButton" && event.target.className !== "dropdown-item") {
+		if (event.target.id !== "cardButton" &amp;&amp; event.target.className !== "dropdown-item") {
 			// ok here we need to basically raise a modal with the card we just click and overlay or over the list
 			setPageState({ page: "details" });
 			setChangeRecipe(recipe);
@@ -643,20 +693,20 @@ const App = (...props) => {
 	 * @returns {Object} returns the jsx string for react
 	 */
 	return (
-		<div className='App'>
-			<Router>
-				<header className='App-header'>
-					<NavBar showNavs={true} />
-				</header>
+		&lt;div className='App'>
+			&lt;Router>
+				&lt;header className='App-header'>
+					&lt;NavBar showNavs={true} />
+				&lt;/header>
 
-				<div className='App-content'>
-					<Switch>
-						<Route exact path='/' render={props => <StartPage setPageState={setPageState} />} />
-						<PrivateRoute
+				&lt;div className='App-content'>
+					&lt;Switch>
+						&lt;Route exact path='/' render={props => &lt;StartPage setPageState={setPageState} />} />
+						&lt;PrivateRoute
 							exact
 							path='/recipes'
 							render={props => (
-								<Recipes
+								&lt;Recipes
 									recipesList={filteredRecipes}
 									pictureList={pictures}
 									filter={filter}
@@ -682,10 +732,10 @@ const App = (...props) => {
 								/>
 							)}
 						/>
-						<PrivateRoute
+						&lt;PrivateRoute
 							path='/recipe/:id'
 							render={props => (
-								<Recipe
+								&lt;Recipe
 									recipesList={filteredRecipes}
 									pictureList={pictures}
 									handleInputChange={handleInputChange}
@@ -707,12 +757,12 @@ const App = (...props) => {
 							)}
 						/>
 
-						<PrivateRoute path='/profile' component={Profile} />
-					</Switch>
-				</div>
+						&lt;PrivateRoute path='/profile' component={Profile} />
+					&lt;/Switch>
+				&lt;/div>
 
-				<div className='d-flex footerButtons'>
-					<FloatButtons
+				&lt;div className='d-flex footerButtons'>
+					&lt;FloatButtons
 						handleAddRecipe={handleAddRecipe}
 						handleSubmit={handleSubmit}
 						handleAddIngredient={handleAddIngredient}
@@ -720,9 +770,9 @@ const App = (...props) => {
 						handleBack={handleBack}
 						{...props}
 					/>
-				</div>
+				&lt;/div>
 
-				<ConfirmationModal
+				&lt;ConfirmationModal
 					showModal={modal.show}
 					handleModalClose={handleModalClose}
 					handleModalSuccess={handleModalSuccess}
@@ -733,9 +783,38 @@ const App = (...props) => {
 					ingredientDelete={ingredientDelete}
 					handleInputChange={handleTableChange}
 				/>
-			</Router>
-		</div>
+			&lt;/Router>
+		&lt;/div>
 	);
 };
 
 export default App;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Aug 12 2019 15:14:04 GMT+0200 (Central European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>
