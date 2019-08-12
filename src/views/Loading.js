@@ -4,7 +4,6 @@ import loading from "../assets/loading.svg";
 
 /**
  * @classdesc render the loading circle
- * @class Loading
  * @exports Loading
  * @constructor
  */

@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 //import { ReactComponent as Logo } from "../assets/Logosmall.svg";
 /**
  * @classdesc This class renders the navigation bar that is displayed in the header
- * @class NavBar
  * @exports NavBar
  * @constructor
  */

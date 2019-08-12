@@ -9,7 +9,6 @@ import Moment from "moment";
 
 /**
  * @classdesc RecipeCard renderer class
- * @class RecipeCard
  * @exports RecipeCard
  * @constructor
  */

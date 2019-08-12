@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 /**
  * @classdesc this class controls the floating buttons that are shown at the bottom
- * @class FloatButtons
  * @exports FloatButtons
  * @constructor
  */

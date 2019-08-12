@@ -4,7 +4,6 @@ import Carousel from "react-bootstrap/Carousel";
 
 /**
  * @classdesc PictureCarousel renderer for the Upload class
- * @class PictureCarousel
  * @exports PictureCarousel
  * @constructor
  * @inner

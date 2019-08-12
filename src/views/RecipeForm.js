@@ -4,7 +4,6 @@ import { Upload, PictureCarousel, RecipeTable } from "./";
 
 /**
  * @classdesc RecipeForm renderer class
- * @class RecipeForm
  * @exports RecipeForm
  * @constructor
  * @inner

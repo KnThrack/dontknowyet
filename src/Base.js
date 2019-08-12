@@ -21,7 +21,6 @@ async function getToken(loading, getTokenSilently) {
 
 /**
  * @classdesc this class is the very top controller of the application
- * @class Base
  * @exports Base
  * @constructor
  */

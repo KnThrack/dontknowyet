@@ -3,7 +3,6 @@ import "./progress.css";
 
 /**
  * @classdesc Progress renderer for the Upload class
- * @class Progress
  * @exports Progress
  * @constructor
  * @inner

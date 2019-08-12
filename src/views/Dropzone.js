@@ -3,7 +3,6 @@ import "./upload.css";
 
 /**
  * @classdesc Dropzone renderer for the Upload class
- * @class Dropzone
  * @exports Dropzone
  * @constructor
  * @inner

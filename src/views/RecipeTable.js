@@ -6,7 +6,6 @@ import "./table.css";
 
 /**
  * @classdesc RecipeTable renderer class
- * @class RecipeTable
  * @exports RecipeTable
  * @constructor
  * @inner

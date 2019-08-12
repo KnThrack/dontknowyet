@@ -7,7 +7,6 @@ import Form from "react-bootstrap/Form";
 
 /**
  * @classdesc This is the class that creates the Modal shown to the user
- * @class ConfirmationModal
  * @exports ConfirmationModal
  * @constructor
  */

@@ -5,7 +5,6 @@ import Image from "react-bootstrap/Image";
 
 /**
  * @classdesc this class renders the start page of the website
- * @class StartPage
  * @exports StartPage
  * @constructor
  */

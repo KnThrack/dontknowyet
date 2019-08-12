@@ -6,7 +6,6 @@ import { useAuth0 } from "../react-auth0-spa";
 
 /**
  * @classdesc PrivateRoute handler for the routes that need authentication
- * @class PrivateRoute
  * @exports PrivateRoute
  * @constructor
  */
