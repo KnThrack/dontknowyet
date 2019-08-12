@@ -10,9 +10,9 @@ import { useAuth0 } from "../react-auth0-spa";
  */
 const Profile = () => {
 	/**
-	 * @inner
 	 * @memberof Profile
-	 * @var {Object} user User object  @var {Object} loading do we still load the user
+	 * @var {Object} user User object
+	 * @var {Object} loading do we still load the user
 	 */
 	const { loading, user } = useAuth0();
 
