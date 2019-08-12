@@ -4,7 +4,6 @@ import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
 
 /**
- * @class Profile
  * @classdesc Profile renderer class for the user profile
  * @exports Profile
  * @constructor
