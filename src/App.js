@@ -14,7 +14,8 @@ var _ = require("underscore");
 
 /**
  * @classdesc The app class is the top functional component which holds most of the logic / handlers / state handling of all other views.
- *
+ * @exports App
+ * @constructor
  */
 
 const App = (...props) => {
