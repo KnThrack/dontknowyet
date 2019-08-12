@@ -4,11 +4,18 @@ import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
 
 /**
+ * @class Profile
  * @classdesc Profile renderer class for the user profile
  * @exports Profile
  * @constructor
  */
 const Profile = () => {
+	/**
+	 * @inner
+	 * @memberof Profile
+	 * @var {Object} loading do we still load the user
+	 * @var {Object} user User object
+	 */
 	const { loading, user } = useAuth0();
 
 	if (loading || !user) {
