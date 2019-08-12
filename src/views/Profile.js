@@ -12,8 +12,12 @@ const Profile = () => {
 	/**
 	 * @memberof Profile
 	 * @typedef {Object} user User object
+	 */
+	/**
+	 * @memberof Profile
 	 * @typedef {Object} loading do we still load the user
 	 */
+
 	const { loading, user } = useAuth0();
 
 	if (loading || !user) {
