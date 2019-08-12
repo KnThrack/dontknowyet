@@ -13,6 +13,7 @@ import "firebase/storage";
 var _ = require("underscore");
 
 /**
+ * @class App
  * @classdesc The app class is the top functional component which holds most of the logic / handlers / state handling of all other views.
  * @exports App
  * @constructor
@@ -21,6 +22,8 @@ var _ = require("underscore");
 const App = (...props) => {
 	// all my state its getting quiet a lot to think about using context
 	/**
+	 * @inner
+	 * @memberof App
 	 * State for all the recipes of a user
 	 * @var {Object} recipes recipes of the user
 	 * @function setRecipes set the state of the recipes (all recipes of the user) thats the total unfiltered list
@@ -94,6 +97,8 @@ const App = (...props) => {
 	/**
 	 * @function callAPI calls the API layer for a authenticated user
 	 * @param {Object} myUser - Somebody's name.
+	 * @memberof App
+	 * @inner
 	 */
 	async function callAPI(myUser) {
 		// get the initial recipes
@@ -105,6 +110,8 @@ const App = (...props) => {
 
 	/**
 	 * @function useEffect react hook for useEffect does the stuff we need to execute on the initial load
+	 * @memberof App
+	 * @inner
 	 */
 	useEffect(() => {
 		// get the initial recipes
@@ -194,6 +201,8 @@ const App = (...props) => {
 	/**
 	 * @function getPictureUrl gets the details of a picture from the firebase storage
 	 * @param {Object} picture - the picture Object
+	 * @memberof App
+	 * @inner
 	 */
 	async function getPictureUrl(picture) {
 		const url = await picture.getDownloadURL();
@@ -212,6 +221,8 @@ const App = (...props) => {
 	 * @function loadPictures loads all the pictures of the user from firebase
 	 * @param {Object} fire  firebase reference to the firebase
 	 * @param {Object} user  current firebase user
+	 * @memberof App
+	 * @inner
 	 */
 	async function loadPictures(fire, user) {
 		var storageRef = fire
@@ -249,6 +260,8 @@ const App = (...props) => {
 	/**
 	 * @function addRecipe commits the new recipe to the API and adds it to the array of all recipes
 	 * @param {Object} newObject - new recipe
+	 * @memberof App
+	 * @inner
 	 */
 	async function addRecipe(newObject) {
 		// and put it away
@@ -268,6 +281,8 @@ const App = (...props) => {
 	/**
 	 * @function handleBack handle going back from the recipe detail to the list
 	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
 	 */
 	function handleBack(event) {
 		// ok here we need to basically raise a modal with the card we just click and overlay or over the list
@@ -278,6 +293,8 @@ const App = (...props) => {
 	/**
 	 * @function handleAddRecipe handle the creation of a empty recipe object and pass it to the API method
 	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
 	 */
 	function handleAddRecipe(event) {
 		const newRecipe = {
@@ -294,6 +311,8 @@ const App = (...props) => {
 	/**
 	 * @function handleAddIngredient handle the creation of a empty ingredient and raise the modal to enter the details
 	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
 	 */
 	function handleAddIngredient(event) {
 		// find which one we updating
@@ -316,6 +335,8 @@ const App = (...props) => {
 	/**
 	 * @function handleDeleteIngredient handle the deletion of a ingredient
 	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
 	 */
 	function handleDeleteIngredient(event) {
 		event.preventDefault();
@@ -325,6 +346,8 @@ const App = (...props) => {
 	/**
 	 * @function handleChangeIngredient handle the change of a ingredient
 	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
 	 */
 	function handleChangeIngredient(event) {
 		let index = changeRecipe.ingredients.findIndex(x => x._id === event.currentTarget.id.toString());
@@ -336,6 +359,8 @@ const App = (...props) => {
 	/**
 	 * @function handleTableChange handle change of inputs from the modal about ingredients (used to be for the table inputs)
 	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
 	 */
 	function handleTableChange(event) {
 		// get the value and move it into the state
@@ -361,6 +386,8 @@ const App = (...props) => {
 	/**
 	 * @function handleInputChange handle change of inputs from the form
 	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
 	 */
 	function handleInputChange(event) {
 		// get the value and move it into the state
@@ -387,6 +414,8 @@ const App = (...props) => {
 	/**
 	 * @function handleSubmit handle submit button action
 	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
 	 */
 	function handleSubmit(event) {
 		event.preventDefault();
@@ -399,6 +428,8 @@ const App = (...props) => {
 	 * @function raiseModal raise the modal to confirm stuff
 	 * @param {Object} event - Event object
 	 * @param {int} index - index of the thing we looking at
+	 * @memberof App
+	 * @inner
 	 */
 	function raiseModal(modalType, index) {
 		setModal({
@@ -411,6 +442,8 @@ const App = (...props) => {
 	/**
 	 * @function handleDelete delete a recipe
 	 * @param {string} key - key of what we deleting
+	 * @memberof App
+	 * @inner
 	 */
 	function handleDelete(key) {
 		// delete stuff
@@ -429,6 +462,8 @@ const App = (...props) => {
 
 	/**
 	 * @function handleDelete close the modal again
+	 * @memberof App
+	 * @inner
 	 */
 	function handleModalClose() {
 		setIngredientDelete(false);
@@ -441,6 +476,8 @@ const App = (...props) => {
 	/**
 	 * @function handleModalSuccess handle what happens when we press confirm in the modal
 	 * @param {Object} state - the state object of the modal
+	 * @memberof App
+	 * @inner
 	 */
 	function handleModalSuccess(state) {
 		setModal({
@@ -516,6 +553,8 @@ const App = (...props) => {
 	/**
 	 * @function handleFilterChange handles the filter search change and filters the recipe list thats displayed
 	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
 	 */
 	function handleFilterChange(event) {
 		// filter all the recipes based on all the text in them and store it in a filter state
@@ -533,6 +572,8 @@ const App = (...props) => {
 	/**
 	 * @function onFilesAdded add a file to the file array
 	 * @param {Object} newfile - the new file we are adding
+	 * @memberof App
+	 * @inner
 	 */
 	function onFilesAdded(newfile) {
 		setFiles(files.concat(newfile));
@@ -540,6 +581,8 @@ const App = (...props) => {
 
 	/**
 	 * @function onFilesAdded upload the file to firebase
+	 * @memberof App
+	 * @inner
 	 */
 	async function uploadFiles() {
 		setUploadProgress({});
@@ -564,6 +607,8 @@ const App = (...props) => {
 	/**
 	 * @function sendRequest sends the request to firebase
 	 * @param {Object} file - the new file we are adding
+	 * @memberof App
+	 * @inner
 	 */
 	function sendRequest(file) {
 		return new Promise((resolve, reject) => {
@@ -628,6 +673,8 @@ const App = (...props) => {
 	 * @function makeCardBig makes the little card bigger
 	 * @param {Object} event - Event object
 	 * @param {Object} recipe - Recipe we want to make bigger
+	 * @memberof App
+	 * @inner
 	 */
 	function makeCardBig(event, recipe) {
 		// we dont do that for that one button
@@ -642,6 +689,8 @@ const App = (...props) => {
 	/**
 	 * Returns the sum of a and b
 	 * @returns {Object} returns the jsx string for react
+	 * @memberof App
+	 * @inner
 	 */
 	return (
 		<div className='App'>

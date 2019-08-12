@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>views/Upload.js - Documentation</title>
+    <title>App - Documentation</title>
     
     
     
@@ -43,86 +43,277 @@
 
 <div id="main">
     
-    <h1 class="page-title">views/Upload.js</h1>
+    <h1 class="page-title">App</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import React, { useEffect } from "react";
-import "./upload.css";
-import { Dropzone, Progress } from "./";
-// Add the Firebase products that you want to use
-import "firebase/storage";
+        <h2>
+        App
+        </h2>
+        
+            <div class="class-description"><p>The app class is the top functional component which holds most of the logic / handlers / state handling of all other views.</p></div>
+        
+    
+</header>
 
-/**
- * @classdesc The Upload class takes care of all the upload functionalities and propagates most of the actual function to the app class
- *
- */
+<article>
+    
+        <div class="container-overview">
+        
+            
 
-const Upload = (...props) => {
-	/*
-	const [files, setFiles] = useState([]);
-	const [uploading, setUploading] = useState(false);
-	const [uploadProgress, setUploadProgress] = useState({});
-	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
-*/
-	const { onFilesAdded, successfullUploaded, uploadProgress, uploading, files } = props[0];
+    
+    <h2>Constructor</h2>
+    
 
-	useEffect(() => {}, []);
+    <h4 class="name" id="App"><span class="type-signature"></span>new App<span class="signature">()</span><span class="type-signature"></span></h4>
 
-	/**
-	 * @function renderProgress renders the progress of the file upload
-	 * @param {Object} file - The file being uploaded.
-	 */
-	function renderProgress(file) {
-		const progress = uploadProgress[file.name];
-		if (uploading || successfullUploaded) {
-			return (
-				&lt;div className='ProgressWrapper'>
-					&lt;Progress progress={progress ? progress.percentage : 0} />
-					&lt;img
-						className='CheckIcon'
-						alt='done'
-						src='baseline-check_circle_outline-24px.svg'
-						style={{
-							opacity: progress &amp;&amp; progress.state === "done" ? 0.5 : 0
-						}}
-					/>
-				&lt;/div>
-			);
-		}
-	}
+    
 
-	return (
-		&lt;div className='upload'>
-			&lt;div className='upload-content'>
-				&lt;div>
-					&lt;Dropzone onFilesAdded={onFilesAdded} disabled={uploading || successfullUploaded} />
-				&lt;/div>
-				&lt;div className='Files'>
-					{files.map(file => {
-						return (
-							&lt;div key={file.name} className='Row'>
-								&lt;span className='Filename'>{file.name}&lt;/span>
-								{renderProgress(file)}
-							&lt;/div>
-						);
-					})}
-				&lt;/div>
-			&lt;/div>
-		&lt;/div>
-	);
-};
 
-export { Upload };
-</code></pre>
-        </article>
-    </section>
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="App.js.html">App.js</a>, <a href="App.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~callAPIcallstheAPIlayerforaauthenticateduser"><span class="type-signature">(inner) </span>callAPI calls the API layer for a authenticated user<span class="signature">(myUser)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="App.js.html">App.js</a>, <a href="App.js.html#line97">line 97</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>myUser</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Somebody's name.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
