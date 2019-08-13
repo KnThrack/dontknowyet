@@ -27,7 +27,8 @@ const App = (...props) => {
 	 */
 	/**
 	 * @memberof App
-	 * @function setRecipes -  set the state of the recipes (all recipes of the user) thats the total unfiltered list
+	 * @function setRecipes
+	 * @description set the state of the recipes (all recipes of the user) thats the total unfiltered list
 	 * @param {Object} recipes -  State for all the recipes of a user
 	 */
 	const [recipes, setRecipes] = useState(null);
