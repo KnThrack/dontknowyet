@@ -22,10 +22,11 @@ var _ = require("underscore");
 const App = (...props) => {
 	// all my state its getting quiet a lot to think about using context
 	/**
-	 * @inner
 	 * @memberof App
-	 * State for all the recipes of a user
-	 * @var {Object} recipes recipes of the user
+	 * @typedef {Object} recipes State for all the recipes of a user
+	 */
+	/**
+	 * @memberof App
 	 * @function setRecipes set the state of the recipes (all recipes of the user) thats the total unfiltered list
 	 */
 	/**
