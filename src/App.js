@@ -27,7 +27,8 @@ const App = (...props) => {
 	 * State for all the recipes of a user
 	 * @var {Object} recipes recipes of the user
 	 * @function setRecipes set the state of the recipes (all recipes of the user) thats the total unfiltered list
-	 *
+	 */
+	/**
 	 * State for all the filtered recipes of a user this state is passed down to the other components
 	 * @var {Object} filteredRecipes filtered recipes of the user
 	 * @function setFilteredRecipes set the state of the filtered recipes (all recipes of the user)  this one is passed down to the components
