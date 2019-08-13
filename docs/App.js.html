@@ -221,13 +221,13 @@ const App = (...props) => {
 	const [files, setFiles] = useState([]);
 	/**
 	 * @memberof App
-	 * @typedef {array} pictures - the pictures we recived from the storage
+	 * @typedef {array} pictures - the pictures we received from the storage
 	 */
 	/**
 	 * @memberof App
 	 * @function setPictures
-	 * @description set  the pictures we recived from the storage
-	 * @param {array} pictures - the pictures we recived from the storage
+	 * @description set  the pictures we received from the storage
+	 * @param {array} pictures - the pictures we received from the storage
 	 */
 	const [pictures, setPictures] = useState([]);
 	/**
@@ -373,6 +373,7 @@ const App = (...props) => {
 				setFirebaseApp(fire);
 			});
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	/**
