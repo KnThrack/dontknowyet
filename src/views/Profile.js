@@ -5,17 +5,18 @@ import { useAuth0 } from "../react-auth0-spa";
 
 /**
  * @classdesc Profile renderer class for the user profile
+ * @returns {Object} returns the jsx string for react
  * @exports Profile
  * @constructor
  */
 const Profile = () => {
 	/**
 	 * @memberof Profile
-	 * @typedef {Object} user User object
+	 * @typedef {Object} user - User object
 	 */
 	/**
 	 * @memberof Profile
-	 * @typedef {Object} loading do we still load the user
+	 * @typedef {Object} loading - do we still load the user
 	 */
 
 	const { loading, user } = useAuth0();
