@@ -58,11 +58,15 @@ const NavBar = (...props) => {
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='justify-content-end' justify='true'>
-						<Link to='/'> Home </Link>
-						<Link className={enableLink} to='/recipes'>
+						<Link className='NavLink' to='/'>
+							Home
+						</Link>
+						<Link className='NavLink' className={enableLink} to='/recipes'>
 							My Recipes
 						</Link>
-						<Link to='/profile'> Profile </Link>
+						<Link className='NavLink' to='/profile'>
+							Profile
+						</Link>
 					</Nav>
 					<Image onClick={loginout} src={userpicture} roundedCircle height='50px' />
 				</Navbar.Collapse>
