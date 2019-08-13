@@ -23,87 +23,87 @@ const App = (...props) => {
 	// all my state its getting quiet a lot to think about using context
 	/**
 	 * @memberof App
-	 * @typedef {Object} recipes State for all the recipes of a user
+	 * @typedef {Object} recipes -  State for all the recipes of a user
 	 */
 	/**
 	 * @memberof App
-	 * @function setRecipes set the state of the recipes (all recipes of the user) thats the total unfiltered list
-	 * @param {Object} recipes State for all the recipes of a user
+	 * @function setRecipes -  set the state of the recipes (all recipes of the user) thats the total unfiltered list
+	 * @param {Object} recipes -  State for all the recipes of a user
 	 */
 	const [recipes, setRecipes] = useState(null);
 	/**
 	 * State for all the filtered recipes of a user this state is passed down to the other components
 	 * @memberof App	 *
-	 * @typedef {Object} filteredRecipes filtered recipes of the user
+	 * @typedef {Object} filteredRecipes -  filtered recipes of the user
 	 */
 	/**
 	 * @memberof App
-	 * @function setFilteredRecipes set the state of the filtered recipes (all recipes of the user)  this one is passed down to the components
-	 * @param {Object} filteredRecipes filtered recipes of the user
+	 * @function setFilteredRecipes -  set the state of the filtered recipes (all recipes of the user)  this one is passed down to the components
+	 * @param {Object} filteredRecipes -  filtered recipes of the user
 	 */
 	const [filteredRecipes, setFilteredRecipes] = useState(null);
 	/**
 	 * State for the user object
 	 * @memberof App
-	 * @typedef {Object} user filtered recipes of the user
+	 * @typedef {Object} user -  filtered recipes of the user
 	 */
 	/**
 	 * @memberof App
-	 * @function setUser set the state of the user
-	 * @param {Object} user filtered recipes of the user
+	 * @function setUser -  set the state of the user
+	 * @param {Object} user -  filtered recipes of the user
 	 */
 	const [user, setUser] = useState(null);
 	/**
 	 * State for the modal
 	 * @memberof App
-	 * @typedef {Object} modal the modal state
+	 * @typedef {Object} modal -  the modal state
 	 */
 	/**
 	 * @memberof App
-	 * @function setModal set the modal state
-	 * @param {Object} modal the modal state
+	 * @function setModal -  set the modal state
+	 * @param {Object} modal - the modal state
 	 */
 	const [modal, setModal] = useState({ show: false, type: "" });
 	/**
 	 * State for the filter string
 	 * @memberof App
-	 * @typedef {string} filter the modal state
+	 * @typedef {string} filter -  the modal state
 	 */
 	/**
 	 * @memberof App
-	 * @function setFilter set the filter state
-	 * @param {string} filter the modal state
+	 * @function setFilter -  set the filter state
+	 * @param {string} filter -  the modal state
 	 */
 	const [filter, setFilter] = useState("");
 	/**
 	 * State for the recipe we changing or deleting or the ingredient we are changing or deleting
 	 * @memberof App
-	 * @typedef {Object} changeRecipe the change recipe
+	 * @typedef {Object} changeRecipe - the change recipe
 	 */
 	/**
 	 * @memberof App
-	 * @function setChangeRecipe set the change recipe
-	 * @param {Object} changeRecipe the change recipe
+	 * @function setChangeRecipe -  set the change recipe
+	 * @param {Object} changeRecipe -  the change recipe
 	 */
 	const [changeRecipe, setChangeRecipe] = useState(null);
 	/**
 	 * @memberof App
-	 * @typedef {Object} deleteRecipe the delete recipe
+	 * @typedef {Object} deleteRecipe -  the delete recipe
 	 */
 	/**
 	 * @memberof App
-	 * @function setDeleteRecipe set the delete recipe
-	 * @param {Object} deleteRecipe the delete recipe
+	 * @function setDeleteRecipe - set the delete recipe
+	 * @param {Object} deleteRecipe - the delete recipe
 	 */
 	const [deleteRecipe, setDeleteRecipe] = useState(null);
 	/**
 	 * @memberof App
-	 * @typedef {int} ingredientIndex the change ingredient index
+	 * @typedef {int} ingredientIndex - the change ingredient index
 	 */
 	/**
 	 * @memberof App
-	 * @function setIngredientIndex set the change ingredient index
-	 * @param {int} ingredientIndex the change ingredient index
+	 * @function setIngredientIndex - set the change ingredient index
+	 * @param {int} ingredientIndex - the change ingredient index
 	 */
 	const [ingredientIndex, setIngredientIndex] = useState(null);
 	/**
@@ -119,73 +119,73 @@ const App = (...props) => {
 	/**
 	 * State the page where are we now to drive some UI changes
 	 * @memberof App
-	 * @typedef {Object} pageState the state of the page
+	 * @typedef {Object} pageState - the state of the page
 	 */
 	/**
 	 * @memberof App
-	 * @function setPageState set the state of the page
-	 * @param {Object} pageState the state of the page
+	 * @function setPageState - set the state of the page
+	 * @param {Object} pageState - the state of the page
 	 */
 	const [pageState, setPageState] = useState(null);
 	/**
 	 * stuff for the firebase picture upload
 	 * @memberof App
-	 * @typedef {Object} firebaseApp reference to the firebase application
+	 * @typedef {Object} firebaseApp - reference to the firebase application
 	 */
 	/**
 	 * @memberof App
-	 * @function setFirebaseApp set the reference to the firebase application
-	 * @param {Object} firebaseApp reference to the firebase application
+	 * @function setFirebaseApp - set the reference to the firebase application
+	 * @param {Object} firebaseApp - reference to the firebase application
 	 */
 	const [firebaseApp, setFirebaseApp] = useState(null);
 	/**
 	 * @memberof App
-	 * @typedef {array} files the files we are uploading
+	 * @typedef {array} files - the files we are uploading
 	 */
 	/**
 	 * @memberof App
-	 * @function setFiles set the files we are uploading
-	 * @param {array} files the files we are uploading
+	 * @function setFiles - set the files we are uploading
+	 * @param {array} files - the files we are uploading
 	 */
 	const [files, setFiles] = useState([]);
 	/**
 	 * @memberof App
-	 * @typedef {array} pictures the pictures we recived from the storage
+	 * @typedef {array} pictures - the pictures we recived from the storage
 	 */
 	/**
 	 * @memberof App
-	 * @function setPictures set  the pictures we recived from the storage
-	 * @param {array} pictures the pictures we recived from the storage
+	 * @function setPictures - set  the pictures we recived from the storage
+	 * @param {array} pictures - the pictures we recived from the storage
 	 */
 	const [pictures, setPictures] = useState([]);
 	/**
 	 * @memberof App
-	 * @typedef {Boolean} uploading are we currently uploading
+	 * @typedef {Boolean} uploading - are we currently uploading
 	 */
 	/**
 	 * @memberof App
-	 * @function setUploading set the are we currently uploading
-	 * @param {Boolean} uploading are we currently uploading
+	 * @function setUploading - set the are we currently uploading
+	 * @param {Boolean} uploading - are we currently uploading
 	 */
 	const [uploading, setUploading] = useState(false);
 	/**
 	 * @memberof App
-	 * @typedef {Object} uploadProgress progress of the upload
+	 * @typedef {Object} uploadProgress - progress of the upload
 	 */
 	/**
 	 * @memberof App
-	 * @function setUploadProgress set  progress of the upload
-	 * @param {Object} uploadProgress progress of the upload
+	 * @function setUploadProgress - set  progress of the upload
+	 * @param {Object} uploadProgress - progress of the upload
 	 */
 	const [uploadProgress, setUploadProgress] = useState({});
 	/**
 	 * @memberof App
-	 * @typedef {Boolean} successfullUploaded did we upload successfully
+	 * @typedef {Boolean} successfullUploaded - did we upload successfully
 	 */
 	/**
 	 * @memberof App
-	 * @function setSuccessfullUploaded set if we uploaded successfully
-	 * @param {Boolean} successfullUploaded did we upload successfully
+	 * @function setSuccessfullUploaded - set if we uploaded successfully
+	 * @param {Boolean} successfullUploaded - did we upload successfully
 	 */
 	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
 
@@ -195,7 +195,7 @@ const App = (...props) => {
 	axios.defaults.headers.get["Content-Type"] = "application/json";
 
 	/**
-	 * @function callAPI calls the API layer for a authenticated user
+	 * @function callAPI - calls the API layer for a authenticated user
 	 * @param {Object} myUser - Somebody's name.
 	 * @memberof App
 	 * @inner
