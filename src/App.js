@@ -28,6 +28,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setRecipes set the state of the recipes (all recipes of the user) thats the total unfiltered list
+	 * @param {Object} recipes State for all the recipes of a user
 	 */
 	const [recipes, setRecipes] = useState(null);
 	/**
@@ -38,6 +39,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setFilteredRecipes set the state of the filtered recipes (all recipes of the user)  this one is passed down to the components
+	 * @param {Object} filteredRecipes filtered recipes of the user
 	 */
 	const [filteredRecipes, setFilteredRecipes] = useState(null);
 	/**
@@ -48,6 +50,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setUser set the state of the user
+	 * @param {Object} user filtered recipes of the user
 	 */
 	const [user, setUser] = useState(null);
 	/**
@@ -58,6 +61,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setModal set the modal state
+	 * @param {Object} modal the modal state
 	 */
 	const [modal, setModal] = useState({ show: false, type: "" });
 	/**
@@ -68,6 +72,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setFilter set the filter state
+	 * @param {string} filter the modal state
 	 */
 	const [filter, setFilter] = useState("");
 	/**
@@ -78,6 +83,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setChangeRecipe set the change recipe
+	 * @param {Object} changeRecipe the change recipe
 	 */
 	const [changeRecipe, setChangeRecipe] = useState(null);
 	/**
@@ -87,6 +93,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setDeleteRecipe set the delete recipe
+	 * @param {Object} deleteRecipe the delete recipe
 	 */
 	const [deleteRecipe, setDeleteRecipe] = useState(null);
 	/**
@@ -96,6 +103,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setIngredientIndex set the change ingredient index
+	 * @param {int} ingredientIndex the change ingredient index
 	 */
 	const [ingredientIndex, setIngredientIndex] = useState(null);
 	/**
@@ -105,6 +113,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setIngredientDelete set the delete ingredient index
+	 * @param {int} ingredientDelete the delete ingredient index
 	 */
 	const [ingredientDelete, setIngredientDelete] = useState(false);
 	/**
@@ -115,6 +124,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setPageState set the state of the page
+	 * @param {Object} pageState the state of the page
 	 */
 	const [pageState, setPageState] = useState(null);
 	/**
@@ -125,6 +135,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setFirebaseApp set the reference to the firebase application
+	 * @param {Object} firebaseApp reference to the firebase application
 	 */
 	const [firebaseApp, setFirebaseApp] = useState(null);
 	/**
@@ -134,6 +145,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setFiles set the files we are uploading
+	 * @param {array} files the files we are uploading
 	 */
 	const [files, setFiles] = useState([]);
 	/**
@@ -143,6 +155,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setPictures set  the pictures we recived from the storage
+	 * @param {array} pictures the pictures we recived from the storage
 	 */
 	const [pictures, setPictures] = useState([]);
 	/**
@@ -152,6 +165,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setUploading set the are we currently uploading
+	 * @param {Boolean} uploading are we currently uploading
 	 */
 	const [uploading, setUploading] = useState(false);
 	/**
@@ -161,6 +175,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setUploadProgress set  progress of the upload
+	 * @param {Object} uploadProgress progress of the upload
 	 */
 	const [uploadProgress, setUploadProgress] = useState({});
 	/**
@@ -170,6 +185,7 @@ const App = (...props) => {
 	/**
 	 * @memberof App
 	 * @function setSuccessfullUploaded set if we uploaded successfully
+	 * @param {Boolean} successfullUploaded did we upload successfully
 	 */
 	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
 
