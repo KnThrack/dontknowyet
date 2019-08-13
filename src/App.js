@@ -29,66 +29,148 @@ const App = (...props) => {
 	 * @memberof App
 	 * @function setRecipes set the state of the recipes (all recipes of the user) thats the total unfiltered list
 	 */
+	const [recipes, setRecipes] = useState(null);
 	/**
 	 * State for all the filtered recipes of a user this state is passed down to the other components
-	 * @var {Object} filteredRecipes filtered recipes of the user
+	 * @memberof App	 *
+	 * @typedef {Object} filteredRecipes filtered recipes of the user
+	 */
+	/**
+	 * @memberof App
 	 * @function setFilteredRecipes set the state of the filtered recipes (all recipes of the user)  this one is passed down to the components
-	 *
+	 */
+	const [filteredRecipes, setFilteredRecipes] = useState(null);
+	/**
 	 * State for the user object
-	 * @var {Object} user filtered recipes of the user
+	 * @memberof App
+	 * @typedef {Object} user filtered recipes of the user
+	 */
+	/**
+	 * @memberof App
 	 * @function setUser set the state of the user
-	 *
+	 */
+	const [user, setUser] = useState(null);
+	/**
 	 * State for the modal
-	 * @var {Object} modal the modal state
+	 * @memberof App
+	 * @typedef {Object} modal the modal state
+	 */
+	/**
+	 * @memberof App
 	 * @function setModal set the modal state
-	 *
+	 */
+	const [modal, setModal] = useState({ show: false, type: "" });
+	/**
 	 * State for the filter string
-	 * @var {string} filter the modal state
+	 * @memberof App
+	 * @typedef {string} filter the modal state
+	 */
+	/**
+	 * @memberof App
 	 * @function setFilter set the filter state
-	 *
+	 */
+	const [filter, setFilter] = useState("");
+	/**
 	 * State for the recipe we changing or deleting or the ingredient we are changing or deleting
-	 * @var {Object} changeRecipe the change recipe
+	 * @memberof App
+	 * @typedef {Object} changeRecipe the change recipe
+	 */
+	/**
+	 * @memberof App
 	 * @function setChangeRecipe set the change recipe
-	 * @var {Object} deleteRecipe the delete recipe
+	 */
+	const [changeRecipe, setChangeRecipe] = useState(null);
+	/**
+	 * @memberof App
+	 * @typedef {Object} deleteRecipe the delete recipe
+	 */
+	/**
+	 * @memberof App
 	 * @function setDeleteRecipe set the delete recipe
-	 * @var {int} ingredientIndex the change ingredient index
+	 */
+	const [deleteRecipe, setDeleteRecipe] = useState(null);
+	/**
+	 * @memberof App
+	 * @typedef {int} ingredientIndex the change ingredient index
+	 */
+	/**
+	 * @memberof App
 	 * @function setIngredientIndex set the change ingredient index
-	 * @var {int} ingredientDelete the delete ingredient index
+	 */
+	const [ingredientIndex, setIngredientIndex] = useState(null);
+	/**
+	 * @memberof App
+	 * @typedef {int} ingredientDelete the delete ingredient index
+	 */
+	/**
+	 * @memberof App
 	 * @function setIngredientDelete set the delete ingredient index
-	 *
+	 */
+	const [ingredientDelete, setIngredientDelete] = useState(false);
+	/**
 	 * State the page where are we now to drive some UI changes
-	 * @var {Object} pageState the state of the page
+	 * @memberof App
+	 * @typedef {Object} pageState the state of the page
+	 */
+	/**
+	 * @memberof App
 	 * @function setPageState set the state of the page
-	 *
+	 */
+	const [pageState, setPageState] = useState(null);
+	/**
 	 * stuff for the firebase picture upload
-	 * @var {Object} firebaseApp reference to the firebase application
+	 * @memberof App
+	 * @typedef {Object} firebaseApp reference to the firebase application
+	 */
+	/**
+	 * @memberof App
 	 * @function setFirebaseApp set the reference to the firebase application
-	 * @var {array} files the files we are uploading
+	 */
+	const [firebaseApp, setFirebaseApp] = useState(null);
+	/**
+	 * @memberof App
+	 * @typedef {array} files the files we are uploading
+	 */
+	/**
+	 * @memberof App
 	 * @function setFiles set the files we are uploading
-	 * @var {array} pictures the pictures we recived from the storage
+	 */
+	const [files, setFiles] = useState([]);
+	/**
+	 * @memberof App
+	 * @typedef {array} pictures the pictures we recived from the storage
+	 */
+	/**
+	 * @memberof App
 	 * @function setPictures set  the pictures we recived from the storage
-	 * @var {Boolean} uploading are we currently uploading
+	 */
+	const [pictures, setPictures] = useState([]);
+	/**
+	 * @memberof App
+	 * @typedef {Boolean} uploading are we currently uploading
+	 */
+	/**
+	 * @memberof App
 	 * @function setUploading set the are we currently uploading
-	 * @var {Object} uploadProgress progress of the upload
+	 */
+	const [uploading, setUploading] = useState(false);
+	/**
+	 * @memberof App
+	 * @typedef {Object} uploadProgress progress of the upload
+	 */
+	/**
+	 * @memberof App
 	 * @function setUploadProgress set  progress of the upload
-	 * @var {Boolean} successfullUploaded did we upload successfully
+	 */
+	const [uploadProgress, setUploadProgress] = useState({});
+	/**
+	 * @memberof App
+	 * @typedef {Boolean} successfullUploaded did we upload successfully
+	 */
+	/**
+	 * @memberof App
 	 * @function setSuccessfullUploaded set if we uploaded successfully
 	 */
-	const [recipes, setRecipes] = useState(null);
-	const [filteredRecipes, setFilteredRecipes] = useState(null);
-	const [user, setUser] = useState(null);
-	const [modal, setModal] = useState({ show: false, type: "" });
-	const [filter, setFilter] = useState("");
-	const [changeRecipe, setChangeRecipe] = useState(null);
-	const [deleteRecipe, setDeleteRecipe] = useState(null);
-	const [ingredientIndex, setIngredientIndex] = useState(null);
-	const [ingredientDelete, setIngredientDelete] = useState(false);
-	const [pageState, setPageState] = useState(null);
-	const [firebaseApp, setFirebaseApp] = useState(null);
-	const [files, setFiles] = useState([]);
-	const [pictures, setPictures] = useState([]);
-	const [uploading, setUploading] = useState(false);
-	const [uploadProgress, setUploadProgress] = useState({});
 	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
 
 	// set the default axios stuff
