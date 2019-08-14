@@ -21,11 +21,26 @@ async function getToken(loading, getTokenSilently) {
 
 /**
  * @classdesc this class is the very top controller of the application
+ * @returns {Object} returns the jsx string for react
  * @exports Base
  * @constructor
  */
 const Base = () => {
+
+	/**
+	 * @memberof Base
+	 * @function getTokenSilently
+	 * @description gets the Auth0 JTW token
+	 */
 	const { getTokenSilently } = useAuth0();
+		/**
+	 * @memberof Base
+	 * @typedef {boolean} loading -  Loading state of Auth0
+	 */
+		/**
+	 * @memberof Base
+	 * @typedef {Object} user -  Auth0 User Object
+	 */
 	const { loading, user } = useAuth0();
 
 	if (loading) {
