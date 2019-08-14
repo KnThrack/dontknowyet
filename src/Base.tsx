@@ -10,7 +10,7 @@ import initFontAwesome from "./utils/initFontAwesome";
 initFontAwesome();
 */
 
-async function getToken(loading, getTokenSilently) {
+async function getToken(loading: any, getTokenSilently: () => void) {
 	// add auth token to axios
 	if (!loading) {
 		const token = await getTokenSilently();
@@ -33,6 +33,7 @@ const Base = () => {
 	 * @description gets the Auth0 JTW token
 	 */
 	const { getTokenSilently } = useAuth0();
+
 		/**
 	 * @memberof Base
 	 * @typedef {boolean} loading -  Loading state of Auth0

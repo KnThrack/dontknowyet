@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import { Upload, PictureCarousel, RecipeTable } from "./";
+import { Upload, PictureCarousel, RecipeTable } from ".";
 
 /**
  * @classdesc RecipeForm renderer class
@@ -9,7 +9,7 @@ import { Upload, PictureCarousel, RecipeTable } from "./";
  * @inner
  * @memberof RecipeCard
  */
-const RecipeForm = (...props) => {
+const RecipeForm : FunctionComponent<any> = (...props) => {
 	const {
 		recipe,
 		uploadFiles,
@@ -30,7 +30,7 @@ const RecipeForm = (...props) => {
 	useEffect(() => {}, []);
 
 	// handlers
-	function handleInputChanges(event) {
+	function handleInputChanges(event: any) {
 		handleInputChange(event, location.state);
 	}
 

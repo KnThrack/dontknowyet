@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import "./upload.css";
-import { Dropzone, Progress } from "./";
+import { Dropzone, Progress } from ".";
 // Add the Firebase products that you want to use
 import "firebase/storage";
 
@@ -11,7 +11,7 @@ import "firebase/storage";
  * @constructor
  */
 
-const Upload = (...props) => {
+const Upload : FunctionComponent<any> = (...props) => {
 	/*
 	const [files, setFiles] = useState([]);
 	const [uploading, setUploading] = useState(false);
@@ -28,7 +28,7 @@ const Upload = (...props) => {
 	 * @inner
 	 * @memberof Upload
 	 */
-	function renderProgress(file) {
+	function renderProgress(file: { name: React.ReactText; }) {
 		const progress = uploadProgress[file.name];
 		if (uploading || successfullUploaded) {
 			return (
@@ -54,7 +54,7 @@ const Upload = (...props) => {
 					<Dropzone onFilesAdded={onFilesAdded} disabled={uploading || successfullUploaded} />
 				</div>
 				<div className='Files'>
-					{files.map(file => {
+					{files.map((file: { name: string; }) => {
 						return (
 							<div key={file.name} className='Row'>
 								<span className='Filename'>{file.name}</span>

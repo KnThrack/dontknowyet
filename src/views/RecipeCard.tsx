@@ -1,10 +1,10 @@
 // src/views/Loading.js
-import React, { useState, useEffect } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
-import { RecipeForm } from "./";
+import { RecipeForm } from ".";
 import Moment from "moment";
 
 /**
@@ -12,7 +12,7 @@ import Moment from "moment";
  * @exports RecipeCard
  * @constructor
  */
-const RecipeCard = (...props) => {
+const RecipeCard : FunctionComponent<any> = (...props) => {
 	const [withforms, setwithform] = useState("");
 
 	const {
@@ -40,11 +40,11 @@ const RecipeCard = (...props) => {
 		setwithform(withform);
 	}, []);
 
-	function test(something) {
+	function test(something: any) {
 		makeCardBig(something, recipe);
 	}
 
-	let cardClass = recipe => {
+	let cardClass = (recipe: { cuisine: any; }) => {
 		var sClass = "";
 
 		switch (recipe.cuisine) {
@@ -81,7 +81,7 @@ const RecipeCard = (...props) => {
 			<Card className='Bigcard'>
 				<Card.Header>{recipe.cuisine}</Card.Header>
 				<div className='recipe-button'>
-					<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
+					<DropdownButton id='cardButton' className='cardButton' drop='left' title='...'>
 						<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDelete}>
 							Delete
 						</Dropdown.Item>
@@ -113,7 +113,7 @@ const RecipeCard = (...props) => {
 			<Card id={"card#" + recipe._id.toString()} className={cardClass(recipe)} key={recipe._id.toString()}>
 				<Card.Header>{recipe.cuisine}</Card.Header>
 				<div className='recipe-button'>
-					<DropdownButton id='cardButton' className='cardButton' drop='left' variant='' title='...'>
+					<DropdownButton id='cardButton' className='cardButton' drop='left' title='...'>
 						<Dropdown.Item eventKey={"recipes_del_btn#" + recipe._id.toString()} onSelect={handleDelete}>
 							Delete
 						</Dropdown.Item>
