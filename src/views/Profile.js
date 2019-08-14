@@ -3,22 +3,37 @@
 import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
 
-const Profile = ({...props}) => {
-  const { loading, user } = useAuth0();
+/**
+ * @classdesc Profile renderer class for the user profile
+ * @returns {Object} returns the jsx string for react
+ * @exports Profile
+ * @constructor
+ */
+const Profile = () => {
+	/**
+	 * @memberof Profile
+	 * @typedef {Object} user - User object
+	 */
+	/**
+	 * @memberof Profile
+	 * @typedef {Object} loading - do we still load the user
+	 */
 
-  if (loading || !user) {
-    return "Loading...";
-  }
+	const { loading, user } = useAuth0();
 
-  return (
-    <>
-      <img src={user.picture} alt="Profile" />
+	if (loading || !user) {
+		return "Loading...";
+	}
 
-      <h2>{user.name}</h2>
-      <p>{user.email}</p>
-      <code>{JSON.stringify(user, null, 2)}</code>
-    </>
-  );
+	return (
+		<>
+			<img src={user.picture} alt='Profile' />
+
+			<h2>{user.name}</h2>
+			<p>{user.email}</p>
+			<code>{JSON.stringify(user, null, 2)}</code>
+		</>
+	);
 };
 
-export  {Profile};
+export { Profile };

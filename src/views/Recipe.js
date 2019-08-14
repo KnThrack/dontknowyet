@@ -2,6 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { RecipeCard } from "./";
 
+/**
+ * @classdesc Recipe renderer class for a single recipe
+ * @deprecated
+ * @exports Recipe
+ * @constructor
+ */
 const Recipe = (...props) => {
 	const {
 		uploadFiles,

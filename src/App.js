@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useAuth0 } from "./react-auth0-spa";
 import axios from "axios";
 import "./App.scss";
-import { Recipes, Recipe, NavBar, Profile, PrivateRoute, ConfirmationModal, Loading, FloatButtons } from "./views";
+import { Recipes, Recipe, NavBar, Profile, StartPage, PrivateRoute, ConfirmationModal, FloatButtons } from "./views";
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import * as firebase from "firebase/app";
 // Add the Firebase products that you want to use
@@ -15,23 +12,198 @@ import "firebase/storage";
 //const util = require("util");
 var _ = require("underscore");
 
+/**
+ * @class App
+ * @classdesc The app class is the top functional component which holds most of the logic / handlers / state handling of all other views.
+ * @returns {Object} returns the jsx string for react
+ * @exports App
+ * @constructor
+ */
+
 const App = (...props) => {
 	// all my state its getting quiet a lot to think about using context
+	/**
+	 * @memberof App
+	 * @typedef {Object} recipes -  State for all the recipes of a user
+	 */
+	/**
+	 * @memberof App
+	 * @function setRecipes
+	 * @description set the state of the recipes (all recipes of the user) thats the total unfiltered list
+	 * @param {Object} recipes -  State for all the recipes of a user
+	 */
 	const [recipes, setRecipes] = useState(null);
+	/**
+	 * State for all the filtered recipes of a user this state is passed down to the other components
+	 * @memberof App	 *
+	 * @typedef {Object} filteredRecipes -  filtered recipes of the user
+	 */
+	/**
+	 * @memberof App
+	 * @function setFilteredRecipes
+	 * @description set the state of the filtered recipes (all recipes of the user)  this one is passed down to the components
+	 * @param {Object} filteredRecipes -  filtered recipes of the user
+	 */
 	const [filteredRecipes, setFilteredRecipes] = useState(null);
+	/**
+	 * State for the user object
+	 * @memberof App
+	 * @typedef {Object} user -  filtered recipes of the user
+	 */
+	/**
+	 * @memberof App
+	 * @function setUser
+	 * @description set the state of the user
+	 * @param {Object} user -  filtered recipes of the user
+	 */
 	const [user, setUser] = useState(null);
+	/**
+	 * State for the modal
+	 * @memberof App
+	 * @typedef {Object} modal -  the modal state
+	 */
+	/**
+	 * @memberof App
+	 * @function setModal
+	 * @description set the modal state
+	 * @param {Object} modal - the modal state
+	 */
 	const [modal, setModal] = useState({ show: false, type: "" });
+	/**
+	 * State for the filter string
+	 * @memberof App
+	 * @typedef {string} filter -  the modal state
+	 */
+	/**
+	 * @memberof App
+	 * @function setFilter
+	 * @description set the filter state
+	 * @param {string} filter -  the modal state
+	 */
 	const [filter, setFilter] = useState("");
+	/**
+	 * State for the recipe we changing or deleting or the ingredient we are changing or deleting
+	 * @memberof App
+	 * @typedef {Object} changeRecipe - the change recipe
+	 */
+	/**
+	 * @memberof App
+	 * @function setChangeRecipe
+	 * @description set the change recipe
+	 * @param {Object} changeRecipe -  the change recipe
+	 */
 	const [changeRecipe, setChangeRecipe] = useState(null);
+	/**
+	 * @memberof App
+	 * @typedef {Object} deleteRecipe -  the delete recipe
+	 */
+	/**
+	 * @memberof App
+	 * @function setDeleteRecipe
+	 * @description set the delete recipe
+	 * @param {Object} deleteRecipe - the delete recipe
+	 */
+	const [deleteRecipe, setDeleteRecipe] = useState(null);
+	/**
+	 * @memberof App
+	 * @typedef {int} ingredientIndex - the change ingredient index
+	 */
+	/**
+	 * @memberof App
+	 * @function setIngredientIndex
+	 * @description set the change ingredient index
+	 * @param {int} ingredientIndex - the change ingredient index
+	 */
 	const [ingredientIndex, setIngredientIndex] = useState(null);
+	/**
+	 * @memberof App
+	 * @typedef {int} ingredientDelete the delete ingredient index
+	 */
+	/**
+	 * @memberof App
+	 * @function setIngredientDelete
+	 * @description set the delete ingredient index
+	 * @param {int} ingredientDelete the delete ingredient index
+	 */
 	const [ingredientDelete, setIngredientDelete] = useState(false);
+	/**
+	 * State the page where are we now to drive some UI changes
+	 * @memberof App
+	 * @typedef {Object} pageState - the state of the page
+	 */
+	/**
+	 * @memberof App
+	 * @function setPageState
+	 * @description set the state of the page
+	 * @param {Object} pageState - the state of the page
+	 */
 	const [pageState, setPageState] = useState(null);
+	/**
+	 * stuff for the firebase picture upload
+	 * @memberof App
+	 * @typedef {Object} firebaseApp - reference to the firebase application
+	 */
+	/**
+	 * @memberof App
+	 * @function setFirebaseApp
+	 * @description set the reference to the firebase application
+	 * @param {Object} firebaseApp - reference to the firebase application
+	 */
 	const [firebaseApp, setFirebaseApp] = useState(null);
-	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+	/**
+	 * @memberof App
+	 * @typedef {array} files - the files we are uploading
+	 */
+	/**
+	 * @memberof App
+	 * @function setFiles
+	 * @description set the files we are uploading
+	 * @param {array} files - the files we are uploading
+	 */
 	const [files, setFiles] = useState([]);
+	/**
+	 * @memberof App
+	 * @typedef {array} pictures - the pictures we received from the storage
+	 */
+	/**
+	 * @memberof App
+	 * @function setPictures
+	 * @description set  the pictures we received from the storage
+	 * @param {array} pictures - the pictures we received from the storage
+	 */
 	const [pictures, setPictures] = useState([]);
+	/**
+	 * @memberof App
+	 * @typedef {Boolean} uploading - are we currently uploading
+	 */
+	/**
+	 * @memberof App
+	 * @function setUploading
+	 * @description set the are we currently uploading
+	 * @param {Boolean} uploading - are we currently uploading
+	 */
 	const [uploading, setUploading] = useState(false);
+	/**
+	 * @memberof App
+	 * @typedef {Object} uploadProgress - progress of the upload
+	 */
+	/**
+	 * @memberof App
+	 * @function setUploadProgress
+	 * @description set  progress of the upload
+	 * @param {Object} uploadProgress - progress of the upload
+	 */
 	const [uploadProgress, setUploadProgress] = useState({});
+	/**
+	 * @memberof App
+	 * @typedef {Boolean} successfullUploaded - did we upload successfully
+	 */
+	/**
+	 * @memberof App
+	 * @function setSuccessfullUploaded
+	 * @description set if we uploaded successfully
+	 * @param {Boolean} successfullUploaded - did we upload successfully
+	 */
 	const [successfullUploaded, setSuccessfullUploaded] = useState(false);
 
 	// set the default axios stuff
@@ -39,6 +211,13 @@ const App = (...props) => {
 	axios.defaults.headers.put["Content-Type"] = "application/json";
 	axios.defaults.headers.get["Content-Type"] = "application/json";
 
+	/**
+	 * @function callAPI
+	 * @description calls the API layer for a authenticated user
+	 * @param {Object} myUser - Somebody's name.
+	 * @memberof App
+	 * @inner
+	 */
 	async function callAPI(myUser) {
 		// get the initial recipes
 		const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + myUser._id)).data;
@@ -47,22 +226,12 @@ const App = (...props) => {
 		setFilteredRecipes(recipes.data);
 	}
 
-	function loginout() {
-		!isAuthenticated && loginWithRedirect({});
-		isAuthenticated && logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
-
-		isAuthenticated &&
-			firebase
-				.auth()
-				.signOut()
-				.then(function() {
-					// Sign-out successful.
-				})
-				.catch(function(error) {
-					// An error happened.
-				});
-	}
-
+	/**
+	 * @function useEffect
+	 * @description react hook for useEffect does the stuff we need to execute on the initial load
+	 * @memberof App
+	 * @inner
+	 */
 	useEffect(() => {
 		// get the initial recipes
 		async function putAuth() {
@@ -146,8 +315,16 @@ const App = (...props) => {
 				setFirebaseApp(fire);
 			});
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	/**
+	 * @function getPictureUrl
+	 * @description gets the details of a picture from the firebase storage
+	 * @param {Object} picture - the picture Object
+	 * @memberof App
+	 * @inner
+	 */
 	async function getPictureUrl(picture) {
 		const url = await picture.getDownloadURL();
 		const metaData = await picture.getMetadata();
@@ -161,12 +338,15 @@ const App = (...props) => {
 		return image;
 	}
 
+	/**
+	 * @function loadPictures
+	 * @description loads all the pictures of the user from firebase
+	 * @param {Object} fire  firebase reference to the firebase
+	 * @param {Object} user  current firebase user
+	 * @memberof App
+	 * @inner
+	 */
 	async function loadPictures(fire, user) {
-		/**
-		 * Returns the sum of all numbers passed to the function.
-		 * @param fire firebase reference to the firebase
-		 * @param user current firebase user
-		 */
 		var storageRef = fire
 			.storage()
 			.ref()
@@ -199,6 +379,13 @@ const App = (...props) => {
 		setFilteredRecipes(stateCopy);
 	}
 */
+	/**
+	 * @function addRecipe
+	 * @description commits the new recipe to the API and adds it to the array of all recipes
+	 * @param {Object} newObject - new recipe
+	 * @memberof App
+	 * @inner
+	 */
 	async function addRecipe(newObject) {
 		// and put it away
 		const newRecipe = (await axios.post("https://notsureyetapp.herokuapp.com/api/recipes/", JSON.stringify(newObject))).data.data;
@@ -214,6 +401,26 @@ const App = (...props) => {
 
 	// handlers
 
+	/**
+	 * @function handleBack
+	 * @description handle going back from the recipe detail to the list
+	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
+	 */
+	function handleBack(event) {
+		// ok here we need to basically raise a modal with the card we just click and overlay or over the list
+		setPageState({ page: "list" });
+		setChangeRecipe(null);
+	}
+
+	/**
+	 * @function handleAddRecipe
+	 * @description handle the creation of a empty recipe object and pass it to the API method
+	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
+	 */
 	function handleAddRecipe(event) {
 		const newRecipe = {
 			name: _.uniqueId("newRecipe"),
@@ -226,6 +433,13 @@ const App = (...props) => {
 		addRecipe(newRecipe);
 	}
 
+	/**
+	 * @function handleAddIngredient
+	 * @description handle the creation of a empty ingredient and raise the modal to enter the details
+	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
+	 */
 	function handleAddIngredient(event) {
 		// find which one we updating
 		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
@@ -244,11 +458,25 @@ const App = (...props) => {
 		raiseModal("addIngredient");
 	}
 
+	/**
+	 * @function handleDeleteIngredient
+	 * @description handle the deletion of a ingredient
+	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
+	 */
 	function handleDeleteIngredient(event) {
 		event.preventDefault();
 		setIngredientDelete(true);
 	}
 
+	/**
+	 * @function handleChangeIngredient
+	 * @description handle the change of a ingredient
+	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
+	 */
 	function handleChangeIngredient(event) {
 		let index = changeRecipe.ingredients.findIndex(x => x._id === event.currentTarget.id.toString());
 		setIngredientIndex(index);
@@ -256,7 +484,14 @@ const App = (...props) => {
 		raiseModal("addIngredient");
 	}
 
-	function handleTableChange(event, childState) {
+	/**
+	 * @function handleTableChange
+	 * @description handle change of inputs from the modal about ingredients (used to be for the table inputs)
+	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
+	 */
+	function handleTableChange(event) {
 		// get the value and move it into the state
 		const target = event.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
@@ -277,6 +512,13 @@ const App = (...props) => {
 		setFilteredRecipes(stateCopy);
 	}
 
+	/**
+	 * @function handleInputChange
+	 * @description handle change of inputs from the form
+	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
+	 */
 	function handleInputChange(event) {
 		// get the value and move it into the state
 		const target = event.target;
@@ -299,6 +541,13 @@ const App = (...props) => {
 		setFilteredRecipes(stateCopy);
 	}
 
+	/**
+	 * @function handleSubmit
+	 * @description handle submit button action
+	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
+	 */
 	function handleSubmit(event) {
 		event.preventDefault();
 
@@ -306,6 +555,14 @@ const App = (...props) => {
 		raiseModal("confirm");
 	}
 
+	/**
+	 * @function raiseModal
+	 * @description raise the modal to confirm stuff
+	 * @param {Object} event - Event object
+	 * @param {int} index - index of the thing we looking at
+	 * @memberof App
+	 * @inner
+	 */
 	function raiseModal(modalType, index) {
 		setModal({
 			show: !modal.show,
@@ -314,7 +571,14 @@ const App = (...props) => {
 		});
 	}
 
-	function handleDelete(key, event) {
+	/**
+	 * @function handleDelete
+	 * @description delete a recipe
+	 * @param {string} key - key of what we deleting
+	 * @memberof App
+	 * @inner
+	 */
+	function handleDelete(key) {
 		// delete stuff
 		const recipeTarget = key.split("#");
 		// find which one we updating
@@ -323,11 +587,18 @@ const App = (...props) => {
 		var stateCopy = recipes.slice();
 		var recipe = stateCopy[index];
 
-		setChangeRecipe(recipe);
+		setDeleteRecipe(recipe);
+		//setChangeRecipe(recipe);
 		// raise decision
 		raiseModal("delete");
 	}
 
+	/**
+	 * @function handleDelete
+	 * @description close the modal again
+	 * @memberof App
+	 * @inner
+	 */
 	function handleModalClose() {
 		setIngredientDelete(false);
 		setModal({
@@ -335,7 +606,15 @@ const App = (...props) => {
 			type: ""
 		});
 	}
-	function handleModalSuccess(state, that) {
+
+	/**
+	 * @function handleModalSuccess
+	 * @description handle what happens when we press confirm in the modal
+	 * @param {Object} state - the state object of the modal
+	 * @memberof App
+	 * @inner
+	 */
+	function handleModalSuccess(state) {
 		setModal({
 			show: false,
 			type: ""
@@ -344,12 +623,15 @@ const App = (...props) => {
 		if (state.type === "delete") {
 			// and put it away
 			setIngredientDelete(false);
-			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + changeRecipe._id)
+			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + deleteRecipe._id)
 				.then(function(response) {
 					// handle success
-					var recipeCopy = _.without(recipes, changeRecipe);
+					var recipeCopy = _.without(recipes, deleteRecipe);
 					setRecipes(recipeCopy);
 					setFilteredRecipes(recipeCopy);
+					if (pageState === "details") {
+						handleBack();
+					}
 				})
 				.catch(function(error) {
 					// handle error
@@ -403,6 +685,13 @@ const App = (...props) => {
 		}
 	}
 
+	/**
+	 * @function handleFilterChange
+	 * @description handles the filter search change and filters the recipe list thats displayed
+	 * @param {Object} event - Event object
+	 * @memberof App
+	 * @inner
+	 */
 	function handleFilterChange(event) {
 		// filter all the recipes based on all the text in them and store it in a filter state
 		const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
@@ -416,10 +705,23 @@ const App = (...props) => {
 	}
 
 	// upload handlers
+	/**
+	 * @function onFilesAdded
+	 * @description add a file to the file array
+	 * @param {Object} newfile - the new file we are adding
+	 * @memberof App
+	 * @inner
+	 */
 	function onFilesAdded(newfile) {
 		setFiles(files.concat(newfile));
 	}
 
+	/**
+	 * @function onFilesAdded
+	 * @description upload the file to firebase
+	 * @memberof App
+	 * @inner
+	 */
 	async function uploadFiles() {
 		setUploadProgress({});
 		setUploading(true);
@@ -440,6 +742,13 @@ const App = (...props) => {
 		}
 	}
 
+	/**
+	 * @function sendRequest
+	 * @description sends the request to firebase
+	 * @param {Object} file - the new file we are adding
+	 * @memberof App
+	 * @inner
+	 */
 	function sendRequest(file) {
 		return new Promise((resolve, reject) => {
 			var storageRef = firebaseApp.storage().ref();
@@ -499,115 +808,118 @@ const App = (...props) => {
 		});
 	}
 
-	// handlers end
-
-	function RecipeListApp() {
-		const recipesList = filteredRecipes;
-
-		if (recipesList) {
-			return (
-				<div className='App'>
-					<Router>
-						<header className='App-header'>
-							<NavBar />
-						</header>
-
-						<div className='App-content'>
-							<PrivateRoute
-								exact
-								path='/'
-								render={props => (
-									<Recipes
-										recipesList={recipesList}
-										pictureList={pictures}
-										filter={filter}
-										handleDelete={handleDelete}
-										handleFilterChange={handleFilterChange}
-										setPageState={setPageState}
-										{...props}
-									/>
-								)}
-							/>
-							<PrivateRoute
-								path='/recipe/:id'
-								render={props => (
-									<Recipe
-										recipesList={recipesList}
-										pictureList={pictures}
-										handleInputChange={handleInputChange}
-										handleChangeIngredient={handleChangeIngredient}
-										handleDeleteIngredient={handleDeleteIngredient}
-										setPageState={setPageState}
-										setChangeRecipe={setChangeRecipe}
-										firebaseApp={firebaseApp}
-										successfullUploaded={successfullUploaded}
-										uploadProgress={uploadProgress}
-										uploading={uploading}
-										files={files}
-										setFiles={setFiles}
-										setSuccessfullUploaded={setSuccessfullUploaded}
-										onFilesAdded={onFilesAdded}
-										uploadFiles={uploadFiles}
-										{...props}
-									/>
-								)}
-							/>
-						</div>
-						<div className='d-flex footerButtons'>
-							<FloatButtons
-								handleAddRecipe={handleAddRecipe}
-								handleSubmit={handleSubmit}
-								handleAddIngredient={handleAddIngredient}
-								pageState={pageState}
-								{...props}
-							/>
-						</div>
-						<Switch>
-							<Route path='/' exact />
-							<PrivateRoute path='/profile' render={props => <Profile recipesList={recipesList} />} />
-						</Switch>
-					</Router>
-					<ConfirmationModal
-						showModal={modal.show}
-						handleModalClose={handleModalClose}
-						handleModalSuccess={handleModalSuccess}
-						modal={modal}
-						changeRecipe={changeRecipe}
-						ingredientIndex={ingredientIndex}
-						ingredientDelete={ingredientDelete}
-						handleInputChange={handleTableChange}
-					/>
-				</div>
-			);
-		} else {
-			return (
-				<div className='App'>
-					<Router>
-						<header className='App-header'>
-							<NavBar />
-						</header>
-						<div className='App-content'>
-							<Jumbotron>
-								<h1>Welcome to my App !!</h1>
-								<p>If you want to store your awesome recipes please make a user and start cooking !!</p>
-								<p>
-									<Button onClick={loginout} variant='primary'>
-										Create your Awesome User !
-									</Button>
-								</p>
-							</Jumbotron>
-							<Loading />
-							<div className='d-flex footerButtons'>
-								<FloatButtons handleAddRecipe={handleAddRecipe} pageState={pageState} />
-							</div>
-						</div>
-					</Router>
-				</div>
-			);
+	/**
+	 * @function makeCardBig
+	 * @description makes the little card bigger
+	 * @param {Object} event - Event object
+	 * @param {Object} recipe - Recipe we want to make bigger
+	 * @memberof App
+	 * @inner
+	 */
+	function makeCardBig(event, recipe) {
+		// we dont do that for that one button
+		if (event.target.id !== "cardButton" && event.target.className !== "dropdown-item") {
+			// ok here we need to basically raise a modal with the card we just click and overlay or over the list
+			setPageState({ page: "details" });
+			setChangeRecipe(recipe);
 		}
 	}
 
-	return RecipeListApp();
+	// handlers end
+	return (
+		<div className='App'>
+			<Router>
+				<header className='App-header'>
+					<NavBar showNavs={true} />
+				</header>
+
+				<div className='App-content'>
+					<Switch>
+						<Route exact path='/' render={props => <StartPage setPageState={setPageState} />} />
+						<PrivateRoute
+							exact
+							path='/recipes'
+							render={props => (
+								<Recipes
+									recipesList={filteredRecipes}
+									pictureList={pictures}
+									filter={filter}
+									handleDelete={handleDelete}
+									handleFilterChange={handleFilterChange}
+									setPageState={setPageState}
+									handleInputChange={handleInputChange}
+									handleChangeIngredient={handleChangeIngredient}
+									handleDeleteIngredient={handleDeleteIngredient}
+									setChangeRecipe={setChangeRecipe}
+									changeRecipe={changeRecipe}
+									firebaseApp={firebaseApp}
+									successfullUploaded={successfullUploaded}
+									uploadProgress={uploadProgress}
+									uploading={uploading}
+									files={files}
+									setFiles={setFiles}
+									setSuccessfullUploaded={setSuccessfullUploaded}
+									onFilesAdded={onFilesAdded}
+									uploadFiles={uploadFiles}
+									makeCardBig={makeCardBig}
+									{...props}
+								/>
+							)}
+						/>
+						<PrivateRoute
+							path='/recipe/:id'
+							render={props => (
+								<Recipe
+									recipesList={filteredRecipes}
+									pictureList={pictures}
+									handleInputChange={handleInputChange}
+									handleChangeIngredient={handleChangeIngredient}
+									handleDeleteIngredient={handleDeleteIngredient}
+									setPageState={setPageState}
+									setChangeRecipe={setChangeRecipe}
+									firebaseApp={firebaseApp}
+									successfullUploaded={successfullUploaded}
+									uploadProgress={uploadProgress}
+									uploading={uploading}
+									files={files}
+									setFiles={setFiles}
+									setSuccessfullUploaded={setSuccessfullUploaded}
+									onFilesAdded={onFilesAdded}
+									uploadFiles={uploadFiles}
+									{...props}
+								/>
+							)}
+						/>
+
+						<PrivateRoute path='/profile' component={Profile} />
+					</Switch>
+				</div>
+
+				<div className='d-flex footerButtons'>
+					<FloatButtons
+						handleAddRecipe={handleAddRecipe}
+						handleSubmit={handleSubmit}
+						handleAddIngredient={handleAddIngredient}
+						pageState={pageState}
+						handleBack={handleBack}
+						{...props}
+					/>
+				</div>
+
+				<ConfirmationModal
+					showModal={modal.show}
+					handleModalClose={handleModalClose}
+					handleModalSuccess={handleModalSuccess}
+					modal={modal}
+					deleteRecipe={deleteRecipe}
+					changeRecipe={changeRecipe}
+					ingredientIndex={ingredientIndex}
+					ingredientDelete={ingredientDelete}
+					handleInputChange={handleTableChange}
+				/>
+			</Router>
+		</div>
+	);
 };
 
 export default App;

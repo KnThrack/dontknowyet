@@ -1,3 +1,6 @@
+/**
+ * @classdesc index class for node
+ */
 export { Loading } from "./Loading";
 export { ConfirmationModal } from "./ConfirmationModal";
 export { NavBar } from "./NavBar";
@@ -13,3 +16,4 @@ export { PictureCarousel } from "./PictureCarousel";
 export { RecipeCard } from "./RecipeCard";
 export { RecipeForm } from "./RecipeForm";
 export { RecipeTable } from "./RecipeTable";
+export { StartPage } from "./StartPage";

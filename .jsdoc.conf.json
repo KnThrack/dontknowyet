@@ -1,0 +1,62 @@
+{
+	"tags": {
+		"allowUnknownTags": true
+	},
+	"source": {
+		"include": ["src"],
+		"includePattern": ".+\\.js(doc|x)?$",
+		"excludePattern": "(node_modules/|docs)"
+	},
+	"plugins": ["plugins/markdown"],
+	"opts": {
+		"encoding": "utf8",
+		"template": "node_modules/docdash",
+		"destination": "./docs/",
+		"recurse": true,
+		"verbose": true
+	},
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": true,
+		"idInHeadings": true
+	},
+	"templates": {
+		"cleverLinks": false,
+		"monospaceLinks": false,
+		"default": {
+			"outputSourceFiles": true,
+			"includeDate": false,
+			"useLongnameInNav": true
+		}
+	},
+	"docdash": {
+		"static": true,
+		"sort": true,
+		"disqus": "",
+		"openGraph": {
+			"title": "Dont Know yet",
+			"type": "website",
+			"image": "",
+			"site_name": "Dontknowyet",
+			"url": ""
+		},
+		"meta": {
+			"title": "Dont know yet",
+			"description": "Some app.",
+			"keyword": "jsdoc"
+		},
+		"search": true,
+		"collapse": true,
+		"typedefs": true,
+		"removeQuotes": "none",
+		"scripts": [],
+		"menu": {
+			"Github repo": {
+				"href": "https://github.com/KnThrack/dontknowyet",
+				"target": "_blank",
+				"class": "menu-item",
+				"id": "repository"
+			}
+		}
+	}
+}

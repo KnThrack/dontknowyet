@@ -3,8 +3,13 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { Link } from "react-router-dom";
 
+/**
+ * @classdesc this class controls the floating buttons that are shown at the bottom
+ * @exports FloatButtons
+ * @constructor
+ */
 const FloatButtons = (...props) => {
-	const { handleAddRecipe, handleSubmit, handleAddIngredient, pageState } = props[0];
+	const { handleAddRecipe, handleSubmit, handleBack, handleAddIngredient, pageState } = props[0];
 
 	if (pageState === null) {
 		return <ButtonGroup className='footerButtonGroup' />;
@@ -13,7 +18,7 @@ const FloatButtons = (...props) => {
 	if (pageState.page === "list") {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
-				<Button variant='dark' className='add-Button' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
+				<Button variant='dark' className='back-Button' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
 					Add Recipe
 				</Button>
 			</ButtonGroup>
@@ -21,19 +26,19 @@ const FloatButtons = (...props) => {
 	} else if (pageState.page === "details") {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
-				<Link to='/'>
-					<Button variant='info' className='back-Button' size='lg' title='Go Back'>
-						Go Back
-					</Button>
-				</Link>
+				<Button variant='info' className='back-Button' size='lg' title='Go Back' onClick={handleBack}>
+					Go Back
+				</Button>
 				<Button type='submit' className='submit-Button' size='lg' variant='primary' onClick={handleSubmit}>
 					Submit
 				</Button>
-				<Button type='button' className='add-Button' size='lg' variant='primary' onClick={handleAddIngredient}>
+				<Button type='button' className='back-Button' size='lg' variant='primary' onClick={handleAddIngredient}>
 					Add Ingredient
 				</Button>
 			</ButtonGroup>
 		);
+	} else if (pageState.page === "home") {
+		return <ButtonGroup className='footerButtonGroup' />;
 	}
 };
 

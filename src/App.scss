@@ -10,18 +10,36 @@
 }
 
 .App-header {
-	background: rgba(236, 222, 195, 0.72);
-	min-height: 10vh;
+	background: rgb(236, 222, 195);
+	min-height: 12vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	font-size: calc(10px + 2vmin);
 	color: white;
+	position: fixed;
+	width: 100%;
+	z-index: 1;
 }
 
 .App-link {
 	color: #61dafb;
+}
+
+.Home-Picture {
+	height: 500px;
+	width: 800px;
+	position: relative;
+}
+
+.hideit {
+	display: none;
+}
+
+.NavLink {
+	margin-inline-start: 5px;
+	margin-inline-end: 5px;
 }
 
 @keyframes App-logo-spin {
@@ -31,6 +49,11 @@
 	to {
 		transform: rotate(360deg);
 	}
+}
+
+.App-Home {
+	background: url(/static/media/background.f22ce3e8.svg);
+	height: 1000px;
 }
 
 .App-content {
@@ -125,7 +148,7 @@
 	color: #000000;
 	padding-top: 10px;
 	text-align: left;
-	height: 100%;
+	height: 130px;
 }
 
 .cardLink:hover {
@@ -243,8 +266,16 @@ button#cardButton {
 .submit-Button:not(:disabled):not(.disabled):active,
 .submit-Button:hover {
 	color: #fff;
-	background-color: #8ab661;
-	border-color: #8ab661;
+	background-color: #fabe0e;
+	border-color: #fabe0e;
+}
+
+.back-Button:not(:disabled):not(.disabled).active,
+.back-Button:not(:disabled):not(.disabled):active,
+.back-Button:hover {
+	color: #fff;
+	background-color: #0e88fa;
+	border-color: #0e88fa;
 }
 
 .add-Button:not(:disabled):not(.disabled).active,
@@ -329,8 +360,8 @@ button#cardButton {
 	}
 
 	.App-header {
-		background: rgba(236, 222, 195, 0.72);
-		min-height: 10vh;
+		background: rgb(236, 222, 195);
+		min-height: 12vh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -373,11 +404,11 @@ button#cardButton {
 	.card {
 		margin-left: 5px;
 	}
+
 	.Bigcard {
 		background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
 		box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 		border-radius: 27px;
-		margin: 0px !important;
 		margin-top: 20px;
 		width: 100% !important;
 		height: 100% !important;
@@ -410,8 +441,8 @@ button#cardButton {
 	}
 
 	.App-header {
-		background: rgba(236, 222, 195, 0.72);
-		min-height: 10vh;
+		background: rgb(236, 222, 195);
+		min-height: 12vh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -447,7 +478,6 @@ button#cardButton {
 		background: linear-gradient(152.52deg, #ff7e36 0%, #ffe920 100%);
 		box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.21);
 		border-radius: 27px;
-		margin: 0px !important;
 		margin-top: 20px;
 		width: 60% !important;
 		height: 100% !important;
@@ -493,8 +523,8 @@ button#cardButton {
 	}
 
 	.App-header {
-		background: rgba(236, 222, 195, 0.72);
-		min-height: 10vh;
+		background: rgb(236, 222, 195);
+		min-height: 12vh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

@@ -2,6 +2,13 @@ import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { Upload, PictureCarousel, RecipeTable } from "./";
 
+/**
+ * @classdesc RecipeForm renderer class
+ * @exports RecipeForm
+ * @constructor
+ * @inner
+ * @memberof RecipeCard
+ */
 const RecipeForm = (...props) => {
 	const {
 		recipe,
@@ -43,7 +50,10 @@ const RecipeForm = (...props) => {
 					<option>Italian</option>
 				</Form.Control>
 			</Form.Group>
-			<Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}*/>
+			<Form.Group /*controlId={recipe._id.toString()+".ControlTextarea1"}
+							<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={recipe.recipe} />
+			*/
+			>
 				<Form.Label htmlFor='recipe'>Recipe</Form.Label>
 				<Form.Control name='recipe' onChange={handleInputChanges} id='recipe' as='textarea' rows='10' value={recipe.recipe} />
 			</Form.Group>

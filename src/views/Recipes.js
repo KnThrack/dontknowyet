@@ -6,8 +6,36 @@ import { Loading, RecipeCard } from ".";
 
 var _ = require("underscore");
 
+/**
+ * @classdesc Recipes renderer class to display a list of recipes or a single recipe
+ * @exports Recipes
+ * @constructor
+ */
 const Recipes = (...props) => {
-	const { handleFilterChange, handleDelete, recipesList, filter, setPageState, pictureList } = props[0];
+	//const { handleFilterChange, handleDelete, recipesList, filter, setPageState, pictureList } = props[0];
+	const {
+		handleFilterChange,
+		handleDelete,
+		recipesList,
+		filter,
+		uploadFiles,
+		onFilesAdded,
+		successfullUploaded,
+		uploadProgress,
+		uploading,
+		files,
+		setFiles,
+		setSuccessfullUploaded,
+		handleInputChange,
+		handleChangeIngredient,
+		handleDeleteIngredient,
+		makeCardBig,
+		pictureList,
+		setPageState,
+		setChangeRecipe,
+		changeRecipe,
+		location
+	} = props[0];
 
 	useEffect(() => {
 		setPageState({ page: "list" });
@@ -15,6 +43,33 @@ const Recipes = (...props) => {
 
 	function handleFilterChanges(event) {
 		handleFilterChange(event);
+	}
+
+	if (changeRecipe) {
+		return (
+			<div className='content-inner'>
+				<RecipeCard
+					recipe={changeRecipe}
+					handleDelete={handleDelete}
+					pictureList={pictureList}
+					withform={true}
+					makeCardBig={makeCardBig}
+					handleInputChange={handleInputChange}
+					handleChangeIngredient={handleChangeIngredient}
+					handleDeleteIngredient={handleDeleteIngredient}
+					setChangeRecipe={setChangeRecipe}
+					successfullUploaded={successfullUploaded}
+					uploadProgress={uploadProgress}
+					uploading={uploading}
+					files={files}
+					setFiles={setFiles}
+					setSuccessfullUploaded={setSuccessfullUploaded}
+					onFilesAdded={onFilesAdded}
+					uploadFiles={uploadFiles}
+					location={location}
+				/>
+			</div>
+		);
 	}
 
 	if (recipesList) {
@@ -33,7 +88,30 @@ const Recipes = (...props) => {
 						} else {
 						}
 						// pictureList[picture_index].url
-						return <RecipeCard recipe={recipe} url={url} handleDelete={handleDelete} />;
+						return (
+							<RecipeCard
+								recipe={recipe}
+								url={url}
+								handleDelete={handleDelete}
+								key={recipe._id}
+								pictureList={pictureList}
+								withform={false}
+								makeCardBig={makeCardBig}
+								handleInputChange={handleInputChange}
+								handleChangeIngredient={handleChangeIngredient}
+								handleDeleteIngredient={handleDeleteIngredient}
+								setChangeRecipe={setChangeRecipe}
+								successfullUploaded={successfullUploaded}
+								uploadProgress={uploadProgress}
+								uploading={uploading}
+								files={files}
+								setFiles={setFiles}
+								setSuccessfullUploaded={setSuccessfullUploaded}
+								onFilesAdded={onFilesAdded}
+								uploadFiles={uploadFiles}
+								location={location}
+							/>
+						);
 					})}
 				</div>
 			</div>
