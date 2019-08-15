@@ -21,10 +21,11 @@ const Profile = () => {
 
 	const { loading, user } = useAuth0();
 
+	/*
 	if (loading || !user) {
 		return (<div>Loading...</div>);
 	}
-
+*/
 	return (
 		<div>
 			<img src={user.picture} alt='Profile' />
