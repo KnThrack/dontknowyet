@@ -8,7 +8,7 @@ import "./progress.css";
  * @inner
  * @memberof Upload
  */
-const Progress = (...props) => {
+const Progress = (...props: { progress: any; }[]) => {
 	const { progress } = props[0];
 
 	return (

@@ -4,6 +4,17 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "./table.css";
 
+interface Irecipe {
+	_id: string;
+	name: string;
+	title: string;
+	cuisine: string;
+	ingredients: [{ ingredient: string; quantity: number; unit: string; _id: string }];
+	create_date: Date;
+	recipe: string;
+	user: string;
+}
+
 /**
  * @classdesc RecipeTable renderer class
  * @exports RecipeTable
@@ -11,7 +22,7 @@ import "./table.css";
  * @inner
  * @memberof RecipeCard
  */
-const RecipeTable = (...props) => {
+const RecipeTable = (...props: { recipe: Irecipe; handleChangeIngredient: any; handleDeleteIngredient: any; }[]) => {
 	const { recipe, handleChangeIngredient, handleDeleteIngredient } = props[0];
 
 	useEffect(() => {}, []);
@@ -34,7 +45,7 @@ const RecipeTable = (...props) => {
 						<Td>{ingredient.unit}</Td>
 						<Td className='ingredientDeleteCell' width='50px'>
 							<img
-								id={ingredient._id ? ingredient._id : 1}
+								id={ingredient._id ? ingredient._id : "1"}
 								onClick={handleDeleteIngredient}
 								src='https://unicons.iconscout.com/release/v1.0.0/svg/multiply.svg'
 								alt=''
@@ -43,7 +54,7 @@ const RecipeTable = (...props) => {
 								className='ingredientDelete-IMG d-inline-block align-center'
 							/>
 							<Button
-								id={ingredient._id ? ingredient._id : 1}
+								id={ingredient._id ? ingredient._id : "1"}
 								type='submit'
 								className='ingredientDelete-Button submit-Button'
 								variant='primary'

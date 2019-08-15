@@ -8,6 +8,7 @@ import { RecipeCard } from ".";
  * @exports Recipe
  * @constructor
  */
+/*
 const Recipe = (...props) => {
 	const {
 		uploadFiles,
@@ -67,3 +68,4 @@ const Recipe = (...props) => {
 };
 
 export { Recipe };
+*/

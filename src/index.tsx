@@ -9,7 +9,8 @@ import config from "./auth_config.json";
 
 // A function that routes the user to the right place
 // after login
-const onRedirectCallback = appState => {
+/*
+const onRedirectCallback = (appState: { targetUrl: string | null | undefined; }) => {
     window.history.replaceState(
       {},
       document.title,
@@ -18,7 +19,9 @@ const onRedirectCallback = appState => {
         : window.location.pathname
     );
   };
-
+  */
+  const onRedirectCallback = () =>
+  window.history.replaceState({}, document.title, window.location.pathname);
 // render stuff
   ReactDOM.render(
     <Auth0Provider

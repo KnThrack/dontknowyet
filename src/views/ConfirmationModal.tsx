@@ -10,7 +10,9 @@ import Form from "react-bootstrap/Form";
  * @exports ConfirmationModal
  * @constructor
  */
-const ConfirmationModal = (...props) => {
+const ConfirmationModal = (
+	...props: { showModal: any; handleModalClose: any; handleModalSuccess: any; handleInputChange: any; modal: any; changeRecipe: any; ingredientIndex: any; ingredientDelete: any }[]
+) => {
 	const { showModal, handleModalClose, handleModalSuccess, handleInputChange, modal, changeRecipe, ingredientIndex, ingredientDelete } = props[0];
 
 	let title = "",

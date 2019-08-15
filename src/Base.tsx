@@ -9,7 +9,6 @@ import "./App.scss";
 import initFontAwesome from "./utils/initFontAwesome";
 initFontAwesome();
 */
-
 async function getToken(loading: any, getTokenSilently: () => void) {
 	// add auth token to axios
 	if (!loading) {
@@ -51,7 +50,7 @@ const Base = () => {
 					<NavBar showNavs={false} />
 				</header>
 				<div className='App-content'>
-					<StartPage />
+					<StartPage setPageState={undefined} />
 					<Loading />
 				</div>
 			</div>

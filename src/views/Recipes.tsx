@@ -6,12 +6,46 @@ import { Loading, RecipeCard } from ".";
 
 var _ = require("underscore");
 
+interface Irecipe {
+	_id: string;
+	name: string;
+	title: string;
+	cuisine: string;
+	ingredients: [{ ingredient: string; quantity: number; unit: string; _id: string }];
+	create_date: Date;
+	recipe: string;
+	user: string;
+}
 /**
  * @classdesc Recipes renderer class to display a list of recipes or a single recipe
  * @exports Recipes
  * @constructor
  */
-const Recipes = (...props) => {
+const Recipes = (
+	...props: {
+		handleFilterChange: any;
+		handleDelete: any;
+		recipesList: any;
+		filter: any;
+		uploadFiles: any;
+		onFilesAdded: any;
+		successfullUploaded: any;
+		uploadProgress: any;
+		uploading: any;
+		files: any;
+		setFiles: any;
+		setSuccessfullUploaded: any;
+		handleInputChange: any;
+		handleChangeIngredient: any;
+		handleDeleteIngredient: any;
+		makeCardBig: any;
+		pictureList: any;
+		setPageState: any;
+		setChangeRecipe: any;
+		changeRecipe: any;
+		location: any;
+	}[]
+) => {
 	//const { handleFilterChange, handleDelete, recipesList, filter, setPageState, pictureList } = props[0];
 	const {
 		handleFilterChange,
@@ -41,7 +75,7 @@ const Recipes = (...props) => {
 		setPageState({ page: "list" });
 	}, []);
 
-	function handleFilterChanges(event) {
+	function handleFilterChanges(event: any) {
 		handleFilterChange(event);
 	}
 
@@ -79,7 +113,7 @@ const Recipes = (...props) => {
 					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={filter} />
 				</Form>
 				<div className='recipe-cards'>
-					{recipesList.map(function recipes(recipe) {
+					{recipesList.map(function recipes(recipe: Irecipe) {
 						// find a picture in the picture list
 						const picture_index = _.findIndex(pictureList, { recipe_id: recipe._id });
 						let url = "";

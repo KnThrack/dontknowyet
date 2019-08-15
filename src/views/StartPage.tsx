@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import Background from "../assets/background.svg";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import Image from "react-bootstrap/Image";
 
 /**
@@ -8,12 +6,19 @@ import Image from "react-bootstrap/Image";
  * @exports StartPage
  * @constructor
  */
-const StartPage = (...props) => {
+enum EpageState {
+	init = "",
+	list = "list",
+	details = "details",
+	home = "home"
+}
+
+const StartPage = (...props: { setPageState: any | undefined; }[]) => {
 	const { setPageState } = props[0];
 
 	useEffect(() => {
 		if (setPageState !== undefined) {
-			setPageState({ page: "home" });
+			setPageState(EpageState.home);
 		}
 	}, []);
 

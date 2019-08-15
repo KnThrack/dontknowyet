@@ -9,23 +9,24 @@ import Carousel from "react-bootstrap/Carousel";
  * @inner
  * @memberof Upload
  */
-const PictureCarousel = (...props) => {
-	const [index, setIndex] = useState(0);
-	const [direction, setDirection] = useState(null);
-	const [images, setImages] = useState([]);
-	const { pictureList, recipeID } = props[0];
 
-	const handleSelect = (selectedIndex, e) => {
-		setIndex(selectedIndex);
-		setDirection(e.direction);
-	};
+interface Ipicture {
+	recipe_id: string;
+	name: string;
+	url: string;
+}
+
+const PictureCarousel = (...props: { pictureList: Ipicture[]; recipeID: string; }[]) => {
+
+	//const [images, setImages] = useState([]);
+	const { pictureList, recipeID } = props[0];
 
 	useEffect(() => {}, []);
 
 	if (pictureList.length !== 0) {
 		return (
 			<div className='pictures-outer'>
-				<Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
+				<Carousel>
 					{pictureList.map(function picture(picture) {
 						if (picture.recipe_id === recipeID) {
 							return (
