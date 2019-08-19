@@ -1,7 +1,8 @@
 // src/views/Profile.js
 
-import React from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import { useAuth0 } from "../react-auth0-spa";
+import Image from "react-bootstrap/Image";
 
 /**
  * @classdesc Profile renderer class for the user profile
@@ -9,7 +10,7 @@ import { useAuth0 } from "../react-auth0-spa";
  * @exports Profile
  * @constructor
  */
-const Profile = () => {
+const Profile: FunctionComponent<any> = () => {
 	/**
 	 * @memberof Profile
 	 * @typedef {Object} user - User object
@@ -21,6 +22,10 @@ const Profile = () => {
 
 	const { loading, user } = useAuth0();
 
+	useEffect(() => {
+		console.log(`test`);
+	}, []);
+
 	/*
 	if (loading || !user) {
 		return (<div>Loading...</div>);
@@ -28,8 +33,7 @@ const Profile = () => {
 */
 	return (
 		<div>
-			<img src={user.picture} alt='Profile' />
-
+			<Image src={user.picture} alt='Profile' fluid />
 			<h2>{user.name}</h2>
 			<p>{user.email}</p>
 			<code>{JSON.stringify(user, null, 2)}</code>
