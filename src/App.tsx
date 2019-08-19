@@ -20,8 +20,14 @@ var _ = require("underscore");
  * @constructor
  */
 
-const App: FunctionComponent<any> = (...props) => {
+const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	// all my state its getting quiet a lot to think about using context
+
+	const {
+		token,
+		user
+	} = props[0];
+
 	/**
 	 * @memberof App
 	 * @typedef {Irecipe} recipes -  State for all the recipes of a user
@@ -58,13 +64,13 @@ const App: FunctionComponent<any> = (...props) => {
 	/**
 	 * State for the user object
 	 * @memberof App
-	 * @typedef {Iuser} user -  filtered recipes of the user
+	 * @typedef {Iuser} auth0User -  filtered recipes of the auth0User
 	 */
 	/**
 	 * @memberof App
-	 * @function setUser
-	 * @description set the state of the user
-	 * @param {Iuser} user -  filtered recipes of the user
+	 * @function setAuth0User
+	 * @description set the state of the auth0User
+	 * @param {Iuser} auth0User -  filtered recipes of the auth0User
 	 */
 
 	interface Iuser {
@@ -74,7 +80,7 @@ const App: FunctionComponent<any> = (...props) => {
 		auth0ID: string;
 		create_date: Date;
 	}
-	const [user, setUser] = useState<Iuser | undefined>(undefined);
+	const [auth0User, setAuth0User] = useState<Iuser | undefined>(undefined);
 	/**
 	 * State for the modal
 	 * @memberof App
@@ -259,7 +265,7 @@ const App: FunctionComponent<any> = (...props) => {
 
 	/**
 	 * @function callAPI
-	 * @description calls the API layer for a authenticated user
+	 * @description calls the API layer for a authenticated auth0User
 	 * @param {Object} myUser - Somebody's name.
 	 * @memberof App
 	 * @inner
@@ -281,7 +287,7 @@ const App: FunctionComponent<any> = (...props) => {
 	useEffect(() => {
 		// get the initial recipes
 		async function putAuth() {
-			await props[0].token.then(function(result: string) {
+			await token.then(function(result: string) {
 				axios.defaults.headers.post["Authorization"] = "Bearer " + result;
 				axios.defaults.headers.delete["Authorization"] = "Bearer " + result;
 				axios.defaults.headers.get["Authorization"] = "Bearer " + result;
@@ -293,7 +299,7 @@ const App: FunctionComponent<any> = (...props) => {
 
 		// before we can get the initial list we need the user to be there.
 		async function getUser() {
-			return (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + props[0].user.email)).data;
+			return (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + user.email)).data;
 		}
 
 		auth.then(function(result) {
@@ -303,9 +309,9 @@ const App: FunctionComponent<any> = (...props) => {
 			user.then(function(result) {
 				async function createUser() {
 					let createUser = {
-						name: props[0].user.name,
-						email: props[0].user.email,
-						auth0ID: props[0].user.sub
+						name: (user as any).name,
+						email: (user as any).email,
+						auth0ID: (user as any).sub
 					};
 
 					return (await axios.post("https://notsureyetapp.herokuapp.com/api/users/", JSON.stringify(createUser))).data;
@@ -316,11 +322,11 @@ const App: FunctionComponent<any> = (...props) => {
 					// no user is here so lets make a new one
 					const newUser = createUser();
 					newUser.then(function(result) {
-						setUser(result.data);
+						setAuth0User(result.data);
 						callAPI(result.data);
 					});
 				} else {
-					setUser(result.data[0]);
+					setAuth0User(result.data[0]);
 					callAPI(result.data[0]);
 				}
 			});

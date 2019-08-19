@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Image from "react-bootstrap/Image";
-
+import Jumbotron from "react-bootstrap/Jumbotron";
 /**
  * @classdesc this class renders the start page of the website
  * @exports StartPage
@@ -13,7 +13,7 @@ enum EpageState {
 	home = "home"
 }
 
-const StartPage = (...props: { setPageState: any | undefined; }[]) => {
+const StartPage = (...props: { setPageState: any | undefined }[]) => {
 	const { setPageState } = props[0];
 
 	useEffect(() => {
@@ -24,17 +24,21 @@ const StartPage = (...props: { setPageState: any | undefined; }[]) => {
 
 	return (
 		<div className='App-Home'>
-			<h1>Dontknowyet App</h1>
-			<p>Put some text here in the future to explain what the App is etc...</p>
-			<p>You need to log in to use the application !</p>
-
-			<Image
-				className='Home-Picture'
-				src='https://firebasestorage.googleapis.com/v0/b/dontknowyet.appspot.com/o/public%2Ffoodpicture.jpg?alt=media&token=17aed28d-eb6f-48e1-ad2b-e3a4a5fc8365'
-				rounded
-			/>
+			<Jumbotron>
+				<h1>Dontknowyet App</h1>
+				<p>Put some text here in the future to explain what the App is etc...</p>
+				<p>You need to log in to use the application !</p>
+			</Jumbotron>
 		</div>
 	);
 };
 
 export { StartPage };
+
+/*
+			<Image
+				className='Home-Picture'
+				src='https://firebasestorage.googleapis.com/v0/b/dontknowyet.appspot.com/o/public%2Ffoodpicture.jpg?alt=media&token=17aed28d-eb6f-48e1-ad2b-e3a4a5fc8365'
+				rounded
+			/>
+*/
