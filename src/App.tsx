@@ -348,7 +348,7 @@ const App: FunctionComponent<any> = (...props) => {
 				fire.auth()
 					.signInWithCustomToken(result.data.firebaseToken)
 					.then(function(User) {
-						if (User !=== null) {
+						if (User !== null) {
 							let user: firebase.User | null = User.user;
 							user !== null ? loadPictures(fire, user) : console.log("No user Error");
 						}
@@ -759,7 +759,7 @@ const App: FunctionComponent<any> = (...props) => {
 		const value = (event.target as HTMLInputElement).value;
 		if (recipes !== undefined) {
 			let filteredRecipes = recipes.filter((recipe: any) => {
-				return _.contains(_.values(recipe).map((a: any) => String(a).indexOf(value) !=== -1), true);
+				return _.contains(_.values(recipe).map((a: any) => String(a).indexOf(value) !== -1), true);
 			});
 
 			setFilteredRecipes(filteredRecipes);
@@ -887,7 +887,7 @@ const App: FunctionComponent<any> = (...props) => {
 	 */
 	function makeCardBig(event: React.SyntheticEvent, recipe: Irecipe) {
 		// we dont do that for that one button
-		if ((event.target as HTMLInputElement).id !=== "cardButton" &&  (event.target as HTMLInputElement).className !=== "dropdown-item") {
+		if ((event.target as HTMLInputElement).id !== "cardButton" &&  (event.target as HTMLInputElement).className !== "dropdown-item") {
 			// ok here we need to basically raise a modal with the card we just click and overlay or over the list
 			setPageState(EpageState.details);
 			setChangeRecipe(recipe);
