@@ -348,9 +348,9 @@ const App: FunctionComponent<any> = (...props) => {
 				fire.auth()
 					.signInWithCustomToken(result.data.firebaseToken)
 					.then(function(User) {
-						if (User !== null) {
+						if (User !=== null) {
 							let user: firebase.User | null = User.user;
-							user != null ? loadPictures(fire, user) : console.log("No user Error");
+							user !== null ? loadPictures(fire, user) : console.log("No user Error");
 						}
 					})
 					.catch(function(error) {
@@ -440,7 +440,7 @@ const App: FunctionComponent<any> = (...props) => {
 		const newRecipe: Irecipe = (await axios.post("https://notsureyetapp.herokuapp.com/api/recipes/", JSON.stringify(newObject))).data.data;
 
 		// add it in
-		var stateCopy = recipes != undefined ? recipes.slice() : [];
+		var stateCopy = recipes !== undefined ? recipes.slice() : [];
 		stateCopy.push(newRecipe);
 
 		// update it
@@ -477,7 +477,7 @@ const App: FunctionComponent<any> = (...props) => {
 			cuisine: "",
 			ingredients: [],
 			recipe: "Your Recipe",
-			user: user != undefined ? user._id : ""
+			user: user !== undefined ? user._id : ""
 		};
 		addRecipe(newRecipe);
 	}
@@ -491,10 +491,10 @@ const App: FunctionComponent<any> = (...props) => {
 	 */
 	function handleAddIngredient(event: any) {
 		// find which one we updating
-		if (changeRecipe != undefined) {
-			let index = recipes != undefined ? recipes.findIndex((x: { _id: any }) => x._id === changeRecipe._id.toString()) : 0;
+		if (changeRecipe !== undefined) {
+			let index = recipes !== undefined ? recipes.findIndex((x: { _id: any }) => x._id === changeRecipe._id.toString()) : 0;
 			// take a copy thats mutable and update it
-			var stateCopy = recipes != undefined ? recipes.slice() : [];
+			var stateCopy = recipes !== undefined ? recipes.slice() : [];
 			stateCopy[index] = Object.assign({}, stateCopy[index]);
 			stateCopy[index].ingredients.push({
 				ingredient: "",
@@ -530,7 +530,7 @@ const App: FunctionComponent<any> = (...props) => {
 	 * @inner
 	 */
 	function handleChangeIngredient(event: any) {
-		if (changeRecipe != undefined) {
+		if (changeRecipe !== undefined) {
 			let index = changeRecipe.ingredients.findIndex((x: { _id: string }) => x._id === event.currentTarget.id.toString());
 			setIngredientIndex(index);
 			// raise Modal
@@ -581,7 +581,7 @@ const App: FunctionComponent<any> = (...props) => {
 		const value = target.type === "checkbox" ? target.checked : target.value;
 
 		const recipeField = target.name;
-		if (recipes != undefined && changeRecipe != undefined) {
+		if (recipes !== undefined && changeRecipe !== undefined) {
 			// find which one we updating
 			let index = recipes.findIndex((x: { _id: any }) => x._id === changeRecipe._id.toString());
 
@@ -638,7 +638,7 @@ const App: FunctionComponent<any> = (...props) => {
 		// delete stuff
 		const recipeTarget = key.split("#");
 		// find which one we updating
-		if (recipes != undefined) {
+		if (recipes !== undefined) {
 			let index = recipes.findIndex((x: { _id: any }) => x._id === recipeTarget[1]);
 			// take a copy thats mutable
 			var stateCopy = recipes.slice();
@@ -680,7 +680,7 @@ const App: FunctionComponent<any> = (...props) => {
 
 		if (state.type === "delete") {
 			// and put it away
-			if (deleteRecipe != undefined) {
+			if (deleteRecipe !== undefined) {
 				setIngredientDelete(false);
 				axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + deleteRecipe._id)
 					.then(function(response) {
@@ -709,7 +709,7 @@ const App: FunctionComponent<any> = (...props) => {
 			// upload pictures
 			uploadFiles();
 
-			if (ingredientDelete && recipes != undefined) {
+			if (ingredientDelete && recipes !== undefined) {
 				stateCopy.ingredients = _.without(stateCopy.ingredients, stateCopy.ingredients[ingredientIndex]);
 
 				// find which one we updating
@@ -726,7 +726,7 @@ const App: FunctionComponent<any> = (...props) => {
 				.then(function(response) {
 					// handle success
 					// find which one we updating
-					if (recipes != undefined) {
+					if (recipes !== undefined) {
 						let index = recipes.findIndex((x: { _id: any }) => x._id === response.data.data._id.toString());
 						// change the one we want to fix the state
 						var recipesCopy = recipes.slice();
@@ -757,9 +757,9 @@ const App: FunctionComponent<any> = (...props) => {
 	function handleFilterChange(event: React.SyntheticEvent) {
 		// filter all the recipes based on all the text in them and store it in a filter state
 		const value = (event.target as HTMLInputElement).value;
-		if (recipes != undefined) {
+		if (recipes !== undefined) {
 			let filteredRecipes = recipes.filter((recipe: any) => {
-				return _.contains(_.values(recipe).map((a: any) => String(a).indexOf(value) !== -1), true);
+				return _.contains(_.values(recipe).map((a: any) => String(a).indexOf(value) !=== -1), true);
 			});
 
 			setFilteredRecipes(filteredRecipes);
@@ -814,24 +814,24 @@ const App: FunctionComponent<any> = (...props) => {
 	 */
 	function sendRequest(file: any) {
 		return new Promise((resolve, reject) => {
-			var storageRef = firebaseApp != undefined ? firebaseApp.storage().ref() : undefined;
+			var storageRef = firebaseApp !== undefined ? firebaseApp.storage().ref() : undefined;
 
-			if (storageRef != undefined) {
+			if (storageRef !== undefined) {
 				var metadata = {
 					contentType: file.type,
 					customMetadata: {
-						recipe_id: changeRecipe != undefined ? changeRecipe._id : "",
-						recipe_name: changeRecipe != undefined ? changeRecipe.name : ""
+						recipe_id: changeRecipe !== undefined ? changeRecipe._id : "",
+						recipe_name: changeRecipe !== undefined ? changeRecipe.name : ""
 					}
 				};
 
-				const copy = uploadProgress != undefined ? { ...uploadProgress } : [];
+				const copy = uploadProgress !== undefined ? { ...uploadProgress } : [];
 				copy[file.name] = { state: "done", percentage: 0 };
 				setUploadProgress(copy);
 
-				if (firebaseApp != undefined) {
-					let currentUser = firebaseApp.auth().currentUser != null ? firebaseApp.auth().currentUser : null;
-					let user: string = currentUser != null ? currentUser.uid : "";
+				if (firebaseApp !== undefined) {
+					let currentUser = firebaseApp.auth().currentUser !== null ? firebaseApp.auth().currentUser : null;
+					let user: string = currentUser !== null ? currentUser.uid : "";
 					var storageData = storageRef.child("users/" + user + "/" + file.name).put(file, metadata);
 
 					storageData.on(
@@ -841,7 +841,7 @@ const App: FunctionComponent<any> = (...props) => {
 							var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 							console.log(percent + "% done");
 							// Do whatever you want with the native progress event
-							const copy = uploadProgress != undefined ? { ...uploadProgress } : [];
+							const copy = uploadProgress !== undefined ? { ...uploadProgress } : [];
 							copy[file.name] = {
 								state: "pending",
 								percentage: percent
@@ -852,7 +852,7 @@ const App: FunctionComponent<any> = (...props) => {
 							// [START onfailure]
 							console.error("Upload failed:", error);
 							//handle error
-							const copy = uploadProgress != undefined ? { ...uploadProgress } : [];
+							const copy = uploadProgress !== undefined ? { ...uploadProgress } : [];
 							copy[file.name] = { state: "error", percentage: 0 };
 							setUploadProgress(copy);
 							reject(error);
@@ -862,7 +862,7 @@ const App: FunctionComponent<any> = (...props) => {
 							// success !!
 
 							//handle success
-							const copy = uploadProgress != undefined ? { ...uploadProgress } : [];
+							const copy = uploadProgress !== undefined ? { ...uploadProgress } : [];
 							copy[file.name] = { state: "done", percentage: 100 };
 							setUploadProgress(copy);
 							resolve();
@@ -887,7 +887,7 @@ const App: FunctionComponent<any> = (...props) => {
 	 */
 	function makeCardBig(event: React.SyntheticEvent, recipe: Irecipe) {
 		// we dont do that for that one button
-		if ((event.target as HTMLInputElement).id !== "cardButton" &&  (event.target as HTMLInputElement).className !== "dropdown-item") {
+		if ((event.target as HTMLInputElement).id !=== "cardButton" &&  (event.target as HTMLInputElement).className !=== "dropdown-item") {
 			// ok here we need to basically raise a modal with the card we just click and overlay or over the list
 			setPageState(EpageState.details);
 			setChangeRecipe(recipe);
@@ -934,7 +934,7 @@ const App: FunctionComponent<any> = (...props) => {
 								/>
 							)}
 						/>
-						<PrivateRoute path='/profile' component={Profile} />
+						<PrivateRoute path='/profile' render={props => <Profile />} />
 					</Switch>
 				</div>
 
