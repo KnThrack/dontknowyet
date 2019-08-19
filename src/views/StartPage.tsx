@@ -24,7 +24,7 @@ const StartPage = (...props: { setPageState: any | undefined }[]) => {
 
 	return (
 		<div className='App-Home'>
-			<Jumbotron>
+			<Jumbotron className='App-Jumbo'>
 				<h1>Dontknowyet App</h1>
 				<p>Put some text here in the future to explain what the App is etc...</p>
 				<p>You need to log in to use the application !</p>
