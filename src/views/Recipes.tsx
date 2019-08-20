@@ -6,16 +6,6 @@ import { Loading, RecipeCard } from ".";
 
 var _ = require("underscore");
 
-interface Irecipe {
-	_id: string;
-	name: string;
-	title: string;
-	cuisine: string;
-	ingredients: [{ ingredient: string; quantity: number; unit: string; _id: string }];
-	create_date: Date;
-	recipe: string;
-	user: string;
-}
 /**
  * @classdesc Recipes renderer class to display a list of recipes or a single recipe
  * @exports Recipes
@@ -23,7 +13,7 @@ interface Irecipe {
  */
 const Recipes = (
 	...props: {
-		handleFilterChange: any;
+		handleFilterChange: handleEvent;
 		handleDelete: any;
 		recipesList: any;
 		filter: any;
@@ -35,9 +25,9 @@ const Recipes = (
 		files: any;
 		setFiles: any;
 		setSuccessfullUploaded: any;
-		handleInputChange: any;
-		handleChangeIngredient: any;
-		handleDeleteIngredient: any;
+		handleInputChange: handleEvent;
+		handleChangeIngredient: handleEvent;
+		handleDeleteIngredient: handleEvent;
 		makeCardBig: any;
 		pictureList: any;
 		setPageState: any;

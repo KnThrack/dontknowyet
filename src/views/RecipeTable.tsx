@@ -4,17 +4,6 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "./table.css";
 
-interface Irecipe {
-	_id: string;
-	name: string;
-	title: string;
-	cuisine: string;
-	ingredients: [{ ingredient: string; quantity: number; unit: string; _id: string }];
-	create_date: Date;
-	recipe: string;
-	user: string;
-}
-
 /**
  * @classdesc RecipeTable renderer class
  * @exports RecipeTable

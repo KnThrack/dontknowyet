@@ -7,14 +7,14 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
  * @exports FloatButtons
  * @constructor
  */
-const FloatButtons = (...props: { handleAddRecipe: any; handleSubmit: any; handleBack: any; handleAddIngredient: any; pageState: any }[]) => {
+const FloatButtons = (...props: { handleAddRecipe: any; handleSubmit: any; handleBack: any; handleAddIngredient: any; pageState: EpageState }[]) => {
 	const { handleAddRecipe, handleSubmit, handleBack, handleAddIngredient, pageState } = props[0];
 
-	if (pageState === "") {
+	if (pageState === EpageState.init) {
 		return <ButtonGroup className='footerButtonGroup' />;
 	}
 
-	if (pageState === "list") {
+	if (pageState === EpageState.list) {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
 				<Button variant='dark' className='back-Button' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
@@ -22,7 +22,7 @@ const FloatButtons = (...props: { handleAddRecipe: any; handleSubmit: any; handl
 				</Button>
 			</ButtonGroup>
 		);
-	} else if (pageState === "details") {
+	} else if (pageState === EpageState.details) {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
 				<Button variant='info' className='back-Button' size='lg' title='Go Back' onClick={handleBack}>
@@ -36,7 +36,7 @@ const FloatButtons = (...props: { handleAddRecipe: any; handleSubmit: any; handl
 				</Button>
 			</ButtonGroup>
 		);
-	} else if (pageState === "home") {
+	} else if (pageState === EpageState.home) {
 		return <ButtonGroup className='footerButtonGroup' />;
 	}
 	return <div />;

@@ -38,16 +38,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @description set the state of the recipes (all recipes of the user) thats the total unfiltered list
 	 * @param {Irecipe} recipes -  State for all the recipes of a user
 	 */
-	interface Irecipe {
-		_id: string;
-		name: string;
-		title: string;
-		cuisine: string;
-		ingredients: [{ ingredient: string; quantity: number; unit: string; _id: string }];
-		create_date: Date;
-		recipe: string;
-		user: string;
-	}
+
 	const [recipes, setRecipes] = useState<Irecipe[] | undefined>(undefined);
 	/**
 	 * State for all the filtered recipes of a user this state is passed down to the other components
@@ -73,13 +64,6 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @param {Iuser} auth0User -  filtered recipes of the auth0User
 	 */
 
-	interface Iuser {
-		_id: string;
-		name: string;
-		email: string;
-		auth0ID: string;
-		create_date: Date;
-	}
 	const [auth0User, setAuth0User] = useState<Iuser | undefined>(undefined);
 	/**
 	 * State for the modal
@@ -93,16 +77,6 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @param {Object} modal - the modal state
 	 */
 
-	enum EmodalType {
-		init = "",
-		delete = "delete",
-		confirm = "confirm",
-		addIngredient = "addIngredient"
-	}
-	interface Imodal {
-		show: boolean;
-		type: EmodalType;
-	}
 	let initModal: Imodal = { show: false, type: EmodalType.init };
 	const [modal, setModal] = useState<Imodal>(initModal);
 	/**
@@ -173,12 +147,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @description set the state of the page
 	 * @param {Object} pageState - the state of the page
 	 */
-	enum EpageState {
-		init = "",
-		list = "list",
-		details = "details",
-		home = "home"
-	}
+
 	const [pageState, setPageState] = useState<EpageState>(EpageState.home);
 	/**
 	 * stuff for the firebase picture upload
@@ -213,11 +182,6 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @description set  the pictures we received from the storage
 	 * @param {Ipictures} pictures - the pictures we received from the storage
 	 */
-	interface Ipicture {
-		recipe_id: string;
-		name: string;
-		url: string;
-	}
 
 	const [pictures, setPictures] = useState<Ipicture[] | undefined>(undefined);
 	/**
@@ -241,10 +205,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @description set  progress of the upload
 	 * @param {Object} uploadProgress - progress of the upload
 	 */
-	interface IuploadProgress {
-		state: string;
-		percentage: number;
-	}
+
 	const [uploadProgress, setUploadProgress] = useState<IuploadProgress[] | undefined>(undefined);
 	/**
 	 * @memberof App
@@ -266,11 +227,11 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	/**
 	 * @function callAPI
 	 * @description calls the API layer for a authenticated auth0User
-	 * @param {Object} myUser - Somebody's name.
+	 * @param {Iuser} myUser - Somebody's name.
 	 * @memberof App
 	 * @inner
 	 */
-	async function callAPI(myUser: { _id: string }) {
+	async function callAPI(myUser: Iuser) {
 		// get the initial recipes
 		const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + myUser._id)).data;
 
@@ -380,7 +341,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @memberof App
 	 * @inner
 	 */
-	async function getPictureUrl(picture: { getDownloadURL: () => void; getMetadata: () => void; name: any }) {
+	async function getPictureUrl(picture: firebase.storage.Reference) {
 		const url: any = await picture.getDownloadURL();
 		const metaData: any = await picture.getMetadata();
 		//customMetadata
@@ -402,7 +363,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @inner
 	 */
 	async function loadPictures(fire: firebase.app.App, user: firebase.User) {
-		var storageRef = fire
+		var storageRef: firebase.storage.Reference = fire
 			.storage()
 			.ref()
 			.child("users/" + user.uid + "/");
@@ -437,11 +398,11 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	/**
 	 * @function addRecipe
 	 * @description commits the new recipe to the API and adds it to the array of all recipes
-	 * @param {Object} newObject - new recipe
+	 * @param {Irecipe} newObject - new recipe
 	 * @memberof App
 	 * @inner
 	 */
-	async function addRecipe(newObject: { name: any; title: string; cuisine: string; ingredients: never[]; recipe: string; user: any }) {
+	async function addRecipe(newObject: Partial<Irecipe>) {
 		// and put it away
 		const newRecipe: Irecipe = (await axios.post("https://notsureyetapp.herokuapp.com/api/recipes/", JSON.stringify(newObject))).data.data;
 
@@ -459,7 +420,6 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	/**
 	 * @function handleBack
 	 * @description handle going back from the recipe detail to the list
-	 * @param {Object} event - Event object
 	 * @memberof App
 	 * @inner
 	 */
@@ -476,12 +436,12 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleAddRecipe(event: any) {
-		const newRecipe = {
+	function handleAddRecipe(event: React.SyntheticEvent) {
+		const newRecipe:Partial<Irecipe> = {
 			name: _.uniqueId("newRecipe"),
 			title: "",
 			cuisine: "",
-			ingredients: [],
+			ingredients: [{ ingredient: "", quantity: 0, unit: "", _id: "" }],
 			recipe: "Your Recipe",
 			user: user !== undefined ? user._id : ""
 		};
@@ -495,7 +455,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleAddIngredient(event: any) {
+	function handleAddIngredient(event: React.SyntheticEvent) {
 		// find which one we updating
 		if (changeRecipe !== undefined) {
 			let index = recipes !== undefined ? recipes.findIndex((x: { _id: any }) => x._id === changeRecipe._id.toString()) : 0;
@@ -523,7 +483,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleDeleteIngredient(event: any) {
+	function handleDeleteIngredient(event: React.SyntheticEvent) {
 		event.preventDefault();
 		setIngredientDelete(true);
 	}
@@ -535,7 +495,8 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleChangeIngredient(event: any) {
+	function handleChangeIngredient(event: React.SyntheticEvent) {
+
 		if (changeRecipe !== undefined) {
 			let index = changeRecipe.ingredients.findIndex((x: { _id: string }) => x._id === event.currentTarget.id.toString());
 			setIngredientIndex(index);
@@ -551,7 +512,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleTableChange(event: any) {
+	function handleTableChange(event: React.SyntheticEvent) {
 		/*
 		// get the value and move it into the state
 		const target = event.target;

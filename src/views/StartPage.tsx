@@ -6,14 +6,8 @@ import Jumbotron from "react-bootstrap/Jumbotron";
  * @exports StartPage
  * @constructor
  */
-enum EpageState {
-	init = "",
-	list = "list",
-	details = "details",
-	home = "home"
-}
 
-const StartPage = (...props: { setPageState: any | undefined }[]) => {
+ const StartPage = (...props: { setPageState: any | undefined }[]) => {
 	const { setPageState } = props[0];
 
 	useEffect(() => {

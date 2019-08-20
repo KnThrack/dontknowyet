@@ -11,7 +11,7 @@ import Form from "react-bootstrap/Form";
  * @constructor
  */
 const ConfirmationModal = (
-	...props: { showModal: any; handleModalClose: any; handleModalSuccess: any; handleInputChange: any; modal: any; changeRecipe: any; ingredientIndex: any; ingredientDelete: any }[]
+	...props: { showModal: any; handleModalClose: any; handleModalSuccess: any; handleInputChange: any; modal: Imodal; changeRecipe: any; ingredientIndex: any; ingredientDelete: any }[]
 ) => {
 	const { showModal, handleModalClose, handleModalSuccess, handleInputChange, modal, changeRecipe, ingredientIndex, ingredientDelete } = props[0];
 
@@ -20,17 +20,17 @@ const ConfirmationModal = (
 
 	if (modal !== undefined) {
 		switch (modal.type) {
-			case "delete":
+			case EmodalType.delete:
 				// code block
 				title = "Delete Recipe";
 				body = "Are you sure that you want to delete the recipe ?";
 				break;
-			case "confirm":
+			case EmodalType.confirm:
 				// code block
 				title = "Submit Recipe";
 				body = "Are you sure that you want to change the recipe ?";
 				break;
-			case "addIngredient":
+			case EmodalType.addIngredient:
 				if (ingredientDelete) {
 					title = "Delete Ingredient";
 				} else {
@@ -49,7 +49,7 @@ const ConfirmationModal = (
 		handleModalSuccess(modal);
 	}
 
-	if (modal.type === "addIngredient") {
+	if (modal.type === EmodalType.addIngredient) {
 		return (
 			<Modal show={showModal} onHide={handleClose}>
 				<Modal.Header closeButton>

@@ -10,12 +10,6 @@ import Carousel from "react-bootstrap/Carousel";
  * @memberof Upload
  */
 
-interface Ipicture {
-	recipe_id: string;
-	name: string;
-	url: string;
-}
-
 const PictureCarousel = (...props: { pictureList: Ipicture[]; recipeID: string; }[]) => {
 
 	//const [images, setImages] = useState([]);
