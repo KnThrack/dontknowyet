@@ -10,7 +10,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 const FloatButtons = (...props: { handleAddRecipe: any; handleSubmit: any; handleBack: any; handleAddIngredient: any; pageState: EpageState }[]) => {
 	const { handleAddRecipe, handleSubmit, handleBack, handleAddIngredient, pageState } = props[0];
 
-	if (pageState === StateInit) {
+	if (pageState === "") {
 		return <ButtonGroup className='footerButtonGroup' />;
 	}
 
