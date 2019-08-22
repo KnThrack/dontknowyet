@@ -10,13 +10,11 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 const FloatButtons = (...props: { handleAddRecipe: any; handleSubmit: any; handleBack: any; handleAddIngredient: any; pageState: EpageState }[]) => {
 	const { handleAddRecipe, handleSubmit, handleBack, handleAddIngredient, pageState } = props[0];
 
-	let StateInit: EpageState = EpageState.init;
-	
 	if (pageState === StateInit) {
 		return <ButtonGroup className='footerButtonGroup' />;
 	}
 
-	if (pageState === EpageState.list) {
+	if (pageState === "list") {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
 				<Button variant='dark' className='back-Button' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
@@ -24,7 +22,7 @@ const FloatButtons = (...props: { handleAddRecipe: any; handleSubmit: any; handl
 				</Button>
 			</ButtonGroup>
 		);
-	} else if (pageState === EpageState.details) {
+	} else if (pageState === "details") {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
 				<Button variant='info' className='back-Button' size='lg' title='Go Back' onClick={handleBack}>
@@ -38,7 +36,7 @@ const FloatButtons = (...props: { handleAddRecipe: any; handleSubmit: any; handl
 				</Button>
 			</ButtonGroup>
 		);
-	} else if (pageState === EpageState.home) {
+	} else if (pageState === "home") {
 		return <ButtonGroup className='footerButtonGroup' />;
 	}
 	return <div />;
