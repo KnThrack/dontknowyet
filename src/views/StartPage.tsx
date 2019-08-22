@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import Jumbotron from "react-bootstrap/Jumbotron";
+import "../declarations/globaltypes"
 /**
  * @classdesc this class renders the start page of the website
  * @exports StartPage
