@@ -20,8 +20,7 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 		<div className='App-Home'>
 			<Jumbotron className='App-Jumbo'>
 				<h1>Dontknowyet App</h1>
-				<p>Put some text here in the future to explain what the App is etc...</p>
-				<p>You need to log in to use the application !</p>
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 			</Jumbotron>
 		</div>
 	);
