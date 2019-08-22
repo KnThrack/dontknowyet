@@ -55,7 +55,7 @@ enum EmodalType {
 }
 
 // Page states
-enum EpageState {
+const enum EpageState {
     init = "",
     list = "list",
     details = "details",
