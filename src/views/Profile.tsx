@@ -3,7 +3,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { useAuth0 } from "../react-auth0-spa";
 import Image from "react-bootstrap/Image";
-
+import * as T from "../declarations/globaltypes";
 /**
  * @classdesc Profile renderer class for the user profile
  * @returns {Object} returns the jsx string for react

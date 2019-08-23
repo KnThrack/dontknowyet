@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./upload.css";
+import * as T from "../declarations/globaltypes";
 
 /**
  * @classdesc Dropzone renderer for the Upload class

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { Loading, RecipeCard } from ".";
-
+import * as T from "../declarations/globaltypes";
 var _ = require("underscore");
 
 /**
@@ -13,7 +13,7 @@ var _ = require("underscore");
  */
 const Recipes = (
 	...props: {
-		handleFilterChange: handleEvent;
+		handleFilterChange: T.handleEvent;
 		handleDelete: any;
 		recipesList: any;
 		filter: any;
@@ -25,9 +25,9 @@ const Recipes = (
 		files: any;
 		setFiles: any;
 		setSuccessfullUploaded: any;
-		handleInputChange: handleEvent;
-		handleChangeIngredient: handleEvent;
-		handleDeleteIngredient: handleEvent;
+		handleInputChange: T.handleEvent;
+		handleChangeIngredient: T.handleEvent;
+		handleDeleteIngredient: T.handleEvent;
 		makeCardBig: any;
 		pictureList: any;
 		setPageState: any;
@@ -103,7 +103,7 @@ const Recipes = (
 					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={filter} />
 				</Form>
 				<div className='recipe-cards'>
-					{recipesList.map(function recipes(recipe: Irecipe) {
+					{recipesList.map(function recipes(recipe: T.Irecipe) {
 						// find a picture in the picture list
 						const picture_index = _.findIndex(pictureList, { recipe_id: recipe._id });
 						let url = "";

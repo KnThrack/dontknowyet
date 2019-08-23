@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import "../declarations/globaltypes.d.ts"
+import * as types from "../declarations/globaltypes";
 /**
  * @classdesc this class renders the start page of the website
  * @exports StartPage
@@ -13,7 +13,7 @@ import "../declarations/globaltypes.d.ts"
 
 	useEffect(() => {
 		if (setPageState !== undefined) {
-			setPageState(EpageState.home);
+			setPageState(types.EpageState.home);
 		}
 	}, []);
 

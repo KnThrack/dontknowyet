@@ -4,7 +4,7 @@ import RouterTypes from "react-router-dom";
 import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
 import { useAuth0 } from "../react-auth0-spa";
-
+import * as T from "../declarations/globaltypes";
 /**
  * @classdesc PrivateRoute handler for the routes that need authentication
  * @exports PrivateRoute

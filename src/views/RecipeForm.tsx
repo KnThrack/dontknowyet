@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { Upload, PictureCarousel, RecipeTable } from ".";
-
+import * as T from "../declarations/globaltypes";
 /**
  * @classdesc RecipeForm renderer class
  * @exports RecipeForm

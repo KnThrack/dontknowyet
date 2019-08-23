@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import Carousel from "react-bootstrap/Carousel";
-
+import * as T from "../declarations/globaltypes";
 /**
  * @classdesc PictureCarousel renderer for the Upload class
  * @exports PictureCarousel
@@ -10,7 +10,7 @@ import Carousel from "react-bootstrap/Carousel";
  * @memberof Upload
  */
 
-const PictureCarousel = (...props: { pictureList: Ipicture[]; recipeID: string; }[]) => {
+const PictureCarousel = (...props: { pictureList: T.Ipicture[]; recipeID: string; }[]) => {
 
 	//const [images, setImages] = useState([]);
 	const { pictureList, recipeID } = props[0];

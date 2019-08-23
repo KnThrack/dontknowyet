@@ -1,6 +1,6 @@
 // src/views/Loading.js
 import React from "react";
-
+import * as T from "../declarations/globaltypes";
 /**
  * @classdesc render the loading circle
  * @exports Loading

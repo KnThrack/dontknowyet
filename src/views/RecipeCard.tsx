@@ -6,7 +6,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link } from "react-router-dom";
 import { RecipeForm } from ".";
 import Moment from "moment";
-
+import * as T from "../declarations/globaltypes";
 /**
  * @classdesc RecipeCard renderer class
  * @exports RecipeCard

@@ -4,6 +4,7 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import * as T from "../declarations/globaltypes";
 
 /**
  * @classdesc This is the class that creates the Modal shown to the user
@@ -11,7 +12,7 @@ import Form from "react-bootstrap/Form";
  * @constructor
  */
 const ConfirmationModal = (
-	...props: { showModal: any; handleModalClose: any; handleModalSuccess: any; handleInputChange: any; modal: Imodal; changeRecipe: any; ingredientIndex: any; ingredientDelete: any }[]
+	...props: { showModal: any; handleModalClose: any; handleModalSuccess: any; handleInputChange: any; modal: T.Imodal; changeRecipe: any; ingredientIndex: any; ingredientDelete: any }[]
 ) => {
 	const { showModal, handleModalClose, handleModalSuccess, handleInputChange, modal, changeRecipe, ingredientIndex, ingredientDelete } = props[0];
 
@@ -20,17 +21,17 @@ const ConfirmationModal = (
 
 	if (modal !== undefined) {
 		switch (modal.type) {
-			case EmodalType.delete:
+			case T.EmodalType.delete:
 				// code block
 				title = "Delete Recipe";
 				body = "Are you sure that you want to delete the recipe ?";
 				break;
-			case EmodalType.confirm:
+			case T.EmodalType.confirm:
 				// code block
 				title = "Submit Recipe";
 				body = "Are you sure that you want to change the recipe ?";
 				break;
-			case EmodalType.addIngredient:
+			case T.EmodalType.addIngredient:
 				if (ingredientDelete) {
 					title = "Delete Ingredient";
 				} else {
@@ -49,7 +50,7 @@ const ConfirmationModal = (
 		handleModalSuccess(modal);
 	}
 
-	if (modal.type === EmodalType.addIngredient) {
+	if (modal.type === T.EmodalType.addIngredient) {
 		return (
 			<Modal show={showModal} onHide={handleClose}>
 				<Modal.Header closeButton>

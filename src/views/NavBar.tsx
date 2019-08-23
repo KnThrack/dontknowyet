@@ -6,6 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import { useAuth0 } from "../react-auth0-spa";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
+import * as T from "../declarations/globaltypes";
 
 //import { ReactComponent as Logo } from "../assets/Logosmall.svg";
 /**

@@ -3,7 +3,7 @@ declare module 'react-super-responsive-table';
 // Interfaces
 
 // recipes backend
-interface Irecipe {
+export interface Irecipe {
     _id: string;
     name: string;
     title: string;
@@ -15,7 +15,7 @@ interface Irecipe {
 }
 
 // User backend
-interface Iuser {
+export interface Iuser {
     _id: string;
     name: string;
     email: string;
@@ -24,30 +24,30 @@ interface Iuser {
 }
 
 // Modal
-interface Imodal {
+export interface Imodal {
     show: boolean;
     type: EmodalType;
 }
 
 // pictures for recipes
-interface Ipicture {
+export interface Ipicture {
     recipe_id: string;
     name: string;
     url: string;
 }
 
 // upload of image progress
-interface IuploadProgress {
+export interface IuploadProgress {
     state: string;
     percentage: number;
 }
 
 // event handlers
-interface handleEvent { (event: React.SyntheticEvent): void }
+export interface handleEvent { (event: React.SyntheticEvent): void }
 // enums
 
 // Modal Types
-enum EmodalType {
+export enum EmodalType {
     init = "",
     delete = "delete",
     confirm = "confirm",
@@ -55,10 +55,9 @@ enum EmodalType {
 }
 
 // Page states
-enum EpageState {
+export enum EpageState {
     init = "",
     list = "list",
     details = "details",
     home = "home"
 }
-

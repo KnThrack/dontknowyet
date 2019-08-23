@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "./table.css";
-
+import * as T from "../declarations/globaltypes";
 /**
  * @classdesc RecipeTable renderer class
  * @exports RecipeTable
@@ -11,7 +11,7 @@ import "./table.css";
  * @inner
  * @memberof RecipeCard
  */
-const RecipeTable = (...props: { recipe: Irecipe; handleChangeIngredient: any; handleDeleteIngredient: any; }[]) => {
+const RecipeTable = (...props: { recipe: T.Irecipe; handleChangeIngredient: any; handleDeleteIngredient: any; }[]) => {
 	const { recipe, handleChangeIngredient, handleDeleteIngredient } = props[0];
 
 	useEffect(() => {}, []);

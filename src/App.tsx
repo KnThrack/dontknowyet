@@ -8,6 +8,7 @@ import * as firebase from "firebase/app";
 // Add the Firebase products that you want to use
 import "firebase/auth";
 import "firebase/storage";
+import * as T from "./declarations/globaltypes";
 
 //const util = require("util");
 var _ = require("underscore");
@@ -30,41 +31,41 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 
 	/**
 	 * @memberof App
-	 * @typedef {Irecipe} recipes -  State for all the recipes of a user
+	 * @typedef {T.T.Irecipe} recipes -  State for all the recipes of a user
 	 */
 	/**
 	 * @memberof App
 	 * @function setRecipes
 	 * @description set the state of the recipes (all recipes of the user) thats the total unfiltered list
-	 * @param {Irecipe} recipes -  State for all the recipes of a user
+	 * @param {T.Irecipe} recipes -  State for all the recipes of a user
 	 */
 
-	const [recipes, setRecipes] = useState<Irecipe[] | undefined>(undefined);
+	const [recipes, setRecipes] = useState<T.Irecipe[] | undefined>(undefined);
 	/**
 	 * State for all the filtered recipes of a user this state is passed down to the other components
 	 * @memberof App	 *
-	 * @typedef {Irecipe} filteredRecipes -  filtered recipes of the user
+	 * @typedef {T.Irecipe} filteredRecipes -  filtered recipes of the user
 	 */
 	/**
 	 * @memberof App
 	 * @function setFilteredRecipes
 	 * @description set the state of the filtered recipes (all recipes of the user)  this one is passed down to the components
-	 * @param {Irecipe} filteredRecipes -  filtered recipes of the user
+	 * @param {T.Irecipe} filteredRecipes -  filtered recipes of the user
 	 */
-	const [filteredRecipes, setFilteredRecipes] = useState<Irecipe[] | undefined>(undefined);
+	const [filteredRecipes, setFilteredRecipes] = useState<T.Irecipe[] | undefined>(undefined);
 	/**
 	 * State for the user object
 	 * @memberof App
-	 * @typedef {Iuser} auth0User -  filtered recipes of the auth0User
+	 * @typedef {T.Iuser} auth0User -  filtered recipes of the auth0User
 	 */
 	/**
 	 * @memberof App
 	 * @function setAuth0User
 	 * @description set the state of the auth0User
-	 * @param {Iuser} auth0User -  filtered recipes of the auth0User
+	 * @param {T.Iuser} auth0User -  filtered recipes of the auth0User
 	 */
 
-	const [auth0User, setAuth0User] = useState<Iuser | undefined>(undefined);
+	const [auth0User, setAuth0User] = useState<T.Iuser | undefined>(undefined);
 	/**
 	 * State for the modal
 	 * @memberof App
@@ -77,8 +78,8 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @param {Object} modal - the modal state
 	 */
 
-	let initModal: Imodal = { show: false, type: EmodalType.init };
-	const [modal, setModal] = useState<Imodal>(initModal);
+	let initModal: T.Imodal = { show: false, type: T.EmodalType.init };
+	const [modal, setModal] = useState<T.Imodal>(initModal);
 	/**
 	 * State for the filter string
 	 * @memberof App
@@ -94,15 +95,15 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	/**
 	 * State for the recipe we changing or deleting or the ingredient we are changing or deleting
 	 * @memberof App
-	 * @typedef {Irecipe} changeRecipe - the change recipe
+	 * @typedef {T.Irecipe} changeRecipe - the change recipe
 	 */
 	/**
 	 * @memberof App
 	 * @function setChangeRecipe
 	 * @description set the change recipe
-	 * @param {Irecipe | undefined} changeRecipe -  the change recipe
+	 * @param {T.Irecipe | undefined} changeRecipe -  the change recipe
 	 */
-	const [changeRecipe, setChangeRecipe] = useState<Irecipe | undefined>(undefined);
+	const [changeRecipe, setChangeRecipe] = useState<T.Irecipe | undefined>(undefined);
 	/**
 	 * @memberof App
 	 * @typedef {Object} deleteRecipe -  the delete recipe
@@ -111,9 +112,9 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @memberof App
 	 * @function setDeleteRecipe
 	 * @description set the delete recipe
-	 * @param {Irecipe} deleteRecipe - the delete recipe
+	 * @param {T.Irecipe} deleteRecipe - the delete recipe
 	 */
-	const [deleteRecipe, setDeleteRecipe] = useState<Irecipe | undefined>(undefined);
+	const [deleteRecipe, setDeleteRecipe] = useState<T.Irecipe | undefined>(undefined);
 	/**
 	 * @memberof App
 	 * @typedef {int} ingredientIndex - the change ingredient index
@@ -148,7 +149,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @param {Object} pageState - the state of the page
 	 */
 
-	const [pageState, setPageState] = useState<EpageState>(EpageState.home);
+	const [pageState, setPageState] = useState<T.EpageState>(T.EpageState.home);
 	/**
 	 * stuff for the firebase picture upload
 	 * @memberof App
@@ -183,7 +184,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @param {Ipictures} pictures - the pictures we received from the storage
 	 */
 
-	const [pictures, setPictures] = useState<Ipicture[] | undefined>(undefined);
+	const [pictures, setPictures] = useState<T.Ipicture[] | undefined>(undefined);
 	/**
 	 * @memberof App
 	 * @typedef {Boolean} uploading - are we currently uploading
@@ -206,7 +207,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @param {Object} uploadProgress - progress of the upload
 	 */
 
-	const [uploadProgress, setUploadProgress] = useState<IuploadProgress[] | undefined>(undefined);
+	const [uploadProgress, setUploadProgress] = useState<T.IuploadProgress[] | undefined>(undefined);
 	/**
 	 * @memberof App
 	 * @typedef {Boolean} successfullUploaded - did we upload successfully
@@ -227,11 +228,11 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	/**
 	 * @function callAPI
 	 * @description calls the API layer for a authenticated auth0User
-	 * @param {Iuser} myUser - Somebody's name.
+	 * @param {T.Iuser} myUser - Somebody's name.
 	 * @memberof App
 	 * @inner
 	 */
-	async function callAPI(myUser: Iuser) {
+	async function callAPI(myUser: T.Iuser) {
 		// get the initial recipes
 		const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + myUser._id)).data;
 
@@ -345,7 +346,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 		const url: any = await picture.getDownloadURL();
 		const metaData: any = await picture.getMetadata();
 		//customMetadata
-		var image: Ipicture = {
+		var image: T.Ipicture = {
 			recipe_id: metaData.customMetadata.recipe_id,
 			name: picture.name,
 			url: url
@@ -373,7 +374,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 			const newArray = pictureList.items.map(async (picture: any) => await getPictureUrl(picture));
 
 			try {
-				var pictures: Ipicture[] = await Promise.all(newArray);
+				var pictures: T.Ipicture[] = await Promise.all(newArray);
 				setPictures(pictures);
 			} catch (e) {}
 		}
@@ -398,13 +399,13 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	/**
 	 * @function addRecipe
 	 * @description commits the new recipe to the API and adds it to the array of all recipes
-	 * @param {Irecipe} newObject - new recipe
+	 * @param {T.Irecipe} newObject - new recipe
 	 * @memberof App
 	 * @inner
 	 */
-	async function addRecipe(newObject: Partial<Irecipe>) {
+	async function addRecipe(newObject: Partial<T.Irecipe>) {
 		// and put it away
-		const newRecipe: Irecipe = (await axios.post("https://notsureyetapp.herokuapp.com/api/recipes/", JSON.stringify(newObject))).data.data;
+		const newRecipe: T.Irecipe = (await axios.post("https://notsureyetapp.herokuapp.com/api/recipes/", JSON.stringify(newObject))).data.data;
 
 		// add it in
 		var stateCopy = recipes !== undefined ? recipes.slice() : [];
@@ -425,7 +426,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 */
 	function handleBack() {
 		// ok here we need to basically raise a modal with the card we just click and overlay or over the list
-		setPageState(EpageState.list);
+		setPageState(T.EpageState.list);
 		setChangeRecipe(undefined);
 	}
 
@@ -437,7 +438,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @inner
 	 */
 	function handleAddRecipe(event: React.SyntheticEvent) {
-		const newRecipe:Partial<Irecipe> = {
+		const newRecipe:Partial<T.Irecipe> = {
 			name: _.uniqueId("newRecipe"),
 			title: "",
 			cuisine: "",
@@ -472,7 +473,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 			setIngredientIndex(stateCopy[index].ingredients.length - 1);
 			setChangeRecipe(stateCopy[index]);
 			// raise Modal
-			raiseModal(EmodalType.addIngredient);
+			raiseModal(T.EmodalType.addIngredient);
 		}
 	}
 
@@ -501,7 +502,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 			let index = changeRecipe.ingredients.findIndex((x: { _id: string }) => x._id === event.currentTarget.id.toString());
 			setIngredientIndex(index);
 			// raise Modal
-			raiseModal(EmodalType.addIngredient);
+			raiseModal(T.EmodalType.addIngredient);
 		}
 	}
 
@@ -576,7 +577,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 		event.preventDefault();
 
 		// raise decision
-		raiseModal(EmodalType.confirm);
+		raiseModal(T.EmodalType.confirm);
 	}
 
 	/**
@@ -587,7 +588,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function raiseModal(modalType: EmodalType) {
+	function raiseModal(modalType: T.EmodalType) {
 		setModal({
 			show: !modal.show,
 			type: modalType
@@ -614,7 +615,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 			setDeleteRecipe(recipe);
 			//setChangeRecipe(recipe);
 			// raise decision
-			raiseModal(EmodalType.delete);
+			raiseModal(T.EmodalType.delete);
 		}
 	}
 
@@ -628,7 +629,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 		setIngredientDelete(false);
 		setModal({
 			show: false,
-			type: EmodalType.init
+			type: T.EmodalType.init
 		});
 	}
 
@@ -642,7 +643,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	function handleModalSuccess(state: { type: string }) {
 		setModal({
 			show: false,
-			type: EmodalType.init
+			type: T.EmodalType.init
 		});
 
 		if (state.type === "delete") {
@@ -852,11 +853,11 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function makeCardBig(event: React.SyntheticEvent, recipe: Irecipe) {
+	function makeCardBig(event: React.SyntheticEvent, recipe: T.Irecipe) {
 		// we dont do that for that one button
 		if ((event.target as HTMLInputElement).id !== "cardButton" &&  (event.target as HTMLInputElement).className !== "dropdown-item") {
 			// ok here we need to basically raise a modal with the card we just click and overlay or over the list
-			setPageState(EpageState.details);
+			setPageState(T.EpageState.details);
 			setChangeRecipe(recipe);
 		}
 	}
