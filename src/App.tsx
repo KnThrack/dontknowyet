@@ -31,7 +31,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 
 	/**
 	 * @memberof App
-	 * @typedef {T.T.Irecipe} recipes -  State for all the recipes of a user
+	 * @typedef {T.Irecipe} recipes -  State for all the recipes of a user
 	 */
 	/**
 	 * @memberof App
