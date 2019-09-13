@@ -61,17 +61,25 @@
 
 .App-Home1 {
 	grid-column: 1 / span 4;
-    grid-row: 1;
+	grid-row: 1;
+	display: flex;
+    flex-direction: column;
 }
 
 .App-Home1-picture {
 	grid-area: picture jumbo;
 	background: url(https://firebasestorage.googleapis.com/v0/b/dontknowyet.appspot.com/o/public%2Ffoodpicture.jpg?alt=media&token=17aed28d-eb6f-48e1-ad2b-e3a4a5fc8365) no-repeat;
-	background-size: contain;
+	background-size: cover;
+    width: 100%;
+    height: 100%;
 }
 
 .App-Home1-Jumbo {
-	grid-area: jumbo;
+    position: absolute;
+    width: 30%;
+    height: 40%;
+    left: 5%;
+    top: 20%;
 }
 
 .App-Home2 {
@@ -81,6 +89,7 @@
 }
 
 .App-Home2-text {
+	width: 100%;
 	font-family: Nunito;
 	font-style: normal;
 	font-weight: bold;
@@ -92,17 +101,19 @@
 .App-Home3 {
 	grid-column: 1 / span 4;
     grid-row: 3;
-
+    display: flex;
+    flex-flow: row;
 	background: #ffffff;
 }
 
 .App-Home3-picture {
 	background: url(https://firebasestorage.googleapis.com/v0/b/dontknowyet.appspot.com/o/public%2Ffoodpicture2.jpg?alt=media&token=50199c06-6366-4a83-83c2-435f98a45902) no-repeat;
 	background-size: contain;
+	width: 50%;
 }
 
 .App-Home3-text {
-	grid-area: text2;
+	width: 50%;
 }
 
 .App-content {
