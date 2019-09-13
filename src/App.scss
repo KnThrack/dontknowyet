@@ -58,62 +58,64 @@
 
 .App-Home1 {
 	position: absolute;
-	width: 1440px;
+	width: 100%;
 	height: 771px;
 	left: 0px;
 	top: 100px;
-	background: url(https://firebasestorage.googleapis.com/v0/b/dontknowyet.appspot.com/o/public%2Ffoodpicture.jpg?alt=media&token=17aed28d-eb6f-48e1-ad2b-e3a4a5fc8365);
+	background: url(https://firebasestorage.googleapis.com/v0/b/dontknowyet.appspot.com/o/public%2Ffoodpicture.jpg?alt=media&token=17aed28d-eb6f-48e1-ad2b-e3a4a5fc8365) no-repeat;
+	background-size: contain;
 }
 
 .App-Home2 {
 	position: absolute;
-	width: 1440px;
+	width: 100%;
 	height: 400px;
 	left: 0px;
 	top: 871px;
-	background: #FFFFFF;
+	background: #ffffff;
 }
 
 .App-Home2-text {
 	position: absolute;
-	width: 1440px;
+	width: 100%;
 	height: 50px;
 	left: 0px;
 	top: 34px;
-	
+
 	font-family: Nunito;
-font-style: normal;
-font-weight: bold;
-font-size: 40px;
-line-height: 55px;
-text-align: center;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 40px;
+	line-height: 55px;
+	text-align: center;
 }
 
 .App-Home3 {
 	position: absolute;
-width: 1440px;
-height: 706px;
-left: 0px;
-top: 1271px;
+	width: 100%;
+	height: 706px;
+	left: 0px;
+	top: 1271px;
 
-background: #FFFFFF;
+	background: #ffffff;
 }
 
 .App-Home3-picture {
 	position: absolute;
-width: 889px;
-height: 706px;
-left: calc(50% - 889px/2 - 275.5px);
-top: calc(50% - 706px/2);
-	background: url(https://firebasestorage.googleapis.com/v0/b/dontknowyet.appspot.com/o/public%2Ffoodpicture2.jpg?alt=media&token=50199c06-6366-4a83-83c2-435f98a45902);
+	width: 50%;
+	height: 706px;
+	left: calc(50% - 889px / 2 - 275.5px);
+	top: calc(50% - 706px / 2);
+	background: url(https://firebasestorage.googleapis.com/v0/b/dontknowyet.appspot.com/o/public%2Ffoodpicture2.jpg?alt=media&token=50199c06-6366-4a83-83c2-435f98a45902) no-repeat;
+	background-size: contain;
 }
 
 .App-Home3-text {
 	position: absolute;
-	width: 551px;
+	width: 50%;
 	height: 708px;
 	left: 889px;
-	top: 0px;	
+	top: 0px;
 }
 
 .App-Jumbo {
