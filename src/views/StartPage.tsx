@@ -19,7 +19,7 @@ const StartPage = (...props: { setPageState: any | undefined }[]) => {
 
 	return (
 		<div className='App-Home'>
-			<div className='App-Home_1'>
+			<div className='App-Home1'>
 				<Jumbotron className='App-Jumbo'>
 					<h1>Dontknowyet App</h1>
 					<p>
@@ -30,12 +30,12 @@ const StartPage = (...props: { setPageState: any | undefined }[]) => {
 					</p>
 				</Jumbotron>
 			</div>
-			<div className='App-Home_2'>
+			<div className='App-Home2'>
 				<div className='App-Home2-text'>
 					<p>Dont know yet is your Cookbook reinvented !</p>
 				</div>
 			</div>
-			<div className='App-Home_3'>
+			<div className='App-Home3'>
 				<div className='App-Home3-picture'></div>
 				<div className='App-Home3-text'>
 					<p>
