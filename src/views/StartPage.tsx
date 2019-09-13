@@ -19,8 +19,8 @@ const StartPage = (...props: { setPageState: any | undefined }[]) => {
 
 	return (
 		<div className='App-Home'>
-			<div className='App-Home1-picture'>
-			</div>
+			<div className='App-Home1'>
+				<div className='App-Home1-picture'></div>
 				<Jumbotron className='App-Home1-Jumbo'>
 					<h1>Dontknowyet App</h1>
 					<p>
@@ -30,12 +30,13 @@ const StartPage = (...props: { setPageState: any | undefined }[]) => {
 						voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 					</p>
 				</Jumbotron>
-			
+			</div>
+			<div className='App-Home2'>
 				<div className='App-Home2-text'>
 					<p>Dont know yet is your Cookbook reinvented !</p>
 				</div>
-
-
+			</div>
+			<div className='App-Home3'>
 				<div className='App-Home3-picture'></div>
 				<div className='App-Home3-text'>
 					<p>
@@ -45,7 +46,7 @@ const StartPage = (...props: { setPageState: any | undefined }[]) => {
 						voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 					</p>
 				</div>
-		
+			</div>
 		</div>
 	);
 };
