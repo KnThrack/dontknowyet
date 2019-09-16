@@ -6,7 +6,7 @@ export { ConfirmationModal } from "./ConfirmationModal";
 export { NavBar } from "./NavBar";
 export { PrivateRoute } from "./PrivateRoute";
 export { Profile } from "./Profile";
-export { Recipe } from "./Recipe";
+//export { Recipe } from "./Recipe";
 export { Recipes } from "./Recipes";
 export { FloatButtons } from "./FloatButtons";
 export { Upload } from "./Upload";

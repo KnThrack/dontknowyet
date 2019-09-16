@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import Carousel from "react-bootstrap/Carousel";
-
+import * as T from "../declarations/globaltypes";
 /**
  * @classdesc PictureCarousel renderer for the Upload class
  * @exports PictureCarousel
@@ -9,23 +9,18 @@ import Carousel from "react-bootstrap/Carousel";
  * @inner
  * @memberof Upload
  */
-const PictureCarousel = (...props) => {
-	const [index, setIndex] = useState(0);
-	const [direction, setDirection] = useState(null);
-	const [images, setImages] = useState([]);
-	const { pictureList, recipeID } = props[0];
 
-	const handleSelect = (selectedIndex, e) => {
-		setIndex(selectedIndex);
-		setDirection(e.direction);
-	};
+const PictureCarousel = (...props: { pictureList: T.Ipicture[]; recipeID: string; }[]) => {
+
+	//const [images, setImages] = useState([]);
+	const { pictureList, recipeID } = props[0];
 
 	useEffect(() => {}, []);
 
 	if (pictureList.length !== 0) {
 		return (
 			<div className='pictures-outer'>
-				<Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
+				<Carousel>
 					{pictureList.map(function picture(picture) {
 						if (picture.recipe_id === recipeID) {
 							return (

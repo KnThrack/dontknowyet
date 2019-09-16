@@ -1,7 +1,6 @@
 // src/views/Loading.js
 import React from "react";
-import loading from "../assets/loading.svg";
-
+import * as T from "../declarations/globaltypes";
 /**
  * @classdesc render the loading circle
  * @exports Loading
@@ -9,7 +8,7 @@ import loading from "../assets/loading.svg";
  */
 const Loading = () => (
 	<div className='spinner'>
-		<img src={loading} alt='Loading' />
+		<img src={require("../assets/loading.svg")} alt='Loading' />
 	</div>
 );
 

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./upload.css";
+import * as T from "../declarations/globaltypes";
 
 /**
  * @classdesc Dropzone renderer for the Upload class
@@ -8,39 +9,39 @@ import "./upload.css";
  * @inner
  * @memberof Upload
  */
-const Dropzone = (...props) => {
+const Dropzone = (...props: { onFilesAdded: any; disabled: any }[]) => {
 	const [hightlight, setHightlight] = useState(false);
 	const { onFilesAdded, disabled } = props[0];
 	const fileInputRef = useRef(null);
 
 	function openFileDialog() {
 		if (disabled) return;
-		fileInputRef.current.click();
+		(fileInputRef as any).current.click();
 	}
 
-	function onFilesAddedlocal(evt) {
+	function onFilesAddedlocal(evt: React.SyntheticEvent) {
 		if (disabled) return;
-		const files = evt.target.files;
+		const files = (evt.target as HTMLInputElement).files;
 		if (onFilesAdded) {
 			const array = fileListToArray(files);
 			onFilesAdded(array);
 		}
 	}
 
-	function onDragOver(event) {
+	function onDragOver(event: React.SyntheticEvent) {
 		event.preventDefault();
 		if (disabled) return;
 		setHightlight(true);
 	}
 
-	function onDragLeave(event) {
+	function onDragLeave() {
 		setHightlight(false);
 	}
 
-	function onDrop(event) {
+	function onDrop(event: React.SyntheticEvent) {
 		event.preventDefault();
 		if (disabled) return;
-		const files = event.dataTransfer.files;
+		const files = (event as any).dataTransfer.files;
 		if (onFilesAdded) {
 			const array = fileListToArray(files);
 			onFilesAdded(array);
@@ -48,10 +49,12 @@ const Dropzone = (...props) => {
 		setHightlight(false);
 	}
 
-	function fileListToArray(list) {
+	function fileListToArray(list: FileList | null) {
 		const array = [];
-		for (var i = 0; i < list.length; i++) {
-			array.push(list.item(i));
+		if (list != null) {
+			for (var i = 0; i < list.length; i++) {
+				array.push(list.item(i));
+			}
 		}
 		return array;
 	}

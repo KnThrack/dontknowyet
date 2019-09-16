@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Dont know yet</title>
+    <title>Loading.tsx - Dont know yet</title>
     
     <meta name="description" content="Some app." />
     
@@ -46,31 +46,34 @@
 
 <div id="main">
     
+    <h1 class="page-title">Loading.tsx</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// src/views/Loading.js
+import React from "react";
 
+/**
+ * @classdesc render the loading circle
+ * @exports Loading
+ * @constructor
+ */
+const Loading = () => (
+	&lt;div className='spinner'>
+		&lt;img src={require("../assets/loading.svg")} alt='Loading' />
+	&lt;/div>
+);
 
-    <section class="package">
-        <h3> </h3>		
+export { Loading };
+</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
 
 

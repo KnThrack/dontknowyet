@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import "./table.css";
-
+import * as T from "../declarations/globaltypes";
 /**
  * @classdesc RecipeTable renderer class
  * @exports RecipeTable
@@ -11,7 +11,7 @@ import "./table.css";
  * @inner
  * @memberof RecipeCard
  */
-const RecipeTable = (...props) => {
+const RecipeTable = (...props: { recipe: T.Irecipe; handleChangeIngredient: any; handleDeleteIngredient: any; }[]) => {
 	const { recipe, handleChangeIngredient, handleDeleteIngredient } = props[0];
 
 	useEffect(() => {}, []);
@@ -34,7 +34,7 @@ const RecipeTable = (...props) => {
 						<Td>{ingredient.unit}</Td>
 						<Td className='ingredientDeleteCell' width='50px'>
 							<img
-								id={ingredient._id ? ingredient._id : 1}
+								id={ingredient._id ? ingredient._id : "1"}
 								onClick={handleDeleteIngredient}
 								src='https://unicons.iconscout.com/release/v1.0.0/svg/multiply.svg'
 								alt=''
@@ -43,7 +43,7 @@ const RecipeTable = (...props) => {
 								className='ingredientDelete-IMG d-inline-block align-center'
 							/>
 							<Button
-								id={ingredient._id ? ingredient._id : 1}
+								id={ingredient._id ? ingredient._id : "1"}
 								type='submit'
 								className='ingredientDelete-Button submit-Button'
 								variant='primary'

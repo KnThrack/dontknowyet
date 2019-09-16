@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import "./App.scss";
-import { Recipes, Recipe, NavBar, Profile, StartPage, PrivateRoute, ConfirmationModal, FloatButtons } from "./views";
+import { Recipes, NavBar, Profile, StartPage, PrivateRoute, ConfirmationModal, FloatButtons } from "./views";
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import * as firebase from "firebase/app";
 // Add the Firebase products that you want to use
 import "firebase/auth";
 import "firebase/storage";
+import * as T from "./declarations/globaltypes";
 
 //const util = require("util");
 var _ = require("underscore");
@@ -20,43 +21,51 @@ var _ = require("underscore");
  * @constructor
  */
 
-const App = (...props) => {
+const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 	// all my state its getting quiet a lot to think about using context
+
+	const {
+		token,
+		user
+	} = props[0];
+
 	/**
 	 * @memberof App
-	 * @typedef {Object} recipes -  State for all the recipes of a user
+	 * @typedef {T.Irecipe} recipes -  State for all the recipes of a user
 	 */
 	/**
 	 * @memberof App
 	 * @function setRecipes
 	 * @description set the state of the recipes (all recipes of the user) thats the total unfiltered list
-	 * @param {Object} recipes -  State for all the recipes of a user
+	 * @param {T.Irecipe} recipes -  State for all the recipes of a user
 	 */
-	const [recipes, setRecipes] = useState(null);
+
+	const [recipes, setRecipes] = useState<T.Irecipe[] | undefined>(undefined);
 	/**
 	 * State for all the filtered recipes of a user this state is passed down to the other components
 	 * @memberof App	 *
-	 * @typedef {Object} filteredRecipes -  filtered recipes of the user
+	 * @typedef {T.Irecipe} filteredRecipes -  filtered recipes of the user
 	 */
 	/**
 	 * @memberof App
 	 * @function setFilteredRecipes
 	 * @description set the state of the filtered recipes (all recipes of the user)  this one is passed down to the components
-	 * @param {Object} filteredRecipes -  filtered recipes of the user
+	 * @param {T.Irecipe} filteredRecipes -  filtered recipes of the user
 	 */
-	const [filteredRecipes, setFilteredRecipes] = useState(null);
+	const [filteredRecipes, setFilteredRecipes] = useState<T.Irecipe[] | undefined>(undefined);
 	/**
 	 * State for the user object
 	 * @memberof App
-	 * @typedef {Object} user -  filtered recipes of the user
+	 * @typedef {T.Iuser} auth0User -  filtered recipes of the auth0User
 	 */
 	/**
 	 * @memberof App
-	 * @function setUser
-	 * @description set the state of the user
-	 * @param {Object} user -  filtered recipes of the user
+	 * @function setAuth0User
+	 * @description set the state of the auth0User
+	 * @param {T.Iuser} auth0User -  filtered recipes of the auth0User
 	 */
-	const [user, setUser] = useState(null);
+
+	const [auth0User, setAuth0User] = useState<T.Iuser | undefined>(undefined);
 	/**
 	 * State for the modal
 	 * @memberof App
@@ -68,7 +77,9 @@ const App = (...props) => {
 	 * @description set the modal state
 	 * @param {Object} modal - the modal state
 	 */
-	const [modal, setModal] = useState({ show: false, type: "" });
+
+	let initModal: T.Imodal = { show: false, type: T.EmodalType.init };
+	const [modal, setModal] = useState<T.Imodal>(initModal);
 	/**
 	 * State for the filter string
 	 * @memberof App
@@ -84,15 +95,15 @@ const App = (...props) => {
 	/**
 	 * State for the recipe we changing or deleting or the ingredient we are changing or deleting
 	 * @memberof App
-	 * @typedef {Object} changeRecipe - the change recipe
+	 * @typedef {T.Irecipe} changeRecipe - the change recipe
 	 */
 	/**
 	 * @memberof App
 	 * @function setChangeRecipe
 	 * @description set the change recipe
-	 * @param {Object} changeRecipe -  the change recipe
+	 * @param {T.Irecipe | undefined} changeRecipe -  the change recipe
 	 */
-	const [changeRecipe, setChangeRecipe] = useState(null);
+	const [changeRecipe, setChangeRecipe] = useState<T.Irecipe | undefined>(undefined);
 	/**
 	 * @memberof App
 	 * @typedef {Object} deleteRecipe -  the delete recipe
@@ -101,9 +112,9 @@ const App = (...props) => {
 	 * @memberof App
 	 * @function setDeleteRecipe
 	 * @description set the delete recipe
-	 * @param {Object} deleteRecipe - the delete recipe
+	 * @param {T.Irecipe} deleteRecipe - the delete recipe
 	 */
-	const [deleteRecipe, setDeleteRecipe] = useState(null);
+	const [deleteRecipe, setDeleteRecipe] = useState<T.Irecipe | undefined>(undefined);
 	/**
 	 * @memberof App
 	 * @typedef {int} ingredientIndex - the change ingredient index
@@ -114,7 +125,7 @@ const App = (...props) => {
 	 * @description set the change ingredient index
 	 * @param {int} ingredientIndex - the change ingredient index
 	 */
-	const [ingredientIndex, setIngredientIndex] = useState(null);
+	const [ingredientIndex, setIngredientIndex] = useState<number>(0);
 	/**
 	 * @memberof App
 	 * @typedef {int} ingredientDelete the delete ingredient index
@@ -137,7 +148,8 @@ const App = (...props) => {
 	 * @description set the state of the page
 	 * @param {Object} pageState - the state of the page
 	 */
-	const [pageState, setPageState] = useState(null);
+
+	const [pageState, setPageState] = useState<T.EpageState>(T.EpageState.home);
 	/**
 	 * stuff for the firebase picture upload
 	 * @memberof App
@@ -149,7 +161,7 @@ const App = (...props) => {
 	 * @description set the reference to the firebase application
 	 * @param {Object} firebaseApp - reference to the firebase application
 	 */
-	const [firebaseApp, setFirebaseApp] = useState(null);
+	const [firebaseApp, setFirebaseApp] = useState<firebase.app.App>();
 	/**
 	 * @memberof App
 	 * @typedef {array} files - the files we are uploading
@@ -169,9 +181,10 @@ const App = (...props) => {
 	 * @memberof App
 	 * @function setPictures
 	 * @description set  the pictures we received from the storage
-	 * @param {array} pictures - the pictures we received from the storage
+	 * @param {Ipictures} pictures - the pictures we received from the storage
 	 */
-	const [pictures, setPictures] = useState([]);
+
+	const [pictures, setPictures] = useState<T.Ipicture[] | undefined>(undefined);
 	/**
 	 * @memberof App
 	 * @typedef {Boolean} uploading - are we currently uploading
@@ -193,7 +206,8 @@ const App = (...props) => {
 	 * @description set  progress of the upload
 	 * @param {Object} uploadProgress - progress of the upload
 	 */
-	const [uploadProgress, setUploadProgress] = useState({});
+
+	const [uploadProgress, setUploadProgress] = useState<T.IuploadProgress[] | undefined>(undefined);
 	/**
 	 * @memberof App
 	 * @typedef {Boolean} successfullUploaded - did we upload successfully
@@ -213,12 +227,12 @@ const App = (...props) => {
 
 	/**
 	 * @function callAPI
-	 * @description calls the API layer for a authenticated user
-	 * @param {Object} myUser - Somebody's name.
+	 * @description calls the API layer for a authenticated auth0User
+	 * @param {T.Iuser} myUser - Somebody's name.
 	 * @memberof App
 	 * @inner
 	 */
-	async function callAPI(myUser) {
+	async function callAPI(myUser: T.Iuser) {
 		// get the initial recipes
 		const recipes = (await axios.get("https://notsureyetapp.herokuapp.com/api/recipes?user=" + myUser._id)).data;
 
@@ -235,7 +249,7 @@ const App = (...props) => {
 	useEffect(() => {
 		// get the initial recipes
 		async function putAuth() {
-			await props[0].token.then(function(result) {
+			await token.then(function(result: string) {
 				axios.defaults.headers.post["Authorization"] = "Bearer " + result;
 				axios.defaults.headers.delete["Authorization"] = "Bearer " + result;
 				axios.defaults.headers.get["Authorization"] = "Bearer " + result;
@@ -247,7 +261,7 @@ const App = (...props) => {
 
 		// before we can get the initial list we need the user to be there.
 		async function getUser() {
-			return (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + props[0].user.email)).data;
+			return (await axios.get("https://notsureyetapp.herokuapp.com/api/users?email=" + user.email)).data;
 		}
 
 		auth.then(function(result) {
@@ -257,9 +271,9 @@ const App = (...props) => {
 			user.then(function(result) {
 				async function createUser() {
 					let createUser = {
-						name: props[0].user.name,
-						email: props[0].user.email,
-						auth0ID: props[0].user.sub
+						name: (user as any).name,
+						email: (user as any).email,
+						auth0ID: (user as any).sub
 					};
 
 					return (await axios.post("https://notsureyetapp.herokuapp.com/api/users/", JSON.stringify(createUser))).data;
@@ -270,11 +284,11 @@ const App = (...props) => {
 					// no user is here so lets make a new one
 					const newUser = createUser();
 					newUser.then(function(result) {
-						setUser(result.data);
+						setAuth0User(result.data);
 						callAPI(result.data);
 					});
 				} else {
-					setUser(result.data[0]);
+					setAuth0User(result.data[0]);
 					callAPI(result.data[0]);
 				}
 			});
@@ -302,7 +316,10 @@ const App = (...props) => {
 				fire.auth()
 					.signInWithCustomToken(result.data.firebaseToken)
 					.then(function(User) {
-						loadPictures(fire, User.user);
+						if (User !== null) {
+							let user: firebase.User | null = User.user;
+							user !== null ? loadPictures(fire, user) : console.log("No user Error");
+						}
 					})
 					.catch(function(error) {
 						// Handle Errors here.
@@ -325,11 +342,11 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	async function getPictureUrl(picture) {
-		const url = await picture.getDownloadURL();
-		const metaData = await picture.getMetadata();
+	async function getPictureUrl(picture: firebase.storage.Reference) {
+		const url: any = await picture.getDownloadURL();
+		const metaData: any = await picture.getMetadata();
 		//customMetadata
-		var image = {
+		var image: T.Ipicture = {
 			recipe_id: metaData.customMetadata.recipe_id,
 			name: picture.name,
 			url: url
@@ -346,18 +363,18 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	async function loadPictures(fire, user) {
-		var storageRef = fire
+	async function loadPictures(fire: firebase.app.App, user: firebase.User) {
+		var storageRef: firebase.storage.Reference = fire
 			.storage()
 			.ref()
 			.child("users/" + user.uid + "/");
 		if (storageRef) {
 			var pictureList = await storageRef.list();
 
-			const newArray = pictureList.items.map(async picture => await getPictureUrl(picture));
+			const newArray = pictureList.items.map(async (picture: any) => await getPictureUrl(picture));
 
 			try {
-				var pictures = await Promise.all(newArray);
+				var pictures: T.Ipicture[] = await Promise.all(newArray);
 				setPictures(pictures);
 			} catch (e) {}
 		}
@@ -382,16 +399,16 @@ const App = (...props) => {
 	/**
 	 * @function addRecipe
 	 * @description commits the new recipe to the API and adds it to the array of all recipes
-	 * @param {Object} newObject - new recipe
+	 * @param {T.Irecipe} newObject - new recipe
 	 * @memberof App
 	 * @inner
 	 */
-	async function addRecipe(newObject) {
+	async function addRecipe(newObject: Partial<T.Irecipe>) {
 		// and put it away
-		const newRecipe = (await axios.post("https://notsureyetapp.herokuapp.com/api/recipes/", JSON.stringify(newObject))).data.data;
+		const newRecipe: T.Irecipe = (await axios.post("https://notsureyetapp.herokuapp.com/api/recipes/", JSON.stringify(newObject))).data.data;
 
 		// add it in
-		var stateCopy = recipes.slice();
+		var stateCopy = recipes !== undefined ? recipes.slice() : [];
 		stateCopy.push(newRecipe);
 
 		// update it
@@ -404,14 +421,13 @@ const App = (...props) => {
 	/**
 	 * @function handleBack
 	 * @description handle going back from the recipe detail to the list
-	 * @param {Object} event - Event object
 	 * @memberof App
 	 * @inner
 	 */
-	function handleBack(event) {
+	function handleBack() {
 		// ok here we need to basically raise a modal with the card we just click and overlay or over the list
-		setPageState({ page: "list" });
-		setChangeRecipe(null);
+		setPageState(T.EpageState.list);
+		setChangeRecipe(undefined);
 	}
 
 	/**
@@ -421,14 +437,14 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleAddRecipe(event) {
-		const newRecipe = {
+	function handleAddRecipe(event: React.SyntheticEvent) {
+		const newRecipe:Partial<T.Irecipe> = {
 			name: _.uniqueId("newRecipe"),
 			title: "",
 			cuisine: "",
-			ingredients: [],
+			ingredients: [{ ingredient: "", quantity: 0, unit: "", _id: "" }],
 			recipe: "Your Recipe",
-			user: user._id
+			user: user !== undefined ? user._id : ""
 		};
 		addRecipe(newRecipe);
 	}
@@ -440,22 +456,25 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleAddIngredient(event) {
+	function handleAddIngredient(event: React.SyntheticEvent) {
 		// find which one we updating
-		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
-		// take a copy thats mutable and update it
-		var stateCopy = recipes.slice();
-		stateCopy[index] = Object.assign({}, stateCopy[index]);
-		stateCopy[index].ingredients.push({
-			ingredient: "",
-			quantity: 0,
-			unit: ""
-		});
+		if (changeRecipe !== undefined) {
+			let index = recipes !== undefined ? recipes.findIndex((x: { _id: any }) => x._id === changeRecipe._id.toString()) : 0;
+			// take a copy thats mutable and update it
+			var stateCopy = recipes !== undefined ? recipes.slice() : [];
+			stateCopy[index] = Object.assign({}, stateCopy[index]);
+			stateCopy[index].ingredients.push({
+				ingredient: "",
+				quantity: 0,
+				unit: "",
+				_id: ""
+			});
 
-		setIngredientIndex(stateCopy[index].ingredients.length - 1);
-		setChangeRecipe(stateCopy[index]);
-		// raise Modal
-		raiseModal("addIngredient");
+			setIngredientIndex(stateCopy[index].ingredients.length - 1);
+			setChangeRecipe(stateCopy[index]);
+			// raise Modal
+			raiseModal(T.EmodalType.addIngredient);
+		}
 	}
 
 	/**
@@ -465,7 +484,7 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleDeleteIngredient(event) {
+	function handleDeleteIngredient(event: React.SyntheticEvent) {
 		event.preventDefault();
 		setIngredientDelete(true);
 	}
@@ -477,11 +496,14 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleChangeIngredient(event) {
-		let index = changeRecipe.ingredients.findIndex(x => x._id === event.currentTarget.id.toString());
-		setIngredientIndex(index);
-		// raise Modal
-		raiseModal("addIngredient");
+	function handleChangeIngredient(event: React.SyntheticEvent) {
+
+		if (changeRecipe !== undefined) {
+			let index = changeRecipe.ingredients.findIndex((x: { _id: string }) => x._id === event.currentTarget.id.toString());
+			setIngredientIndex(index);
+			// raise Modal
+			raiseModal(T.EmodalType.addIngredient);
+		}
 	}
 
 	/**
@@ -491,7 +513,8 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleTableChange(event) {
+	function handleTableChange(event: React.SyntheticEvent) {
+		/*
 		// get the value and move it into the state
 		const target = event.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
@@ -499,7 +522,7 @@ const App = (...props) => {
 		const ingredientsField = target.name;
 
 		// find which one we updating
-		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
+		let index = recipes.findIndex((x: { _id: any }) => x._id === changeRecipe._id.toString());
 
 		// change the one we want to fix the state
 		var stateCopy = recipes.slice();
@@ -510,6 +533,7 @@ const App = (...props) => {
 		setChangeRecipe(stateCopy[index]);
 		setRecipes(stateCopy);
 		setFilteredRecipes(stateCopy);
+		*/
 	}
 
 	/**
@@ -519,26 +543,27 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleInputChange(event) {
+	function handleInputChange(event: React.SyntheticEvent) {
 		// get the value and move it into the state
-		const target = event.target;
+		const target = event.target as HTMLInputElement;
 		const value = target.type === "checkbox" ? target.checked : target.value;
 
 		const recipeField = target.name;
+		if (recipes !== undefined && changeRecipe !== undefined) {
+			// find which one we updating
+			let index = recipes.findIndex((x: { _id: any }) => x._id === changeRecipe._id.toString());
 
-		// find which one we updating
-		let index = recipes.findIndex(x => x._id === changeRecipe._id.toString());
+			// change the one we want to fix the state
+			var stateCopy = recipes.slice();
+			stateCopy[index] = Object.assign({}, stateCopy[index]);
+			(stateCopy[index] as any)[recipeField] = value;
 
-		// change the one we want to fix the state
-		var stateCopy = recipes.slice();
-		stateCopy[index] = Object.assign({}, stateCopy[index]);
-		stateCopy[index][recipeField] = value;
-
-		// one
-		setChangeRecipe(stateCopy[index]);
-		// ALL
-		setRecipes(stateCopy);
-		setFilteredRecipes(stateCopy);
+			// one
+			setChangeRecipe(stateCopy[index]);
+			// ALL
+			setRecipes(stateCopy);
+			setFilteredRecipes(stateCopy);
+		}
 	}
 
 	/**
@@ -548,11 +573,11 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleSubmit(event) {
+	function handleSubmit(event: React.SyntheticEvent) {
 		event.preventDefault();
 
 		// raise decision
-		raiseModal("confirm");
+		raiseModal(T.EmodalType.confirm);
 	}
 
 	/**
@@ -563,11 +588,10 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function raiseModal(modalType, index) {
+	function raiseModal(modalType: T.EmodalType) {
 		setModal({
 			show: !modal.show,
-			type: modalType,
-			index: index
+			type: modalType
 		});
 	}
 
@@ -578,23 +602,25 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleDelete(key) {
+	function handleDelete(key: string) {
 		// delete stuff
 		const recipeTarget = key.split("#");
 		// find which one we updating
-		let index = recipes.findIndex(x => x._id === recipeTarget[1]);
-		// take a copy thats mutable
-		var stateCopy = recipes.slice();
-		var recipe = stateCopy[index];
+		if (recipes !== undefined) {
+			let index = recipes.findIndex((x: { _id: any }) => x._id === recipeTarget[1]);
+			// take a copy thats mutable
+			var stateCopy = recipes.slice();
+			var recipe = stateCopy[index];
 
-		setDeleteRecipe(recipe);
-		//setChangeRecipe(recipe);
-		// raise decision
-		raiseModal("delete");
+			setDeleteRecipe(recipe);
+			//setChangeRecipe(recipe);
+			// raise decision
+			raiseModal(T.EmodalType.delete);
+		}
 	}
 
 	/**
-	 * @function handleDelete
+	 * @function handleModalClose
 	 * @description close the modal again
 	 * @memberof App
 	 * @inner
@@ -603,7 +629,7 @@ const App = (...props) => {
 		setIngredientDelete(false);
 		setModal({
 			show: false,
-			type: ""
+			type: T.EmodalType.init
 		});
 	}
 
@@ -614,32 +640,34 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleModalSuccess(state) {
+	function handleModalSuccess(state: { type: string }) {
 		setModal({
 			show: false,
-			type: ""
+			type: T.EmodalType.init
 		});
 
 		if (state.type === "delete") {
 			// and put it away
-			setIngredientDelete(false);
-			axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + deleteRecipe._id)
-				.then(function(response) {
-					// handle success
-					var recipeCopy = _.without(recipes, deleteRecipe);
-					setRecipes(recipeCopy);
-					setFilteredRecipes(recipeCopy);
-					if (pageState === "details") {
-						handleBack();
-					}
-				})
-				.catch(function(error) {
-					// handle error
-					console.log(error);
-				})
-				.finally(function() {
-					// always executed
-				});
+			if (deleteRecipe !== undefined) {
+				setIngredientDelete(false);
+				axios.delete("https://notsureyetapp.herokuapp.com/api/recipes/" + deleteRecipe._id)
+					.then(function(response) {
+						// handle success
+						var recipeCopy = _.without(recipes, deleteRecipe);
+						setRecipes(recipeCopy);
+						setFilteredRecipes(recipeCopy);
+						if (pageState === "details") {
+							handleBack();
+						}
+					})
+					.catch(function(error) {
+						// handle error
+						console.log(error);
+					})
+					.finally(function() {
+						// always executed
+					});
+			}
 		}
 
 		if (state.type === "confirm" || state.type === "addIngredient") {
@@ -649,11 +677,11 @@ const App = (...props) => {
 			// upload pictures
 			uploadFiles();
 
-			if (ingredientDelete) {
+			if (ingredientDelete && recipes !== undefined) {
 				stateCopy.ingredients = _.without(stateCopy.ingredients, stateCopy.ingredients[ingredientIndex]);
 
 				// find which one we updating
-				let index = recipes.findIndex(x => x._id === stateCopy._id.toString());
+				let index = recipes.findIndex((x: { _id: any }) => x._id === stateCopy._id.toString());
 				// change the one we want to fix the state
 				var recipesCopy = recipes.slice();
 				recipesCopy[index] = stateCopy;
@@ -666,14 +694,16 @@ const App = (...props) => {
 				.then(function(response) {
 					// handle success
 					// find which one we updating
-					let index = recipes.findIndex(x => x._id === response.data.data._id.toString());
-					// change the one we want to fix the state
-					var recipesCopy = recipes.slice();
-					recipesCopy[index] = response.data.data;
+					if (recipes !== undefined) {
+						let index = recipes.findIndex((x: { _id: any }) => x._id === response.data.data._id.toString());
+						// change the one we want to fix the state
+						var recipesCopy = recipes.slice();
+						recipesCopy[index] = response.data.data;
 
-					setRecipes(recipesCopy);
-					setFilteredRecipes(recipesCopy);
-					setChangeRecipe(response.data.data);
+						setRecipes(recipesCopy);
+						setFilteredRecipes(recipesCopy);
+						setChangeRecipe(response.data.data);
+					}
 				})
 				.catch(function(error) {
 					// handle error
@@ -692,16 +722,17 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function handleFilterChange(event) {
+	function handleFilterChange(event: React.SyntheticEvent) {
 		// filter all the recipes based on all the text in them and store it in a filter state
-		const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
-		let filteredRecipes = recipes;
-		filteredRecipes = filteredRecipes.filter(recipe => {
-			return _.contains(_.values(recipe).map(a => String(a).indexOf(value) !== -1), true);
-		});
+		const value = (event.target as HTMLInputElement).value;
+		if (recipes !== undefined) {
+			let filteredRecipes = recipes.filter((recipe: any) => {
+				return _.contains(_.values(recipe).map((a: any) => String(a).indexOf(value) !== -1), true);
+			});
 
-		setFilteredRecipes(filteredRecipes);
-		setFilter(value);
+			setFilteredRecipes(filteredRecipes);
+			setFilter(value);
+		}
 	}
 
 	// upload handlers
@@ -712,7 +743,7 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function onFilesAdded(newfile) {
+	function onFilesAdded(newfile: ConcatArray<never>) {
 		setFiles(files.concat(newfile));
 	}
 
@@ -723,9 +754,9 @@ const App = (...props) => {
 	 * @inner
 	 */
 	async function uploadFiles() {
-		setUploadProgress({});
+		setUploadProgress(undefined);
 		setUploading(true);
-		const promises = [];
+		const promises: any[] = [];
 		files.forEach(file => {
 			promises.push(sendRequest(file));
 		});
@@ -749,62 +780,68 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function sendRequest(file) {
+	function sendRequest(file: any) {
 		return new Promise((resolve, reject) => {
-			var storageRef = firebaseApp.storage().ref();
+			var storageRef = firebaseApp !== undefined ? firebaseApp.storage().ref() : undefined;
 
-			var metadata = {
-				contentType: file.type,
-				customMetadata: {
-					recipe_id: changeRecipe._id,
-					recipe_name: changeRecipe.name
+			if (storageRef !== undefined) {
+				var metadata = {
+					contentType: file.type,
+					customMetadata: {
+						recipe_id: changeRecipe !== undefined ? changeRecipe._id : "",
+						recipe_name: changeRecipe !== undefined ? changeRecipe.name : ""
+					}
+				};
+
+				const copy = uploadProgress !== undefined ? { ...uploadProgress } : [];
+				copy[file.name] = { state: "done", percentage: 0 };
+				setUploadProgress(copy);
+
+				if (firebaseApp !== undefined) {
+					let currentUser = firebaseApp.auth().currentUser !== null ? firebaseApp.auth().currentUser : null;
+					let user: string = currentUser !== null ? currentUser.uid : "";
+					var storageData = storageRef.child("users/" + user + "/" + file.name).put(file, metadata);
+
+					storageData.on(
+						firebase.storage.TaskEvent.STATE_CHANGED,
+						function(snapshot: { bytesTransferred: number; totalBytes: number }) {
+							// progress
+							var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+							console.log(percent + "% done");
+							// Do whatever you want with the native progress event
+							const copy = uploadProgress !== undefined ? { ...uploadProgress } : [];
+							copy[file.name] = {
+								state: "pending",
+								percentage: percent
+							};
+							setUploadProgress(copy);
+						},
+						function(error: any) {
+							// [START onfailure]
+							console.error("Upload failed:", error);
+							//handle error
+							const copy = uploadProgress !== undefined ? { ...uploadProgress } : [];
+							copy[file.name] = { state: "error", percentage: 0 };
+							setUploadProgress(copy);
+							reject(error);
+							// [END onfailure]
+						},
+						function() {
+							// success !!
+
+							//handle success
+							const copy = uploadProgress !== undefined ? { ...uploadProgress } : [];
+							copy[file.name] = { state: "done", percentage: 100 };
+							setUploadProgress(copy);
+							resolve();
+						}
+					);
+
+					storageData.then(function(snapshot: any) {
+						console.log(snapshot);
+					});
 				}
-			};
-
-			const copy = { ...uploadProgress };
-			copy[file.name] = { state: "done", percentage: 0 };
-			setUploadProgress(copy);
-
-			var storageData = storageRef.child("users/" + firebaseApp.auth().currentUser.uid + "/" + file.name).put(file, metadata);
-
-			storageData.on(
-				firebase.storage.TaskEvent.STATE_CHANGED,
-				function(snapshot) {
-					// progress
-					var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-					console.log(percent + "% done");
-					// Do whatever you want with the native progress event
-					const copy = { uploadProgress };
-					copy[file.name] = {
-						state: "pending",
-						percentage: percent
-					};
-					setUploadProgress(copy);
-				},
-				function(error) {
-					// [START onfailure]
-					console.error("Upload failed:", error);
-					//handle error
-					const copy = { ...uploadProgress };
-					copy[file.name] = { state: "error", percentage: 0 };
-					setUploadProgress(copy);
-					reject(error);
-					// [END onfailure]
-				},
-				function(snapshot) {
-					// success !!
-
-					//handle success
-					const copy = { ...uploadProgress };
-					copy[file.name] = { state: "done", percentage: 100 };
-					setUploadProgress(copy);
-					resolve(snapshot);
-				}
-			);
-
-			storageData.then(function(snapshot) {
-				console.log(snapshot);
-			});
+			}
 		});
 	}
 
@@ -816,11 +853,11 @@ const App = (...props) => {
 	 * @memberof App
 	 * @inner
 	 */
-	function makeCardBig(event, recipe) {
+	function makeCardBig(event: React.SyntheticEvent, recipe: T.Irecipe) {
 		// we dont do that for that one button
-		if (event.target.id !== "cardButton" && event.target.className !== "dropdown-item") {
+		if ((event.target as HTMLInputElement).id !== "cardButton" &&  (event.target as HTMLInputElement).className !== "dropdown-item") {
 			// ok here we need to basically raise a modal with the card we just click and overlay or over the list
-			setPageState({ page: "details" });
+			setPageState(T.EpageState.details);
 			setChangeRecipe(recipe);
 		}
 	}
@@ -852,7 +889,6 @@ const App = (...props) => {
 									handleDeleteIngredient={handleDeleteIngredient}
 									setChangeRecipe={setChangeRecipe}
 									changeRecipe={changeRecipe}
-									firebaseApp={firebaseApp}
 									successfullUploaded={successfullUploaded}
 									uploadProgress={uploadProgress}
 									uploading={uploading}
@@ -866,7 +902,41 @@ const App = (...props) => {
 								/>
 							)}
 						/>
-						<PrivateRoute
+						<PrivateRoute path='/profile' render={props => <Profile />} />
+					</Switch>
+				</div>
+
+				<div className='d-flex footerButtons'>
+					<FloatButtons
+						handleAddRecipe={handleAddRecipe}
+						handleSubmit={handleSubmit}
+						handleAddIngredient={handleAddIngredient}
+						pageState={pageState}
+						handleBack={handleBack}
+						{...props}
+					/>
+				</div>
+
+				<ConfirmationModal
+					showModal={modal.show}
+					handleModalClose={handleModalClose}
+					handleModalSuccess={handleModalSuccess}
+					modal={modal}
+					changeRecipe={changeRecipe}
+					ingredientIndex={ingredientIndex}
+					ingredientDelete={ingredientDelete}
+					handleInputChange={handleTableChange}
+				/>
+			</Router>
+		</div>
+	);
+};
+
+export default App;
+
+
+/*
+<PrivateRoute
 							path='/recipe/:id'
 							render={props => (
 								<Recipe
@@ -890,36 +960,4 @@ const App = (...props) => {
 								/>
 							)}
 						/>
-
-						<PrivateRoute path='/profile' component={Profile} />
-					</Switch>
-				</div>
-
-				<div className='d-flex footerButtons'>
-					<FloatButtons
-						handleAddRecipe={handleAddRecipe}
-						handleSubmit={handleSubmit}
-						handleAddIngredient={handleAddIngredient}
-						pageState={pageState}
-						handleBack={handleBack}
-						{...props}
-					/>
-				</div>
-
-				<ConfirmationModal
-					showModal={modal.show}
-					handleModalClose={handleModalClose}
-					handleModalSuccess={handleModalSuccess}
-					modal={modal}
-					deleteRecipe={deleteRecipe}
-					changeRecipe={changeRecipe}
-					ingredientIndex={ingredientIndex}
-					ingredientDelete={ingredientDelete}
-					handleInputChange={handleTableChange}
-				/>
-			</Router>
-		</div>
-	);
-};
-
-export default App;
+*/

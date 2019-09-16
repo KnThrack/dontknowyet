@@ -1,21 +1,21 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { Link } from "react-router-dom";
+import * as types from "../declarations/globaltypes";
 
 /**
  * @classdesc this class controls the floating buttons that are shown at the bottom
  * @exports FloatButtons
  * @constructor
  */
-const FloatButtons = (...props) => {
+const FloatButtons = (...props: { handleAddRecipe: any; handleSubmit: any; handleBack: any; handleAddIngredient: any; pageState: types.EpageState }[]) => {
 	const { handleAddRecipe, handleSubmit, handleBack, handleAddIngredient, pageState } = props[0];
 
-	if (pageState === null) {
+	if (pageState === types.EpageState.init) {
 		return <ButtonGroup className='footerButtonGroup' />;
 	}
 
-	if (pageState.page === "list") {
+	if (pageState === types.EpageState.list) {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
 				<Button variant='dark' className='back-Button' size='lg' block onClick={handleAddRecipe} title='Add Recipe'>
@@ -23,7 +23,7 @@ const FloatButtons = (...props) => {
 				</Button>
 			</ButtonGroup>
 		);
-	} else if (pageState.page === "details") {
+	} else if (pageState === types.EpageState.details) {
 		return (
 			<ButtonGroup className='footerButtonGroup'>
 				<Button variant='info' className='back-Button' size='lg' title='Go Back' onClick={handleBack}>
@@ -37,9 +37,10 @@ const FloatButtons = (...props) => {
 				</Button>
 			</ButtonGroup>
 		);
-	} else if (pageState.page === "home") {
+	} else if (pageState === types.EpageState.home) {
 		return <ButtonGroup className='footerButtonGroup' />;
 	}
+	return <div />;
 };
 
 export { FloatButtons };

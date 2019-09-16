@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { Loading, RecipeCard } from ".";
-
+import * as T from "../declarations/globaltypes";
 var _ = require("underscore");
 
 /**
@@ -11,7 +11,31 @@ var _ = require("underscore");
  * @exports Recipes
  * @constructor
  */
-const Recipes = (...props) => {
+const Recipes = (
+	...props: {
+		handleFilterChange: T.handleEvent;
+		handleDelete: any;
+		recipesList: any;
+		filter: any;
+		uploadFiles: any;
+		onFilesAdded: any;
+		successfullUploaded: any;
+		uploadProgress: any;
+		uploading: any;
+		files: any;
+		setFiles: any;
+		setSuccessfullUploaded: any;
+		handleInputChange: T.handleEvent;
+		handleChangeIngredient: T.handleEvent;
+		handleDeleteIngredient: T.handleEvent;
+		makeCardBig: any;
+		pictureList: any;
+		setPageState: any;
+		setChangeRecipe: any;
+		changeRecipe: any;
+		location: any;
+	}[]
+) => {
 	//const { handleFilterChange, handleDelete, recipesList, filter, setPageState, pictureList } = props[0];
 	const {
 		handleFilterChange,
@@ -41,7 +65,7 @@ const Recipes = (...props) => {
 		setPageState({ page: "list" });
 	}, []);
 
-	function handleFilterChanges(event) {
+	function handleFilterChanges(event: any) {
 		handleFilterChange(event);
 	}
 
@@ -79,7 +103,7 @@ const Recipes = (...props) => {
 					<FormControl type='text' placeholder='Search' className=' mr-sm-2' onChange={handleFilterChanges} value={filter} />
 				</Form>
 				<div className='recipe-cards'>
-					{recipesList.map(function recipes(recipe) {
+					{recipesList.map(function recipes(recipe: T.Irecipe) {
 						// find a picture in the picture list
 						const picture_index = _.findIndex(pictureList, { recipe_id: recipe._id });
 						let url = "";

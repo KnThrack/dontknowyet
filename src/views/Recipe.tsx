@@ -1,6 +1,6 @@
 // src/views/Recipe.js
 import React, { useState, useEffect } from "react";
-import { RecipeCard } from "./";
+import { RecipeCard } from ".";
 
 /**
  * @classdesc Recipe renderer class for a single recipe
@@ -8,6 +8,7 @@ import { RecipeCard } from "./";
  * @exports Recipe
  * @constructor
  */
+/*
 const Recipe = (...props) => {
 	const {
 		uploadFiles,
@@ -67,3 +68,4 @@ const Recipe = (...props) => {
 };
 
 export { Recipe };
+*/

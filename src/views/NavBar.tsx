@@ -6,6 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import { useAuth0 } from "../react-auth0-spa";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
+import * as T from "../declarations/globaltypes";
 
 //import { ReactComponent as Logo } from "../assets/Logosmall.svg";
 /**
@@ -13,7 +14,7 @@ import { Link } from "react-router-dom";
  * @exports NavBar
  * @constructor
  */
-const NavBar = (...props) => {
+const NavBar = (...props: { showNavs: any }[]) => {
 	const { showNavs } = props[0];
 	const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 	var enableLink = "hideit";
@@ -31,7 +32,7 @@ const NavBar = (...props) => {
 	//in your component
 
 	function loginout() {
-		!isAuthenticated && loginWithRedirect({});
+		!isAuthenticated && loginWithRedirect({ redirect_uri: "" });
 		isAuthenticated && logout({ returnTo: "https://dontknowyet.herokuapp.com/" });
 
 		/*
@@ -57,11 +58,11 @@ const NavBar = (...props) => {
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
-					<Nav className='justify-content-end' justify='true'>
+					<Nav className='justify-content-end' justify={true}>
 						<Link className='NavLink' to='/'>
 							Home
 						</Link>
-						<Link className='NavLink' className={enableLink} to='/recipes'>
+						<Link className={`NavLink ${enableLink}`} to='/recipes'>
 							My Recipes
 						</Link>
 						<Link className='NavLink' to='/profile'>
