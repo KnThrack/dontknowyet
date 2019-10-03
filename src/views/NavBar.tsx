@@ -65,7 +65,7 @@ const NavBar = (...props: { showNavs: any }[]) => {
 						<Link className={`NavLink ${enableLink}`} to='/recipes'>
 							My Recipes
 						</Link>
-						<Link className='NavLink' to='/profile'>
+						<Link className={`NavLink ${enableLink}`} to='/profile'>
 							Profile
 						</Link>
 					</Nav>

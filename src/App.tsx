@@ -902,7 +902,7 @@ const App: FunctionComponent<any> = (...props: { token: any; user: any }[]) => {
 								/>
 							)}
 						/>
-						<PrivateRoute path='/profile' render={props => <Profile />} />
+						<PrivateRoute exact path='/profile' render={props => <Profile />} />
 					</Switch>
 				</div>
 
